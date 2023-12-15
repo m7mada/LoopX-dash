@@ -33,7 +33,7 @@
         </div>
         <x-footers.auth></x-footers.auth>
         </main>
-        <x-plugins></x-plugins>
+        <!-- <x-plugins></x-plugins> -->
     </div>
     @else
     <x-navbars.sidebar></x-navbars.sidebar>
@@ -44,6 +44,6 @@
 
         <x-footers.auth></x-footers.auth>
     </main>
-    <x-plugins></x-plugins>
+    <!-- <x-plugins></x-plugins> -->
     @endif
 </x-layouts.base>
