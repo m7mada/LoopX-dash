@@ -1,27 +1,42 @@
 <div class="">
-        <!-- Navbar -->
-        <!-- End Navbar -->
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card my-4">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Jamaika Twins</h6>
-                            </div>
+
+    <div class="col-md-8 mb-2">
+        @if(session()->has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+        @if(session()->has('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+    </div>
+
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card my-4">
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Jamaika Twins</h6>
                         </div>
-                        <div class=" me-3 my-3 text-end">
-                            <a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
-                                User</a>
-                        </div>
-                        <div class="card-body px-0 pb-2">
-                            <div class="table-responsive p-0">
+                    </div>
+                    <div class=" me-3 my-3 text-end">
+                        @include('livewire.twins.create')
+                    </div>
+
+                    <div class="card-body px-0 pb-2">
+                        <div class="table-responsive p-0">
+                            @if( count($twins) > 0 )
+
                                 <table class="table align-items-center justify-content-center mb-0">
                                     <thead>
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Project</th>
+                                                Twin</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Budget</th>
@@ -30,11 +45,12 @@
                                                 Status</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                                                Completion</th>
+                                                Usage</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($twins as $twin )
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2">
@@ -44,15 +60,15 @@
                                                             alt="spotify">
                                                     </div>
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">Asana</h6>
+                                                        <h6 class="mb-0 text-sm">{{ $twin->title }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                                                <p class="text-sm font-weight-bold mb-0">$70</p>
                                             </td>
                                             <td>
-                                                <span class="text-xs font-weight-bold">working</span>
+                                                <span class="text-xs font-weight-bold">{{ $twin->is_active }}</span>
                                             </td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex align-items-center justify-content-center">
@@ -68,18 +84,17 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-Edit
-</a>
+                                            <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>
                                             </td>
                                         </tr>
-                                        
+                                        @endforeach
                                     </tbody>
                                 </table>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
