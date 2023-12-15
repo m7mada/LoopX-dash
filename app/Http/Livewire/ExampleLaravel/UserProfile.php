@@ -51,7 +51,7 @@ class UserProfile extends Component
 
 public function render()
 {
-    return view('livewire.example-laravel.user-profile');
+    return view('livewire.users.user-profile');
 }
 
 }
