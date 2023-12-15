@@ -7,12 +7,10 @@
                         document.write(new Date().getFullYear())
 
                     </script>,
-                    made with <i class="fa fa-heart"></i> by
-                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a> &
-                    <a href="https://www.updivision.com" class="font-weight-bold" target="_blank">UPDIVISION</a>
-                    for a better web.
+                    made with <i class="fa fa-heart"></i> 
                 </div>
             </div>
+            <!-- 
             <div class="col-lg-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
@@ -35,6 +33,7 @@
                     </li>
                 </ul>
             </div>
+            -->
         </div>
     </div>
 </footer>
