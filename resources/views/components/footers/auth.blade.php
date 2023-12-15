@@ -37,3 +37,4 @@
         </div>
     </div>
 </footer>
+<script src="../../assets/js/plugins/multistep-form.js"></script>

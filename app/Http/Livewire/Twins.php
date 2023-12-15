@@ -4,15 +4,29 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Twin; 
-use Auth ;
+use App\Models\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Livewire\WithFileUploads;
+
 
 class Twins extends Component
 {
+    use WithFileUploads;
 
-    public $twins, $title, $user_id, $is_active, $agent_persona, $agent_instructions, $example_messagesa, $kb_model_name, $msgs_model_name, $agent_dialect, $user_dialect ;
-    public $addTwins = false;
-    public $updateTwins = false;
-    public $showModale = true ;
+    public $model;
+    public $listTwins = true ;
+    public $updateTwins = false ;
+    public $currentStep = 0 ;
+
+    protected $listeners = [
+        'addTwins' => 'addTwins' ,
+        'storeTwins' => 'storeTwins',
+        'editTwins' => 'editTwins',
+        'updateTwin' => 'updateTwin',
+        'cancelTwins'=>'cancelTwins'
+        
+    ];
 
     protected $rules = [
         'title' => 'required',
@@ -25,30 +39,37 @@ class Twins extends Component
         // 'user_dialect' => 'required',
     ];
 
-    public function resetFields(){
-        $this->title = $this->is_active = $this->agent_persona = $this->agent_instructions = $this->example_messagesa = $this->kb_model_name = $this->msgs_model_name = $this->agent_dialect = $this->user_dialect = '';
+    public function mount(){
+        $this->model = Twin::class ;
+    }
 
+    public function resetFields(){
+        $this->model = new Twin();
     }
 
     public function render()
     {
-        $this->twins = Twin::where("user_id",Auth::user()->id)->get();
+        $this->listTwins = true ;
+        $this->model = Twin::where("user_id",Auth::user()->id)->get();
 
         return view('livewire.twins.twins');
     }
 
     public function addTwins(){
         $this->resetFields();
+        $this->updateTwins = true ;
     }
 
     public function storeTwins(){
         $this->validate();
 
         try{
-            Twin::create([
-                'title'=>$this->title,
-                'user_id'=>Auth::user()->id,
-            ]);
+            // Twin::create([
+            //     'title'=>$this->title,
+            //     'user_id'=>Auth::user()->id,
+            // ]);
+            $this->model->save();
+            
             session()->flash('success','Twin Created Successfully');
             $this->resetFields();
 
@@ -59,13 +80,19 @@ class Twins extends Component
     }
 
     public function editTwins($id){
+        $this->resetFields();
+
+
         try{
-            $twin = Twin::findOrFail($id);
-            if( !$twin ){
-                session()->flash('error','Twin not Found !!');
-            }else{
-                $this->twinId = $twin->id;
-            }
+            $this->model = Twin::find($id);
+
+            $this->title = $this->model->title ;
+
+            $this->updateTwins = true ;
+            $this->currentStep++ ;
+
+   
+            
 
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
@@ -77,8 +104,7 @@ class Twins extends Component
         $this->validate();
 
         try{
-            Twin::whereId($this->twinId)->update([$request->all()]);
-
+            $this->model->save();
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
         } 
