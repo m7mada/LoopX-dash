@@ -8,7 +8,7 @@
                         </div>
                     </div>
                     <div class=" me-3 my-3 text-end">
-                        @include('livewire.twins.create')
+                        <a class="btn bg-gradient-dark mb-0" wire:click.prevent="addTwins();" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Twin</a>
                     </div>
 
                     <div class="card-body px-0 pb-2">

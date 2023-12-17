@@ -13,7 +13,7 @@
         @endif
     </div>
 
-    @if( $updateTwins == true )
+    @if( $showForm == true )
         @include('livewire.twins.update')
     @elseif( $listTwins == true )
         @include('livewire.twins.list')

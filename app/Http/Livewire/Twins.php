@@ -14,10 +14,11 @@ class Twins extends Component
 {
     use WithFileUploads;
 
-    public $model;
+    public $model = Twin::class ;
     public $listTwins = true ;
-    public $updateTwins = false ;
+    public $showForm = false ;
     public $currentStep = 0 ;
+    public $addTwins = false ;
 
     protected $listeners = [
         'addTwins' => 'addTwins' ,
@@ -29,35 +30,51 @@ class Twins extends Component
     ];
 
     protected $rules = [
-        'title' => 'required',
-        //'agent_persona' => 'required',
-        // 'agent_instructions' => 'required',
-        // 'example_messagesa' => 'required',
-        // 'kb_model_name' => 'required',
-        // 'msgs_model_name' => 'required',
-        // 'agent_dialect' => 'required',
-        // 'user_dialect' => 'required',
+        'model.title' => 'required',
+        'model.agent_persona' => 'nullable|max:300',
+        'model.agent_instructions' => 'nullable|max:300',
+        'model.example_messagesa' => 'nullable|max:300',
+        'model.kb_model_name' => 'nullable',
+        'model.msgs_model_name' => 'nullable',
+        'model.agent_dialect' => 'nullable',
+        'model.user_dialect' => 'nullable',
     ];
 
+
     public function mount(){
-        $this->model = Twin::class ;
+        $this->model = Twin::where("user_id",Auth::user()->id)->get();
     }
 
     public function resetFields(){
         $this->model = new Twin();
     }
 
-    public function render()
-    {
+    public function render(){
         $this->listTwins = true ;
-        $this->model = Twin::where("user_id",Auth::user()->id)->get();
-
         return view('livewire.twins.twins');
     }
 
     public function addTwins(){
         $this->resetFields();
-        $this->updateTwins = true ;
+        
+        $this->showForm = true ;
+        $this->addTwins = true ;
+        $this->currentStep = 1 ;
+    }
+
+    public function editTwins($id){
+        $this->resetFields();
+
+
+        try{
+            $this->model = Twin::find($id);
+            $this->showForm = true ;
+            $this->currentStep++ ;    
+
+        }catch(\Excetion $ex){
+            session()->flash('error','Something gose wrong !!');
+        } 
+
     }
 
     public function storeTwins(){
@@ -79,32 +96,13 @@ class Twins extends Component
 
     }
 
-    public function editTwins($id){
-        $this->resetFields();
-
-
-        try{
-            $this->model = Twin::find($id);
-
-            $this->title = $this->model->title ;
-
-            $this->updateTwins = true ;
-            $this->currentStep++ ;
-
-   
-            
-
-        }catch(\Excetion $ex){
-            session()->flash('error','Something gose wrong !!');
-        } 
-
-    }
-
     public function updateTwin(){
         $this->validate();
 
         try{
+
             $this->model->save();
+            $this->currentStep++;
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
         } 
