@@ -42,6 +42,7 @@ class Twins extends Component
 
 
     public function mount(){
+        //$this->model->user_id = Auth::user()->id ;
         $this->model = Twin::where("user_id",Auth::user()->id)->get();
     }
 
@@ -81,14 +82,12 @@ class Twins extends Component
         $this->validate();
 
         try{
-            // Twin::create([
-            //     'title'=>$this->title,
-            //     'user_id'=>Auth::user()->id,
-            // ]);
+            $this->model->user_id = Auth::user()->id ;
             $this->model->save();
+            $this->addTwins = false ;
+            $this->currentStep = 2 ;
             
             session()->flash('success','Twin Created Successfully');
-            $this->resetFields();
 
         } catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');

@@ -94,7 +94,7 @@
                                         
                                     
                                     @if( $addTwins )
-                                        <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="addTwins()" type="button" >Next</button>
+                                        <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="storeTwins()" type="button" >Next</button>
                                     @else
                                         <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Next</button>                        
                                     @endif
