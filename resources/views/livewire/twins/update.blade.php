@@ -94,7 +94,7 @@
                                         
                                     
                                     @if( $addTwins )
-                                        <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="storeTwins()" type="button" >Next</button>
+                                        <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="insertTwins()" type="button" >Next</button>
                                     @else
                                         <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Next</button>                        
                                     @endif
@@ -106,7 +106,55 @@
                                 <div class="col-md-12">
                                     <h3>Step 2: Upload your files </h3>
                     
+                                    <div class="card">
+                                        <h5 class="card-header">Multiple</h5>
+
+                                        <div class="card-body">
+                                                <div class="dz-message needsclick dropzone needsclick">
+                                                    Drop files here or click to upload
+                                                </div>
+                                                <div class="fallback">
+                                                    <input wire:model="newFiles"  name="file" type="file" multiple />
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div style="width:100%" wire:loading>
+                                        <div wire:loading class="spinner-border" role="status">
+                                        </div>Loading...
+                                    </div>
+
                                     
+                                    @foreach($files as $file)
+                                        <div class="dz-preview dz-processing dz-image-preview dz-complete">
+                                            <div class="dz-details">
+                                                <div class="dz-thumbnail">
+                                                    {{--<img data-dz-thumbnail=""
+                                                        alt="logo.svg"
+                                                        src="{{$file['path']}}">--}}
+                                                    <span class="dz-nopreview">{{$file['name']}} <br> {{$file['size']}}</span>
+                                                    <div class="dz-success-mark"></div>
+                                                    <div class="dz-error-mark"></div>
+                                                    <div class="dz-error-message">
+                                                            <span data-dz-errormessage="">
+
+                                                            </span>
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress="" style="width: 100%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="dz-filename" data-dz-name=""></div>
+                                                <div style="padding: 0.875rem 0.625rem 0.625rem 0.625rem;" class="dz-size text-center" data-dz-size="">
+                                                        <a target="_blank" href="{{$file['path']}}">Preview</a>
+                                                </div>
+                                            </div>
+                                            <a class="dz-remove bg-danger text-white" href="javascript:undefined;" wire:click="removeFile({{$file['id']}})" data-dz-remove="">
+                                                Remove file
+                                            </a>
+                                        </div>
+
+                                    @endforeach
                     
                         
                                     <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Next</button>                        

@@ -9,7 +9,7 @@ class File extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['path','name','extension','size','user_id'] ;
+    protected $fillable = ['path','name','extension','size','twin_id'] ;
 
     public function getPathAttribute($value): ?string
     {

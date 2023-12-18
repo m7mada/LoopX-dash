@@ -19,10 +19,11 @@ class Twins extends Component
     public $showForm = false ;
     public $currentStep = 0 ;
     public $addTwins = false ;
+    public $files=[], $newFiles = [] ;
 
     protected $listeners = [
         'addTwins' => 'addTwins' ,
-        'storeTwins' => 'storeTwins',
+        'insertTwins' => 'insertTwins',
         'editTwins' => 'editTwins',
         'updateTwin' => 'updateTwin',
         'cancelTwins'=>'cancelTwins'
@@ -42,7 +43,6 @@ class Twins extends Component
 
 
     public function mount(){
-        //$this->model->user_id = Auth::user()->id ;
         $this->model = Twin::where("user_id",Auth::user()->id)->get();
     }
 
@@ -69,6 +69,10 @@ class Twins extends Component
 
         try{
             $this->model = Twin::find($id);
+            $files  = File::query()->where('twin_id',$id)->select('path')->get()->toArray();
+
+            
+
             $this->showForm = true ;
             $this->currentStep++ ;    
 
@@ -78,7 +82,7 @@ class Twins extends Component
 
     }
 
-    public function storeTwins(){
+    public function insertTwins(){
         $this->validate();
 
         try{
@@ -106,6 +110,34 @@ class Twins extends Component
             session()->flash('error','Something gose wrong !!');
         } 
 
+    }
+
+    public function removeFile($fileId){
+
+        $file = File::query()->find($fileId);
+        \Storage::disk('s3')->delete($file->getAttributes()['path']);
+        $file->delete();
+        foreach ($this->files as $key => $file){
+            if ($file['id'] == $fileId){
+                unset($this->files[$key]);
+            }
+        }
+
+        $this->emit('refreshComponent');
+    }
+
+    public function updatedNewFiles(){
+        foreach ($this->newFiles as $file){
+            $newFile = File::create([
+                'path' => $file->store('x_coach/files/'. $this->model->id , 's3') ,
+                'name' => $file->getClientOriginalName(),
+                'extension' => $file->getClientOriginalExtension(),
+                'size' => $file->getSize(),
+                'twin_id' => $this->model->id ,
+            ]);
+            $this->files[] = $newFile;
+        }
+        $this->newFiles = [] ;
     }
 
     public function cancelTwins(){
