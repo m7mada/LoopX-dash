@@ -27,7 +27,5 @@ class PakedgeDateTable extends Component
     {
         Pakedge::find($this->packageToDelete)->delete(); // Replace with your actual model
 
-        $this->dispatchBrowserEvent('closeDeleteModal');
-        $this->emit('modelSaved');
-    }
+        return redirect()->route('pakedge');}
 }

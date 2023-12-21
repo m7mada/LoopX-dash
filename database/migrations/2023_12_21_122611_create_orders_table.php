@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('phone');
+            $table->foreignId('pakedge_id')->constrained('pakedges','id')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users','id')->cascadeOnDelete();
+            $table->string('serial_number');
+            $table->enum('payment', ['pending', 'completed'])->default('pending');
             $table->timestamps();
         });
     }

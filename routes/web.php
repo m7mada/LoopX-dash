@@ -26,6 +26,7 @@ use App\Http\Livewire\Pakedge\PakedgeDateTable;
 use App\Http\Livewire\ExampleLaravel\UserProfile;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Controllers\Admin\Pakedeg\pakedegController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,5 +73,5 @@ Route::get('pakedges',PakedgeDateTable::class)->name('pakedge');
 Route::get('pakedges/create',PakedgeForm::class)->name('addPakedge');
 Route::get('pakedges/edit/{id}',PakedgeFormEdit::class)->name('editPakedge');
 Route::get('pakedges/show/{id}',PakedgeFormShow::class)->name('showPakedge');
-
+Route::post('pakedeg/billing',[OrderController::class,'store'])->name('store.order');
 });
