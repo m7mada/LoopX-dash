@@ -34,7 +34,7 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link href="{{ asset('assets') }}/css/wizard.css" rel="stylesheet"/>
 
@@ -52,6 +52,9 @@
 <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
 <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="{{ asset('assets') }}/js/multistep-form.js"></script>
+<script src="{{ asset('assets') }}/js/dropzone.min.js"></script>
+
 @stack('js')
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
