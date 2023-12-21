@@ -21,7 +21,7 @@
                     <span class="nav-link-text ms-1">User Profile</span>
                 </a>
             </li> -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link text-white {{ Route::currentRouteName() == 'user-management' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('user-management') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -29,7 +29,8 @@
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
-            </li>
+            </li> --}}
+            <!---------------------------------User Control--------------------------------->
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Pages</h6>
             </li>
@@ -124,7 +125,21 @@
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
             </li> -->
+
+             <!---------------------------------User Control--------------------------------->
+             <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Control System</h6>
+            </li>
+          <li class="nav-item">
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'pakedges' ? ' active bg-gradient-primary' : '' }}  "
+                    href="{{ route('pakedge') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">notifications</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Pakedges</span>
+                </a>
+          </li>
         </ul>
     </div>
-   
+
 </aside>
