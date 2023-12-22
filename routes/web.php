@@ -2,6 +2,7 @@
 
 use App\Http\Livewire\RTL;
 use GuzzleHttp\Middleware;
+use App\Http\Livewire\Order;
 use App\Http\Livewire\Twins;
 use App\Http\Livewire\Tables;
 use App\Http\Livewire\Billing;
@@ -13,20 +14,21 @@ use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Auth\Register;
 use App\Http\Livewire\Notifications;
+use App\Http\Livewire\OrderDatatable;
 use App\Http\Livewire\VirtualReality;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+
 use App\Http\Livewire\Auth\ResetPassword;
+
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Pakedge\PakedgeForm;
-
 use App\Http\Livewire\Pakedge\PakedgeFormEdit;
-
 use App\Http\Livewire\Pakedge\PakedgeFormShow;
 use App\Http\Livewire\Pakedge\PakedgeDateTable;
 use App\Http\Livewire\ExampleLaravel\UserProfile;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Controllers\Admin\Pakedeg\pakedegController;
-use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,4 +76,6 @@ Route::get('pakedges/create',PakedgeForm::class)->name('addPakedge');
 Route::get('pakedges/edit/{id}',PakedgeFormEdit::class)->name('editPakedge');
 Route::get('pakedges/show/{id}',PakedgeFormShow::class)->name('showPakedge');
 Route::post('pakedeg/billing',[OrderController::class,'store'])->name('store.order');
+Route::get('orders',OrderDatatable::class)->name('order');
+
 });
