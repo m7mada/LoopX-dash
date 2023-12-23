@@ -25,7 +25,6 @@
                 <div class="input-group input-group-outline my-3">
                     <input type="hidden" value="{{$item->id}}"  class="form-control"name="pakedge_id">
                 </div>
-
         </div>
 
         <div class="modal-footer">
