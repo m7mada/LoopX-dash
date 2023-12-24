@@ -57,45 +57,28 @@
                                             </div>
                                         </div>
 
-<<<<<<< HEAD
-                                            <div class="col-md-6">
-                                                
-                                                <div class="input-group input-group-static mb-4">
-                                                    <label for="kb_model_name" class="ms-0">Model Name:</label>
-=======
                                         <div class="col-md-6">
                                             <div class="input-group mb-4">
                                                 <label for="kb_model_name" class="ms-0">Model Name:</label>
                                                 <div class="input-group input-group-outline">
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
                                                     <select class="form-control" id="kb_model_name" wire:model.defer="model.kb_model_name">
                                                         <option value="gpt-3.5-turbo-1106" selected>Twin</option>
                                                         <option value="gpt-4-1106-preview">Twin Pro</option>
                                                     </select>
                                                 </div>
                                             </div>
-<<<<<<< HEAD
-                                            <!-- <div class="col-md-6">
-                                                <div class="input-group input-group-static mb-4">
-                                                    <label for="msgs_model_name" class="ms-0">Message Model Name</label>
-=======
                                         </div>
-                                        <div class="col-md-6">
+                                        <!-- <div class="col-md-6">
                                             <div class="input-group mb-4">
                                                 <label for="msgs_model_name" class="ms-0">Message Model Name</label>
                                                 <div class="input-group input-group-outline">
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
                                                     <select class="form-control" id="msgs_model_name" wire:model.defer="model.msgs_model_name">
                                                         <option value="1" selected>1</option>
                                                         <option value="2">2</option>
                                                     </select>
                                                 </div>
-<<<<<<< HEAD
-                                            </div> -->
-=======
                                             </div>
-                                        </div>
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
+                                        </div> -->
 
                                         <div class="col-md-6">
                                             <div class="input-group mb-4">
@@ -129,45 +112,6 @@
                                 @endif
                             </div>
                         </div>
-<<<<<<< HEAD
-                        <div class="p-2 row setup-content {{ $currentStep != 2 ? 'displayNone' : '' }}" id="step-2">
-                            <div class="col-xs-12">
-                                <div class="col-md-12">
-                                    <h3>Step 2: Upload your files </h3>
-                    
-                                    <div class="card">
-                                        <h5 class="card-header">Multiple</h5>
-
-                                        <div class="card-body">
-                                                <div class="dz-message needsclick dropzone needsclick">
-                                                    Drop files here or click to upload
-                                                </div>
-                                                <div class="fallback">
-                                                    <input wire:model="newFiles"  name="file" type="file" multiple />
-                                                </div>
-                                        </div>
-                                    </div>
-                                    
-                                    
-                                    @foreach($model->files as $file)
-                                        <div class="dz-preview dz-processing dz-image-preview dz-complete">
-                                            <div class="dz-details">
-                                                <div class="dz-thumbnail">
-                                                    {{--<img data-dz-thumbnail=""
-                                                        alt="logo.svg"
-                                                        src="{{$file['path']}}">--}}
-                                                    <span class="dz-nopreview">{{$file['name']}} <br> {{$file['size']}}</span>
-                                                    <div class="dz-success-mark"></div>
-                                                    <div class="dz-error-mark"></div>
-                                                    <div class="dz-error-message">
-                                                            <span data-dz-errormessage="">
-
-                                                            </span>
-                                                    </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress="" style="width: 100%;"></div>
-                                                    </div>
-=======
                     </div>
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 2 ? 'displayNone' : '' }}" id="step-2">
                         <div class="col-xs-12">
@@ -198,8 +142,8 @@
                                                 <div class="dz-error-message">
                                                         <span data-dz-errormessage="">
 
+
                                                         </span>
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
                                                 </div>
                                                 <div class="progress">
                                                     <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress="" style="width: 100%;"></div>
@@ -229,28 +173,15 @@
                                     <h4 class="mb-3"> Step 3</h4>
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
-<<<<<<< HEAD
-                                            <div class="input-group input-group-dynamic">
-                                                <!-- <label for="agent_persona" class="form-label">agent_persona:</label> -->
-
-                                                <textarea name="agent_persona" class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
-=======
                                             <div class="input-group input-group-outline">
                                                 <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
-<<<<<<< HEAD
-                                            <div class="input-group input-group-dynamic">
-                                                <label for="title" class="form-label">Twin Title:</label>
-
-=======
                                             <div class="input-group input-group-outline">
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
                                                 <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
                                             </div>
                                         </div>
@@ -270,15 +201,6 @@
                                 </div>
                             </div>
                         </div>
-<<<<<<< HEAD
-                    
-                        <div class="p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">mmmmm
-                            <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-                            <script src="https://mediafiles.botpress.cloud/caa58dcf-151f-4811-b8c3-d69e9099f9ae/webchat/config.js" defer></script>
-                        </div>
-
-=======
->>>>>>> 538064f4a16b5488706da418e44fed171e02e138
                 </div>
             </div>
         </div>
