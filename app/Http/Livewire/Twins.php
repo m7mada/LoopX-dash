@@ -47,34 +47,7 @@ class Twins extends Component
 
     public function mount(){
         $this->model = Twin::where("user_id",Auth::user()->id)->get();
-
-            // $message = new Messages ;
-
-            // $message->title = "ff";
-            // $message->save();
-
         $this->TwinMessages = Messages::get();
-
-
-
-        dd($this->TwinMessages);
-
-
-        // $connection = DB::connection('mongodb');
-        // $msg = 'MongoDB is accessible!';
-        // try {  
-        //     $connection->command(['ping' => 1]); 
-            
-        //     $message = new Messages ;
-
-        //     $message->title = "ff";
-        //     $message->save();
-
-        // } catch (\Exception  $e) {  
-        //     $msg = 'MongoDB is not accessible. Error: ' . $e->getMessage();
-        // }
-
-        // dd($msg);
     }
 
     public function resetFields(){
