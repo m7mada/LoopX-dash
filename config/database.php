@@ -64,10 +64,10 @@ return [
         ],
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('DB_URI', 'mongodb+srv://loopxtech:mGwoD9dpnST7Cnju@loopx0chat.zgaxdd5.mongodb.net/?retryWrites=true&w=majority'),
-            'database' => 'loopx_twin',
-            #'dns'=>env('mongodb://18.232.176.148:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1'),
-            #'host'=>env('mongo_host','18.232.176.148'),
+            #'dsn' => env('DB_URI', 'mongodb+srv://loopxtech:mGwoD9dpnST7Cnju@loopx0chat.zgaxdd5.mongodb.net/?retryWrites=true&w=majority'),
+            'database' => env('mongo_database','loopx_twin'),
+            'dns'=>env('mongo_db_uri','mongodb://18.232.176.148:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1'),
+            'host'=>env('mongo_host','18.232.176.148'),
 
         ],
 
