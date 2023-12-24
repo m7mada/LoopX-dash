@@ -35,13 +35,13 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
-            'driver' => 'sqlite',
-            'url' => env('DATABASE_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
-            'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
-        ],
+        // 'sqlite' => [
+        //     'driver' => 'sqlite',
+        //     'url' => env('DATABASE_URL'),
+        //     'database' => env('DB_DATABASE', database_path('database.sqlite')),
+        //     'prefix' => '',
+        //     'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+        // ],
 
         'mysql' => [
             'driver' => 'mysql',
@@ -62,34 +62,16 @@ return [
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => env('DB_URI', 'mongodb+srv://loopxtech:mGwoD9dpnST7Cnju@loopx0chat.zgaxdd5.mongodb.net/?retryWrites=true&w=majority'),
+            'database' => 'loopx_twin',
+            #'dns'=>env('mongodb://18.232.176.148:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1'),
+            #'host'=>env('mongo_host','18.232.176.148'),
 
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'schema' => 'public',
-            'sslmode' => 'prefer',
         ],
 
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-        ],
+
 
     ],
 

@@ -5,9 +5,12 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Twin; 
 use App\Models\File;
+use App\Models\Messages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithFileUploads;
+
+use DB;
 
 
 class Twins extends Component
@@ -19,7 +22,7 @@ class Twins extends Component
     public $showForm = false ;
     public $currentStep = 0 ;
     public $addTwins = false ;
-    public $files=[], $newFiles = [] ;
+    public $files=[], $newFiles = [] ,$TwinMessages;
 
     protected $listeners = [
         'addTwins' => 'addTwins' ,
@@ -44,6 +47,34 @@ class Twins extends Component
 
     public function mount(){
         $this->model = Twin::where("user_id",Auth::user()->id)->get();
+
+            // $message = new Messages ;
+
+            // $message->title = "ff";
+            // $message->save();
+
+        $this->TwinMessages = Messages::get();
+
+
+
+        dd($this->TwinMessages);
+
+
+        // $connection = DB::connection('mongodb');
+        // $msg = 'MongoDB is accessible!';
+        // try {  
+        //     $connection->command(['ping' => 1]); 
+            
+        //     $message = new Messages ;
+
+        //     $message->title = "ff";
+        //     $message->save();
+
+        // } catch (\Exception  $e) {  
+        //     $msg = 'MongoDB is not accessible. Error: ' . $e->getMessage();
+        // }
+
+        // dd($msg);
     }
 
     public function resetFields(){
@@ -68,10 +99,7 @@ class Twins extends Component
 
 
         try{
-            $this->model = Twin::find($id);
-            $files  = File::query()->where('twin_id',$id)->select('path')->get()->toArray();
-
-            
+            $this->model = Twin::find($id);            
 
             $this->showForm = true ;
             $this->currentStep++ ;    
@@ -122,8 +150,6 @@ class Twins extends Component
                 unset($this->files[$key]);
             }
         }
-
-        $this->emit('refreshComponent');
     }
 
     public function updatedNewFiles(){

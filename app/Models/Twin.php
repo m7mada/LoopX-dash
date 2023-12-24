@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\File;
+
+
 
 class Twin extends Model
 {
@@ -12,4 +16,9 @@ class Twin extends Model
         'title', 'user_id', 'is_active','agent_persona','agent_instructions','example_messagesa','kb_model_name','msgs_model_name','agent_dialect','user_dialect'
     ];
     public $timestamps = true;
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(File::class);
+    }
 }

@@ -54,15 +54,16 @@
                                             </div>
 
                                             <div class="col-md-6">
+                                                
                                                 <div class="input-group input-group-static mb-4">
                                                     <label for="kb_model_name" class="ms-0">Model Name:</label>
                                                     <select class="form-control" id="kb_model_name" wire:model.defer="model.kb_model_name">
-                                                        <option value="1" selected>1</option>
-                                                        <option value="2">2</option>
+                                                        <option value="gpt-3.5-turbo-1106" selected>Twin</option>
+                                                        <option value="gpt-4-1106-preview">Twin Pro</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <div class="input-group input-group-static mb-4">
                                                     <label for="msgs_model_name" class="ms-0">Message Model Name</label>
                                                     <select class="form-control" id="msgs_model_name" wire:model.defer="model.msgs_model_name">
@@ -70,14 +71,14 @@
                                                         <option value="2">2</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-static mb-4">
                                                     <label for="agent_dialect" class="ms-0">Agent Dialect</label>
                                                     <select class="form-control" wire:model.defer="model.agent_dialect">
-                                                        <option value="1" selected>1</option>
-                                                        <option value="2">2</option>
+                                                        <option value="Egyptian Colloquial Arabic - اللهجة العامية المصرية" selected>Egyptian Colloquial Arabic - اللهجة العامية المصرية</option>
+                                                        <option value="Saudi Arabic - اللهجة السعودية">Saudi Arabic - اللهجة السعودية</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -85,8 +86,8 @@
                                                 <div class="input-group input-group-static mb-4">
                                                     <label for="user_dialect" class="ms-0">User Dialect</label>
                                                     <select class="form-control" wire:model.defer="model.user_dialect">
-                                                        <option value="1" selected>1</option>
-                                                        <option value="2">2</option>
+                                                        <option value="English">English</option>
+                                                        <option value="Arabic" selected>Arabic</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -118,14 +119,9 @@
                                                 </div>
                                         </div>
                                     </div>
-
-                                    <div style="width:100%" wire:loading>
-                                        <div wire:loading class="spinner-border" role="status">
-                                        </div>Loading...
-                                    </div>
-
                                     
-                                    @foreach($files as $file)
+                                    
+                                    @foreach($model->files as $file)
                                         <div class="dz-preview dz-processing dz-image-preview dz-complete">
                                             <div class="dz-details">
                                                 <div class="dz-thumbnail">
@@ -169,7 +165,9 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-dynamic">
-                                                <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
+                                                <!-- <label for="agent_persona" class="form-label">agent_persona:</label> -->
+
+                                                <textarea name="agent_persona" class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -177,6 +175,8 @@
                                     <div class="col-xs-12">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-dynamic">
+                                                <label for="title" class="form-label">Twin Title:</label>
+
                                                 <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
                                             </div>
 
@@ -198,6 +198,10 @@
                             </div>
                         </div>
                     
+                        <div class="p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">mmmmm
+                            <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+                            <script src="https://mediafiles.botpress.cloud/caa58dcf-151f-4811-b8c3-d69e9099f9ae/webchat/config.js" defer></script>
+                        </div>
 
                 </div>
             </div>
