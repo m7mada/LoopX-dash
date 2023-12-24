@@ -34,13 +34,13 @@
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link href="{{ asset('assets') }}/css/wizard.css" rel="stylesheet"/>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
+    <link href="{{asset('assets')}}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 
     @livewireStyles
 </head>
@@ -52,6 +52,9 @@
 <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
 <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
+<script src="{{ asset('assets') }}/js/multistep-form.js"></script>
+<script src="{{ asset('assets') }}/js/dropzone.min.js"></script>
+
 @stack('js')
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -67,6 +70,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
+@yield('script')
 @livewireScripts
 </body>
 </html>
