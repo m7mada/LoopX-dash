@@ -14,8 +14,6 @@ class Messages extends Model
     use HasFactory;
     protected $connection = 'mongodb';
     protected $collection = 'twins_messages';
-    //protected $fillable = ['title'];
-
 
 
 }

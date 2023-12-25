@@ -50,7 +50,7 @@
                             <div class="col-md-12">
                                 <h4 class="mb-3"> Step 1 : Set the Twin Settings</h4>
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4">
                                                 <label for="title" class="form-label">Twin Title:</label>
                                                 <input type="text" id="title" wire:model.defer="model.title" class="form-control">
@@ -59,7 +59,16 @@
 
                                         <div class="col-md-6">
                                             <div class="input-group mb-4">
-                                                <label for="kb_model_name" class="ms-0">Model Name:</label>
+                                                <div class="form-check form-switch">
+                                                    <input wire:model.defer="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
+                                                    <label class="form-check-label" for="is_active">Active {{$this->model->is_active}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="input-group mb-4">
+                                                <label for="kb_model_name" class="ms-0">Model :</label>
                                                 <div class="input-group input-group-outline">
                                                     <select class="form-control" id="kb_model_name" wire:model.defer="model.kb_model_name">
                                                         <option value="gpt-3.5-turbo-1106" selected>Twin</option>
@@ -68,6 +77,10 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        
+
+                                      
                                         <!-- <div class="col-md-6">
                                             <div class="input-group mb-4">
                                                 <label for="msgs_model_name" class="ms-0">Message Model Name</label>
@@ -91,7 +104,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <!-- <div class="col-md-6">
                                             <div class="input-group mb-4">
                                                 <label for="user_dialect" class="ms-0">User Dialect</label>
                                                 <div class="input-group input-group-outline">
@@ -101,7 +114,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
 
@@ -206,26 +219,3 @@
         </div>
     </div>
 </div>
-{{--<script>--}}
-{{--    var initDropzone = false;--}}
-{{--    const observer = new MutationObserver((mutations, observer) => {--}}
-
-{{--        if(initDropzone) {--}}
-{{--            return;--}}
-{{--        }--}}
-
-{{--        setTimeout(() => {--}}
-{{--            Dropzone.autoDiscover = false;--}}
-{{--            var drop = document.getElementById('dropzone');--}}
-{{--            var myDropzone = new Dropzone(drop, {--}}
-{{--                url: "/file/post",--}}
-{{--                addRemoveLinks: true--}}
-{{--            });--}}
-{{--        }, 100)--}}
-{{--        initDropzone = true;--}}
-{{--    });--}}
-{{--    observer.observe(document.getElementById('step-2'), {--}}
-{{--        subtree: true,--}}
-{{--        attributes: true--}}
-{{--    });--}}
-{{--</script>--}}

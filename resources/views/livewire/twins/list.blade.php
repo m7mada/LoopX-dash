@@ -52,7 +52,11 @@
                                                 <p class="text-sm font-weight-bold mb-0">$70</p>
                                             </td>
                                             <td>
-                                                <span class="text-xs font-weight-bold">{{ $twin->is_active }}</span>
+                                                @if ( $twin->is_active == 1 )
+                                                    <span class="badge badge-success">Active</span>
+                                                @else
+                                                    <span class="badge badge-warning">Stoped</span>
+                                                @endif
                                             </td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex align-items-center justify-content-center">
@@ -68,7 +72,13 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="#" wire:click.prevent="editTwins({{$twin->id}});" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">Edit</a>
+                                                <button class="btn btn-link text-secondary mb-0 " type="button" data-bs-toggle="dropdown">
+                                                    <span class="material-icons">more_vert</span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <li><a wire:click.prevent="editTwins({{$twin->id}});" class="dropdown-item" href="#">Setting</a></li>
+                                                    <li><a href="{{ route('show-logs',$twin->id) }}" class="dropdown-item" href="#">Logs</a></li>
+                                                </ul>
                                             </td>
                                         </tr>
                                         @endforeach

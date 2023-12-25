@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\File;
+use App\Models\Messages;
 
 
 
@@ -13,7 +14,7 @@ class Twin extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title', 'user_id', 'is_active','agent_persona','agent_instructions','example_messagesa','kb_model_name','msgs_model_name','agent_dialect','user_dialect'
+        'title', 'user_id', 'is_active','agent_persona','agent_instructions','example_messagesa','kb_model_name','msgs_model_name','agent_dialect','user_dialect','is_active','twin_external_id'
     ];
     public $timestamps = true;
 
@@ -21,4 +22,5 @@ class Twin extends Model
     {
         return $this->hasMany(File::class);
     }
+
 }

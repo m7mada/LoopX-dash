@@ -9,7 +9,7 @@ use App\Models\Messages;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Livewire\WithFileUploads;
-
+use MongoDB\BSON\ObjectId;
 use DB;
 
 
@@ -22,7 +22,7 @@ class Twins extends Component
     public $showForm = false ;
     public $currentStep = 0 ;
     public $addTwins = false ;
-    public $files=[], $newFiles = [] ,$TwinMessages;
+    public $files=[], $newFiles = [] ,$twinMessages;
 
     protected $listeners = [
         'addTwins' => 'addTwins' ,
@@ -42,12 +42,22 @@ class Twins extends Component
         'model.msgs_model_name' => 'nullable',
         'model.agent_dialect' => 'nullable',
         'model.user_dialect' => 'nullable',
+        'model.is_active' => 'nullable',
     ];
 
 
     public function mount(){
         $this->model = Twin::where("user_id",Auth::user()->id)->get();
-        $this->TwinMessages = Messages::get();
+
+        // $desiredTwinId = new ObjectId('60f0b0b9e4b0a9b9a0f3b0a9');
+        // // $desiredTwinId = [
+        // //     '60f0b0b9e4b0a9b9a0f3b0a9',
+
+        // // ];
+        // $this->twinMessages = Messages::get();
+
+
+        // dd($this->twinMessages);
     }
 
     public function resetFields(){
@@ -87,6 +97,7 @@ class Twins extends Component
         $this->validate();
 
         try{
+            $this->model->twin_external_id = new ObjectId() ;
             $this->model->user_id = Auth::user()->id ;
             $this->model->save();
             $this->addTwins = false ;
@@ -107,6 +118,32 @@ class Twins extends Component
 
             $this->model->save();
             $this->currentStep++;
+
+            ini_set('max_execution_time', 10000);
+
+
+            if( $this->currentStep == 3 ){
+
+                $files  = File::query()->where('twin_id',$this->model->id)->select('path')->get()->toArray();
+                $filesToSend  = [] ;
+                foreach ( $files as $fileToSend){
+                    $filesToSend[] = $fileToSend['path'];
+                }
+
+                $baseUrl = config('app.django_url');
+                $r = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
+                ])->post($baseUrl.'/api/create-db',[
+                    'files' => $filesToSend,
+                    'twin_id' => $this->model->twin_external_id,
+                ]);
+    
+            }
+
+            
+            
+
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
         } 

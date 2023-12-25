@@ -59,6 +59,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'django_url' => env('DJANGO_SERVER'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

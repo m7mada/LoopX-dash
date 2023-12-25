@@ -7,9 +7,11 @@ use App\Http\Livewire\Twins;
 use App\Http\Livewire\Tables;
 use App\Http\Livewire\Billing;
 use App\Http\Livewire\Profile;
+use App\Http\Livewire\ShowLogs;
 use function PHPSTORM_META\map;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Auth\Login;
+use App\Http\Livewire\MessageLogs;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Auth\Register;
@@ -17,20 +19,20 @@ use App\Http\Livewire\Notifications;
 use App\Http\Livewire\OrderDatatable;
 use App\Http\Livewire\VirtualReality;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\OrderController;
 
 use App\Http\Livewire\Auth\ResetPassword;
-
 use App\Http\Livewire\Auth\ForgotPassword;
 use App\Http\Livewire\Pakedge\PakedgeForm;
+use App\Http\Livewire\ExampleLaravel\UserForm;
 use App\Http\Livewire\Pakedge\PakedgeFormEdit;
 use App\Http\Livewire\Pakedge\PakedgeFormShow;
 use App\Http\Livewire\Pakedge\PakedgeDateTable;
 use App\Http\Livewire\ExampleLaravel\UserProfile;
+use App\Http\Livewire\ExampleLaravel\UserFormEdit;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Controllers\Admin\Pakedeg\pakedegController;
-use App\Http\Livewire\ExampleLaravel\UserForm;
-use App\Http\Livewire\ExampleLaravel\UserFormEdit;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +68,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', Profile::class)->name('profile');
     Route::get('tables', Tables::class)->name('tables');
     Route::get('twins', Twins::class)->name('twins');
+    Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
+
 
     Route::get('notifications', Notifications::class)->name("notifications");
     Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
