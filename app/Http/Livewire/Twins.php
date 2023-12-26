@@ -20,6 +20,7 @@ class Twins extends Component
     public $model = Twin::class ;
     public $listTwins = true ;
     public $showForm = false ;
+    public $showLogs = false ;
     public $currentStep = 0 ;
     public $addTwins = false ;
     public $files=[], $newFiles = [] ,$twinMessages;
@@ -29,7 +30,8 @@ class Twins extends Component
         'insertTwins' => 'insertTwins',
         'editTwins' => 'editTwins',
         'updateTwin' => 'updateTwin',
-        'cancelTwins'=>'cancelTwins'
+        'cancelTwins'=>'cancelTwins',
+        'showTwinConverssations'=>'showTwinConverssations'
         
     ];
 
@@ -47,17 +49,10 @@ class Twins extends Component
 
 
     public function mount(){
-        $this->model = Twin::where("user_id",Auth::user()->id)->get();
-
-        // $desiredTwinId = new ObjectId('60f0b0b9e4b0a9b9a0f3b0a9');
-        // // $desiredTwinId = [
-        // //     '60f0b0b9e4b0a9b9a0f3b0a9',
-
-        // // ];
-        // $this->twinMessages = Messages::get();
-
-
-        // dd($this->twinMessages);
+        $this->model = Twin::where("user_id",Auth::user()->id)
+                            ->with("messages")
+                            ->with("files")
+                            ->get();
     }
 
     public function resetFields(){
@@ -189,5 +184,22 @@ class Twins extends Component
             session()->flash('error','Something gose wrong !!');
         } 
 
+    }
+
+    public function showTwinConverssations($id){
+        $this->resetFields();
+
+        try{
+            $this->model = Twin::with("messages")->find($id);
+            $this->showLogs = true ;
+        }catch(\Excetion $ex){
+            session()->flash('error','Something gose wrong !!');
+        } 
+
+    }
+
+        
+    public function showConverssationMessages($converssationId){
+        dd('ttdtdt');
     }
 }

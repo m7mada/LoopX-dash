@@ -23,7 +23,7 @@
                                                 Twin</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Budget</th>
+                                                Knolage Files</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Status</th>
@@ -44,12 +44,12 @@
                                                             alt="spotify">
                                                     </div>
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">{{ $twin->title }}</h6>
+                                                        <h6 class="mb-0 text-sm">{{ $twin->title }} {{$this->showLogs}}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <p class="text-sm font-weight-bold mb-0">$70</p>
+                                            <p class="text-sm font-weight-bold mb-0">{{count($twin->files)}}</p>
                                             </td>
                                             <td>
                                                 @if ( $twin->is_active == 1 )
@@ -59,14 +59,15 @@
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center">
+
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">60%</span>
+                                                    <span class="me-2 text-xs font-weight-bold">{{count($twin->messages)}} Messages </span>
                                                     <div>
                                                         <div class="progress">
                                                             <div class="progress-bar bg-gradient-info"
-                                                                role="progressbar" aria-valuenow="60"
+                                                                role="progressbar" aria-valuenow="{{count($twin->messages)}}"
                                                                 aria-valuemin="0" aria-valuemax="100"
-                                                                style="width: 60%;"></div>
+                                                                style="width: {{ count($twin->messages) / 100 }}%;"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,7 +78,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <li><a wire:click.prevent="editTwins({{$twin->id}});" class="dropdown-item" href="#">Setting</a></li>
-                                                    <li><a href="{{ route('show-logs',$twin->id) }}" class="dropdown-item" href="#">Logs</a></li>
+                                                    <li><a wire:click.prevent="showTwinConverssations({{$twin->id}});" class="dropdown-item" href="#">Logs</a></li>
                                                 </ul>
                                             </td>
                                         </tr>

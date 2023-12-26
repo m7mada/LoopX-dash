@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('profile', Profile::class)->name('profile');
     Route::get('tables', Tables::class)->name('tables');
     Route::get('twins', Twins::class)->name('twins');
+    Route::get('show-logs', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
 
 

@@ -64,12 +64,17 @@ return [
         ],
         'mongodb' => [
             'driver' => 'mongodb',
-            #'dsn' => env('DB_URI', 'mongodb+srv://loopxtech:mGwoD9dpnST7Cnju@loopx0chat.zgaxdd5.mongodb.net/?retryWrites=true&w=majority'),
-            'database' => env('mongo_database','loopx_twin'),
-            'dns'=>env('mongo_db_uri','mongodb://18.232.176.148:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1'),
-            'host'=>env('mongo_host','18.232.176.148'),
-
+            'host' => env('MONGO_DB_HOST', 'localhost'),
+            'dsn' => env('MONGO_DB_DSN', 'mongodb://') . env('MONGO_DB_HOST', 'localhost'),
+            'port' => 27017,
+            'database' => env('MONGO_DB_DATABASE', 'loopx_twin'),
+            'username' => env('MONGO_DB_USERNAME'),
+            'password' => env('MONGO_DB_PASSWORD'),
+            'options' => [
+                'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo 3+
+            ],
         ],
+
 
 
 

@@ -5,13 +5,13 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">{{$this->twin->title}} Conversassions Log </h6>
+                            <h6 class="text-white text-capitalize ps-3">{{$this->model->title}} Conversassions Log </h6>
                         </div>
                     </div>
 
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            @if( count($model) > 0 )
+                            @if( count($model->messages) > 0 )
 
                                 <table class="table align-items-center justify-content-center mb-0">
                                     <thead>
@@ -32,7 +32,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($model as $log )
+                                        @foreach($model->messages as $log )
                                         <tr>
                                             <td>
                                                 <p class="text-sm font-weight-bold mb-0">{{$log->botpress_conversation_id}}</p>
@@ -46,11 +46,10 @@
                                             </td>
                                             <td class="align-middle">
                                                 
-                                            <!-- <a wire:click.prevent="converssationMessages({{$log->botpress_conversation_id}})"  >
+                                                <a wire:click.prevent="showConverssationMessages({{$log->botpress_conversation_id}})"  >
                                                         <span class="material-icons">more_vert</span>
-                                                         edit 
-                                                    </a> -->
-                                            <button wire:click.prevent="converssationMessages()" class="btn btn-info">Edit</button>
+                                                          
+                                                    </a>
                                             </td>
                                             
                                         </tr>

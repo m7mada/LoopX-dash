@@ -11,18 +11,18 @@ use Illuminate\Http\Request;
 
 class MessageLogs extends Component
 {
-    public $model , $twin;
+    public $model , $twin ;
 
     // protected $listeners = [
     //     'converssationMessages' => 'converssationMessages' ,
         
     // ];
     
-    public function mount( request $request ){
+    public function mount(){
     
         $this->twin = Twin::select('twin_external_id','title')
-                            ->where("user_id",Auth::user()->id)
-                            ->where("id",$request->route('id'))
+                            //->where("user_id",Auth::user()->id)
+                            ->where("id",19)
                             ->first();
     
     }
@@ -30,7 +30,9 @@ class MessageLogs extends Component
     public function render()
     {
     
-        $this->model = Messages::select('botpress_conversation_id','botpress_channel','botpress_createdOn')->where("twin_id",new ObjectId($this->twin->twin_external_id))->groupBy("botpress_conversation_id")->get();
+        $this->model = Messages::select('botpress_conversation_id','botpress_channel','botpress_createdOn')->where("twin_id",$this->twin->twin_external_id)->groupBy("botpress_conversation_id")->get();
+
+        dd($this->model);
     
        return view('livewire.message-logs');
     }

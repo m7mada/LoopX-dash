@@ -23,4 +23,24 @@ class Twin extends Model
         return $this->hasMany(File::class);
     }
 
+    public function messages(): HasMany 
+    {
+        $instance = $this->newRelatedInstance(Messages::class);
+
+        return $this->hasManyMongo(Messages::class,"twin_id","twin_external_id");
+    }
+
+    public function hasManyMongo($related, $foreignKey = null, $localKey = null)
+    {
+        $instance = $this->newRelatedInstance($related);
+
+        $foreignKey = $foreignKey ?: $this->getForeignKey();
+
+        $localKey = $localKey ?: $this->getKeyName();
+
+        return $this->newHasMany(
+            $instance->newQuery(), $this, $foreignKey, $localKey
+        );
+    }
+
 }
