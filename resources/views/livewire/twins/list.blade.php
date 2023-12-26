@@ -62,14 +62,14 @@
 
                                                 <div class="d-flex align-items-center justify-content-center">
                                                     <span class="me-2 text-xs font-weight-bold">{{count($twin->messages)}} Messages </span>
-                                                    <div>
+                                                    <!-- <div>
                                                         <div class="progress">
                                                             <div class="progress-bar bg-gradient-info"
                                                                 role="progressbar" aria-valuenow="{{count($twin->messages)}}"
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: {{ count($twin->messages) / 100 }}%;"></div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </td>
                                             <td class="align-middle">

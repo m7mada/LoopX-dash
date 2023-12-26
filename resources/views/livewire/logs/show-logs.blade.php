@@ -45,11 +45,10 @@
                                                 <span class="badge badge-sm badge-success">{{$log->botpress_channel}}</span>
                                             </td>
                                             <td class="align-middle">
+                                                <button wire:click.prevent="showConverssationMessages({{$log->botpress_conversation_id}})" class="btn btn-link text-secondary mb-0 " type="button">
+                                                    <span class="material-icons">more_vert</span>
+                                                </button>
                                                 
-                                                <a wire:click.prevent="showConverssationMessages({{$log->botpress_conversation_id}})"  >
-                                                        <span class="material-icons">more_vert</span>
-                                                          
-                                                    </a>
                                             </td>
                                             
                                         </tr>
