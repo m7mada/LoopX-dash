@@ -2,15 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Twin; 
+use DB;
+use Excetion;
 use App\Models\File;
+use App\Models\Twin;
+use Livewire\Component;
 use App\Models\Messages;
+use MongoDB\BSON\ObjectId;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use Livewire\WithFileUploads;
-use MongoDB\BSON\ObjectId;
-use DB;
 
 
 class Twins extends Component
@@ -32,7 +33,7 @@ class Twins extends Component
         'updateTwin' => 'updateTwin',
         'cancelTwins'=>'cancelTwins',
         'showTwinConverssations'=>'showTwinConverssations'
-        
+
     ];
 
     protected $rules = [
@@ -53,6 +54,7 @@ class Twins extends Component
                             ->with("messages")
                             ->with("files")
                             ->get();
+                            // dd($this->model);
     }
 
     public function resetFields(){
@@ -66,7 +68,7 @@ class Twins extends Component
 
     public function addTwins(){
         $this->resetFields();
-        
+
         $this->showForm = true ;
         $this->addTwins = true ;
         $this->currentStep = 1 ;
@@ -77,14 +79,14 @@ class Twins extends Component
 
 
         try{
-            $this->model = Twin::find($id);            
+            $this->model = Twin::find($id);
 
             $this->showForm = true ;
-            $this->currentStep++ ;    
+            $this->currentStep++ ;
 
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
-        } 
+        }
 
     }
 
@@ -97,12 +99,12 @@ class Twins extends Component
             $this->model->save();
             $this->addTwins = false ;
             $this->currentStep = 2 ;
-            
+
             session()->flash('success','Twin Created Successfully');
 
-        } catch(\Excetion $ex){
+        } catch(Excetion $ex){
             session()->flash('error','Something gose wrong !!');
-        } 
+        }
 
     }
 
@@ -133,15 +135,15 @@ class Twins extends Component
                     'files' => $filesToSend,
                     'twin_id' => $this->model->twin_external_id,
                 ]);
-    
+
             }
 
-            
-            
+
+
 
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
-        } 
+        }
 
     }
 
@@ -182,7 +184,7 @@ class Twins extends Component
 
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
-        } 
+        }
 
     }
 
@@ -194,11 +196,11 @@ class Twins extends Component
             $this->showLogs = true ;
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');
-        } 
+        }
 
     }
 
-        
+
     public function showConverssationMessages($converssationId){
         dd('ttdtdt');
     }

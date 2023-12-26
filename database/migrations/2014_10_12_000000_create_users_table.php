@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('location')->nullable();
             $table->text('about')->nullable();
             $table->string('password');
-            $table->enum('is_admin',['admin','normal_user'])->default('normal_user');
+            // $table->enum('is_admin',['admin','normal_user'])->default('normal_user');
             $table->rememberToken();
             $table->timestamps();
         });

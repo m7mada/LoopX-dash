@@ -12,7 +12,7 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            @if (Auth::user()->is_admin == 'admin')
+            @if (Auth::user()->is_admin == 1)
                 <!---------------------------------User Control--------------------------------->
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">User Control
