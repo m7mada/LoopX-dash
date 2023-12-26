@@ -25,14 +25,18 @@ class Twins extends Component
     public $currentStep = 0 ;
     public $addTwins = false ;
     public $files=[], $newFiles = [] ,$twinMessages;
-
+    public $twin_id;
+    public $botpress_conversation_id;
+    public $messages;
+    public $llMessage;
     protected $listeners = [
         'addTwins' => 'addTwins' ,
         'insertTwins' => 'insertTwins',
         'editTwins' => 'editTwins',
         'updateTwin' => 'updateTwin',
         'cancelTwins'=>'cancelTwins',
-        'showTwinConverssations'=>'showTwinConverssations'
+        'showTwinConverssations'=>'showTwinConverssations',
+        'showMessageNew' => '$refresh'
 
     ];
 
@@ -54,7 +58,8 @@ class Twins extends Component
                             ->with("messages")
                             ->with("files")
                             ->get();
-                            // dd($this->model);
+                            //dd($this->model);
+
     }
 
     public function resetFields(){
@@ -201,7 +206,22 @@ class Twins extends Component
     }
 
 
-    public function showConverssationMessages($converssationId){
-        dd('ttdtdt');
+    // public function getMessges($botpress_conversation_id,$twin_id){
+    //     dd($botpress_conversation_id,$twin_id);
+    // }
+    public function getMessges($twin_id, $botpress_conversation_id)
+    {
+
+        $this->twin_id = $twin_id;
+        $this->botpress_conversation_id = $botpress_conversation_id;
+
+
+       $this->messages = Messages::where('twin_id', $twin_id)->where('botpress_conversation_id', $botpress_conversation_id)->get();
+       $this->emit('showMessageNew');
+       return $this->messages;
+
     }
+
+
+
 }
