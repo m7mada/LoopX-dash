@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Pakedge extends Model
 {
     use HasFactory;
+    protected $table = 'packages';
+
     public $fillable = [
         'title',
         'description',
         'class_name',
         'price',
-        'discount'
+        'discount',
+        'messages'
     ];
 }
