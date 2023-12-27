@@ -31,7 +31,7 @@
                                                         @endphp
 
                                                         <a class="list-group-item list-group-item-action border-0" wire:click.prevent="getMessges('{{ $twin_id }}', '{{ $botpress_conversation_id }}')">
-                                                            <div class="badge bg-success float-right">5</div>
+                                                            <div class="badge bg-success float-right">{{count($messages)}}</div>
                                                             <div class="d-flex align-items-start">
                                                                 <img src="https://bootdey.com/img/Content/avatar/avatar5.png" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                                                 <div class="flex-grow-1 ml-3">
@@ -58,9 +58,9 @@
                                                                     <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
                                                                 </div>
                                                                 <div class="flex-grow-1 pl-3">
-                                                                    <strong>Sharon Lessman</strong>
-                                                                    <div class="text-muted small"><em>Typing...</em>
-                                                                    </div>
+                                                                    {{-- {{ $this->model->title }}{ --}}
+                                                                    <strong></strong>
+                                                                    {{-- <div class="text-muted small"><em>Typing...</em> --}}
                                                                 </div>
                                                                 {{-- <div>
                                                                     <button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone feather-lg">
@@ -83,57 +83,60 @@
 
                                                         <div class="position-relative">
                                                             <div class="chat-messages p-4">
-                                                                @dump($llMessage)
-                                                                @forelse ($messages as $item )
-                                                                {{-- @dump($item) --}}
+                                                                {{-- @dump($llMessage) --}}
+                                                                @if($messages)
+                                                                @forelse ($mt_twins as $item )
+                                                                {{-- @dump($item->toArray()) --}}
 
 
-
-                                                                <div class="chat-message-right pb-4">
-                                                                    <div>
-                                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                                                                        <div class="text-muted small text-nowrap mt-2">
-                                                                            2:33 am</div>
+                                                                @if ( $item->role == "user")
+                                                                    <div class="chat-message-right pb-4">
+                                                                        <div>
+                                                                            {{-- <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40"> --}}
+                                                                            <div class="text-muted small text-nowrap mt-2">
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                                                            <div class="font-weight-bold mb-1">User
+                                                                                <div class="text-muted small text-nowrap mt-2">
+                                                                                    {{ $item->created_at->format('Y-m-d H:i:s') }}
+                                                                                </div>
+                                                                                </div>
+                                                                            {{$item->content}}
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                                                                        <div class="font-weight-bold mb-1">You</div>
-                                                                        Lorem ipsum dolor sit amet, vis erat denique
-                                                                        in,
-                                                                        dicunt prodesset te vix.
-                                                                    </div>
-                                                                </div>
-
+                                                                @else
                                                                 <div class="chat-message-left pb-4">
                                                                     <div>
-                                                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                                                        {{-- <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40"> --}}
                                                                         <div class="text-muted small text-nowrap mt-2">
-                                                                            2:34 am</div>
+                                                                            </div>
                                                                     </div>
                                                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                                        <div class="font-weight-bold mb-1">Sharon
-                                                                            Lessman</div>
-                                                                        Sit meis deleniti eu, pri vidit meliore
-                                                                        docendi
-                                                                        ut, an eum erat animal commodo.
+                                                                        <div class="font-weight-bold mb-1">{{$model->title}}
+                                                                            <div class="text-muted small text-nowrap mt-2">
+                                                                                {{ $item->created_at->format('Y-m-d H:i:s') }}
+                                                                            </div>
+                                                                            </div>
+                                                                        {{$item->content}}
                                                                     </div>
                                                                 </div>
-
+                                                                @endif
                                                                 @empty
-
+                                                                <span></span>
                                                                 @endforelse
-
-
+                                                                @endif
 
 
                                                             </div>
                                                         </div>
 
-                                                        <div class="flex-grow-0 py-3 px-4 border-top">
+                                                        {{-- <div class="flex-grow-0 py-3 px-4 border-top">
                                                             <div class="input-group">
                                                                 <input type="text" class="form-control" placeholder="Type your message">
                                                                 <button class="btn btn-primary">Send</button>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
 
                                                     </div>
                                                 </div>
@@ -208,3 +211,5 @@
     </div>
 </div>
 </div>
+
+

@@ -17,6 +17,7 @@
         @include('livewire.twins.update')
     @elseif( $showLogs == true )
         @include('livewire.logs.show-logs')
+
     @elseif( $listTwins == true )
         @include('livewire.twins.list')
     @endif

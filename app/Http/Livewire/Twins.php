@@ -27,8 +27,8 @@ class Twins extends Component
     public $files=[], $newFiles = [] ,$twinMessages;
     public $twin_id;
     public $botpress_conversation_id;
-    public $messages;
-    public $llMessage;
+    public $mt_twins = [] ;
+    public $selectedData;
     protected $listeners = [
         'addTwins' => 'addTwins' ,
         'insertTwins' => 'insertTwins',
@@ -36,7 +36,7 @@ class Twins extends Component
         'updateTwin' => 'updateTwin',
         'cancelTwins'=>'cancelTwins',
         'showTwinConverssations'=>'showTwinConverssations',
-        'showMessageNew' => '$refresh'
+        'showMessageNew' => 'getMessges'
 
     ];
 
@@ -215,10 +215,9 @@ class Twins extends Component
         $this->twin_id = $twin_id;
         $this->botpress_conversation_id = $botpress_conversation_id;
 
+        $this->mt_twins = Messages::where('twin_id', $twin_id)->where('botpress_conversation_id', $botpress_conversation_id)->get();
+        // $this->emit('showMessageNew');
 
-       $this->messages = Messages::where('twin_id', $twin_id)->where('botpress_conversation_id', $botpress_conversation_id)->get();
-       $this->emit('showMessageNew');
-       return $this->messages;
 
     }
 
