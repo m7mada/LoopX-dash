@@ -187,7 +187,7 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
+                                                <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about your agent persona." spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -195,7 +195,7 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
+                                                <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Say a few words as an instructions for your agent." spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.example_messagesa" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false"></textarea>
+                                                <textarea class="form-control" wire:model="model.example_messages" rows="5" placeholder="Say a few examples for your agent." spellcheck="false"></textarea>
                                             </div>
 
                                         </div>
