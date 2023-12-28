@@ -15,6 +15,7 @@ class Order extends Model
         'user_id',
         'serial_number',
         'payment',
+        'messages_ammount',
     ];
 
 

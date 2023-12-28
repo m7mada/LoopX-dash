@@ -128,8 +128,12 @@
                                         </div>
                                         <div class="card-body text-lg-start text-center pt-0">
                                             {!!$package->description!!}
-                                            <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+
+
+                                            <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{$package->id}}"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                                             </a>
+
+                                            @include('livewire._model_order')
                             
                                             
                                         </div>
@@ -139,130 +143,6 @@
                     </div>
                 </div>
             @endforeach
-            {{--<div class="tab-pane" id="annual">
-               <div class="row">
-                  <div class="col-lg-4 mb-lg-0 mb-4">
-                     <div class="card shadow-lg">
-                        <span class="badge rounded-pill bg-light text-dark w-30 mx-auto">Starter</span>
-                        <div class="card-header text-center pt-4 pb-3">
-                           <h1 class="font-weight-bold mt-2">
-                              <small class="text-lg align-top me-1">$</small>119<small class="text-lg">/mo</small>
-                           </h1>
-                        </div>
-                        <div class="card-body text-lg-start text-center pt-0">
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">2 team members</span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">20GB Cloud storage </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">remove</i>
-                              <span class="ps-3">Integration help </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">remove</i>
-                              <span class="ps-3">Sketch Files </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">remove</i>
-                              <span class="ps-3">API Access </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">remove</i>
-                              <span class="ps-3">Complete documentation </span>
-                           </div>
-                           <a href="javascript:;" class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
-                           Join
-                           <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 mb-lg-0 mb-4">
-                     <div class="card bg-gradient-dark shadow-lg">
-                        <span class="badge rounded-pill bg-primary w-30 mx-auto">Premium</span>
-                        <div class="card-header text-center pt-4 pb-3 bg-transparent">
-                           <h1 class="font-weight-bold mt-2 text-white">
-                              <small class="text-lg align-top me-1">$</small>159<small class="text-lg">/mo</small>
-                           </h1>
-                        </div>
-                        <div class="card-body text-lg-start text-center pt-0">
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto text-white">done</i>
-                              <span class="ps-3 text-white">10 team members</span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto text-white">done</i>
-                              <span class="ps-3 text-white">40GB Cloud storage </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto text-white">done</i>
-                              <span class="ps-3 text-white">Integration help </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto text-white">done</i>
-                              <span class="ps-3 text-white">Sketch Files </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto text-white">remove</i>
-                              <span class="ps-3 text-white">API Access </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto text-white">remove</i>
-                              <span class="ps-3 text-white">Complete documentation </span>
-                           </div>
-                           <a href="javascript:;" class="btn btn-icon bg-gradient-primary d-lg-block mt-3 mb-0">
-                           Try Premium
-                           <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-4 mb-lg-0 mb-4">
-                     <div class="card shadow-lg">
-                        <span class="badge rounded-pill bg-light text-dark w-30 mx-auto">Enterprise</span>
-                        <div class="card-header text-center pt-4 pb-3">
-                           <h1 class="font-weight-bold mt-2">
-                              <small class="text-lg align-top me-1">$</small>399<small class="text-lg">/mo</small>
-                           </h1>
-                        </div>
-                        <div class="card-body text-lg-start text-center pt-0">
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">Unlimited team members</span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">100GB Cloud storage </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">Integration help </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">Sketch Files </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">API Access </span>
-                           </div>
-                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
-                              <i class="material-icons my-auto">done</i>
-                              <span class="ps-3">Complete documentation </span>
-                           </div>
-                           <a href="javascript:;" class="btn btn-icon bg-gradient-dark d-lg-block mt-3 mb-0">
-                           Join
-                           <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>--}}
          </div>
       </div>
       <div class="row mt-5">
