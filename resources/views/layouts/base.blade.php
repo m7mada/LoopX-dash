@@ -44,6 +44,15 @@
     <link href="{{asset('assets/css/custome.css')}}" rel="stylesheet">
 
 
+
+
+
+
+    <style>
+        body.g-sidenav-show.bg-gray-200{
+            margin-top: 0px;
+        }
+    </style>
     @livewireStyles
 </head>
 <body class="g-sidenav-show {{ Route::currentRouteName() == 'rtl' ? 'rtl' : '' }} {{ Route::currentRouteName() == 'register' || Route::currentRouteName() == 'static-sign-up'  ? '' : 'bg-gray-200' }}">

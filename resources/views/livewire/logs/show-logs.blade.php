@@ -208,4 +208,10 @@
 </div>
 </div>
 
+@push('body')
+    <script>
+        // .list-group-item:first-child
+        console.log("test");
+    </script>
+@endpush
 

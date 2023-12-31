@@ -99,47 +99,42 @@
                <div class="nav-wrapper mt-5 position-relative z-index-2">
                   <ul class="nav nav-pills nav-fill flex-row p-1" id="tabs-pricing" role="tablist">
                     @foreach ($pakedge->groupBy('type') as $packageCategory )
-                        
                         <li class="nav-item">
-                            <a class="nav-link mb-0" id="tabs-{{$packageCategory[0]['id']}}" data-bs-toggle="tab" href="#{{$packageCategory[0]['id']}}" role="tab" aria-controls="{{$packageCategory[0]['id']}}" aria-selected="@if ($loop->first) true @else false @endif">
-                            {{$packageCategory[0]['type']}}
+                            <a class="nav-link mb-0 @once active @endonce" 
+                              id="tabs-{{$packageCategory[0]['id']}}" 
+                              data-bs-toggle="tab" href="#tabs_{{$packageCategory[0]['id']}}" 
+                              role="tab" aria-controls="{{$packageCategory[0]['id']}}" 
+                              aria-selected="@if ($loop->first) true @else false @endif">
+                              {{$packageCategory[0]['type']}}
                             </a>
                      </li>
                     @endforeach
-
-                    
-                     <div class="moving-tab position-absolute nav-link" style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(0px, 0px, 0px); width: 204px;"><a class="nav-link mb-0 active" id="tabs-Twin" data-bs-toggle="tab" href="#twin" role="tab" aria-controls="twin" aria-selected="false">-</a></div>
                   </ul>
                </div>
             </div>
          </div>
          <div class="tab-content tab-space">
             @foreach ($pakedge->groupBy('type') as $packageCategory )
-                <div class="tab-pane @once active @endonce" id="tabs-{{$packageCategory[0]['id']}}">
+                <div class="tab-pane @once active @endonce" id="tabs_{{$packageCategory[0]['id']}}">
                     <div class="row">
-                            @foreach ( $packageCategory as $package )
-                                <div class="col-lg-4 mb-lg-0 mb-4">
-                                    <div class="card shadow-lg @if ( $loop->index == 1 ) bg-gradient-dark @endif">
-                                        <span class="badge rounded-pill @if ( $loop->index == 1 ) bg-primary @else bg-light text-dark @endif  w-30 mt-n2 mx-auto">{{$package->title}}</span>
-                                        <div class="card-header text-center pt-4 pb-3 bg-transparent">
-                                            <h1 class="font-weight-bold mt-2 @if ( $loop->index == 1 )text-white @endif">
-                                                <small class="text-lg align-top me-1">$</small>{{$package->price}}
-                                            </h1>
-                                        </div>
-                                        <div class="card-body text-lg-start text-center pt-0">
-                                            {!!$package->description!!}
-
-
-                                            <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{$package->id}}"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
-                                            </a>
-
-                                            @include('livewire._model_order')
-                            
-                                            
-                                        </div>
+                        @foreach ( $packageCategory as $package )
+                           <div class="col-lg-4 mb-lg-0 mb-4">
+                              <div class="card shadow-lg @if ( $loop->index == 1 ) bg-gradient-dark @endif">
+                                    <span class="badge rounded-pill @if ( $loop->index == 1 ) bg-primary @else bg-light text-dark @endif  w-30 mt-n2 mx-auto">{{$package->title}}</span>
+                                    <div class="card-header text-center pt-4 pb-3 bg-transparent">
+                                       <h1 class="font-weight-bold mt-2 @if ( $loop->index == 1 )text-white @endif">
+                                          <small class="text-lg align-top me-1">$</small>{{$package->price}}
+                                       </h1>
                                     </div>
-                                </div>
-                            @endforeach
+                                    <div class="card-body text-lg-start text-center pt-0">
+                                       {!!$package->description!!}
+                                       <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{$package->id}}"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                                       </a>
+                                       @include('livewire._model_order')
+                                    </div>
+                              </div>
+                           </div>
+                        @endforeach
                     </div>
                 </div>
             @endforeach

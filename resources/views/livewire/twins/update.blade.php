@@ -213,10 +213,60 @@
                                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="$set('currentStep', '2')">Back</button>
                                 </div>
                             </div>
-                        </div>
+                    </div>
+
+                    <div class="px-4 p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
+                            <div class="col-xs-12">
+                            <iframe
+                            style="width: 500px;height: 600px;margin: auto;display: block;"
+                            
+                                srcdoc='
+                            
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                    <title>Page Title</title>
+
+                                <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+                                <script src="https://mediafiles.botpress.cloud/caa58dcf-151f-4811-b8c3-d69e9099f9ae/webchat/config.js" defer></script>
+                                </head>
+                                    <body>
+
+                                        <script>
+                                            console.log(window.botpressWebChat)
+                                            window.botpressWebChat.init({
+                                                <!-- "composerPlaceholder": "Chat with bot",
+                                                "botConversationDescription": "This chatbot was built surprisingly fast with Botpress", -->
+                                                "botId": "c4b9f9b1-525d-435e-a745-d57fc5445e06",
+                                                "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+                                                "messagingUrl": "https://messaging.botpress.cloud",
+                                                "clientId": "c4b9f9b1-525d-435e-a745-d57fc5445e06",
+                                                "webhookId": "73c5dd0d-30e8-4e0e-b099-11acd75375ca",
+                                                <!-- "lazySocket": true,
+                                                "themeName": "prism",
+                                                "frontendVersion": "v1",
+                                                "showPoweredBy": true,
+                                                "theme": "prism",
+                                                "themeColor": "#2563eb",
+                                                "className": "botpress",
+                                                "showCloseButton": false,
+                                                "showConversationsButton": false -->
+                                            })
+
+                                            window.botpressWebChat.sendEvent({ type: 'show' })
+                                        </script>
+
+                                    </body>
+                                </html>
+                            
+                            ' name="iframe_a" title="Iframe Example"></iframe>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
