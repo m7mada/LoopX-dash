@@ -214,7 +214,20 @@
 
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
                             <div class="col-xs-12">
-                            <iframe
+                            
+                                <div class="card text-center">
+                                <div class="overflow-hidden position-relative border-radius-lg bg-cover p-3" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/window-desk.jpg')">
+                                    <span class="mask bg-gradient-dark opacity-6"></span>
+                                    <div class="card-body position-relative z-index-1 d-flex flex-column mt-5">
+                                    <p class="text-white font-weight-bolder">Chose package from billing page.</p>
+                                    <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-4" href="/billing">
+                                        Try Now
+                                        <i class="material-icons text-sm ms-1 position-relative" aria-hidden="true">arrow_forward</i>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{--<iframe
                             style="width: 500px;height: 600px;margin: auto;display: block;"
                             
                                 srcdoc='
@@ -254,7 +267,7 @@
                                     </body>
                                 </html>
                             
-                            ' name="iframe_a" title="Iframe Example"></iframe>
+                            ' name="iframe_a" title="Iframe Example"></iframe> --}}
                             </div>
                     </div>
                 </div>
