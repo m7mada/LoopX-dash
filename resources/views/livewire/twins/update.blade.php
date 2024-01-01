@@ -225,8 +225,6 @@
                                 <!DOCTYPE html>
                                 <html>
                                 <head>
-                                    <title>Page Title</title>
-
                                 <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
                                 <script src="https://mediafiles.botpress.cloud/caa58dcf-151f-4811-b8c3-d69e9099f9ae/webchat/config.js" defer></script>
                                 </head>
