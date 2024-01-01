@@ -73,6 +73,8 @@
                               <h4 class="mb-0">
                                 @if( $totalUsage )  
                                     {{ $totalUsage / $totalConversasions }}
+                                @else
+                                    0
                                 @endif</h4>
                           </div>
                       </div>
