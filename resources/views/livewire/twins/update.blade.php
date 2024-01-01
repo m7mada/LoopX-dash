@@ -145,28 +145,22 @@
                                         </div> -->
                                         <div class="card-body text-center">
                                             <div class="d-flex mt-n6 mx-auto">
-                                            <a class="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show file" target="_blank" href="{{$file['path']}}">
-                                                <i class="material-icons text-lg">remove_red_eye</i>
-                                            </a>
-                                            <button wire:click.prevent="removeFile({{$file['id']}})" class="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove file">
-                                                <i class="material-icons text-lg">delete</i>
-                                            </button>
+                                                <a class="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show file" target="_blank" href="{{$file['path']}}">
+                                                    <i class="material-icons text-lg">remove_red_eye</i>
+                                                </a>
+                                                <button wire:click.prevent="removeFile({{$file['id']}})" class="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove file">
+                                                    <i class="material-icons text-lg">delete</i>
+                                                </button>
                                             </div>
                                             <h9 class="font-weight-normal mt-3">
-                                            <a href="javascript:;">{{$file['name']}}</a>
+                                                <a target="_blank" href="{{$file['path']}}">{{$file['name']}}</a>
                                             </h9>
-                                            <p class="mb-0">
-                                                {{$file['size']}}
-                                            </p>
+                                            <p class="mb-0">{{$file['size']}}</p>
                                         </div>
-
-                                        </div>
-
-
-
+                                    </div>
                                 @endforeach
                                 </div>
-
+                                <hr>
                                 <div class="mb-3 p-3" style="border: 2px dashed #ddd;">
                                     <div class="fallback">
                                         <input wire:model="newFiles" type="file" multiple />
