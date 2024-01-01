@@ -70,7 +70,10 @@
                           </div>
                           <div class="text-end pt-1">
                               <p class="text-sm mb-0 text-capitalize">Messages per conversions</p>
-                              <h4 class="mb-0">{{ $totalUsage / $totalConversasions }}</h4>
+                              <h4 class="mb-0">
+                                @if( $totalUsage )  
+                                    {{ $totalUsage / $totalConversasions }}
+                                @endif</h4>
                           </div>
                       </div>
                       <hr class="dark horizontal my-0">
