@@ -160,8 +160,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($model->messages->groupBy('botpress_conversation_id') as $conversationId
-                                    => $messages)
+                                    @foreach ($model->messages->groupBy('botpress_conversation_id') as $conversationId => $messages)
                                     <tr>
                                         <td>
                                             <p class="text-sm font-weight-bold mb-0">{{ $conversationId }}</p>

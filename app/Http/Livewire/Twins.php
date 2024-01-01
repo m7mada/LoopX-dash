@@ -55,7 +55,9 @@ class Twins extends Component
 
     public function mount(){
         $this->model = Twin::where("user_id",Auth::user()->id)
-                            ->with("messages")
+                            ->with("messages",function($query){
+                                $query->where('role','=','assistant');
+                            })
                             ->with("files")
                             ->get();
                             //dd($this->model);

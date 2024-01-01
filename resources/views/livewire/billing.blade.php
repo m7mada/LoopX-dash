@@ -140,7 +140,7 @@
             @endforeach
          </div>
       </div>
-      <div class="row mt-5">
+      <!-- <div class="row mt-5">
          <div class="col-8 mx-auto text-center">
             <h6 class="opacity-5"> More than 50+ brands trust Material</h6>
          </div>
@@ -164,7 +164,7 @@
          <div class="col-lg-2 col-md-4 col-6 mb-4">
             <img class="w-100 opacity-9" src="https://material-dashboard-pro-laravel-livewire.creative-tim.com/assets/img/logos/gray-logos/logo-vodafone.svg" alt="logo_vodafone">
          </div>
-      </div>
+      </div> -->
       <div class="row mt-5">
          <div class="col-md-6 mx-auto text-center">
             <h2>Frequently Asked Questions</h2>
