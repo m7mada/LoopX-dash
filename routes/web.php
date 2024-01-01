@@ -58,7 +58,7 @@ Route::get('sign-up', Register::class)->middleware('guest')->name('register');
 Route::get('sign-in', Login::class)->middleware('guest')->name('login');
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {    
     Route::get('user-profile', UserProfile::class)->name('user-profile');
     Route::get('user-management', UserManagement::class)->name('user-management');
     Route::get('add-users', UserForm::class)->name('add-users');

@@ -133,7 +133,7 @@
 
                                 <div class="mb-3 p-3" style="border: 2px dashed #ddd;">
                                     <div class="fallback">
-                                        <input wire:model="newFiles" name="file" type="file" multiple />
+                                        <input wire:model="newFiles" type="file" multiple />
                                     </div>
                                 </div>
 
