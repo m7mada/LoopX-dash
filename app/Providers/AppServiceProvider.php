@@ -16,11 +16,6 @@ class AppServiceProvider extends ServiceProvider
         if(!\App::isLocal()){
             \URL::forceScheme('https');
         }
-
-        if (Str::contains(Config::get('app.url'), 'https://')) {
-            URL::forceScheme('https');
-        }
-        
     }
 
     /**
