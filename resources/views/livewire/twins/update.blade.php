@@ -131,6 +131,42 @@
                             <div class="col-md-12">
                                 <h4 class="mb-3">Step 2: Upload your files </h4>
 
+                                
+
+                                <div class="row ">
+                                @foreach($model->files as $file)
+
+                                    <div class=" m-4 col-2 card" data-animation="true">
+                                        <!-- <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                            <a class="d-block blur-shadow-image">
+                                                <img src="/assets/img/logo-ct.png" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                                            </a>
+                                            <div class="colored-shadow" style="background-image: url(&quot;/assets/img/logo-ct.png&quot;);"></div>
+                                        </div> -->
+                                        <div class="card-body text-center">
+                                            <div class="d-flex mt-n6 mx-auto">
+                                            <a class="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show file" target="_blank" href="{{$file['path']}}">
+                                                <i class="material-icons text-lg">remove_red_eye</i>
+                                            </a>
+                                            <button wire:click.prevent="removeFile({{$file['id']}})" class="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove file">
+                                                <i class="material-icons text-lg">delete</i>
+                                            </button>
+                                            </div>
+                                            <h9 class="font-weight-normal mt-3">
+                                            <a href="javascript:;">{{$file['name']}}</a>
+                                            </h9>
+                                            <p class="mb-0">
+                                                {{$file['size']}}
+                                            </p>
+                                        </div>
+
+                                        </div>
+
+
+
+                                @endforeach
+                                </div>
+
                                 <div class="mb-3 p-3" style="border: 2px dashed #ddd;">
                                     <div class="fallback">
                                         <input wire:model="newFiles" type="file" multiple />
@@ -140,40 +176,6 @@
                                 <div style="width:100%" wire:loading class="mb-3 p-3">
                                     <div wire:loading class="spinner-border" role="status"></div>Loading...
                                 </div>
-
-
-                                @foreach($files as $file)
-                                    <div class="dz-preview dz-processing dz-image-preview dz-complete">
-                                        <div class="dz-details">
-                                            <div class="dz-thumbnail">
-                                                <img data-dz-thumbnail=""
-                                                    alt="logo.svg"
-                                                    src="{{$file['path']}}">
-                                                <span class="dz-nopreview">{{$file['name']}} <br> {{$file['size']}}</span>
-                                                <div class="dz-success-mark"></div>
-                                                <div class="dz-error-mark"></div>
-                                                <div class="dz-error-message">
-                                                        <span data-dz-errormessage="">
-
-
-                                                        </span>
-                                                </div>
-                                                <div class="progress">
-                                                    <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-dz-uploadprogress="" style="width: 100%;"></div>
-                                                </div>
-                                            </div>
-                                            <div class="dz-filename" data-dz-name=""></div>
-                                            <div style="padding: 0.875rem 0.625rem 0.625rem 0.625rem;" class="dz-size text-center" data-dz-size="">
-                                                    <a target="_blank" href="{{$file['path']}}">Preview</a>
-                                            </div>
-                                        </div>
-                                        <a class="dz-remove bg-danger text-white" href="javascript:undefined;" wire:click="removeFile({{$file['id']}})" data-dz-remove="">
-                                            Remove file
-                                        </a>
-                                    </div>
-
-                                @endforeach
-
 
                                 <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="$set('currentStep', '1')">Back</button>
                                 <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Next</button>

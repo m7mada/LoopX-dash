@@ -156,9 +156,9 @@ class Twins extends Component
 
     public function removeFile($fileId){
 
-        $file = File::query()->find($fileId);
-        \Storage::disk('s3')->delete($file->getAttributes()['path']);
-        $file->delete();
+        $fileToDelete = File::query()->find($fileId);
+        \Storage::disk('s3')->delete($fileToDelete->getAttributes()['path']);
+        $fileToDelete->delete();
         foreach ($this->files as $key => $file){
             if ($file['id'] == $fileId){
                 unset($this->files[$key]);
