@@ -134,14 +134,17 @@ class Twins extends Component
                     $filesToSend[] = $fileToSend['path'];
                 }
 
-                $baseUrl = config('app.django_url');
-                $r = Http::withHeaders([
-                    'Content-Type' => 'application/json',
-                    'Accept' => 'application/json',
-                ])->post($baseUrl.'/api/create-db',[
-                    'files' => $filesToSend,
-                    'twin_id' => $this->model->twin_external_id,
-                ]);
+                if( ! empty( $filesToSend ) ){
+                    $baseUrl = config('app.django_url');
+                    $r = Http::withHeaders([
+                        'Content-Type' => 'application/json',
+                        'Accept' => 'application/json',
+                    ])->post($baseUrl.'/api/create-db',[
+                        'files' => $filesToSend,
+                        'twin_id' => $this->model->twin_external_id,
+                    ]);
+                } 
+
 
             }
 
@@ -207,10 +210,6 @@ class Twins extends Component
 
     }
 
-
-    // public function getMessges($botpress_conversation_id,$twin_id){
-    //     dd($botpress_conversation_id,$twin_id);
-    // }
     public function getMessges($twin_id, $botpress_conversation_id)
     {
 
