@@ -135,11 +135,10 @@ class Twins extends Component
                 }
 
                 if( ! empty( $filesToSend ) ){
-                    $baseUrl = config('app.django_url');
                     $r = Http::withHeaders([
                         'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
-                    ])->post($baseUrl.'/api/create-db',[
+                    ])->post(config('app.django_url').'/api/create-db',[
                         'files' => $filesToSend,
                         'twin_id' => $this->model->twin_external_id,
                     ]);
