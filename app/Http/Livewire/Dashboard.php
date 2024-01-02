@@ -21,6 +21,7 @@ class Dashboard extends Component
                                 ->with("messages",function($query){
                                     $query->where('role','=','assistant');
                                 })
+                                ->with('files')
                                 ->get();
 
         $this->userTwins->transform(function ($twin) {
