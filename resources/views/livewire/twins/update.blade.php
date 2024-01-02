@@ -61,7 +61,7 @@
                                             <div class="input-group mb-4">
                                                 <div class="form-check form-switch">
                                                     <input wire:model.defer="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
-                                                    <label class="form-check-label" for="is_active">Active {{$this->model->is_active}}</label>
+                                                    <label class="form-check-label" for="is_active">Active</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,41 +134,57 @@
                                 
 
                                 <div class="row ">
-                                @foreach($model->files as $file)
-
-                                    <div class=" m-4 col-2 card" data-animation="true">
-                                        <!-- <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                            <a class="d-block blur-shadow-image">
-                                                <img src="/assets/img/logo-ct.png" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
-                                            </a>
-                                            <div class="colored-shadow" style="background-image: url(&quot;/assets/img/logo-ct.png&quot;);"></div>
-                                        </div> -->
-                                        <div class="card-body text-center">
-                                            <div class="d-flex mt-n6 mx-auto">
-                                                <a class="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show file" target="_blank" href="{{$file['path']}}">
-                                                    <i class="material-icons text-lg">remove_red_eye</i>
-                                                </a>
-                                                <button wire:click.prevent="removeFile({{$file['id']}})" class="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Remove file">
-                                                    <i class="material-icons text-lg">delete</i>
-                                                </button>
+                                    <div class="col-lg-6 col-md-6 mt-4 mb-4">
+                                        <div class="mb-3 p-3" style="border: 2px dashed #ddd;">
+                                            <div class="fallback">
+                                                <input wire:model="newFiles" type="file" multiple />
                                             </div>
-                                            <h9 class="font-weight-normal mt-3">
-                                                <a target="_blank" href="{{$file['path']}}">{{$file['name']}}</a>
-                                            </h9>
-                                            <p class="mb-0">{{$file['size']}}</p>
+                                        </div>
+
+                                        <div style="width:100%" wire:loading class="mb-3 p-3">
+                                            <div wire:loading class="spinner-border" role="status"></div>Loading...
+                                        </div>
+                                    </div>    
+                                    <div class="col-lg-6 col-md-6 mt-4 mb-4">
+                                        <div class="card">
+                                            <div class="table-responsive">
+                                                <table class="table align-items-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Attached files</th>
+                                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Size</th>
+                                                    <th class="text-secondary opacity-7"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($model->files as $file)
+
+                                                    <tr>
+                                                
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">{{$file['name']}}</p>
+                                                        <p class="text-xs text-secondary mb-0">{{$file['created_at']}}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span class="text-secondary text-xs font-weight-normal">{{$file['size']}}</span>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <a href="javascript:;" wire:click.prevent="removeFile({{$file['id']}})"  class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete file">
+                                                        Delete
+                                                        </a> | 
+
+                                                        <a target="_blank" href="{{$file['path']}}" class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete file">
+                                                        Preview
+                                                        </a>
+                                                    </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
-                                @endforeach
-                                </div>
-                                <hr>
-                                <div class="mb-3 p-3" style="border: 2px dashed #ddd;">
-                                    <div class="fallback">
-                                        <input wire:model="newFiles" type="file" multiple />
-                                    </div>
-                                </div>
-
-                                <div style="width:100%" wire:loading class="mb-3 p-3">
-                                    <div wire:loading class="spinner-border" role="status"></div>Loading...
+                                    
                                 </div>
 
                                 <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="$set('currentStep', '1')">Back</button>
