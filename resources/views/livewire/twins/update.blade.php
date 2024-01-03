@@ -48,7 +48,7 @@
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 1 ? 'displayNone' : '' }}" id="step-1">
                         <div class="col-xs-12">
                             <div class="col-md-12">
-                                <h4 class="mb-3"> Step 1 : Set the Twin Settings</h4>
+                                <h4 class="mb-3">Setup Your Twin:</h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4">
@@ -129,7 +129,7 @@
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 2 ? 'displayNone' : '' }}" id="step-2">
                         <div class="col-xs-12">
                             <div class="col-md-12">
-                                <h4 class="mb-3">Step 2: Upload your files </h4>
+                                <h4 class="mb-3">Build Your Twin Mind: </h4>
 
                                 
 
@@ -196,7 +196,7 @@
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 3 ? 'displayNone' : '' }}" id="step-3">
                             <div class="col-xs-12">
                                 <div class="col-md-12">
-                                    <h4 class="mb-3"> Step 3</h4>
+                                    <h4 class="mb-3"> Teach Your Twin:</h4>
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
@@ -227,7 +227,6 @@
                                 </div>
                             </div>
                     </div>
-
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
                             <div class="col-xs-12">
                             
