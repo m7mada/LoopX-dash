@@ -42,9 +42,9 @@ class Twins extends Component
 
     protected $rules = [
         'model.title' => 'required',
-        'model.agent_persona' => 'nullable|max:600',
-        'model.agent_instructions' => 'nullable|max:600',
-        'model.example_messages' => 'nullable|max:600',
+        'model.agent_persona' => 'nullable',
+        'model.agent_instructions' => 'nullable',
+        'model.example_messages' => 'nullable',
         'model.kb_model_name' => 'nullable',
         'model.msgs_model_name' => 'nullable',
         'model.agent_dialect' => 'nullable',
