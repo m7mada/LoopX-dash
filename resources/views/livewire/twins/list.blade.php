@@ -37,7 +37,7 @@
                                         @foreach($model as $twin )
                                         <tr>
                                             <td>
-                                                <div class="d-flex px-2">
+                                                <div class="d-flex px-2" data-id="{{ $twin->twin_external_id }}">
                                                     <div>
                                                         <img src="{{ asset('assets') }}/img/small-logos/logo-asana.svg"
                                                             class="avatar avatar-sm rounded-circle me-2"
