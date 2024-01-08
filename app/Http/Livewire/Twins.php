@@ -45,9 +45,9 @@ class Twins extends Component
         'model.agent_persona' => 'nullable',
         'model.agent_instructions' => 'nullable',
         'model.example_messages' => 'nullable',
-        'model.kb_model_name' => 'nullable',
+        'model.kb_model_name' => 'required',
         'model.msgs_model_name' => 'nullable',
-        'model.agent_dialect' => 'nullable',
+        'model.agent_dialect' => 'required',
         'model.user_dialect' => 'nullable',
         'model.is_active' => 'nullable',
     ];

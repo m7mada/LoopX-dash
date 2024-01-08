@@ -51,8 +51,10 @@
                                 <h4 class="mb-3">Setup Your Twin:</h4>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <div class="input-group input-group-outline mb-4">
+                                            <div class="input-group input-group-outline mb-4 @error('model.title') is-invalid @enderror">
+
                                                 <label for="title" class="form-label">Twin Title:</label>
+
                                                 <input type="text" id="title" wire:model.defer="model.title" class="form-control">
                                             </div>
                                         </div>
@@ -60,18 +62,19 @@
                                         <div class="col-md-6">
                                             <div class="input-group mb-4">
                                                 <div class="form-check form-switch">
-                                                    <input wire:model.defer="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
+                                                    <input wire:model="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
                                                     <label class="form-check-label" for="is_active">Active</label>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="input-group mb-4">
-                                                <label for="kb_model_name" class="ms-0">Model :</label>
+                                            <div class="input-group input-group-outline mb-4 @error('model.kb_model_name') is-invalid @enderror ">
+                                                <label for="kb_model_name" class="ms-0">Model :* @error('model.kb_model_name') {{$message}} @enderror</label>
                                                 <div class="input-group input-group-outline">
-                                                    <select class="form-control" id="kb_model_name" wire:model.defer="model.kb_model_name">
-                                                        <option value="gpt-3.5-turbo-1106" selected>Twin</option>
+                                                    <select class="form-control" id="kb_model_name" wire:model="model.kb_model_name">
+                                                        <option value="" >Choos Twin</option>
+                                                        <option value="gpt-3.5-turbo-1106">Twin</option>
                                                         <option value="gpt-4-1106-preview">Twin Pro</option>
                                                     </select>
                                                 </div>
@@ -94,10 +97,11 @@
                                         </div> -->
 
                                         <div class="col-md-6">
-                                            <div class="input-group mb-4">
-                                                <label for="agent_dialect" class="ms-0">Agent Dialect</label>
+                                            <div class="input-group input-group-outline mb-4 @error('model.agent_dialect') is-invalid @enderror ">
+                                                <label for="agent_dialect" class="ms-0">Agent Dialect :*</label>@error('model.agent_dialect') {{$message}} @enderror 
                                                 <div class="input-group input-group-outline">
                                                     <select class="form-control" wire:model.defer="model.agent_dialect">
+                                                        <option value="">Choos Twin Dialect</option>
                                                         <option value="Egyptian Colloquial Arabic - اللهجة العامية المصرية" selected>Egyptian Colloquial Arabic - اللهجة العامية المصرية</option>
                                                         <option value="Saudi Arabic - اللهجة السعودية">Saudi Arabic - اللهجة السعودية</option>
                                                     </select>
