@@ -72,7 +72,7 @@
                               <p class="text-sm mb-0 text-capitalize">Messages per conversions</p>
                               <h4 class="mb-0">
                                 @if( $totalUsage )  
-                                    {{ $totalUsage / $totalConversasions }}
+                                    {{ round($totalUsage / $totalConversasions) }}
                                 @else
                                     0
                                 @endif</h4>
