@@ -44,7 +44,8 @@
                                                             alt="spotify">
                                                     </div>
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">{{ $twin->title }} {{$this->showLogs}}</h6>
+                                                        <h6 class="mb-0 text-sm">{{ $twin->title }} </h6>
+                                                        @if(\Auth::user()->is_admin) <span class="me-2 text-xs"> {{$twin->twin_external_id}} </span> @endif
                                                     </div>
                                                 </div>
                                             </td>

@@ -60,8 +60,10 @@ class Twins extends Component
                             })
                             ->with("files")
                             ->get();
-                            //dd($this->model);
 
+        if( Auth::user()->is_admin ){
+            $this->model = Twin::get();
+        }
     }
 
     public function resetFields(){
