@@ -124,7 +124,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="align-middle text-center text-sm">
-                                                        <span class="text-xs"> {{count($twin->messages)}} </span>
+                                                        <span class="text-xs"> {{count($twin->messages->where('role','=','assistant'))}}</span>
                                                     </td>
                                                 </tr>
                                                 @empty
@@ -164,7 +164,7 @@
                                     <canvas id="twinsCostChart" class="chart-canvas" height="197" width="287" style="display: block; box-sizing: border-box; height: 197px; width: 287.5px;"></canvas>
                                 </div>
                                 <h4 class="font-weight-bold mt-n8">
-                                    <span>@if( $messagesCost ) {{$messagesCost}} @else 0 @endif</span>
+                                    <span>@if( $userTwins->sum("messages_cost") ) {{$userTwins->sum("messages_cost")}} @else 0 @endif</span>
                                     <span class="d-block text-body text-sm">USD</span>
                                 </h4>
                             </div>
@@ -359,7 +359,7 @@
                                                 <div class="progress-wrapper w-75 mx-auto">
                                                     <div class="progress-info">
                                                         <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">{{count($twin->messages)}} Reply</span>
+                                                            <span class="text-xs font-weight-bold">{{count($twin->messages->where('role','=','assistant'))}} Reply</span>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="progress">

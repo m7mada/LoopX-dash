@@ -30,7 +30,7 @@ class Dashboard extends Component
 
         $this->userTwins->transform(function ($twin) {
             $twin->color = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-            $twin->messages_count = count($twin->messages) ;
+            $twin->messages_count = count($twin->messages->where('role','=','assistant')) ;
             $twin->messages_cost = $twin->messages->sum("total_cost") ;
 
             return $twin;
@@ -38,10 +38,6 @@ class Dashboard extends Component
 
 
         foreach ($this->userTwins as $twin) {
-
-            $this->messagesCost += Messages::where('role', 'assistant')
-                                    ->where('twin_id',$twin->twin_external_id)
-                                    ->sum('total_cost');
 
             $this->totalUsage += Messages::where('twin_id', $twin->twin_external_id)
                                             ->where('role', 'assistant')
@@ -73,6 +69,7 @@ class Dashboard extends Component
 
         }
 
+        //dd($this->userTwins , $this->totalUsage);
         $this->userOrders = Order::where('payment','=','completed')
                                         ->where('user_id',Auth::user()->id)
                                         ->get();
