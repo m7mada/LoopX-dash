@@ -147,6 +147,65 @@
                     </div>
                 </div>
 
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <div class="d-flex align-items-center">
+                            <h6 class="mb-0">Cost Per Twin</h6>
+                            <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See cost per Twin">
+                            <i class="fas fa-info" aria-hidden="true"></i>
+                            </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row">
+                            <div class="col-5 text-center">
+                                <div class="chart">
+                                    <canvas id="twinsCostChart" class="chart-canvas" height="197" width="287" style="display: block; box-sizing: border-box; height: 197px; width: 287.5px;"></canvas>
+                                </div>
+                                <h4 class="font-weight-bold mt-n8">
+                                    <span>@if( $messagesCost ) {{$messagesCost}} @else 0 @endif</span>
+                                    <span class="d-block text-body text-sm">USD</span>
+                                </h4>
+                            </div>
+                            <div class="col-7">
+                                <div class="table-responsive">
+                                    <table class="table align-items-center mb-0" style="min-height:200px">
+                                        <tbody>
+                                            @forelse ( $userTwins as $twin )
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-0">
+                                                            <span class="badge me-3" style="background-color:{{$twin->color}}"> </span>
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$twin->title}}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <span class="text-xs"> ${{$twin->messages_cost}} </span>
+                                                    </td>
+                                                </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div class="d-flex px-2 py-0">
+                                                                <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm"><a href="/twins">Try your first Twin -></a></h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforelse                                      
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -667,6 +726,67 @@
                     borderWidth: 2,
                     backgroundColor: @json($userTwins->pluck('color')),
                     data: @json($userTwins->pluck('messages_count')),
+                    fill: false
+                }],
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+                scales: {
+                    y: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            drawBorder: false,
+                            display: false,
+                            drawOnChartArea: false,
+                            drawTicks: false,
+                        },
+                        ticks: {
+                            display: false,
+                        }
+                    },
+                },
+            },
+        });
+
+
+
+        // Chart Doughnut Consumption by room
+        var ctx2 = document.getElementById("twinsCostChart").getContext("2d");
+
+
+        // Twins usage chart
+        new Chart(ctx2, {
+            type: "doughnut",
+            data: {
+                labels: @json($userTwins->pluck('title')),
+                datasets: [{
+                    weight: 9,
+                    cutout: 90,
+                    tension: 0.9,
+                    pointRadius: 2,
+                    borderWidth: 2,
+                    backgroundColor: @json($userTwins->pluck('color')),
+                    data: @json($userTwins->pluck('messages_cost')),
                     fill: false
                 }],
             },

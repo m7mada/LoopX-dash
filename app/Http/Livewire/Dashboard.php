@@ -14,7 +14,7 @@ use Carbon\Carbon;
 
 class Dashboard extends Component
 {
-    public $userTwins , $totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders;
+    public $userTwins , $totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost;
     public function render()
     {
         $this->userTwins = Twin::where("user_id",Auth::user()->id)
@@ -31,10 +31,18 @@ class Dashboard extends Component
         $this->userTwins->transform(function ($twin) {
             $twin->color = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
             $twin->messages_count = count($twin->messages) ;
+            $twin->messages_cost = $twin->messages->sum("total_cost") ;
+
             return $twin;
         });
 
+
         foreach ($this->userTwins as $twin) {
+
+            $this->messagesCost += Messages::where('role', 'assistant')
+                                    ->where('twin_id',$twin->twin_external_id)
+                                    ->sum('total_cost');
+
             $this->totalUsage += Messages::where('twin_id', $twin->twin_external_id)
                                             ->where('role', 'assistant')
                                             ->count();
