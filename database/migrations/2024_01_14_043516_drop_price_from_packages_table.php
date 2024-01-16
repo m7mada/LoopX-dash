@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('packages', function (Blueprint $table) {
-            $table->dropColumn('price');
-            $table->dropColumn('discount');
-            $table->dropColumn('messages');
-        });
+        Schema::dropIfExists('order_cridet');
+        Schema::dropIfExists('order_packages_prices');
+
     }
 
     /**
@@ -23,8 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('packages', function (Blueprint $table) {
-            //
-        });
+
     }
 };
