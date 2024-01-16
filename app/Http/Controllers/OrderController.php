@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Pakedge ;
+use App\Models\OrderLine;
+use App\Models\PackagesPrice;
+use App\Models\PackagesBenefit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -13,24 +16,37 @@ class OrderController extends Controller
     public function store(Request $request){
 
 
-        dd($request->all());
         $data = $request->validate([
             'name' => 'required|string',
             'phone' => 'required',
-            'pakedge_id' => 'required|exists:packages,id',
+            'package_price_id' => 'required|exists:packages_prices,id',
 
         ]);
-
         
-        // Create a new Order instance and save it to the database
-        Order::create([
+        $packcagePrice = PackagesPrice::find($data['package_price_id']) ;
+        
+        $insertedOrder = Order::create([
             'name' => $data['name'],
             'phone' => $data['phone'],
-            'pakedge_id' => $data['pakedge_id'],
             'user_id' =>auth()->user()->id,
-            'messages_ammount'=>Pakedge::select('messages')->find($data['pakedge_id'])->messages,
+            'payment_methods_id'=>(int) 1,
+            'is_paid'=>(int) 0,
+            'net_paid'=> $packcagePrice->price,
 
         ]);
+
+
+        foreach ( PackagesBenefit::where('package_id',$packcagePrice->package_id)->get() as $line){
+            $orderLines[] = [
+                'order_id'=> $insertedOrder->id,
+                'referance_package_id'=> $packcagePrice->package_id,
+                'benefit_id'=> $line->benefit_id,
+                'value'=> $line->value,
+                'expire_time'=> ( $line->benefit->type == 'saas') ? Carbon::now()->addMonth($line->value) : null,
+            ];
+        }
+
+        $insertedOrderLines = OrderLine::insert($orderLines);
 
         return redirect()->back();
 

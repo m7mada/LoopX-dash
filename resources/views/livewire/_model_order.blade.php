@@ -23,7 +23,7 @@
                 @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
 
                 <div class="input-group input-group-outline my-3">
-                    <input type="hidden" value="{{$package->id}}"  class="form-control"name="pakedge_id">
+                    <input type="hidden" value="{{$package->getPrice->id ?? ''}}"  class="form-control" name="package_price_id">
                 </div>
         </div>
 

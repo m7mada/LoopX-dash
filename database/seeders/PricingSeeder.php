@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Package;
 use App\Models\PackagesBenefit;
+use App\Models\PaymentMethod;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +71,9 @@ class PricingSeeder extends Seeder
             ]
             ]
         );
+        PaymentMethod::insertOrInsert([
+            'name'=>'cash'
+        ]);
 
     }
 }

@@ -14,8 +14,9 @@ class Order extends Model
         'pakedge_id',
         'user_id',
         'serial_number',
-        'payment',
-        'messages_ammount',
+        'payment_methods_id',
+        'is_paid',
+		'net_paid' ,
     ];
 
 
