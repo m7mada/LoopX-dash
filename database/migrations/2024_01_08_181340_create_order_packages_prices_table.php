@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('package_price_id');
             $table->foreign('package_price_id')->references('id')->on('packages_prices')->onDelete('cascade');
+            $table->unsignedBigInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->dateTime('expire_time');
             $table->timestamps();
         });

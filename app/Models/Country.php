@@ -10,4 +10,12 @@ class Country extends BaseCountry
 		'name',
 		'code'
 	];
+
+	// protected static function booted()
+    // {
+    //     static::addGlobalScope('default', function (Builder $builder) {
+    //         $builder->where('is_default', 1);
+    //     });
+    // }
+
 }

@@ -7,7 +7,6 @@
 namespace App\Models\Base;
 
 use App\Models\Benefit;
-use App\Models\Order;
 use App\Models\PackagesPrice;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -27,7 +26,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $messages
  * @property string $type
  * 
- * @property Collection|Order[] $orders
  * @property Collection|Benefit[] $benefits
  * @property Collection|PackagesPrice[] $packages_prices
  *
@@ -43,20 +41,15 @@ class Package extends Model
 		'messages' => 'int'
 	];
 
-	public function orders()
-	{
-		return $this->hasMany(Order::class, 'pakedge_id');
-	}
-
 	public function benefits()
 	{
-		return $this->belongsToMany(Benefit::class, 'packages_benefits')
+		return $this->belongsToMany(Benefit::class, 'packages_benefits','package_id','benefit_id')
 					->withPivot('id', 'value')
 					->withTimestamps();
 	}
 
 	public function packages_prices()
 	{
-		return $this->hasMany(PackagesPrice::class);
+		return $this->hasMany(PackagesPrice::class,'package_id','id');
 	}
 }

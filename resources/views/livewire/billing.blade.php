@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="row">
-                                @forelse($pakedge as $key => $item)
+                                @forelse($package as $key => $item)
                                 <div class="col-md-3 col-4">
                                     <div class="card">
                                         <div class="card-header mx-4 p-3 text-center">
@@ -98,7 +98,7 @@
             <div class="col-lg-4 col-md-6 col-7 mx-auto text-center">
                <div class="nav-wrapper mt-5 position-relative z-index-2">
                   <ul class="nav nav-pills nav-fill flex-row p-1" id="tabs-pricing" role="tablist">
-                    @foreach ($pakedge->groupBy('type') as $packageCategory )
+                    @foreach ($packages->groupBy('type') as $packageCategory )
                         <li class="nav-item">
                             <a class="nav-link mb-0 @once active @endonce" 
                               id="tabs-{{$packageCategory[0]['id']}}" 
@@ -114,7 +114,7 @@
             </div>
          </div>
          <div class="tab-content tab-space">
-            @foreach ($pakedge->groupBy('type') as $packageCategory )
+            @foreach ($packages->groupBy('type') as $packageCategory )
                 <div class="tab-pane @once active @endonce" id="tabs_{{$packageCategory[0]['id']}}">
                     <div class="row">
                         @foreach ( $packageCategory as $package )
@@ -123,12 +123,21 @@
                                     <span class="badge rounded-pill @if ( $loop->index == 1 ) bg-primary @else bg-light text-dark @endif  w-30 mt-n2 mx-auto">{{$package->title}}</span>
                                     <div class="card-header text-center pt-4 pb-3 bg-transparent">
                                        <h1 class="font-weight-bold mt-2 @if ( $loop->index == 1 )text-white @endif">
-                                          <small class="text-lg align-top me-1">$</small>{{$package->price}}
+                                          <small class="text-lg align-top me-1">{{$package->getPrice->currency->code ?? '' }}</small>
+                                          {{ $package->getPrice->price ?? '' }}
                                        </h1>
                                     </div>
                                     <div class="card-body text-lg-start text-center pt-0">
                                        {!!$package->description!!}
-                                       <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{$package->id}}"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+
+                                       @foreach ( $package->benefits as $benefit )
+                                          <div class="d-flex justify-content-lg-start justify-content-center p-2">
+                                             <i class="material-icons my-auto">done</i>
+                                             <span class="ps-3">{{$benefit->getOriginal("pivot_value")}} {{$benefit->name}}</span>
+                                          </div>                                         
+                                       @endforeach
+
+                                       <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{$package->getPrice->id ?? ''}}"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                                        </a>
                                        @include('livewire._model_order')
                                     </div>

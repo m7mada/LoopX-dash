@@ -24,7 +24,7 @@ class Order extends Model
     }
 
     public function pakedge(){
-        return $this->belongsTo(Pakedge::class,'pakedge_id','id');
+        return $this->belongsTo(Packages::class,'pakedge_id','id');
     }
 
 

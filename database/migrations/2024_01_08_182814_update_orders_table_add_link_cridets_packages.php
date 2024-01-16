@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedBigInteger('order_type_id');
-            $table->string('order_type'); // this a morph relation
+            $table->dropForeign('orders_pakedge_id_foreign');
+            $table->dropColumn('pakedge_id');
             $table->unsignedBigInteger('payment_methods_id')->nullable();
             $table->foreign('payment_methods_id')->references('id')->on('payment_methods');
             $table->tinyInteger('is_paid')->nullable();

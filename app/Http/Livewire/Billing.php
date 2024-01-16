@@ -3,21 +3,31 @@
 namespace App\Http\Livewire;
 
 use App\Models\Order;
-use App\Models\Pakedge;
+use App\Models\Packages;
+use App\Models\Currency;
 use Livewire\Component;
 
 class Billing extends Component
 {
-    public $pakedge;
-    public $name , $phone , $pakedge_id ,$user_id ,$serial_number , $orders;
+    public $packages , $name , $phone , $pakedge_id ,$user_id ,$serial_number , $orders;
 
     public function mount(){
         $this->orders = Order::query()->with('pakedge')->get();
     }
     public function render()
     {
-        $this->pakedge = Pakedge::query()->get();
-        return view('livewire.billing',['pakedge' => $this->pakedge]);
+        $this->packages = Packages::query()
+                                    ->with('benefits')
+                                    ->with('packages_prices',function($q){
+                                        $q->where('currency_id',1);
+                                        $q->where('country_id',1);
+                                    })
+                                    ->with('packages_prices.currency')
+                                    ->with('packages_prices.country')
+                                    ->get();
+
+        //dd($this->packages);
+        return view('livewire.billing',['packages' => $this->packages]);
     }
 }
 

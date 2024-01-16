@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $code
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property int|null $is_default
  * 
  * @property Collection|PackagesPrice[] $packages_prices
  *
@@ -27,6 +28,10 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
 	protected $table = 'countries';
+
+	protected $casts = [
+		'is_default' => 'int'
+	];
 
 	public function packages_prices()
 	{
