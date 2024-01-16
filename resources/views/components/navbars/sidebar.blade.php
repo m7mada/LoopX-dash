@@ -20,12 +20,12 @@
                     </h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white {{ Route::currentRouteName() == 'pakedges' ? ' active bg-gradient-primary' : '' }}  "
-                        href="{{ route('pakedge') }}">
+                    <a class="nav-link text-white {{ Route::currentRouteName() == 'packages' ? ' active bg-gradient-primary' : '' }}  "
+                        href="{{ route('packages') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-box"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Pakedges</span>
+                        <span class="nav-link-text ms-1">Packages</span>
                     </a>
                 </li>
                 <li class="nav-item">

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Pakedge;
+namespace App\Http\Livewire\Package;
 
-use App\Models\Pakedge;
+use App\Models\Packages;
 use Livewire\Component;
 
-class PakedgeForm extends Component
+class PackageForm extends Component
 {
     public $title, $description, $class_name, $price, $discount = null;
 
@@ -20,7 +20,7 @@ class PakedgeForm extends Component
 
     public function render()
     {
-        return view('livewire.pakedge.pakedge-form');
+        return view('livewire.package.package-form');
     }
 
 
@@ -30,7 +30,7 @@ class PakedgeForm extends Component
         $data = $this->validate();
 
 
-        Pakedge::create($data);
+        Packages::create($data);
         $this->reset(['title', 'description', 'class_name', 'price', 'discount']);
         session()->flash('success', 'Form submitted successfully!');
     }

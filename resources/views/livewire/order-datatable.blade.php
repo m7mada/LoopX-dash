@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card mt-5">
             <div class="row">
-                @include('livewire.pakedge.message')
+                @include('livewire.package.message')
 
             </div>
             <div class="table-responsive">

@@ -24,11 +24,11 @@ use App\Http\Controllers\OrderController;
 
 use App\Http\Livewire\Auth\ResetPassword;
 use App\Http\Livewire\Auth\ForgotPassword;
-use App\Http\Livewire\Pakedge\PakedgeForm;
+use App\Http\Livewire\Package\PackageForm;
 use App\Http\Livewire\ExampleLaravel\UserForm;
-use App\Http\Livewire\Pakedge\PakedgeFormEdit;
-use App\Http\Livewire\Pakedge\PakedgeFormShow;
-use App\Http\Livewire\Pakedge\PakedgeDateTable;
+use App\Http\Livewire\Package\PackageFormEdit;
+use App\Http\Livewire\Package\PackageFormShow;
+use App\Http\Livewire\Package\PackageDateTable;
 use App\Http\Livewire\ExampleLaravel\UserProfile;
 use App\Http\Livewire\ExampleLaravel\UserFormEdit;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
@@ -80,10 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
     Route::get('rtl', RTL::class)->name('rtl');
-    Route::get('pakedges', PakedgeDateTable::class)->name('pakedge');
-    Route::get('pakedges/create', PakedgeForm::class)->name('addPakedge');
-    Route::get('pakedges/edit/{id}', PakedgeFormEdit::class)->name('editPakedge');
-    Route::get('pakedges/show/{id}', PakedgeFormShow::class)->name('showPakedge');
-    Route::post('pakedeg/billing', [OrderController::class, 'store'])->name('store.order');
+    Route::get('packages', PackageDateTable::class)->name('packages');
+    Route::get('packages/create', PackageForm::class)->name('addpackage');
+    Route::get('packages/edit/{id}', PackageFormEdit::class)->name('editpackage');
+    Route::get('packages/show/{id}', PackageFormShow::class)->name('showpackage');
+    Route::post('package/billing', [OrderController::class, 'store'])->name('store.order');
     Route::get('orders', OrderDatatable::class)->name('order');
 });

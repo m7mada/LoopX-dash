@@ -3,11 +3,11 @@
         <div class="card mt-5">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-end">
-                    <a href="{{route('pakedge')}}" class="btn btn-info">Back</a>
+                    <a href="{{route('package')}}" class="btn btn-info">Back</a>
                 </div>
 
             </div>
-            @include('livewire.pakedge.message')
+            @include('livewire.package.message')
             <div class="modal-body">
                 <div class="input-group input-group-outline my-3">
                     <label class="form-label">Title</label>
@@ -32,12 +32,12 @@
                 @error('discount') <span class="text-danger">{{ $message }}</span> @enderror
                 <div class="input-group input-group-outline my-3">
                     <label class="form-label">Dscription</label>
-                    <textarea class="form-control" wire:model="desc ription"></textarea>
+                    <textarea class="form-control" wire:model="description"></textarea>
                 </div>
                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                 <div class="input-group input-group-outline my-3">
 
-                    <button class="btn bg-gradient-primary" wire:click="edit()">Edit</button>
+                    <button class="btn bg-gradient-primary" wire:click="store()">Save </button>
                 </div>
 
             </div>
