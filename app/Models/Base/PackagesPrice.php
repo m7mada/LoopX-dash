@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\Currency;
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\Packages;
 use App\Models\PackagesPricesDiscount;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -60,7 +61,7 @@ class PackagesPrice extends Model
 
 	public function package()
 	{
-		return $this->belongsTo(Package::class);
+		return $this->belongsTo(Packages::class);
 	}
 
 	public function orders()

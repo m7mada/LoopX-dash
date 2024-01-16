@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Order;
 use App\Models\Packages;
-use App\Models\Currency;
 use Livewire\Component;
 
 class Billing extends Component

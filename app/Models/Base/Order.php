@@ -6,8 +6,7 @@
 
 namespace App\Models\Base;
 
-use App\Models\OrderCridet;
-use App\Models\PackagesPrice;
+use App\Models\OrderLine;
 use App\Models\PaymentMethod;
 use App\Models\User;
 use Carbon\Carbon;
@@ -25,7 +24,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $payment
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property int $messages_ammount
  * @property int|null $payment_methods_id
  * @property int|null $is_paid
  * @property string|null $payment_reference
@@ -34,8 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property PaymentMethod|null $payment_method
  * @property User $user
- * @property Collection|OrderCridet[] $order_cridets
- * @property Collection|PackagesPrice[] $packages_prices
+ * @property Collection|OrderLine[] $order_lines
  *
  * @package App\Models\Base
  */
@@ -45,7 +42,6 @@ class Order extends Model
 
 	protected $casts = [
 		'user_id' => 'int',
-		'messages_ammount' => 'int',
 		'payment_methods_id' => 'int',
 		'is_paid' => 'int',
 		'net_paid' => 'int'
@@ -61,15 +57,8 @@ class Order extends Model
 		return $this->belongsTo(User::class);
 	}
 
-	public function order_cridets()
+	public function order_lines()
 	{
-		return $this->hasMany(OrderCridet::class);
-	}
-
-	public function packages_prices()
-	{
-		return $this->belongsToMany(PackagesPrice::class, 'order_packages_prices', 'order_id', 'package_price_id')
-					->withPivot('id', 'expire_time')
-					->withTimestamps();
+		return $this->hasMany(OrderLine::class);
 	}
 }

@@ -26,19 +26,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orders as $key => $item)
-                            <tr  class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                <td>{{ $loop->iteration }}</td> <!-- Use $loop->iteration to get the loop index starting from 1 -->
+                        @foreach ($orders as $item)
+                            <tr  class="text-center text-secondary text-xs ">
+                                <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->user->email }}</td>
                                 <td>{{ $item->phone }}</td>
-                                <td>{{ $item->pakedge->title }}</td>
-                                <td>{{ $item->pakedge->price }}</td>
+                                <td>  
+                                    <span class="badge badge-pill badge-lg bg-gradient-success">{{$item->order_lines->first()->packages_price->package->title}}</span>
+                                    @foreach ($item->order_lines as $line )
+
+                                        <button type="button" class="btn btn-primary">
+                                            <span>{{ $line->benefit->name }} </span>
+                                            <span class="badge badge-sm badge-circle badge-danger border border-white border-2">{{ $line->value }}</span>
+                                        </button>
+                                    
+                                    @endforeach
+                                </td>
+                                <td>{{ $item->net_paid }}</td>
                                 <td>
-                                    @if ($item->payment =='pending')
-                                    <button class="badge-danger btn" wire:click="updatePayment({{ $item->id }})">pending</button>
+                                    @if ($item->is_paid == 0 )
+                                    <button class="badge-danger btn" wire:click="updatePayment({{ $item->id }} , 1 )">pending</button>
                                     @else
-                                    <button class=" badge-success btn " wire:click="updatePayment({{ $item->id }})">completed</button>
+                                    <button class=" badge-success btn ">Paid</button>
 
                                     @endif
                                 </td>

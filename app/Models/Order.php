@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Base\Order as BaseOrder;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Order extends BaseOrder
 {
     use HasFactory;
     public $fillable = [
