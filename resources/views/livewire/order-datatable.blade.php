@@ -33,7 +33,7 @@
                                 <td>{{ $item->user->email }}</td>
                                 <td>{{ $item->phone }}</td>
                                 <td>  
-                                    <span class="badge badge-pill badge-lg bg-gradient-success">{{$item->order_lines->first()->packages_price->package->title}}</span>
+                                    <span class="badge badge-pill badge-lg bg-gradient-success">{{$item->order_lines->first()->packages_price->package->title ?? ''}}</span>
                                     @foreach ($item->order_lines as $line )
 
                                         <button type="button" class="btn btn-primary">
