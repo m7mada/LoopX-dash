@@ -37,12 +37,15 @@
                                     <div class="card-body text-lg-start text-center pt-0">
                                        {!!$package->description!!}
 
+                                       {{--
                                        @foreach ( $package->benefits as $benefit )
                                           <div class="d-flex justify-content-lg-start justify-content-center p-2">
                                              <i class="material-icons my-auto">done</i>
                                              <span class="ps-3">{{$benefit->getOriginal("pivot_value")}} {{$benefit->name}}</span>
                                           </div>                                         
                                        @endforeach
+
+                                       --}}
 
                                        <a href="javascript:;" class="btn btn-icon @if ( $loop->index == 1 ) bg-gradient-primary @else bg-gradient-dark @endif d-lg-block mt-3 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModal{{$package->getPrice->id ?? ''}}"> Try Now <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
                                        </a>
