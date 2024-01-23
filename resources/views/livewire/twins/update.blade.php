@@ -193,7 +193,7 @@
                                     
                                     <hr>
                                     <div>
-                                        <h4 class="mb-3">How creative your twin is: </h4>
+                                        <h4 class="mb-3">How creative your Twin is: </h4>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="col-4 card m-2 p-2">
