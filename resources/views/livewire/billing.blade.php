@@ -20,6 +20,40 @@
                </div>
             </div>
          </div>
+
+         <style>
+            .offer{
+               padding: 0 10px;
+               position: relative;
+            }
+            .offer small{
+               font-size: 12px;
+               margin-top: 24px;
+               margin-right: -11px;
+               display: inline-block;
+               opacity: 0.6;
+            }
+            .offer span.price{
+               font-size: 24px;
+               opacity: 0.6;
+            }
+            .offer span:not(.price){
+               position: absolute;
+               height: 2px;
+               background-color: red;
+               top: 61%;
+               left: 3%;
+               width: 100%;
+               transform: rotate(351deg)
+            }
+
+            .offer-subtitle{
+               font-size: 17px;
+            }
+            .bg-gradient-dark .offer-subtitle{
+               color: #fff;
+            }
+         </style>
          <div class="tab-content tab-space">
             @foreach ($packages->groupBy('type') as $packageCategory )
                 <div class="tab-pane @once active @endonce" id="tabs_{{$packageCategory[0]['id']}}">
@@ -30,9 +64,20 @@
                                     <span class="badge rounded-pill @if ( $loop->index == 1 ) bg-primary @else bg-light text-dark @endif  w-30 mt-n2 mx-auto">{{$package->title}}</span>
                                     <div class="card-header text-center pt-4 pb-3 bg-transparent">
                                        <h1 class="font-weight-bold mt-2 @if ( $loop->index == 1 )text-white @endif">
+
+                                       <span class="offer">
+                                          <small class="align-top">{{$package->getPrice->currency->code ?? '' }}</small>
+                                          <span class="price">444</span>
+                                          <span></span>
+                                       </span>
+
                                           <small class="text-lg align-top me-1">{{$package->getPrice->currency->code ?? '' }}</small>
-                                          {{ $package->getPrice->price ?? '' }} 
+                                          <span>{{ $package->getPrice->price ?? '' }}</span>
+
+                                          
+                                          
                                        </h1>
+                                      
                                     </div>
                                     <div class="card-body text-lg-start text-center pt-0">
                                        {!!$package->description!!}

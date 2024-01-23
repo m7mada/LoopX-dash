@@ -8,6 +8,7 @@ use App\Models\File;
 use App\Models\Twin;
 use Livewire\Component;
 use App\Models\Messages;
+use App\Models\Conversations;
 use MongoDB\BSON\ObjectId;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
@@ -218,11 +219,17 @@ class Twins extends Component
         $this->botpress_conversation_id = $botpress_conversation_id;
 
         $this->mt_twins = Messages::where('twin_id', $twin_id)->where('botpress_conversation_id', $botpress_conversation_id)->get();
-        // $this->emit('showMessageNew');
-
 
     }
 
+    public function playPauseConversation($conversationId){
+        $conversation = Conversations::where('id',$conversationId)->get();
+        if(count($conversation) > 0){
+            $conversation = Conversations::where('id',$conversationId)->delete();
+        }else{
+            $conversation = Conversations::insert(['id'=>$conversationId]);
+        }
+    }
 
 
 }
