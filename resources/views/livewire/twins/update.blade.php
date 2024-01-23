@@ -191,33 +191,35 @@
                                         </div>
                                     </div>
                                     
-                                    
+                                    <hr>
                                     <div>
                                         <h4 class="mb-3">How creative your twin is: </h4>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <div style="width: 35%;">
+                                        <div class="col-4 card m-2 p-2">
                                             <div class="form-check">
                                                 <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.1" checked="checked">
-                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Stuck with the knowledge base</label>
+                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">My Knowledge Mode: 
+                                                </label>
                                             </div>
-                                            <div><p style="font-size: 13px;font-weight: 400;">Toggle this custom radio help</p></div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Focuses solely on your personal files and data.</p><p style="font-size: 11px;font-weight: 400;">- In this mode, the system utilizes only the information and content you provide, ensuring that outputs are based
+                                            entirely on your own resources and knowledge.</p></div>
                                         </div>
 
-                                        <div style="width: 35%;">
+                                        <div class="col-4 card m-2 p-2">
                                             <div class="form-check">
                                                 <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.6">
-                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Use GPT based on knowledge base</label>
+                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Hybrid Knowledge Mode:</label>
                                             </div>
-                                            <div><p style="font-size: 13px;font-weight: 400;">Toggle this custom radio help</p></div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Merges your personal files with AI-generated information.</p><p style="font-size: 11px;font-weight: 400;">- This mode combines the uniqueness of your content with the extensive knowledge base of the AI, providing a balanced mix of personalized and AI-enhanced insights.</p></div>
                                         </div>
 
-                                        <div style="width: 35%;">
+                                        <div class="col-4 card m-2 p-2">
                                             <div class="form-check">
                                                 <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.9">
-                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Use GPT among of knowledge base</label>
+                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">AI-Primary Knowledge Mode:</label>
                                             </div>
-                                            <div><p style="font-size: 13px;font-weight: 400;">Toggle this custom radio help</p></div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Prioritizes AI knowledge, using it as the main source of information.</p><p style="font-size: 11px;font-weight: 400;">- If you upload personal files, the AI creatively integrates them, enhancing the output. Without file uploads, the AI relies solely on its vast knowledge base, ensuring a wide range of information and creativity.</p></div>
                                         </div>
                                     </div>
 
