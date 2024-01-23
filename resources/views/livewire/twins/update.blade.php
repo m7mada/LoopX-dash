@@ -53,14 +53,16 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.title') is-invalid @enderror">
 
-                                                <label for="title" class="form-label">Twin Title:</label>
-
+                                                <label for="title">Twin Title:</label>
+                                                <div class="input-group input-group-outline">
                                                 <input type="text" id="title" wire:model.defer="model.title" class="form-control">
+                                                </div>
+                                                
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="input-group mb-4">
+                                            <div class="input-group mt-5">
                                                 <div class="form-check form-switch">
                                                     <input wire:model="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
                                                     <label class="form-check-label" for="is_active">Active</label>
@@ -189,6 +191,41 @@
                                         </div>
                                     </div>
                                     
+                                    
+                                    <div>
+                                        <h4 class="mb-3">How creative your twin is: </h4>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div style="width: 35%;">
+                                            <div class="form-check">
+                                                <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.1" checked="checked">
+                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Stuck with the knowledge base</label>
+                                            </div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Toggle this custom radio help</p></div>
+                                        </div>
+
+                                        <div style="width: 35%;">
+                                            <div class="form-check">
+                                                <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.6">
+                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Use GPT based on knowledge base</label>
+                                            </div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Toggle this custom radio help</p></div>
+                                        </div>
+
+                                        <div style="width: 35%;">
+                                            <div class="form-check">
+                                                <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.9">
+                                                <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Use GPT among of knowledge base</label>
+                                            </div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Toggle this custom radio help</p></div>
+                                        </div>
+                                    </div>
+
+
+
+    
+                                    <div class="mb-3"></div>
+
                                 </div>
 
                                 <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="$set('currentStep', '1')">Back</button>

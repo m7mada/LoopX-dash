@@ -51,6 +51,7 @@ class Twins extends Component
         'model.agent_dialect' => 'required',
         'model.user_dialect' => 'nullable',
         'model.is_active' => 'nullable',
+        'model.creativity_temperature'=>'nullable'
     ];
 
 
@@ -204,7 +205,7 @@ class Twins extends Component
         $this->resetFields();
 
         try{
-            $this->model = Twin::with("messages")->find($id);
+            $this->model = Twin::with("messages")->with('messages.isPauseConversation')->find($id);
             $this->showLogs = true ;
         }catch(\Excetion $ex){
             session()->flash('error','Something gose wrong !!');

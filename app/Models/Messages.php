@@ -8,6 +8,7 @@ use MongoDB\Laravel\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Twin; 
+use App\Models\Conversations ;
 
 
 
@@ -26,6 +27,10 @@ class Messages extends Model
         return $this->belongsTo(Twin::class,'twin_external_id','twin_id');
     }
 
+    public function isPauseConversation(): BelongsTo
+    {
+        return $this->belongsTo(Conversations::class,'botpress_conversation_id','id');
+    }
 
 
 }

@@ -1,3 +1,14 @@
+<style>
+    .stop-icon {
+        margin: 0;
+        padding: 0;
+        color: #e9306f;
+        font-size: 23px;
+        line-height: 23px;
+        margin-top: 5px;
+    }
+</style>
+
 <div>
     <div class="container-fluid py-4">
         <div class="row">
@@ -25,14 +36,8 @@
                                                 <div class="row g-0">
                                                     <div class="col-12 col-lg-5 col-xl-3 border-right" style="border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 24px;">
                                                         @forelse ($model->messages->groupBy('botpress_conversation_id') as $conversationId => $messages)
-                                                        @php
-                                                            $botpress_conversation_id = $messages->first()->botpress_conversation_id;
-                                                            $twin_id = $messages->first()->twin_id;
-                                                        @endphp
-                                                        <button wire:click="playPauseConversation('{{ $botpress_conversation_id }}')" class="btn btn-icon btn-2 btn-link" type="button">
-                                                            <span class="btn-inner--icon"><i class="material-icons">lightbulb</i></span>
-                                                        </button>
-                                                        <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important" wire:click.prevent="getMessges('{{ $twin_id }}', '{{ $botpress_conversation_id }}')">
+                                                        
+                                                        <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')">
                                                             <div class="d-flex align-items-start">
                                                                 
                                                             <img style="border: 1px solid #adadad !important;" src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta1910/tanyadanuta191000003.jpg" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
@@ -40,13 +45,22 @@
                                                                     @if($messages->isNotEmpty())
                                                                         <div class="small">{{ $messages->first()->created_at->format('Y-m-d H:i:s') }}</div>
                                                                         <div class="small">
-                                                                            <span class="fas fa-circle chat-online"></span>
+                                                                            <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
                                                                             {{ $messages->first()->botpress_integration }}
                                                                         </div>
                                                                     @endif
                                                                 </div>
 
-                                                                <div class="badge bg-success float-right">{{count($messages)}}</div>
+                                                                <div class="d-flex flex-column align-items-center">
+                                                                    <div class="badge bg-success float-right">{{count($messages)}}</div>
+                                                                    <button wire:click="playPauseConversation('{{ $messages->first()->botpress_conversation_id }}')" class="btn btn-icon btn-2 btn-link stop-icon" type="button">
+                                                                        @if ( empty($messages->first()->isPauseConversation) )
+                                                                            <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
+                                                                        @else
+                                                                            <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i></span>                                                                        
+                                                                        @endif
+                                                                    </button>
+                                                                </div>
                                                                 
 
                                                             </div>
