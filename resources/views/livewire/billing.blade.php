@@ -65,11 +65,11 @@
                                     <div class="card-header text-center pt-4 pb-3 bg-transparent">
                                        <h1 class="font-weight-bold mt-2 @if ( $loop->index == 1 )text-white @endif">
 
-                                       <span class="offer">
+                                       <!-- <span class="offer">
                                           <small class="align-top">{{$package->getPrice->currency->code ?? '' }}</small>
                                           <span class="price">444</span>
                                           <span></span>
-                                       </span>
+                                       </span> -->
 
                                           <small class="text-lg align-top me-1">{{$package->getPrice->currency->code ?? '' }}</small>
                                           <span>{{ $package->getPrice->price ?? '' }}</span>
