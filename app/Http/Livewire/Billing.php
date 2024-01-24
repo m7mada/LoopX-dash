@@ -24,6 +24,7 @@ class Billing extends Component
                                     ->with('packages_prices.currency')
                                     ->with('packages_prices.country')
                                     ->with('packages_prices.packages_prices_discounts')
+                                    ->with('packages_prices.packages_prices_discounts.discount_type')
                                     ->get();
 
         //dd($this->packages);
