@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('twins', function (Blueprint $table) {
-            $table->float('creativity_temperature')->default(0.1);
+            $table->float('creativity_temperature')->nullable()->default(0.1);
         });
     }
 
