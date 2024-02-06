@@ -281,7 +281,7 @@
                       <div class="card-header pb-0">
                           <div class="row">
                               <div class="col-lg-6 col-7">
-                                  <h6>Twins usage</h6>
+                                  <h6>Twins Usage</h6>
                                   <!-- <p class="text-sm mb-0">
                                       <i class="fa fa-check text-info" aria-hidden="true"></i>
                                       <span class="font-weight-bold ms-1">30 done</span> this month
@@ -390,7 +390,7 @@
               <div class="col-lg-4 col-md-6">
                   <div class="card h-100">
                       <div class="card-header pb-0">
-                          <h6>Orders overview</h6>
+                          <h6>Order Overview</h6>
                           <p class="text-sm">
                               <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
                               <span class="font-weight-bold">{{$userOrders->where('created_at','>',\Carbon\Carbon::now()->subMonth()->startOfWeek())->count()}}</span> This Month
