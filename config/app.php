@@ -61,6 +61,9 @@ return [
 
     'django_url' => env('DJANGO_SERVER'),
 
+    'botbress_token' => env('BOTBRESS_TOKEN'),
+    'botbress_workspace_id' => env('BOTBRESS_WORKSPACE_ID'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

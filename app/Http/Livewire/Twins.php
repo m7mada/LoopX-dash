@@ -13,6 +13,7 @@ use MongoDB\BSON\ObjectId;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use App\Helpers\PotBressHelper;
 
 
 class Twins extends Component
@@ -123,8 +124,6 @@ class Twins extends Component
         $this->validate();
 
         try{
-
-            $this->model->save();
             $this->currentStep++;
 
             ini_set('max_execution_time', 10000);
@@ -151,7 +150,17 @@ class Twins extends Component
 
             }
 
+            if( $this->currentStep == 4){
 
+                if( $this->model->botbress_bot_id == null ){
+                    $bot = new PotBressHelper;
+                    $bot = $bot->createBot(['name'=>$this->model->title,'payload'=>[]]);
+                    $this->model->botbress_bot_id = $bot['bot']['id'];
+                }
+            }
+
+            $this->model->save();
+            
 
 
         }catch(\Excetion $ex){
