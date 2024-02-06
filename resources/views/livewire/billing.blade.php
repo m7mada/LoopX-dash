@@ -142,10 +142,10 @@
       </div> -->
       <div class="row mt-5">
          <div class="col-md-6 mx-auto text-center">
-            <h2>Frequently Asked Questions</h2>
-            <p>A lot of people don't appreciate the moment until it’s passed. I'm not trying my hardest,
+            <h2>Frequently Asked Questions (FAQs):</h2>
+            <!-- <p>A lot of people don't appreciate the moment until it’s passed. I'm not trying my hardest,
                and I'm not trying to do 
-            </p>
+            </p> -->
          </div>
       </div>
       <div class="row mb-5">
@@ -154,110 +154,136 @@
                <div class="accordion-item my-2">
                   <h5 class="accordion-header" id="headingOne">
                      <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                     How do I order?
+                     What is AI Twin by LoopX?
                      <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
                      <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
                      </button>
                   </h5>
                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionRental">
                      <div class="accordion-body text-sm opacity-8">
-                        We’re not always in the position that we want to be at. We’re constantly growing.
-                        We’re constantly making mistakes. We’re constantly trying to express ourselves and
-                        actualize our dreams. If you have the opportunity to play this game
-                        of life you need to appreciate every moment. A lot of people don’t appreciate the
-                        moment until it’s passed.
+                        AI Twin by LoopX is a virtual assistant designed to provide 24/7 personalized customer support and automate business processes.
                      </div>
                   </div>
                </div>
                <div class="accordion-item my-2">
                   <h5 class="accordion-header" id="headingTwo">
                      <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                     How can i make the payment?
+                     How does AI Twin differ from traditional customer service solutions?
                      <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
                      <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
                      </button>
                   </h5>
                   <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionRental">
                      <div class="accordion-body text-sm opacity-8">
-                        It really matters and then like it really doesn’t matter. What matters is the people
-                        who are sparked by it. And the people who are like offended by it, it doesn’t
-                        matter. Because it's about motivating the doers. Because I’m here to follow my
-                        dreams and inspire other people to follow their dreams, too.
-                        <br>
-                        We’re not always in the position that we want to be at. We’re constantly growing.
-                        We’re constantly making mistakes. We’re constantly trying to express ourselves and
-                        actualize our dreams. If you have the opportunity to play this game of life you need
-                        to appreciate every moment. A lot of people don’t appreciate the moment until it’s
-                        passed.
+                        AI Twin offers instant, personalized support in various languages and dialects, handling unlimited clients simultaneously without scaling limitations.
                      </div>
                   </div>
                </div>
                <div class="accordion-item my-2">
                   <h5 class="accordion-header" id="headingThree">
                      <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                     How much time does it take to receive the order?
+                     What languages and dialects can AI Twin support?
                      <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
                      <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
                      </button>
                   </h5>
                   <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionRental">
                      <div class="accordion-body text-sm opacity-8">
-                        The time is now for it to be okay to be great. People in this world shun people for
-                        being great. For being a bright color. For standing out. But the time is now to be
-                        okay to be the greatest you. Would you believe in what you believe in, if you were
-                        the only one who believed it?
-                        If everything I did failed - which it doesn't, it actually succeeds - just the
-                        fact that I'm willing to fail is an inspiration. People are so scared to lose
-                        that they don't even try. Like, one thing people can't say is that I'm
-                        not trying, and I'm not trying my hardest, and I'm not trying to do the best
-                        way I know how.
+                        AI Twin is proficient in multiple languages and dialects, adapting to users' specific communication styles for seamless interaction.
                      </div>
                   </div>
                </div>
                <div class="accordion-item my-2">
                   <h5 class="accordion-header" id="headingFour">
                      <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                     Can I resell the products?
+                     What are the key features of AI Twin?
                      <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
                      <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
                      </button>
                   </h5>
                   <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionRental">
                      <div class="accordion-body text-sm opacity-8">
-                        I always felt like I could do anything. That’s the main thing people are controlled
-                        by! Thoughts- their perception of themselves! They're slowed down by their
-                        perception of themselves. If you're taught you can’t do anything, you won’t do
-                        anything. I was taught I could do everything.
-                        <br><br>
-                        If everything I did failed - which it doesn't, it actually succeeds - just the
-                        fact that I'm willing to fail is an inspiration. People are so scared to lose
-                        that they don't even try. Like, one thing people can't say is that I'm
-                        not trying, and I'm not trying my hardest, and I'm not trying to do the best
-                        way I know how.
+                        Key features include 24/7 customer service in brand-specific language and dialect, automated task handling, data-driven insights, and cost-effective scaling.
                      </div>
                   </div>
                </div>
                <div class="accordion-item my-2">
                   <h5 class="accordion-header" id="headingFifth">
                      <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFifth" aria-expanded="false" aria-controls="collapseFifth">
-                     Where do I find the shipping details?
+                     Can AI Twin handle complex customer queries?
                      <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
                      <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
                      </button>
                   </h5>
                   <div id="collapseFifth" class="accordion-collapse collapse" aria-labelledby="headingFifth" data-bs-parent="#accordionRental">
                      <div class="accordion-body text-sm opacity-8">
-                        There’s nothing I really wanted to do in life that I wasn’t able to get good at.
-                        That’s my skill. I’m not really specifically talented at anything except for the
-                        ability to learn. That’s what I do. That’s what I’m here for. Don’t be afraid to be
-                        wrong because you can’t learn anything from a compliment.
-                        I always felt like I could do anything. That’s the main thing people are controlled
-                        by! Thoughts- their perception of themselves! They're slowed down by their
-                        perception of themselves. If you're taught you can’t do anything, you won’t do
-                        anything. I was taught I could do everything.
+                        Yes, AI Twin is designed to resolve inquiries in real-time, providing data-driven insights and proactive suggestions.
                      </div>
                   </div>
                </div>
+
+
+
+               <div class="accordion-item my-2">
+                  <h5 class="accordion-header" id="headingSixth">
+                     <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSixth" aria-expanded="false" aria-controls="collapseSixth">
+                        Is AI Twin customizable for specific business needs?
+                        <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
+                        <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
+                     </button>
+                  </h5>
+                  <div id="collapseSixth" class="accordion-collapse collapse" aria-labelledby="headingSixth"
+                     data-bs-parent="#accordionRental">
+                     <div class="accordion-body text-sm opacity-8">
+                        Absolutely, AI Twin can be customized to handle various business functions, from customer inquiries to content creation.
+                     </div>
+                  </div>
+               </div>
+
+
+
+
+               <div class="accordion-item my-2">
+                  <h5 class="accordion-header" id="headingSeventh">
+                     <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSeventh" aria-expanded="false" aria-controls="collapseSeventh">
+                        What are the pricing plans for AI Twin?
+                        <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
+                        <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
+                     </button>
+                  </h5>
+                  <div id="collapseSeventh" class="accordion-collapse collapse" aria-labelledby="headingSeventh"
+                     data-bs-parent="#accordionRental">
+                     <div class="accordion-body text-sm opacity-8">
+                        LoopX offers flexible pricing for AI Twin, with different plans suitable for varying business needs.
+
+                     </div>
+                  </div>
+               </div>
+
+
+
+               <div class="accordion-item my-2">
+                  <h5 class="accordion-header" id="headingEightth">
+                     <button class="accordion-button border-bottom font-weight-bold" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEightth" aria-expanded="false" aria-controls="collapseEightth">
+                        How do I set up AI Twin for my business?
+                        <i class="collapse-close material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">add</i>
+                        <i class="collapse-open material-icons text-sm font-weight-bold pt-1 position-absolute end-0 me-3">remove</i>
+                     </button>
+                  </h5>
+                  <div id="collapseEightth" class="accordion-collapse collapse" aria-labelledby="headingEightth"
+                     data-bs-parent="#accordionRental">
+                     <div class="accordion-body text-sm opacity-8">
+                        Setting up AI Twin is simple and can be done in just a few clicks, with LoopX providing support for data preparation and integration.
+               
+                     </div>
+                  </div>
+               </div>
+
+
+               
             </div>
          </div>
       </div>

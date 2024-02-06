@@ -29,19 +29,19 @@
                         <div class="stepwizard-row setup-panel">
                             <div class="stepwizard-step">
                                 <a href="#step-1" wire:click="$set('currentStep', '1')" type="button" class="btn btn-circle {{ $currentStep != 1 ? 'btn-secondary' : 'btn-primary' }}">1</a>
-                                <p>1- Setting</p>
+                                <p>1- Configuration Settings</p>
                             </div>
                             <div class="stepwizard-step">
                                 <a href="#step-2" wire:click="$set('currentStep', '2')" type="button" class="btn btn-circle {{ $currentStep != 2 ? 'btn-secondary' : 'btn-primary' }}">2</a>
-                                <p>2- Knolage Base</p>
+                                <p>2- Knowledge Base</p>
                             </div>
                             <div class="stepwizard-step">
                                 <a href="#step-3" wire:click="$set('currentStep', '3')" type="button" class="btn btn-circle {{ $currentStep != 3 ? 'btn-secondary' : 'btn-primary' }}">3</a>
-                                <p>3- Instructions</p>
+                                <p>3- Persona & Instructions </p>
                             </div>
                             <div class="stepwizard-step">
                                 <a href="#step-4" wire:click="$set('currentStep', '4')" type="button" class="btn btn-circle {{ $currentStep != 4 ? 'btn-secondary' : 'btn-primary' }}" disabled="disabled">4</a>
-                                <p>4- Test</p>
+                                <p>4- Testing & Evaluation</p>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.title') is-invalid @enderror">
 
-                                                <label for="title">Twin Title:</label>
+                                                <label for="title">Twin Name:</label>
                                                 <div class="input-group input-group-outline">
                                                 <input type="text" id="title" wire:model.defer="model.title" class="form-control">
                                                 </div>
@@ -65,7 +65,7 @@
                                             <div class="input-group mt-5">
                                                 <div class="form-check form-switch">
                                                     <input wire:model="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
-                                                    <label class="form-check-label" for="is_active">Active</label>
+                                                    <label class="form-check-label" for="is_active">Twin Power</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@
                                                 <label for="kb_model_name" class="ms-0">Model :* @error('model.kb_model_name') {{$message}} @enderror</label>
                                                 <div class="input-group input-group-outline">
                                                     <select class="form-control" id="kb_model_name" wire:model="model.kb_model_name">
-                                                        <option value="" >Choos Twin</option>
+                                                        <option value="" >Choose Twin</option>
                                                         <option value="gpt-3.5-turbo-1106">Twin</option>
                                                         <option value="gpt-4-1106-preview">Twin Pro</option>
                                                     </select>
@@ -100,12 +100,22 @@
 
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.agent_dialect') is-invalid @enderror ">
-                                                <label for="agent_dialect" class="ms-0">Agent Dialect :*</label>@error('model.agent_dialect') {{$message}} @enderror 
+                                                <label for="agent_dialect" class="ms-0">Twin Dialect:*</label>@error('model.agent_dialect') {{$message}} @enderror 
                                                 <div class="input-group input-group-outline">
                                                     <select class="form-control" wire:model.defer="model.agent_dialect">
-                                                        <option value="">Choos Twin Dialect</option>
-                                                        <option value="Egyptian Colloquial Arabic - اللهجة العامية المصرية" selected>Egyptian Colloquial Arabic - اللهجة العامية المصرية</option>
+                                                        <option value="">Choose Twin Dialect</option>
+                                                        <option value="English">English</option>
+                                                        <option value="Egyptian Colloquial Arabic - اللهجة العامية المصرية">Egyptian Colloquial Arabic - اللهجة العامية المصرية
+                                                        </option>
+                                                        <option value="Modern Standard Arabic - العربية الفصحى">Modern Standard Arabic - العربية الفصحى</option>
                                                         <option value="Saudi Arabic - اللهجة السعودية">Saudi Arabic - اللهجة السعودية</option>
+                                                        <option value="Levantine Arabic - اللهجة الشامية">Levantine Arabic - اللهجة الشامية</option>
+                                                        <option value="Gulf Arabic - اللهجة الخليجية">Gulf Arabic - اللهجة الخليجية</option>
+                                                        <option value="Moroccan Arabic - الدارجة المغربية">Moroccan Arabic - الدارجة المغربية</option>
+                                                        <option value="Spanish - Español">Spanish - Español</option>
+                                                        <option value="French - Français">French - Français</option>
+                                                        <option value="Multilingual Adaptation - متعدد اللغات واللهجات">Multilingual Adaptation - متعدد اللغات واللهجات</option>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -193,7 +203,7 @@
                                     
                                     <hr>
                                     <div>
-                                        <h4 class="mb-3">How creative your Twin is: </h4>
+                                        <h4 class="mb-3">Your Knowledge Base Mode: </h4>
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <div class="col-4 card m-2 p-2">
@@ -277,7 +287,7 @@
                                 <div class="overflow-hidden position-relative border-radius-lg bg-cover p-3" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/window-desk.jpg')">
                                     <span class="mask bg-gradient-dark opacity-6"></span>
                                     <div class="card-body position-relative z-index-1 d-flex flex-column mt-5">
-                                    <p class="text-white font-weight-bolder">Chose package from billing page.</p>
+                                    <p class="text-white font-weight-bolder">Choose package from billing page.</p>
                                     <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-4" href="/billing">
                                         Try Now
                                         <i class="material-icons text-sm ms-1 position-relative" aria-hidden="true">arrow_forward</i>
