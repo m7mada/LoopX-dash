@@ -152,11 +152,11 @@ class Twins extends Component
 
             if( $this->currentStep == 4){
 
-                if( $this->model->botbress_bot_id == null ){
-                    $bot = new PotBressHelper;
-                    $bot = $bot->createBot(['name'=>$this->model->title,'payload'=>[]]);
-                    $this->model->botbress_bot_id = $bot['bot']['id'];
-                }
+                // if( $this->model->botbress_bot_id == null ){
+                //     $bot = new PotBressHelper;
+                //     $bot = $bot->createBot(['name'=>$this->model->title,'payload'=>[]]);
+                //     $this->model->botbress_bot_id = $bot['bot']['id'];
+                // }
             }
 
             $this->model->save();
