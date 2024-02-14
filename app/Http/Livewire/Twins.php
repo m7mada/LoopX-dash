@@ -240,13 +240,16 @@ class Twins extends Component
         }else{
             $conversation = Conversations::insert(['id'=>$conversationId]);
         }
+
+        //$this->mt_twins = Messages::where('twin_id', $this->twin_id)->where('botpress_conversation_id', $conversationId)->get();
+
     }
 
     public function sendMessageToUser(){
 
         if( ! $this->inbutMessageToSendToUser ) return ;
 
-        //try{
+        try{
             $bot = new PotBressHelper;
             $bot = $bot->sendMessage([
                 'botId'=> $this->mt_twins[0]->botpress_bot_id,
@@ -279,12 +282,15 @@ class Twins extends Component
 
             $message->save();
 
+            $this->mt_twins = Messages::where('twin_id', $this->twin_id)->where('botpress_conversation_id', $this->botpress_conversation_id)->get();
+
+
             $this->inbutMessageToSendToUser = '';
             $this->dispatchBrowserEvent('focusMessageInput');
 
-        // } catch (\Excetion $ex) {
-        //     session()->flash('error', 'Something gose wrong !!');
-        // }
+        } catch (\Excetion $ex) {
+            session()->flash('error', 'Something gose wrong !!');
+        }
 
     }
 

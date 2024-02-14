@@ -74,8 +74,30 @@
                                                     <div class="col-12 col-lg-7 col-xl-9">
                                                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
                                                             <div class="d-flex align-items-center py-1">
+                                                                @if($mt_twins)
 
+                                                    
 
+                                                                    <div class="d-flex flex-column align-items-center">
+                                                                        <button wire:click="playPauseConversation('{{ $this->mt_twins->first()->botpress_conversation_id }}')"
+                                                                            class="btn btn-icon btn-2 btn-link stop-icon" type="button">
+                                                                            @if ( empty($this->mt_twins->first()->isPauseConversation) )
+                                                                            <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
+                                                                            @else
+                                                                            <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i></span>
+                                                                            @endif
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div class="badge bg-success float-right m-1">{{count($this->mt_twins)}} Messages </div>
+                                                                    <h7>
+                                                                        Conversation Created on {{ $this->mt_twins->first()->created_at->format('Y-m-d H:i:s') ?? '' }} by {{
+                                                                        $this->mt_twins->first()->botpress_integration }}
+                                                                    </h7>
+                                                                
+                                                                @endif
+                                                                
+                                                                
                                                                 {{--<div>
                                                                     <button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone feather-lg">
                                                                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
@@ -145,7 +167,7 @@
                                                         @if($mt_twins)
                                                         <div class="flex-grow-0 py-3 px-4 border-top">
                                                             <div class="input-group">
-                                                                <input type="text" id="inbutMessageToSendToUser" class="form-control" placeholder="Type your message" wire:model.defer="inbutMessageToSendToUser" wire:keydown.enter="sendMessageToUser()" wire:loading.attr="disabled" >
+                                                                <input type="text" autocomplete="off"  id="inbutMessageToSendToUser" class="form-control" placeholder="Type your message" wire:model.defer="inbutMessageToSendToUser" wire:keydown.enter="sendMessageToUser()" wire:loading.attr="disabled" >
                                                                 <button class="btn btn-primary" wire:click.prevent="sendMessageToUser()" wire:loading.sendMessageToUser.attr="disabled">Send</button>
                                                             </div>
                                                         </div>
