@@ -28,7 +28,7 @@ class Messages extends Model
 
     public function isPauseConversation(): BelongsTo
     {
-        return $this->belongsTo(Conversations::class,'botpress_conversation_id','id');
+        return $this->belongsTo(Conversations::class,'botpress_conversation_id','conversation_id');
     }
 
 

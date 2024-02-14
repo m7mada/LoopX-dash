@@ -236,14 +236,14 @@ class Twins extends Component
     }
 
     public function playPauseConversation($conversationId){
-        $conversation = Conversations::where('id',$conversationId)->get();
+        $conversation = Conversations::where('conversation_id',$conversationId)->get();
         if(count($conversation) > 0){
-            $conversation = Conversations::where('id',$conversationId)->delete();
+            $conversation = Conversations::where('conversation_id',$conversationId)->delete();
         }else{
-            $conversation = Conversations::insert(['id'=>$conversationId]);
+            $conversation = Conversations::insert(['conversation_id'=>$conversationId]);
         }
 
-        //$this->mt_twins = Messages::where('twin_id', $this->twin_id)->where('botpress_conversation_id', $conversationId)->get();
+        $this->mt_twins = Messages::where('twin_id', $this->twin_id)->where('botpress_conversation_id', $conversationId)->get();
 
     }
 
@@ -264,6 +264,18 @@ class Twins extends Component
                      "options"=>[]
                 ]
             ]);
+
+            Log::info(["api_message"=>[
+                'botId'=> $this->mt_twins[0]->botpress_bot_id,
+                'userId'=> $this->mt_twins[0]->botpress_user_id,
+                'conversationId'=>$this->botpress_conversation_id,
+                'type'=> 'choice',
+                'tags'=> (object) [],
+                'payload'=>[
+                     "text"=> $this->inbutMessageToSendToUser ,
+                     "options"=>[]
+                ]
+            ]]);
 
             $message = new Messages([
                 "role" => "assistant",
