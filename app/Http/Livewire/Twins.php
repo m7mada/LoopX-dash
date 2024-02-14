@@ -265,7 +265,7 @@ class Twins extends Component
                 ]
             ]);
 
-            Log::info(["api_message"=>[
+            \Log::info("api_message",[
                 'botId'=> $this->mt_twins[0]->botpress_bot_id,
                 'userId'=> $this->mt_twins[0]->botpress_user_id,
                 'conversationId'=>$this->botpress_conversation_id,
@@ -275,7 +275,7 @@ class Twins extends Component
                      "text"=> $this->inbutMessageToSendToUser ,
                      "options"=>[]
                 ]
-            ]]);
+            ]);
 
             $message = new Messages([
                 "role" => "assistant",
