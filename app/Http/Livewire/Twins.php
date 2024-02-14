@@ -250,7 +250,7 @@ class Twins extends Component
         if( ! $this->inbutMessageToSendToUser ) return ;
 
         try{
-            $bot = new PotBressHelper;
+            $bot = new PotBressHelper($this->model);
             $bot = $bot->sendMessage([
                 'botId'=> $this->mt_twins[0]->botpress_bot_id,
                 'userId'=> $this->mt_twins[0]->botpress_user_id,

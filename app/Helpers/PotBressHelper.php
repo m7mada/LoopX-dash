@@ -12,12 +12,12 @@ class PotBressHelper
     private $token ;
     private $workspace ;
 
-    public function __construct()
+    public function __construct($twin)
     {
         $this->client = new Client();
-        $this->endPoint = "https://api.botpress.cloud";
-        $this->token = config("app.botbress_token");
-        $this->workspace = config("app.botbress_workspace_id");
+        $this->endPoint = "https://api.botpress.cloud";        
+        $this->token = ($twin->botbress_integration_key)? $twin->botbress_integration_key : config("app.botbress_token");
+        $this->workspace = ($twin->botbress_workspace_id)? $twin->botbress_workspace_id : config("app.botbress_workspace_id");
     }
 
     public function createBot(array $data)
