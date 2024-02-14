@@ -34,7 +34,7 @@
                                         <div class="container p-0">
                                             <div class="card">
                                                 <div class="row g-0">
-                                                    <div class="col-12 col-lg-5 col-xl-3 border-right" style="border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 24px;">
+                                                    <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;max-height: calc(100vh - 316px);border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 24px;">
                                                         @forelse ($model->messages->groupBy('botpress_conversation_id') as $conversationId => $messages)
                                                         
                                                         <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')">
@@ -118,8 +118,8 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="position-relative">
-                                                            <div class="chat-messages p-4">
+                                                        <div class="position-relative chat-messages-box" >
+                                                            <div class="chat-messages p-4" id="chat-messages" style="max-height: calc(100vh - 462px);">
                                                                 @if($messages)
                                                                 @forelse ($mt_twins as $item )
 
@@ -167,8 +167,8 @@
                                                         @if($mt_twins)
                                                         <div class="flex-grow-0 py-3 px-4 border-top">
                                                             <div class="input-group">
-                                                                <input type="text" autocomplete="off"  id="inbutMessageToSendToUser" class="form-control" placeholder="Type your message" wire:model.defer="inbutMessageToSendToUser" wire:keydown.enter="sendMessageToUser()" wire:loading.attr="disabled" >
-                                                                <button class="btn btn-primary" wire:click.prevent="sendMessageToUser()" wire:loading.sendMessageToUser.attr="disabled">Send</button>
+                                                                <input  type="text" autocomplete="off"  id="inbutMessageToSendToUser" class="form-control" placeholder="Type your message" wire:model.defer="inbutMessageToSendToUser" wire:keydown.enter="sendMessageToUser()" wire:loading.attr="disabled" >
+                                                                <button style="height: 50px;margin: 0;" class="btn btn-primary" wire:click.prevent="sendMessageToUser()" wire:loading.sendMessageToUser.attr="disabled">Send</button>
                                                             </div>
                                                         </div>
                                                         @endif

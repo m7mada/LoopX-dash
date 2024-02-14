@@ -231,6 +231,8 @@ class Twins extends Component
 
         $this->mt_twins = Messages::where('twin_id', $twin_id)->where('botpress_conversation_id', $botpress_conversation_id)->get();
 
+        $this->dispatchBrowserEvent('selectConversation');
+
     }
 
     public function playPauseConversation($conversationId){

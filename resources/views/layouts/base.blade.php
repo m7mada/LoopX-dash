@@ -71,9 +71,25 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
-    window.addEventListener('focusMessageInput', () => {
-        $('#inbutMessageToSendToUser').focus();
+        
+
+
+    window.addEventListener('selectConversation', function () {
+         $('#chat-messages').animate({ scrollTop: document.getElementById("chat-messages").scrollHeight }, 100);
     });
+
+
+
+
+    window.addEventListener('focusMessageInput', function () {
+        $('#inbutMessageToSendToUser').focus();
+        console.log(document.getElementById("chat-messages").scrollHeight)
+        $('#chat-messages').animate({ scrollTop: document.getElementById("chat-messages").scrollHeight }, 100);
+    });
+
+
+
+
 </script>
 
 <!-- Github buttons -->
