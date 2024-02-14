@@ -43,11 +43,6 @@
     <link href="{{asset('assets')}}/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="{{asset('assets/css/custome.css')}}" rel="stylesheet">
 
-
-
-
-
-
     <style>
         body.g-sidenav-show.bg-gray-200{
             margin-top: 0px;
@@ -76,7 +71,11 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
+    window.addEventListener('focusMessageInput', () => {
+        $('#inbutMessageToSendToUser').focus();
+    });
 </script>
+
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

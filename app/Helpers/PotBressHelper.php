@@ -56,4 +56,24 @@ class PotBressHelper
 
     }
 
+    public function sendMessage($data)
+    {
+        try {
+
+            $response = $this->client->post($this->endPoint . '/v1/chat/messages', [
+                'json'=>$data,
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->token,
+                    'x-workspace-id' => $this->workspace,
+                    'x-bot-id'=>$data['botId'],
+                ],
+            ]);
+
+            return json_decode($response->getBody(), true);
+        } catch (GuzzleException $e) {
+            \Log::error("Botpress API error: " . $e->getMessage());
+            return ['error' => 'Failed to list bot.'];
+        }
+
+    }
 }

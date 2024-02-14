@@ -142,13 +142,14 @@
 
                                                             </div>
                                                         </div>
-
-                                                        {{-- <div class="flex-grow-0 py-3 px-4 border-top">
+                                                        @if($mt_twins)
+                                                        <div class="flex-grow-0 py-3 px-4 border-top">
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" placeholder="Type your message">
-                                                                <button class="btn btn-primary">Send</button>
+                                                                <input type="text" id="inbutMessageToSendToUser" class="form-control" placeholder="Type your message" wire:model.defer="inbutMessageToSendToUser" wire:keydown.enter="sendMessageToUser()" wire:loading.attr="disabled" >
+                                                                <button class="btn btn-primary" wire:click.prevent="sendMessageToUser()" wire:loading.sendMessageToUser.attr="disabled">Send</button>
                                                             </div>
-                                                        </div> --}}
+                                                        </div>
+                                                        @endif
 
                                                     </div>
                                                 </div>
@@ -167,10 +168,4 @@
 </div>
 </div>
 
-@push('body')
-    <script>
-        // .list-group-item:first-child
-        console.log("test");
-    </script>
-@endpush
 

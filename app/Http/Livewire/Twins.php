@@ -26,7 +26,7 @@ class Twins extends Component
     public $showLogs = false ;
     public $currentStep = 0 ;
     public $addTwins = false ;
-    public $files=[], $newFiles = [] ,$twinMessages;
+    public $files=[], $newFiles = [] ,$twinMessages , $inbutMessageToSendToUser;
     public $twin_id;
     public $botpress_conversation_id;
     public $mt_twins = [] ;
@@ -38,7 +38,8 @@ class Twins extends Component
         'updateTwin' => 'updateTwin',
         'cancelTwins'=>'cancelTwins',
         'showTwinConverssations'=>'showTwinConverssations',
-        'showMessageNew' => 'getMessges'
+        'showMessageNew' => 'getMessges',
+        'sendMessageToUser'=>'sendMessageToUser',
 
     ];
 
@@ -241,5 +242,31 @@ class Twins extends Component
         }
     }
 
+    public function sendMessageToUser(){
+
+        if( ! $this->inbutMessageToSendToUser ) return ;
+
+        try{
+            $bot = new PotBressHelper;
+            $bot = $bot->sendMessage([
+                'botId'=> $this->mt_twins[0]->botpress_bot_id,
+                'userId'=> $this->mt_twins[0]->botpress_user_id,
+                'conversationId'=>$this->botpress_conversation_id,
+                'type'=> 'choice',
+                'tags'=> (object) [],
+                'payload'=>[
+                     "text"=> $this->inbutMessageToSendToUser ,
+                     "options"=>[]
+                ]
+            ]);
+
+            $this->inbutMessageToSendToUser = '';
+            $this->dispatchBrowserEvent('focusMessageInput');
+
+        } catch (\Excetion $ex) {
+            session()->flash('error', 'Something gose wrong !!');
+        }
+
+    }
 
 }
