@@ -246,7 +246,7 @@ class Twins extends Component
 
         if( ! $this->inbutMessageToSendToUser ) return ;
 
-        try{
+        //try{
             $bot = new PotBressHelper;
             $bot = $bot->sendMessage([
                 'botId'=> $this->mt_twins[0]->botpress_bot_id,
@@ -260,12 +260,31 @@ class Twins extends Component
                 ]
             ]);
 
+            $message = new Messages([
+                "role" => "assistant",
+                "content" => $this->inbutMessageToSendToUser,
+                "twin_id" => $this->twin_id,
+                "botpress_user_id" => $this->mt_twins[0]->botpress_user_id,
+                "botpress_bot_id" => $this->mt_twins[0]->botpress_bot_id,
+                "botpress_conversation_id" => $this->botpress_conversation_id,
+                "botpress_messageId" => "internal".rand(6,8),
+                "botpress_integration" => 'console',
+                "botpress_channel" => null,
+                "botpress_eventId" => null,
+                "botpress_eventType" => null,
+                "botpress_createdOn" => null,
+                "created_at" => now(),
+                "event_payload" => (object) [],
+            ]);
+
+            $message->save();
+
             $this->inbutMessageToSendToUser = '';
             $this->dispatchBrowserEvent('focusMessageInput');
 
-        } catch (\Excetion $ex) {
-            session()->flash('error', 'Something gose wrong !!');
-        }
+        // } catch (\Excetion $ex) {
+        //     session()->flash('error', 'Something gose wrong !!');
+        // }
 
     }
 

@@ -125,7 +125,7 @@
                                                                             </div>
                                                                     </div>
                                                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                                                        <div class="font-weight-bold mb-1">{{$model->title}}
+                                                                        <div class="font-weight-bold mb-1">{{$model->title}} {{$item->botpress_integration}}
                                                                             <div class="text-muted small text-nowrap" style="font-size: 12px;color: #939393 !important;">
                                                                                 {{ $item->created_at->format('Y-m-d H:i:s') }}
                                                                             </div>

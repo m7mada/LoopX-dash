@@ -72,7 +72,7 @@ class PotBressHelper
             return json_decode($response->getBody(), true);
         } catch (GuzzleException $e) {
             \Log::error("Botpress API error: " . $e->getMessage());
-            return ['error' => 'Failed to list bot.'];
+            return ['error' => 'Failed to send Message.'];
         }
 
     }
