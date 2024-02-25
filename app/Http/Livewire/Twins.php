@@ -276,6 +276,14 @@ class Twins extends Component
 
             //dd( $bot['userId'] );
 
+            \Log::info($bot->getMessages([
+                'botId' => $this->model->botbress_bot_id,
+                'userId' => $this->mt_twins[0]->botpress_user_id,
+                'conversationId' => $this->botpress_conversation_id,
+                'tags' => (object) [],
+                'payload' => (object) []
+            ]));
+
         //}
         try{
 
