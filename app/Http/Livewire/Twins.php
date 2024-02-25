@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Http;
 use App\Helpers\PotBressHelper;
 
 
+
 class Twins extends Component
 {
     use WithFileUploads;
@@ -251,25 +252,49 @@ class Twins extends Component
 
         if( ! $this->inbutMessageToSendToUser ) return ;
 
+        //dd($this->mt_twins->where('botpress_conversation_id', $this->botpress_conversation_id)->whereNotNull('botpress_user_out_id')->count());
+        // $userOutId = $this->mt_twins->where('botpress_conversation_id', $this->botpress_conversation_id)->whereNotNull('botpress_user_out_id')->where('role','assistant');
+
+        $bot = new PotBressHelper($this->model);
+
+        //if( ! $userOutId->count() ){
+
+        //     dd([
+        //     'botId' => $this->model->botbress_bot_id,
+        //     'userId' => $this->mt_twins[0]->botpress_user_id,
+        //     'conversationId' => $this->botpress_conversation_id,
+        //     'tags' => (object) [],
+        //     'payload' => (object) []
+        // ]);
+            $outgoingUserId = collect($bot->getMessages([
+                'botId' => $this->model->botbress_bot_id,
+                'userId' => $this->mt_twins[0]->botpress_user_id,
+                'conversationId' => $this->botpress_conversation_id,
+                'tags' => (object) [],
+                'payload' => (object) []
+            ])['messages'])->firstWhere('direction', 'outgoing') ;
+
+            //dd( $bot['userId'] );
+
+        //}
         try{
 
 
-            \Log::info("api_message",[
-                'botId'=> $this->mt_twins[0]->botpress_bot_id,
-                'userId'=> $this->mt_twins[0]->botpress_user_id,
-                'conversationId'=>$this->botpress_conversation_id,
-                'type'=> 'choice',
-                'tags'=> (object) [],
-                'payload'=>[
-                     "text"=> $this->inbutMessageToSendToUser ,
-                     "options"=>[]
-                ]
-            ]);
+            // \Log::info("api_message",[
+            //     'botId'=> $this->mt_twins[0]->botpress_bot_id,
+            //     'userId'=> $this->mt_twins[0]->botpress_user_id,
+            //     'conversationId'=>$this->botpress_conversation_id,
+            //     'type'=> 'choice',
+            //     'tags'=> (object) [],
+            //     'payload'=>[
+            //          "text"=> $this->inbutMessageToSendToUser ,
+            //          "options"=>[]
+            //     ]
+            // ]);
             
-            $bot = new PotBressHelper($this->model);
             $bot = $bot->sendMessage([
                 'botId'=> $this->mt_twins[0]->botpress_bot_id,
-                'userId'=> $this->mt_twins[0]->botpress_user_id,
+                'userId'=> $outgoingUserId['userId'],
                 'conversationId'=>$this->botpress_conversation_id,
                 'type'=> 'choice',
                 'tags'=> (object) [],
@@ -295,6 +320,8 @@ class Twins extends Component
                 "botpress_createdOn" => null,
                 "created_at" => now(),
                 "event_payload" => (object) [],
+                "botpress_user_out_id" => "123456789s",
+
             ]);
 
             $message->save();
