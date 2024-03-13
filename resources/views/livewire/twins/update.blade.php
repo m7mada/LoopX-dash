@@ -76,8 +76,8 @@
                                                 <div class="input-group input-group-outline">
                                                     <select class="form-control" id="kb_model_name" wire:model="model.kb_model_name">
                                                         <option value="" >Choose Twin</option>
-                                                        <option value="gpt-3.5-turbo-1106">Twin</option>
-                                                        <option value="gpt-4-1106-preview">Twin Pro</option>
+                                                        <option value="gpt-3.5-turbo">Twin</option>
+                                                        <option value="gpt-4-turbo-preview">Twin Pro</option>
                                                     </select>
                                                 </div>
                                             </div>
