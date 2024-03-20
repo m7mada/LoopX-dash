@@ -65,7 +65,7 @@
                                     <div class="card-header text-center pt-4 pb-3 bg-transparent">
                                        <h1 class="font-weight-bold mt-2 @if ( $loop->index == 1 )text-white @endif">
 
-                                       @if ( isset($package->getPrice->packages_prices_discounts->first()->discount) )
+                                       @if ( ! empty( $package->getPrice->packages_prices_discounts ) && isset($package->getPrice->packages_prices_discounts->first()->discount) )
                                           <span class="offer">
                                              <small class="align-top">{{$package->getPrice->currency->code ?? '' }}</small>
                                              <span class="price">{{ $package->getPrice->price ?? '' }}</span>
