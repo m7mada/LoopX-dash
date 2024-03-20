@@ -39,13 +39,14 @@ class OrderController extends Controller
         foreach ( PackagesBenefit::where('package_id',$packcagePrice->package_id)->get() as $line){
             $orderLines[] = [
                 'order_id'=> $insertedOrder->id,
-                'referance_package_id'=> $packcagePrice->package_id,
+                'referance_package_id'=> $packcagePrice->id,
                 'benefit_id'=> $line->benefit_id,
                 'value'=> $line->value,
                 'expire_time'=> ( $line->benefit->type == 'saas') ? Carbon::now()->addMonth($line->value) : null,
             ];
         }
 
+        //dd($orderLines);
         $insertedOrderLines = OrderLine::insert($orderLines);
 
         return redirect()->back();
