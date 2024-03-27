@@ -54,7 +54,13 @@ class Twins extends Component
         'model.agent_dialect' => 'required',
         'model.user_dialect' => 'nullable',
         'model.is_active' => 'nullable',
-        'model.creativity_temperature'=>'nullable'
+        'model.creativity_temperature'=>'nullable',
+
+        'model.integrations_settings' => 'nullable',
+        'model.custom_settings' => 'nullable',
+        'model.handover_settings' => 'nullable',
+
+
     ];
 
 

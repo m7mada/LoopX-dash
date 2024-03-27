@@ -17,9 +17,9 @@
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
                             @if( $addTwins )
-                              Add an AI Twin :
+                              Add an AI Twin:
                             @else
-                              Update {{$model->title }} Twin :
+                              Update {{$model->title }} Twin:
                             @endif
                         </h6>
                     </div>
@@ -29,20 +29,26 @@
                         <div class="stepwizard-row setup-panel">
                             <div class="stepwizard-step">
                                 <a href="#step-1" wire:click="$set('currentStep', '1')" type="button" class="btn btn-circle {{ $currentStep != 1 ? 'btn-secondary' : 'btn-primary' }}">1</a>
-                                <p>1- Configuration Settings</p>
+                                <p>Configuration Settings</p>
                             </div>
                             <div class="stepwizard-step">
                                 <a href="#step-2" wire:click="$set('currentStep', '2')" type="button" class="btn btn-circle {{ $currentStep != 2 ? 'btn-secondary' : 'btn-primary' }}">2</a>
-                                <p>2- Knowledge Base</p>
+                                <p>Knowledge Base</p>
                             </div>
                             <div class="stepwizard-step">
                                 <a href="#step-3" wire:click="$set('currentStep', '3')" type="button" class="btn btn-circle {{ $currentStep != 3 ? 'btn-secondary' : 'btn-primary' }}">3</a>
-                                <p>3- Persona & Instructions </p>
+                                <p>Persona & Instructions </p>
                             </div>
-                            <div class="stepwizard-step">
-                                <a href="#step-4" wire:click="$set('currentStep', '4')" type="button" class="btn btn-circle {{ $currentStep != 4 ? 'btn-secondary' : 'btn-primary' }}" disabled="disabled">4</a>
-                                <p>4- Testing & Evaluation</p>
-                            </div>
+
+                            @if ( Auth::user()->is_admin )
+                                
+                                <div class="stepwizard-step">
+                                    <a href="#step-4" wire:click="$set('currentStep', '4')" type="button" class="btn btn-circle {{ $currentStep != 4 ? 'btn-secondary' : 'btn-primary' }}" disabled="disabled">4</a>
+                                    <p>Integrations (Admins Only) </p>
+                                </div>
+
+                            @endif
+
                         </div>
                     </div>
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 1 ? 'displayNone' : '' }}" id="step-1">
@@ -53,7 +59,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.title') is-invalid @enderror">
 
-                                                <label for="title">Twin Name:</label>
+                                                <label for="title">Twin Title <small>(This is to identify your twins!):</small></label>
                                                 <div class="input-group input-group-outline">
                                                 <input type="text" id="title" wire:model.defer="model.title" class="form-control">
                                                 </div>
@@ -72,12 +78,14 @@
 
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.kb_model_name') is-invalid @enderror ">
-                                                <label for="kb_model_name" class="ms-0">Model :* @error('model.kb_model_name') {{$message}} @enderror</label>
+                                                <label for="kb_model_name" class="ms-0">Model:* @error('model.kb_model_name') {{$message}} @enderror</label>
                                                 <div class="input-group input-group-outline">
                                                     <select class="form-control" id="kb_model_name" wire:model="model.kb_model_name">
                                                         <option value="" >Choose Twin</option>
                                                         <option value="gpt-3.5-turbo">Twin</option>
                                                         <option value="gpt-4-turbo-preview">Twin Pro</option>
+                                                        <!-- <option value="Cohare">Twin Turbo</option> -->
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -212,7 +220,7 @@
                                                 <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">My Knowledge Mode: 
                                                 </label>
                                             </div>
-                                            <div><p style="font-size: 13px;font-weight: 400;">Focuses solely on your personal files and data.</p><p style="font-size: 11px;font-weight: 400;">- In this mode, the system utilizes only the information and content you provide, ensuring that outputs are based
+                                            <div><p style="font-size: 13px;font-weight: 400;">Focuses solely on your personal files and data.</p><p style="font-size: 11px;font-weight: 400;">In this mode, the system utilizes only the information and content you provide, ensuring that outputs are based
                                             entirely on your own resources and knowledge.</p></div>
                                         </div>
 
@@ -221,7 +229,7 @@
                                                 <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.6">
                                                 <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">Hybrid Knowledge Mode:</label>
                                             </div>
-                                            <div><p style="font-size: 13px;font-weight: 400;">Merges your personal files with AI-generated information.</p><p style="font-size: 11px;font-weight: 400;">- This mode combines the uniqueness of your content with the extensive knowledge base of the AI, providing a balanced mix of personalized and AI-enhanced insights.</p></div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Merges your personal files with AI-generated information.</p><p style="font-size: 11px;font-weight: 400;">This mode combines the uniqueness of your content with the extensive knowledge base of the AI, providing a balanced mix of personalized and AI-enhanced insights.</p></div>
                                         </div>
 
                                         <div class="col-4 card m-2 p-2">
@@ -229,7 +237,7 @@
                                                 <input wire:model.defer="model.creativity_temperature" class="form-check-input" type="radio" name="creativity_temperature" id="creativityTemperature" value="0.9">
                                                 <label style="font-weight: 600;" class="custom-control-label" for="creativityTemperature">AI-Primary Knowledge Mode:</label>
                                             </div>
-                                            <div><p style="font-size: 13px;font-weight: 400;">Prioritizes AI knowledge, using it as the main source of information.</p><p style="font-size: 11px;font-weight: 400;">- If you upload personal files, the AI creatively integrates them, enhancing the output. Without file uploads, the AI relies solely on its vast knowledge base, ensuring a wide range of information and creativity.</p></div>
+                                            <div><p style="font-size: 13px;font-weight: 400;">Prioritizes AI knowledge, using it as the main source of information.</p><p style="font-size: 11px;font-weight: 400;">If you upload personal files, the AI creatively integrates them, enhancing the output. Without file uploads, the AI relies solely on its vast knowledge base, ensuring a wide range of information and creativity.</p></div>
                                         </div>
                                     </div>
 
@@ -253,7 +261,7 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Say a few words about your agent persona." spellcheck="false"></textarea>
+                                                <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Give your twin a persona!" spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +269,7 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Say a few words as an instructions for your agent." spellcheck="false"></textarea>
+                                                <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Instruct your twin and tell what to do!" spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -269,7 +277,7 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.example_messages" rows="5" placeholder="Say a few examples for your agent." spellcheck="false"></textarea>
+                                                <textarea class="form-control" wire:model="model.example_messages" rows="5" placeholder="Tell your twin any special notes like live offers & discounts!" spellcheck="false"></textarea>
                                             </div>
 
                                         </div>
@@ -280,64 +288,49 @@
                                 </div>
                             </div>
                     </div>
-                    <div class="px-4 p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
-                            <div class="col-xs-12">
-                            
-                                <div class="card text-center">
-                                <div class="overflow-hidden position-relative border-radius-lg bg-cover p-3" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/window-desk.jpg')">
-                                    <span class="mask bg-gradient-dark opacity-6"></span>
-                                    <div class="card-body position-relative z-index-1 d-flex flex-column mt-5">
-                                    <p class="text-white font-weight-bolder">Choose package from billing page.</p>
-                                    <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-4" href="/billing">
-                                        Try Now
-                                        <i class="material-icons text-sm ms-1 position-relative" aria-hidden="true">arrow_forward</i>
-                                    </a>
-                                    </div>
+
+                    @if ( Auth::user()->is_admin )
+                        
+                        <div class="px-4 p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
+                                <div class="col-xs-12">
+                                        <h4 class="mb-3"> Integrations (Admins Only) :</h4>
+                                        <div class="col-xs-12 mb-3">
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <textarea class="form-control" wire:model="model.integrations_settings" rows="5" placeholder="Build intgration array!" spellcheck="false"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+
+                                        <div class="col-xs-12 mb-3">
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <textarea class="form-control" wire:model="model.custom_settings" rows="5" placeholder="Add any custom settings here!" spellcheck="false"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-xs-12 mb-3">
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <textarea class="form-control" wire:model="model.handover_settings" rows="5" placeholder="Handle any handover settings here!" spellcheck="false"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        @if( $addTwins )
+                                            <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="insertTwins()" type="button" >Save</button>
+                                        @else
+                                            <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Save</button>
+                                        @endif
+
                                 </div>
-                            </div>
-                            {{--<iframe
-                            style="width: 500px;height: 600px;margin: auto;display: block;"
-                            
-                                srcdoc='
-                            
-                                <!DOCTYPE html>
-                                <html>
-                                <head>
-                                <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
-                                <script src="https://mediafiles.botpress.cloud/caa58dcf-151f-4811-b8c3-d69e9099f9ae/webchat/config.js" defer></script>
-                                </head>
-                                    <body>
-
-                                        <script>
-                                            console.log(window.botpressWebChat)
-                                            window.botpressWebChat.init({
-                                                <!-- "composerPlaceholder": "Chat with bot",
-                                                "botConversationDescription": "This chatbot was built surprisingly fast with Botpress", -->
-                                                "botId": "c4b9f9b1-525d-435e-a745-d57fc5445e06",
-                                                "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
-                                                "messagingUrl": "https://messaging.botpress.cloud",
-                                                "clientId": "c4b9f9b1-525d-435e-a745-d57fc5445e06",
-                                                "webhookId": "73c5dd0d-30e8-4e0e-b099-11acd75375ca",
-                                                <!-- "lazySocket": true,
-                                                "themeName": "prism",
-                                                "frontendVersion": "v1",
-                                                "showPoweredBy": true,
-                                                "theme": "prism",
-                                                "themeColor": "#2563eb",
-                                                "className": "botpress",
-                                                "showCloseButton": false,
-                                                "showConversationsButton": false -->
-                                            })
-
-                                            window.botpressWebChat.sendEvent({ type: 'show' })
-                                        </script>
-
-                                    </body>
-                                </html>
-                            
-                            ' name="iframe_a" title="Iframe Example"></iframe> --}}
-                            </div>
-                    </div>
+                            </div> 
+                        </div>
+                        
+                    @endif
                 </div>
             </div>
         </div>
