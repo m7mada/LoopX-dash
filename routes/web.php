@@ -65,17 +65,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('edit-user/{id}', UserFormEdit::class)->name('edit-user');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('billing', Billing::class)->name('billing');
-    Route::get('profile', Profile::class)->name('profile');
+    // Route::get('profile', Profile::class)->name('profile');
     Route::get('tables', Tables::class)->name('tables');
     Route::get('twins', Twins::class)->name('twins');
     Route::get('show-logs', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
-
-
-    Route::get('notifications', Notifications::class)->name("notifications");
-    Route::get('virtual-reality', VirtualReality::class)->name('virtual-reality');
-    Route::get('static-sign-in', StaticSignIn::class)->name('static-sign-in');
-
 
 
     Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
