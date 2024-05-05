@@ -9,6 +9,7 @@ use App\Models\Messages;
 use App\Models\Order;
 use MongoDB\BSON\ObjectId;
 use Carbon\Carbon;
+use DB ;
 
 
 
@@ -37,7 +38,12 @@ class Dashboard extends Component
         });
 
 
+        $this->totalCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND orders.user_id = ". Auth::user()->id ." AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
+
+
+        //dd($this->totalCridets[0]->total_credits);
         foreach ($this->userTwins as $twin) {
+
 
             $this->totalUsage += Messages::where('twin_id', $twin->twin_external_id)
                                             ->where('role', 'assistant')
@@ -70,10 +76,9 @@ class Dashboard extends Component
         }
 
         //dd($this->userTwins , $this->totalUsage);
-        $this->userOrders = Order::where('payment','=','completed')
+        $this->userOrders = Order::where('is_paid','=','1')
                                         ->where('user_id',Auth::user()->id)
                                         ->get();
-
 
         return view('livewire.dashboard');
     }

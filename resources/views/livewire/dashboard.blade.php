@@ -33,8 +33,8 @@
                               <i class="material-icons opacity-10">person</i>
                           </div>
                           <div class="text-end pt-1">
-                              <p class="text-sm mb-0 text-capitalize">Remaining Replies</p>
-                              <h4 class="mb-0">{{$userOrders->sum('messages_ammount') - $totalUsage }}</h4>
+                              <p class="text-sm mb-0 text-capitalize">Remaining Balance</p>
+                              <h4 class="mb-0">${{ round($this->totalCridets[0]->total_credits - $userTwins->sum("messages_cost") , 2 )  }}</h4>
                           </div>
                       </div>
                       <hr class="dark horizontal my-0">
@@ -164,7 +164,7 @@
                                     <canvas id="twinsCostChart" class="chart-canvas" height="197" width="287" style="display: block; box-sizing: border-box; height: 197px; width: 287.5px;"></canvas>
                                 </div>
                                 <h4 class="font-weight-bold mt-n8">
-                                    <span>@if( $userTwins->sum("messages_cost") ) {{$userTwins->sum("messages_cost")}} @else 0 @endif</span>
+                                    <span>@if( $userTwins->sum("messages_cost") ) {{ round($userTwins->sum("messages_cost"),2)}} @else 0 @endif</span>
                                     <span class="d-block text-body text-sm">USD</span>
                                 </h4>
                             </div>
@@ -183,7 +183,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="align-middle text-center text-sm">
-                                                        <span class="text-xs"> ${{$twin->messages_cost}} </span>
+                                                        <span class="text-xs"> ${{round($twin->messages_cost,2)}} </span>
                                                     </td>
                                                 </tr>
                                                 @empty
@@ -405,7 +405,7 @@
                                         <i class="material-icons text-danger text-gradient">shopping_cart</i>
                                     </span>
                                     <div class="timeline-content">
-                                        <h6 class="text-dark text-sm font-weight-bold mb-0">{{$order->messages_ammount}} Reply added by order  {{$order->serial_number}} </h6>
+                                        <h6 class="text-dark text-sm font-weight-bold mb-0">{{$order->net_paid}} £  By Order  {{$order->serial_number}} </h6>
                                         <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{$order->created_at}}
                                         </p>
                                     </div>
