@@ -74,13 +74,9 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0 " type="button" data-bs-toggle="dropdown">
-                                                    <span class="material-icons">more_vert</span>
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li><a wire:click.prevent="editTwins({{$twin->id}});" class="dropdown-item" href="#">Setting</a></li>
-                                                    <li><a wire:click.prevent="showTwinConverssations({{$twin->id}});" class="dropdown-item" href="#">Logs</a></li>
-                                                </ul>
+                                                <i  wire:click.prevent="showTwinConverssations({{$twin->id}});" class="fa fa-thin fa-envelope fixed-plugin-button-nav cursor-pointer"></i> | 
+                                                <i wire:click.prevent="editTwins({{$twin->id}});" class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+       
                                             </td>
                                         </tr>
                                         @endforeach
