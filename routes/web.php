@@ -59,21 +59,17 @@ Route::get('sign-in', Login::class)->middleware('guest')->name('login');
 
 
 Route::group(['middleware' => 'auth'], function () {    
-    Route::get('user-profile', UserProfile::class)->name('user-profile');
     Route::get('user-management', UserManagement::class)->name('user-management');
     Route::get('add-users', UserForm::class)->name('add-users');
     Route::get('edit-user/{id}', UserFormEdit::class)->name('edit-user');
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('billing', Billing::class)->name('billing');
-    // Route::get('profile', Profile::class)->name('profile');
-    Route::get('tables', Tables::class)->name('tables');
     Route::get('twins', Twins::class)->name('twins');
     Route::get('show-logs', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
 
 
-    Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
-    Route::get('rtl', RTL::class)->name('rtl');
+
     Route::get('packages', PackageDateTable::class)->name('packages');
     Route::get('packages/create', PackageForm::class)->name('addpackage');
     Route::get('packages/edit/{id}', PackageFormEdit::class)->name('editpackage');
