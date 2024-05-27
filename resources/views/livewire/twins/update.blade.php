@@ -155,10 +155,10 @@
                                                 <input wire:model.defer="model.kb_model_name" class="form-check-input" type="radio" name="kb_model_name" id="twinLight" value="0.1" checked="checked">
                                                 <label style="font-weight: 600;" class="custom-control-label" for="twinLight">Twin Light: 
                                                 </label>
+                                                <div style="width: auto !important;float: right;position: relative;top: 9px;" class="badge rounded-pill bg-primary w-30 mt-n2 mx-auto">10K Message/ 1000EGP</div>
                                             </div>
                                             <div>
                                                 <p style="font-size: 13px;font-weight: 600;">Affordable, Formal Arabic, Basic Reasoning</p><p style="font-size: 11px;font-weight: 400;">Ideal for small businesses needing basic support in formal Arabic. Perfect for startups and local enterprises with straightforward tasks, ensuring cost-effective and simple AI assistance.</p>
-                                                <p>10K Messages Cost arround 1000EGP</p>
                                             </div>
 
                                             <div class="col-md">
@@ -168,17 +168,8 @@
                                                         <select class="form-control" wire:model.defer="model.agent_dialect">
                                                             <option value="">Choose Twin Dialect</option>
                                                             <option value="English">English</option>
-                                                            <option value="Egyptian Colloquial Arabic - اللهجة العامية المصرية">Egyptian Colloquial Arabic - اللهجة العامية المصرية
-                                                            </option>
                                                             <option value="Modern Standard Arabic - العربية الفصحى">Modern Standard Arabic - العربية الفصحى</option>
-                                                            <option value="Saudi Arabic - اللهجة السعودية">Saudi Arabic - اللهجة السعودية</option>
-                                                            <option value="Levantine Arabic - اللهجة الشامية">Levantine Arabic - اللهجة الشامية</option>
-                                                            <option value="Gulf Arabic - اللهجة الخليجية">Gulf Arabic - اللهجة الخليجية</option>
-                                                            <option value="Moroccan Arabic - الدارجة المغربية">Moroccan Arabic - الدارجة المغربية</option>
-                                                            <option value="Spanish - Español">Spanish - Español</option>
-                                                            <option value="French - Français">French - Français</option>
-                                                            <option value="Multilingual Adaptation - متعدد اللغات واللهجات">Multilingual Adaptation - متعدد اللغات واللهجات</option>
-
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>
@@ -189,10 +180,10 @@
                                             <div class="form-check">
                                                 <input wire:model.defer="model.kb_model_name" class="form-check-input" type="radio" name="kb_model_name" id="twin" value="0.6">
                                                 <label style="font-weight: 600;" class="custom-control-label" for="twin">Twin:</label>
+                                                <div style="width: auto !important;float: right;position: relative;top: 9px;" class="badge rounded-pill bg-primary w-30 mt-n2 mx-auto">10K Message/ 3500EGP</div>
                                             </div>
                                             <div>
                                                 <p style="font-size: 13px;font-weight: 600;">Mid Price, Formal Arabic, Intermediate Logic</p><p style="font-size: 11px;font-weight: 400;">Suited for medium-sized businesses requiring formal Arabic and moderate reasoning. Great for agencies and growing businesses needing balanced insights and efficient AI support.</p>
-                                                <p>10K Messages Cost arround 3500EGP</p>
 
                                             </div>
 
@@ -225,11 +216,10 @@
                                             <div class="form-check">
                                                 <input wire:model.defer="model.kb_model_name" class="form-check-input" type="radio" name="kb_model_name" id="twinTurbo" value="0.9">
                                                 <label style="font-weight: 600;" class="custom-control-label" for="twinTurbo">Twin Turbo:</label>
+                                                <div style="width: auto !important;float: right;position: relative;top: 9px;" class="badge rounded-pill bg-primary w-30 mt-n2 mx-auto">10K Message/ 9000EGP</div>
                                             </div>
                                             <div>
                                                 <p style="font-size: 13px;font-weight: 600;">Best Value, Multi Dialects, Advanced Logic</p><p style="font-size: 11px;font-weight: 400;">Best for businesses seeking advanced support with multi-dialect capabilities. Ideal for large enterprises and diverse teams needing comprehensive AI assistance and creative problem-solving.</p>
-                                                <p>10K Messages Cost arround 9000EGP</p>
-
                                             </div>
 
 
@@ -261,10 +251,10 @@
                                             <div class="form-check">
                                                 <input wire:model.defer="model.kb_model_name" class="form-check-input" type="radio" name="kb_model_name" id="twinPro" value="0.9">
                                                 <label style="font-weight: 600;" class="custom-control-label" for="twinPro">Twin Pro:</label>
+                                                <div style="width: auto !important;float: right;position: relative;top: 9px;" class="badge rounded-pill bg-primary w-30 mt-n2 mx-auto">10K Message/ 20000EGP</div>
                                             </div>
                                             <div>
                                                 <p style="font-size: 13px;font-weight: 600;">Premium, Multi Dialects/Languages, Expert Logic</p><p style="font-size: 11px;font-weight: 400;">Perfect for multinational companies demanding top-tier AI support in multiple languages and dialects. Ensures the most sophisticated and logical outputs, suitable for complex and high-stakes tasks.</p>
-                                                <p>10K Messages Cost arround 20000EGP</p>
                                             </div>
 
 
