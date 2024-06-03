@@ -39,56 +39,56 @@
                                     </thead>
                                     <tbody>
                                         @foreach($model as $twin)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2" data-id="{{ $twin->twin_external_id }}">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/small-logos/logo-asana.svg"
-                                                            class="avatar avatar-sm rounded-circle me-2"
-                                                            alt="spotify">
-                                                    </div>
-                                                    <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm">{{ $twin->title }} </h6>
-                                                        @if(\Auth::user()->is_admin) <span class="me-2 text-xs"> {{$twin->twin_external_id}} </span> @endif
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                            <p class="text-sm font-weight-bold mb-0">{{count($twin->files)}}</p>
-                                            </td>
-                                            @if (Auth::user()->is_admin)
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">{{$twin->user->email}}</p>
-                                            </td>
-                                            @endif
-                                            
-                                            <td>
-                                                @if ($twin->is_active == 1)
-                                                    <span class="badge badge-success">Active</span>
-                                                @else
-                                                    <span class="badge badge-warning">Stoped</span>
-                                                @endif
-                                            </td>
-                                            <td class="align-middle text-center">
-
-                                                <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">{{count($twin->messages->where('role', '=', 'assistant'))}} Reply </span>
-                                                    <!-- <div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-info"
-                                                                role="progressbar" aria-valuenow="{{count($twin->messages)}}"
-                                                                aria-valuemin="0" aria-valuemax="100"
-                                                                style="width: {{ count($twin->messages) / 100 }}%;"></div>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2" data-id="{{ $twin->twin_external_id }}">
+                                                        <div>
+                                                            <img src="{{ asset('assets') }}/img/favicon.png"
+                                                                class="avatar avatar-sm rounded-circle me-2"
+                                                                alt="spotify">
                                                         </div>
-                                                    </div> -->
-                                                </div>
-                                            </td>
-                                            <td class="align-middle">
-                                                <i  wire:click.prevent="showTwinConverssations({{$twin->id}});" class="fa fa-comments fixed-plugin-button-nav cursor-pointer"></i> | 
-                                                <i wire:click.prevent="editTwins({{$twin->id}});" class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+                                                        <div class="my-auto">
+                                                            <h6 class="mb-0 text-sm">{{ $twin->title }} </h6>
+                                                            @if(\Auth::user()->is_admin) <span class="me-2 text-xs"> {{$twin->twin_external_id}} </span> @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                <p class="text-sm font-weight-bold mb-0">{{count($twin->files)}}</p>
+                                                </td>
+                                                @if (Auth::user()->is_admin)
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{$twin->user->email}}</p>
+                                                </td>
+                                                @endif
 
-                                            </td>
-                                        </tr>
+                                                <td>
+                                                    @if ($twin->is_active == 1)
+                                                        <span class="badge badge-success">Active</span>
+                                                    @else
+                                                        <span class="badge badge-warning">Stoped</span>
+                                                    @endif
+                                                </td>
+                                                <td class="align-middle text-center">
+
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <span class="me-2 text-xs font-weight-bold">{{count($twin->messages->where('role', '=', 'assistant'))}} Reply </span>
+                                                        <!-- <div>
+                                                            <div class="progress">
+                                                                <div class="progress-bar bg-gradient-info"
+                                                                    role="progressbar" aria-valuenow="{{count($twin->messages)}}"
+                                                                    aria-valuemin="0" aria-valuemax="100"
+                                                                    style="width: {{ count($twin->messages) / 100 }}%;"></div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <i  wire:click.prevent="showTwinConverssations({{$twin->id}});" class="fa fa-comments fixed-plugin-button-nav cursor-pointer"></i> | 
+                                                    <i wire:click.prevent="editTwins({{$twin->id}});" class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
