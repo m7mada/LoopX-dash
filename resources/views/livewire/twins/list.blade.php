@@ -13,7 +13,7 @@
 
                     <div class="card-body px-0 pb-2">
                         <div class="table-responsive p-0">
-                            @if( count($model) > 0 )
+                            @if(count($model) > 0)
 
                                 <table class="table align-items-center justify-content-center mb-0">
                                     <thead>
@@ -24,6 +24,10 @@
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Knowledge files</th>
+                                            @if (Auth::user()->is_admin)
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    User </th>
+                                            @endif
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Status</th>
@@ -34,7 +38,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($model as $twin )
+                                        @foreach($model as $twin)
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2" data-id="{{ $twin->twin_external_id }}">
@@ -52,8 +56,14 @@
                                             <td>
                                             <p class="text-sm font-weight-bold mb-0">{{count($twin->files)}}</p>
                                             </td>
+                                            @if (Auth::user()->is_admin)
                                             <td>
-                                                @if ( $twin->is_active == 1 )
+                                                <p class="text-sm font-weight-bold mb-0">{{$twin->user->email}}</p>
+                                            </td>
+                                            @endif
+                                            
+                                            <td>
+                                                @if ($twin->is_active == 1)
                                                     <span class="badge badge-success">Active</span>
                                                 @else
                                                     <span class="badge badge-warning">Stoped</span>
@@ -62,7 +72,7 @@
                                             <td class="align-middle text-center">
 
                                                 <div class="d-flex align-items-center justify-content-center">
-                                                    <span class="me-2 text-xs font-weight-bold">{{count($twin->messages->where('role','=','assistant'))}} Reply </span>
+                                                    <span class="me-2 text-xs font-weight-bold">{{count($twin->messages->where('role', '=', 'assistant'))}} Reply </span>
                                                     <!-- <div>
                                                         <div class="progress">
                                                             <div class="progress-bar bg-gradient-info"
@@ -76,7 +86,7 @@
                                             <td class="align-middle">
                                                 <i  wire:click.prevent="showTwinConverssations({{$twin->id}});" class="fa fa-comments fixed-plugin-button-nav cursor-pointer"></i> | 
                                                 <i wire:click.prevent="editTwins({{$twin->id}});" class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
-       
+
                                             </td>
                                         </tr>
                                         @endforeach

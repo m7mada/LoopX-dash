@@ -75,10 +75,11 @@ class Twins extends Component
                                 $query->where('role','=','assistant');
                             })
                             ->with("files")
+                            ->with("user")
                             ->get();
 
         if( Auth::user()->is_admin ){
-            $this->model = Twin::get();
+            $this->model = Twin::with("files")->with("user")->get();
         }
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\File;
 use App\Models\Messages;
-
+use App\Models\User;
 
 
 class Twin extends Model
@@ -41,6 +41,11 @@ class Twin extends Model
         return $this->newHasMany(
             $instance->newQuery(), $this, $foreignKey, $localKey
         );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }
