@@ -1,5 +1,3 @@
-
-
 <style>
     .stepwizard-row:before{
         top: 22px;
@@ -16,7 +14,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
                         <h6 class="text-white text-capitalize ps-3">
-                            @if( $addTwins )
+                            @if($addTwins)
                               Add an AI Twin:
                             @else
                               Update {{$model->title }} Twin:
@@ -40,7 +38,7 @@
                                 <p>Persona & Instructions </p>
                             </div>
 
-                            @if ( Auth::user()->is_admin )
+                            @if (Auth::user()->is_admin)
                                 
                                 <div class="stepwizard-step">
                                     <a href="#step-4" wire:click="$set('currentStep', '4')" type="button" class="btn btn-circle {{ $currentStep != 4 ? 'btn-secondary' : 'btn-primary' }}" disabled="disabled">4</a>
@@ -70,7 +68,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group mt-5">
                                                 <div class="form-check form-switch">
-                                                    <input wire:model="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1 ) checked="1" @endif>
+                                                    <input wire:model="model.is_active" class="form-check-input" type="checkbox" id="is_active" @if ($this->model->is_active == 1) checked="1" @endif>
                                                     <label class="form-check-label" for="is_active">Twin Power</label>
                                                 </div>
                                             </div>
@@ -286,7 +284,7 @@
                                     </div>
 
 
-                                @if( $addTwins )
+                                @if($addTwins)
                                     <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="insertTwins()" type="button" >Next</button>
                                 @else
                                     <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Next</button>
@@ -433,8 +431,8 @@
                             </div>
                     </div>
 
-                    @if ( Auth::user()->is_admin )
-                        
+                    @if (Auth::user()->is_admin)
+
                         <div class="px-4 p-2 row setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step-4">
                                 <div class="col-xs-12">
                                         <h4 class="mb-3"> Integrations (Admins Only) :</h4>
@@ -445,7 +443,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                
+
 
                                         <div class="col-xs-12 mb-3">
                                             <div class="col-md-8">
@@ -463,8 +461,40 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                        @if( $addTwins )
+
+                                        <div class="col-xs-12 mb-3">
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <label for="botbress_bot_id" >Botbress Bot Id</label>
+                                                    <div class="input-group input-group-outline">
+                                                        <input type="text" name="botbress_bot_id" id="botbress_bot_id" class="form-control" wire:model="model.botbress_bot_id" placeholder="Botbress Bot Id" spellcheck="false">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <label for="botbress_integration_key">Botbress Integration Key</label>
+                                                    <div class="input-group input-group-outline">
+                                                        <input type="text" name="botbress_integration_key" id="botbress_integration_key" class="form-control" wire:model="model.botbress_integration_key" placeholder="Botbress Integration Key" spellcheck="false">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <label for="botbress_workspace_id">Botbress Workspace Id</label>
+                                                    <div class="input-group input-group-outline">
+                                                        <input type="text" name="botbress_workspace_id" id="botbress_workspace_id" class="form-control" wire:model="model.botbress_workspace_id" placeholder="Botbress Workspace Id" spellcheck="false">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @if($addTwins)
                                             <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="insertTwins()" type="button" >Save</button>
                                         @else
                                             <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Save</button>
@@ -473,7 +503,7 @@
                                 </div>
                             </div> 
                         </div>
-                        
+
                     @endif
                 </div>
             </div>

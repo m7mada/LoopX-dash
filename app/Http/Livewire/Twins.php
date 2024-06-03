@@ -60,6 +60,10 @@ class Twins extends Component
         'model.custom_settings' => 'nullable',
         'model.handover_settings' => 'nullable',
 
+        'model.botbress_bot_id' => 'nullable',
+        'model.botbress_integration_key' => 'nullable',
+        'model.botbress_workspace_id' => 'nullable',
+
 
     ];
 
