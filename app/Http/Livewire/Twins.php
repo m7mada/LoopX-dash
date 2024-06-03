@@ -63,6 +63,7 @@ class Twins extends Component
         'model.botbress_bot_id' => 'nullable',
         'model.botbress_integration_key' => 'nullable',
         'model.botbress_workspace_id' => 'nullable',
+        'model.user_id' => 'nullable',
 
 
     ];

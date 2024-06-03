@@ -47,10 +47,29 @@
         body.g-sidenav-show.bg-gray-200{
             margin-top: 0px;
         }
+         .bg-gradient-primary{
+            background-image: linear-gradient(195deg, #6a75dc, #6a75dc); 
+        }
+        .container-fluid .shadow-primary{
+            box-shadow: 0 4px 20px 0 #6a75dc, 0 7px 10px -5px #6a75dc !important;
+        }
+        .btn-primary{
+            background-color: #6a75dc;
+        }
+        .badge.bg-primary {
+            background: #6a75dc;
+
+        }
+        .bg-primary{
+            background-color: #6a75dc !important;
+  
+        }
+
+        
     </style>
     @livewireStyles
 </head>
-<body class="g-sidenav-show {{ Route::currentRouteName() == 'rtl' ? 'rtl' : '' }} {{ Route::currentRouteName() == 'register' || Route::currentRouteName() == 'static-sign-up'  ? '' : 'bg-gray-200' }}">
+<body class="g-sidenav-show {{ Route::currentRouteName() == 'rtl' ? 'rtl' : '' }} {{ Route::currentRouteName() == 'register' || Route::currentRouteName() == 'static-sign-up' ? '' : 'bg-gray-200' }}">
 
 {{ $slot }}
 

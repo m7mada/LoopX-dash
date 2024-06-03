@@ -494,6 +494,17 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-xs-12 mb-3">
+                                            <div class="col-md-8">
+                                                <div class="input-group input-group-outline">
+                                                    <label for="user_id">User Id</label>
+                                                    <div class="input-group input-group-outline">
+                                                        <input type="text" name="user_id" id="user_id" class="form-control" wire:model="model.user_id" placeholder="User Id" spellcheck="false">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         @if($addTwins)
                                             <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="insertTwins()" type="button" >Save</button>
                                         @else
