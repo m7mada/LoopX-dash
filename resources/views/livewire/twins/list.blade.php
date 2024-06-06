@@ -15,7 +15,7 @@
                         <div class="table-responsive p-0">
                             @if(count($model) > 0)
 
-                                <table class="table align-items-center justify-content-center mb-0">
+                                <table class="table-list table align-items-center justify-content-center mb-0">
                                     <thead>
                                         <tr>
                                             <th

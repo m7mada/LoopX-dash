@@ -403,7 +403,8 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.agent_persona" rows="5" placeholder="Give your twin a persona!" spellcheck="false"></textarea>
+                                                <label for="twin_a_persona">Twin Persona:</small></label>
+                                                <textarea style="border: 1px solid #ababab; border-radius: 6px;" id="twin_a_persona" class="input-group input-group-outline" wire:model="model.agent_persona" rows="5" placeholder="Give your twin a persona!" spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -411,7 +412,8 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.agent_instructions" rows="5" placeholder="Instruct your twin and tell what to do!" spellcheck="false"></textarea>
+                                                <label for="twin_what_to_do">Twin Instructions:</small></label>
+                                                <textarea style="border: 1px solid #ababab; border-radius: 6px;" id="twin_what_to_do" class="input-group input-group-outline" wire:model="model.agent_instructions" rows="5" placeholder="Instruct your twin and tell what to do!" spellcheck="false"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -419,7 +421,8 @@
                                     <div class="col-xs-12 mb-3">
                                         <div class="col-md-8">
                                             <div class="input-group input-group-outline">
-                                                <textarea class="form-control" wire:model="model.example_messages" rows="5" placeholder="Tell your twin any special notes like live offers & discounts!" spellcheck="false"></textarea>
+                                                <label for="twin_live_offers">Special Notes (like live offers & discounts!):</small></label>
+                                                <textarea style="border: 1px solid #ababab; border-radius: 6px;" id="twin_live_offers" class="input-group input-group-outline" wire:model="model.example_messages" rows="5" placeholder="Tell your twin any special notes like live offers & discounts!" spellcheck="false"></textarea>
                                             </div>
 
                                         </div>

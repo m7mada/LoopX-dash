@@ -44,28 +44,135 @@
     <link href="{{asset('assets/css/custome.css')}}" rel="stylesheet">
 
     <style>
+
+     
+        :root {
+            --color: #6d72e0;
+            --color-hover: #5f64dd;
+            --color-o50: #5f64dd80;
+        }
         body.g-sidenav-show.bg-gray-200{
             margin-top: 0px;
         }
          .bg-gradient-primary{
-            background-image: linear-gradient(195deg, #6a75dc, #6a75dc); 
+            background-image: linear-gradient(195deg, var(--color), var(--color)) !important; 
         }
         .container-fluid .shadow-primary{
-            box-shadow: 0 4px 20px 0 #6a75dc, 0 7px 10px -5px #6a75dc !important;
+            box-shadow: 0 4px 20px 0 var(--color), 0 7px 10px -5px var(--color) !important;
         }
         .btn-primary{
-            background-color: #6a75dc;
+            background-color: var(--color);
         }
         .badge.bg-primary {
-            background: #6a75dc;
+            background: var(--color);
 
         }
         .bg-primary{
-            background-color: #6a75dc !important;
+            background-color: var(--color) !important;
   
         }
 
+        .table-list .avatar-sm {
+            width: 30px !important;
+            height: 30px !important;
+            margin-top: 6px;
+        }
+
+        .btn-primary:hover, .btn.bg-gradient-primary:hover, .shadow-primary {
+            box-shadow: 0 4px 20px 0 #00000024, 0 7px 10px -5px #6d72e066 !important;
+        }
+
+        .text-primary {
+            color: var(--color) !important;
+        }
+
+        .btn-primary, .btn.bg-gradient-primary {
+            box-shadow: 0 3px 3px 0 #00000024, 0 3px 1px -2px #6d72e066, 0 1px 5px 0 #6d72e066;
+        }
+
+        .text-gradient.text-primary {
+            background-image: linear-gradient(195deg, var(--color), var(--color));
+        }
+
+        .form-check:not(.form-switch) .form-check-input[type=checkbox]:checked {
+            background: var(--color);
+        }
+
+        .form-check:not(.form-switch) .form-check-input[type=checkbox]:checked, .form-check:not(.form-switch) .form-check-input[type=radio]:checked {
+            border-color: var(--color);
+        }
+        .btn-primary:hover, .btn.bg-gradient-primary:hover, .btn-check:focus+.btn-primary, .btn-primary:focus, .btn-primary:hover {
+            background-color: var(--color-hover);
+            border-color: var(--color-hover);
+        }
+        .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .btn.bg-gradient-primary:not(:disabled):not(.disabled).active, .btn.bg-gradient-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle, .show>.btn.bg-gradient-primary.dropdown-toggle {
+            background-color: var(--color-hover);
+            color: #fff
+        }
+        .btn-check:focus+.btn-primary, .btn-primary:focus {
+            box-shadow: 0 0 0 .2rem var(--color-o50);
+        }
+               
         
+
+            /* width */
+            ::-webkit-scrollbar {
+                width: 7px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+               background: #ffffff00;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+               background: #afaeae;
+                border-radius: 8px;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
+
+            .stop-icon {
+                color: var(--color) !important;
+            }
+
+            .chat-message{
+                border: 1px;
+            }
+
+            .chat-message div + div{
+                    position: relative;
+                    border-radius: 18px !important;
+                    max-width: 500px;
+                }
+            .chat-message-data{
+                position: absolute;
+                right: 20px;
+                bottom: -25px;
+                width: 215px;
+                text-align: right;
+                font-size: 12px;
+            }
+
+            .chat-message-left .chat-message-data {
+                text-align: left;
+                left: 20px;
+                right: initial;
+            }
+
+            .chat-message-right div + div {
+                background-color: #6a75dc !important;
+                color: #fff;
+            }
+
+            .chat-message-right  .chat-message-data {
+                color: #7b809a;
+            }
+
     </style>
     @livewireStyles
 </head>
@@ -111,11 +218,30 @@
 
 </script>
 
+
+
+
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
 @yield('script')
 @livewireScripts
+
+
+<script>
+    function copyText(event, id) {
+        console.log(event);
+        event.stopPropagation();
+                var $temp = $("<div>");
+        $("body").append($temp);
+        $temp.attr("contenteditable", true)
+            .html($("#botpress_conversation_id_" + id).html()).select()
+            .on("focus", function () { document.execCommand('selectAll', false, null); })
+            .focus();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script>
 </body>
 </html>

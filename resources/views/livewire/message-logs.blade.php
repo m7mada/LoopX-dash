@@ -1,5 +1,5 @@
 <div>
-<div class="container-fluid py-4">
+<div class="container-fluid pb-4">
         <div class="row">
             <div class="col-12">
                 <div class="card my-4">

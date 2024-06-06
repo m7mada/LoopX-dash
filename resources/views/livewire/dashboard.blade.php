@@ -34,7 +34,7 @@
                           </div>
                           <div class="text-end pt-1">
                               <p class="text-sm mb-0 text-capitalize">Remaining Balance</p>
-                              <h4 class="mb-0">${{ round($this->totalCridets[0]->total_credits - $userTwins->sum("messages_cost") , 2 )  }}</h4>
+                              <h4 class="mb-0">${{ round($this->totalCridets[0]->total_credits - $userTwins->sum("messages_cost"), 2)  }}</h4>
                           </div>
                       </div>
                       <hr class="dark horizontal my-0">
@@ -57,7 +57,7 @@
                       </div>
                       <hr class="dark horizontal my-0">
                       <div class="card-footer p-3">
-                          <p class="mb-0"><span class="text-danger text-sm font-weight-bolder">{{$servedUsersLastMonth}}</span> Last Week</p>
+                          <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{$servedUsersLastMonth}}</span> Last Week</p>
                       </div>
                   </div>
               </div>
@@ -71,7 +71,7 @@
                           <div class="text-end pt-1">
                               <p class="text-sm mb-0 text-capitalize">Messages per conversions</p>
                               <h4 class="mb-0">
-                                @if( $totalUsage )  
+                                @if($totalUsage)  
                                     {{ round($totalUsage / $totalConversasions) }}
                                 @else
                                     0
@@ -105,7 +105,7 @@
                                     <canvas id="twinsUsageChart" class="chart-canvas" height="197" width="287" style="display: block; box-sizing: border-box; height: 197px; width: 287.5px;"></canvas>
                                 </div>
                                 <h4 class="font-weight-bold mt-n8">
-                                    <span>@if( $totalUsage ) {{$totalUsage}} @else 0 @endif</span>
+                                    <span>@if($totalUsage) {{$totalUsage}} @else 0 @endif</span>
                                     <span class="d-block text-body text-sm">Reply</span>
                                 </h4>
                             </div>
@@ -113,7 +113,7 @@
                                 <div class="table-responsive">
                                     <table class="table align-items-center mb-0" style="min-height:200px">
                                         <tbody>
-                                            @forelse ( $userTwins as $twin )
+                                            @forelse ($userTwins as $twin)
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-2 py-0">
@@ -124,7 +124,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="align-middle text-center text-sm">
-                                                        <span class="text-xs"> {{count($twin->messages->where('role','=','assistant'))}}</span>
+                                                        <span class="text-xs"> {{count($twin->messages->where('role', '=', 'assistant'))}}</span>
                                                     </td>
                                                 </tr>
                                                 @empty
@@ -164,7 +164,7 @@
                                     <canvas id="twinsCostChart" class="chart-canvas" height="197" width="287" style="display: block; box-sizing: border-box; height: 197px; width: 287.5px;"></canvas>
                                 </div>
                                 <h4 class="font-weight-bold mt-n8">
-                                    <span>@if( $userTwins->sum("messages_cost") ) {{ round($userTwins->sum("messages_cost"),2)}} @else 0 @endif</span>
+                                    <span>@if($userTwins->sum("messages_cost")) {{ round($userTwins->sum("messages_cost"), 2)}} @else 0 @endif</span>
                                     <span class="d-block text-body text-sm">USD</span>
                                 </h4>
                             </div>
@@ -172,7 +172,7 @@
                                 <div class="table-responsive">
                                     <table class="table align-items-center mb-0" style="min-height:200px">
                                         <tbody>
-                                            @forelse ( $userTwins as $twin )
+                                            @forelse ($userTwins as $twin)
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-2 py-0">
@@ -183,7 +183,7 @@
                                                         </div>
                                                     </td>
                                                     <td class="align-middle text-center text-sm">
-                                                        <span class="text-xs"> ${{round($twin->messages_cost,2)}} </span>
+                                                        <span class="text-xs"> ${{round($twin->messages_cost, 2)}} </span>
                                                     </td>
                                                 </tr>
                                                 @empty
@@ -306,7 +306,7 @@
                       </div>
                       <div class="card-body px-0 pb-2">
                           <div class="table-responsive">
-                              <table class="table align-items-center mb-0">
+                              <table class="table-list table align-items-center mb-0">
                                   <thead>
                                       <tr>
                                           <th
@@ -324,14 +324,15 @@
                                       </tr>
                                   </thead>
                                   <tbody>
-                                     @forelse ( $userTwins as $twin )
-                                         
+                                     @forelse ($userTwins as $twin)
+
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                        <img src="{{ asset('assets') }}/img/small-logos/logo-asana.svg"
-                                                            class="avatar avatar-sm me-3" alt="Twin">
+                                                    
+
+                                                            <img src="{{ asset('assets') }}/img/favicon.png" class="avatar avatar-sm rounded-circle me-2" alt="Twin">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
                                                         <h6 class="mb-0 text-sm">{{$twin->title}}</h6>
@@ -359,7 +360,7 @@
                                                 <div class="progress-wrapper w-75 mx-auto">
                                                     <div class="progress-info">
                                                         <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">{{count($twin->messages->where('role','=','assistant'))}} Reply</span>
+                                                            <span class="text-xs font-weight-bold">{{count($twin->messages->where('role', '=', 'assistant'))}} Reply</span>
                                                         </div>
                                                     </div>
                                                     <!-- <div class="progress">
@@ -393,16 +394,16 @@
                           <h6>Order Overview</h6>
                           <p class="text-sm">
                               <i class="fa fa-arrow-up text-success" aria-hidden="true"></i>
-                              <span class="font-weight-bold">{{$userOrders->where('created_at','>',\Carbon\Carbon::now()->subMonth()->startOfWeek())->count()}}</span> This Month
+                              <span class="font-weight-bold">{{$userOrders->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->startOfWeek())->count()}}</span> This Month
                           </p>
                       </div>
                       <div class="card-body p-3">
                           <div class="timeline timeline-one-side">
 
-                                @forelse ( $userOrders as $order )
+                                @forelse ($userOrders as $order)
                                     <div class="timeline-block mb-3">
                                     <span class="timeline-step">
-                                        <i class="material-icons text-danger text-gradient">shopping_cart</i>
+                                        <i class="material-icons text-success text-gradient">shopping_cart</i>
                                     </span>
                                     <div class="timeline-content">
                                         <h6 class="text-dark text-sm font-weight-bold mb-0">{{$order->net_paid}} £  By Order  {{$order->serial_number}} </h6>
