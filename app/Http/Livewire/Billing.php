@@ -15,7 +15,7 @@ class Billing extends Component
     }
     public function render()
     {
-        $this->packages = Packages::query()
+        $this->packages = Packages::where('is_active',1)
                                     ->with('benefits')
                                     ->with('packages_prices',function($q){
                                         $q->where('currency_id',1);
