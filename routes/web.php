@@ -49,6 +49,10 @@ Route::get('/', function () {
     return redirect('sign-in');
 });
 
+Route::get('profile', function () {
+    return redirect('sign-in');
+});
+
 Route::get('forgot-password', ForgotPassword::class)->middleware('guest')->name('password.forgot');
 Route::get('reset-password/{id}', ResetPassword::class)->middleware('signed')->name('reset-password');
 
