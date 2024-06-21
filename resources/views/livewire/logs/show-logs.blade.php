@@ -56,7 +56,7 @@
                                                                             <span onclick="copyText(event, '{{$model->messages[0]->botpress_conversation_id}}')" 
                                                                             style="padding: 4px 8px;background-color: #f3f3f3;border-radius: 6px;cursor: copy;"
                                                                             id="botpress_conversation_id_{{$model->messages[0]->botpress_conversation_id ?? '0'}}">
-                                                                            {{$model->messages[0]->botpress_conversation_id ?? "0"}} 
+                                                                            {{$conversationId ?? "0"}}
                                                                                 <i class="fa fa-clone" aria-hidden="true"></i>
                                                                             </span>
 
