@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('apirequest')->group(function () {
-    Route::get('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
+    Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
 });

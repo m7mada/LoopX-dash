@@ -13,7 +13,7 @@ class ThirdPartyApiController extends Controller
      * Base URL for the 3rd party API
      * @var string
      */
-    protected $baseUrl = 'https://webhook.botpress.cloud/';
+    protected $baseUrl = 'https://api.botpress.cloud/v1/chat/';
 
     public function __invoke(Request $request, $endpoint)
     {
@@ -30,8 +30,9 @@ class ThirdPartyApiController extends Controller
     public function proxy(Request $request, $endpoint)
     {
         
+        //dd($request->header('Authorization'));
         // Allowed endpoints
-        if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044'])) { 
+        if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) { 
             return response()->json(['error' => 'Invalid endpoint'], 400);
         }
 
@@ -46,18 +47,27 @@ class ThirdPartyApiController extends Controller
             $options = [
                 'headers' => [
                     'Content-Type' => 'application/json',
+                    'Authorization' => $request->header('Authorization'),
+                    'x-workspace-id' => $request->header('x-workspace-id'),
+                    'x-bot-id' => $request->header('x-bot-id'),
+                    'x-integration-id'=>$request->header('x-integration-id'),
+                    'conversationId' => $request->header('conversationId'),
+
                 ],
             ];
 
+            //dd($$request->header);
             switch ($method) {
                 case 'GET':
-                    $options['query'] = $params; 
+                    //$options['query'] = $params;
+                    $options['body'] = json_encode($params);
                     break;
                 case 'POST':
                     $options['body'] = json_encode($params);
                     break;
             }
 
+            //dd($options['body']);
             $response = $client->request($method, $apiUrl, $options);
 
             if ($response->getStatusCode() === 200) {
