@@ -111,8 +111,13 @@ class ThirdPartyApiController extends Controller
         $response = $client->request("post", $apiUrl, $options);
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody(), true);
-            return response()->json($data);
+            // $data = json_decode($response->getBody(), true);
+            // return response()->json($data);
+
+            sleep(10);
+
+            $messageReply = TempRecivedMessages::get();
+            return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
         }
