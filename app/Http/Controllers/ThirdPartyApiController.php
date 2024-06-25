@@ -101,6 +101,7 @@ class ThirdPartyApiController extends Controller
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
                 'conversationId' => $request->header('conversationId'),
+                'x-user-key'=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKMDdRMVBRTUJBRjIzWEZaSlJXVjlUVDAiLCJpYXQiOjE3MTgyNDU5NzJ9.Ry1T3MvnWKeRsMc0MMBOPq8Cr47fVW58PtRcLbrS6DI",
 
             ],
         ];
