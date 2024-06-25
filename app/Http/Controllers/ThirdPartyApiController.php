@@ -114,11 +114,12 @@ class ThirdPartyApiController extends Controller
             $data = json_decode($response->getBody(), true);
             // return response()->json($data);
 
-            dd($data->message->createdAt);
+            // print_r($data['message']['createdAt']);
 
+            // exit ;
             sleep(15);
 
-            $messageReply = TempRecivedMessages::get();
+            $messageReply = TempRecivedMessages::where('created_at','>', $data['message']['createdAt'])->get();
             return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
