@@ -32,7 +32,6 @@ class ThirdPartyApiController extends Controller
      */
     public function proxy(Request $request, $endpoint)
     {
-        dd(TempRecivedMessages::get());
         $twin = Twin::find(Auth::guard('twins')->user()->id);
         // Allowed endpoints
         if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) { 
@@ -86,6 +85,9 @@ class ThirdPartyApiController extends Controller
 
 
     public function reciveMessages(Request $request){
+
+        dd(TempRecivedMessages::get());
+
 
         TempRecivedMessages::create(["res"=>$request->all()]);
 
