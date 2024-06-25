@@ -90,7 +90,7 @@ class ThirdPartyApiController extends Controller
 
         $params = $request->all();
 
-        $apiUrl = "https://chat.botpress.cloud/9e1e7784-9b30-4daa-b830-d1bc72a66f7c/messages/";
+        $apiUrl = "https://webhook.botpress.cloud/d68d2e09-4f8f-4b0f-a6f0-8df17d959e76";
 
         $client = new Client();
         $options = [
