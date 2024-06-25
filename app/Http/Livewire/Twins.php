@@ -79,7 +79,7 @@ class Twins extends Component
                             ->get();
 
         if( Auth::user()->is_admin ){
-            $this->model = Twin::with("files")->with("user")->get();
+            //$this->model = Twin::with("files")->with("user")->get();
         }
     }
 
