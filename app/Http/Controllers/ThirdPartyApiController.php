@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\RequestException;
 use Auth ;
 use App\Models\Twin;
 use App\Models\TempRecivedMessages;
+use Carbon\Carbon;
 
 class ThirdPartyApiController extends Controller
 {
@@ -114,12 +115,13 @@ class ThirdPartyApiController extends Controller
             $data = json_decode($response->getBody(), true);
             // return response()->json($data);
 
-            print_r($data['message']['createdAt']);
+            //print_r($data['message']['createdAt']);
+            $afterDate = Carbon::parse($data['message']['createdAt']);
 
             // exit ;
             sleep(15);
 
-            $messageReply = TempRecivedMessages::where('created_at','>', $data['message']['createdAt'])->get();
+            $messageReply = TempRecivedMessages::where('created_at','>', $afterDate->toDateTime())->get();
             return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
