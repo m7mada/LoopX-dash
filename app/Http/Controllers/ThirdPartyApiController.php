@@ -87,7 +87,7 @@ class ThirdPartyApiController extends Controller
 
     public function reciveMessages(Request $request){
 
-        TempRecivedMessages::create($request->all());
+        TempRecivedMessages::create(["res"=>$request->all()]);
 
         return true ;
     }
