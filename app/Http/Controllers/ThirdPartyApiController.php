@@ -91,13 +91,13 @@ class ThirdPartyApiController extends Controller
 
         $params = $request->all();
 
-        $apiUrl = "https://webhook.botpress.cloud/d68d2e09-4f8f-4b0f-a6f0-8df17d959e76";
+        $apiUrl = "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
 
         $client = new Client();
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => "Bearer bp_pat_HpiWv9lErmO8O1bN8e1rRRKgJltaKBCBtL0d",//$request->header('Authorization'),
+                'Authorization' => "Bearer bp_pat_SuDPYASlc45P4751XtSQWGd3UO0llnO8Zjvs",//$request->header('Authorization'),
                 'x-workspace-id' => $twin->botbress_workspace_id,
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
