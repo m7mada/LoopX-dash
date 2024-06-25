@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Auth ;
 use App\Models\Twin;
+use App\Models\TempRecivedMessages;
 
 class ThirdPartyApiController extends Controller
 {
@@ -81,5 +82,13 @@ class ThirdPartyApiController extends Controller
         // } catch (RequestException $e) {
         //     return response()->json(['error' => 'Error fetching data'], 500);
         // }
+    }
+
+
+    public function reciveMessages(Request $request){
+
+        TempRecivedMessages::insert($request->all());
+
+        return true ;
     }
 }

@@ -22,3 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:twins')->prefix('apirequest')->group(function () {
     Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
 });
+
+
+Route::post('/recive_messages', [ThirdPartyApiController::class, 'reciveMessages']);
