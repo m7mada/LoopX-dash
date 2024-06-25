@@ -279,9 +279,26 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         
                                     </div>
+                                    @if(!$addTwins)
+                                        <hr>
+                                        <div>
+                                            <h4 class="mb-3">API: </h4>
+                                        </div>
+                                        <div class="d-flex justify-center-center">
+                                            <div class="col-12 card m-2 p-2">
+                                                <div>
+                                                    <spn>API Token:</spn> <a href="#" wire:click.prevent="getApiToken()"> {{ $model->api_token }} </a>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn-secondary pull-right" wire:click.prevent="updateApiToken()" wire:confirm="aasdfasdf" type="button" >Update Api Token</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    @endif
 
 
                                 @if($addTwins)

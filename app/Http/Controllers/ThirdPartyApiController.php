@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Auth ;
+use App\Models\Twin;
 
 class ThirdPartyApiController extends Controller
 {
@@ -30,7 +32,7 @@ class ThirdPartyApiController extends Controller
     public function proxy(Request $request, $endpoint)
     {
         
-        //dd($request->header('Authorization'));
+        $twin = Twin::find(Auth::guard('twins')->user()->id);
         // Allowed endpoints
         if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) { 
             return response()->json(['error' => 'Invalid endpoint'], 400);
@@ -47,10 +49,10 @@ class ThirdPartyApiController extends Controller
             $options = [
                 'headers' => [
                     'Content-Type' => 'application/json',
-                    'Authorization' => $request->header('Authorization'),
-                    'x-workspace-id' => $request->header('x-workspace-id'),
-                    'x-bot-id' => $request->header('x-bot-id'),
-                    'x-integration-id'=>$request->header('x-integration-id'),
+                    'Authorization' => "Bearer bp_pat_HpiWv9lErmO8O1bN8e1rRRKgJltaKBCBtL0d" ,//$request->header('Authorization'),
+                    'x-workspace-id' => $twin->botbress_workspace_id,
+                    'x-bot-id' => $twin->botbress_bot_id,
+                    'x-integration-id'=> $twin->botbress_integration_key,
                     'conversationId' => $request->header('conversationId'),
 
                 ],

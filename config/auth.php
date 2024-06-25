@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'twins' => [
+            'driver' => 'token',
+            'provider' => 'twins',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -64,7 +69,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'twins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Twin::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

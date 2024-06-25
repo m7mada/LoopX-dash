@@ -14,7 +14,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Helpers\PotBressHelper;
-
+use Str ;
 
 
 class Twins extends Component
@@ -106,6 +106,7 @@ class Twins extends Component
 
         try{
             $this->model = Twin::find($id);
+            $this->model->api_token = "***** ".substr($this->model->api_token,-4);
 
             $this->showForm = true ;
             $this->currentStep++ ;
@@ -120,8 +121,12 @@ class Twins extends Component
         $this->validate();
 
         try{
+            $token = Str::random(60);
             $this->model->twin_external_id = new ObjectId() ;
             $this->model->user_id = Auth::user()->id ;
+            $this->model->forceFill([
+            'api_token' => hash('sha256', $token), 
+            ]);
             $this->model->save();
             $this->addTwins = false ;
             $this->currentStep = 2 ;
@@ -358,4 +363,16 @@ class Twins extends Component
 
     }
 
+    public function updateApiToken(){
+        $token = Str::random(60);
+        $twin = $this->model ;
+        $twin->forceFill([
+            'api_token' => hash('sha256', $token), 
+        ])->save();
+        
+    }
+
+    public function getApiToken(){
+        $this->model->api_token = $this->model->api_token ;
+    }
 }
