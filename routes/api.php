@@ -20,8 +20,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware('auth:twins')->prefix('apirequest')->group(function () {
+    Route::post('/send_message', [ThirdPartyApiController::class, 'sendMessage']);
     Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
+
 });
 
 
 Route::post('/recive_messages', [ThirdPartyApiController::class, 'reciveMessages']);
+
+Route::get('/recived_messages', [ThirdPartyApiController::class, 'listTempMessages']);

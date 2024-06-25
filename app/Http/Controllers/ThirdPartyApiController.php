@@ -83,14 +83,51 @@ class ThirdPartyApiController extends Controller
         // }
     }
 
+    public function sendMessage( Request $request){
+
+        $twin = Twin::find(Auth::guard('twins')->user()->id);
+   
+
+        $params = $request->all();
+
+        $apiUrl = "https://chat.botpress.cloud/9e1e7784-9b30-4daa-b830-d1bc72a66f7c/messages/";
+
+        $client = new Client();
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => "Bearer bp_pat_HpiWv9lErmO8O1bN8e1rRRKgJltaKBCBtL0d",//$request->header('Authorization'),
+                'x-workspace-id' => $twin->botbress_workspace_id,
+                'x-bot-id' => $twin->botbress_bot_id,
+                'x-integration-id' => $twin->botbress_integration_key,
+                'conversationId' => $request->header('conversationId'),
+
+            ],
+        ];
+
+        //dd($options['body']);
+        $options['body'] = json_encode($params);
+        $response = $client->request("post", $apiUrl, $options);
+
+        if ($response->getStatusCode() === 200) {
+            $data = json_decode($response->getBody(), true);
+            return response()->json($data);
+        } else {
+            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+        }
+    }
 
     public function reciveMessages(Request $request){
-
-        dd(TempRecivedMessages::get());
-
 
         TempRecivedMessages::create(["res"=>$request->all()]);
 
         return true ;
     }
+
+    public function listTempMessages(){
+
+        dd(TempRecivedMessages::get());
+
+    }
+
 }
