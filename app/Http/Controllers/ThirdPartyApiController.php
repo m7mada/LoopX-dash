@@ -114,7 +114,7 @@ class ThirdPartyApiController extends Controller
             $data = json_decode($response->getBody(), true);
             // return response()->json($data);
 
-            dd($data);
+            dd($data->message->createdAt);
 
             sleep(15);
 
