@@ -107,7 +107,6 @@ class ThirdPartyApiController extends Controller
             ],
         ];
 
-        //dd($options['body']);
         $options['body'] = json_encode($params);
         $response = $client->request("post", $apiUrl, $options);
 
