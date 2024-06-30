@@ -91,18 +91,18 @@ class ThirdPartyApiController extends Controller
 
         $params = $request->all();
 
-        $apiUrl = "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+        $apiUrl = $twin->bootpress_webhook_link ;//"https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
 
         $client = new Client();
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => "Bearer bp_pat_SuDPYASlc45P4751XtSQWGd3UO0llnO8Zjvs",//$request->header('Authorization'),
+                'Authorization' => "Bearer ". $twin->bootpress_access_token,//$request->header('Authorization'),
                 'x-workspace-id' => $twin->botbress_workspace_id,
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
                 'conversationId' => $request->header('conversationId'),
-                'x-user-key'=>"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKMDdRMVBRTUJBRjIzWEZaSlJXVjlUVDAiLCJpYXQiOjE3MTgyNDU5NzJ9.Ry1T3MvnWKeRsMc0MMBOPq8Cr47fVW58PtRcLbrS6DI",
+                'x-user-key'=>$request->header('conversationId'), //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKMDdRMVBRTUJBRjIzWEZaSlJXVjlUVDAiLCJpYXQiOjE3MTgyNDU5NzJ9.Ry1T3MvnWKeRsMc0MMBOPq8Cr47fVW58PtRcLbrS6DI",
 
             ],
         ];
@@ -113,14 +113,8 @@ class ThirdPartyApiController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody(), true);
-            // return response()->json($data);
-
-            //print_r($data['message']['createdAt']);
             $afterDate = Carbon::parse($data['message']['createdAt']);
-
-            // exit ;
             sleep(15);
-
             $messageReply = TempRecivedMessages::where('created_at','>', $afterDate->toDateTime())->get();
             return response()->json($messageReply);
         } else {
