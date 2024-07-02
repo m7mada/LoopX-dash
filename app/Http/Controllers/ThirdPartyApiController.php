@@ -87,22 +87,21 @@ class ThirdPartyApiController extends Controller
     public function sendMessage( Request $request){
 
         $twin = Twin::find(Auth::guard('twins')->user()->id);
-   
 
         $params = $request->all();
 
-        $apiUrl = $twin->bootpress_webhook_link ;//"https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+        $apiUrl = $twin->botpress_webhook_link ;// Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
 
         $client = new Client();
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => "Bearer ". $twin->bootpress_access_token,//$request->header('Authorization'),
+                'Authorization' => "Bearer ". $twin->bootpress_access_token,
                 'x-workspace-id' => $twin->botbress_workspace_id,
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
                 'conversationId' => $request->header('conversationId'),
-                'x-user-key'=>$request->header('conversationId'), //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJfMDFKMDdRMVBRTUJBRjIzWEZaSlJXVjlUVDAiLCJpYXQiOjE3MTgyNDU5NzJ9.Ry1T3MvnWKeRsMc0MMBOPq8Cr47fVW58PtRcLbrS6DI",
+                'x-user-key'=>$request->header('user-key'),
 
             ],
         ];
@@ -134,4 +133,53 @@ class ThirdPartyApiController extends Controller
 
     }
 
+    public function createChatUser( Request $request ){
+        $twin = Twin::find(Auth::guard('twins')->user()->id);
+        $apiUrl = $twin->botpress_webhook_link . "/users";
+        // Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+
+        $client = new Client();
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+            ],
+        ];
+        $params = $request->all();
+
+        $options['body'] = json_encode($params);
+
+        $response = $client->request("post", $apiUrl,$options);
+
+        if ($response->getStatusCode() === 200) {
+            return response()->json(json_decode($response->getBody(), true));
+        } else {
+            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+        }
+    }
+
+
+    public function createConversation( Request $request ){
+        $twin = Twin::find(Auth::guard('twins')->user()->id);
+        $apiUrl = $twin->botpress_webhook_link . "/conversations";
+        // Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+
+        $client = new Client();
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'x-user-key' => $request->header('user-key'),
+            ],
+        ];
+        $params = $request->all();
+
+        $options['body'] = json_encode($params);
+
+        $response = $client->request("post", $apiUrl, $options);
+
+        if ($response->getStatusCode() === 200) {
+            return response()->json(json_decode($response->getBody(), true));
+        } else {
+            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+        }
+    }
 }

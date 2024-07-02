@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::middleware('auth:twins')->prefix('apirequest')->group(function () {
-    Route::post('/send_message', [ThirdPartyApiController::class, 'sendMessage']);
+Route::middleware('auth:twins')->group(function () {
+    Route::post('/user/create', [ThirdPartyApiController::class, 'createChatUser']);
+    Route::post('/conversation/create', [ThirdPartyApiController::class, 'createConversation']);
+    Route::post('/message/send', [ThirdPartyApiController::class, 'sendMessage']);
     Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
 
 });
