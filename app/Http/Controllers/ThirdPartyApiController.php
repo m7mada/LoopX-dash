@@ -135,8 +135,8 @@ class ThirdPartyApiController extends Controller
 
     public function createChatUser( Request $request ){
         $twin = Twin::find(Auth::guard('twins')->user()->id);
-        $apiUrl = $twin->botpress_webhook_link . "/users";
-        // Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+        $apiUrl = str_replace( "https://webhook.botpress.cloud","https://chat.botpress.cloud",$twin->botpress_webhook_link) . "/users";
+        // Something like this "https://chat.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
 
         $client = new Client();
         $options = [
@@ -157,11 +157,10 @@ class ThirdPartyApiController extends Controller
         }
     }
 
-
     public function createConversation( Request $request ){
         $twin = Twin::find(Auth::guard('twins')->user()->id);
-        $apiUrl = $twin->botpress_webhook_link . "/conversations";
-        // Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+        $apiUrl = str_replace("https://webhook.botpress.cloud", "https://chat.botpress.cloud", $twin->botpress_webhook_link) . "/conversations";
+        // Something like this "https://chat.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
 
         $client = new Client();
         $options = [

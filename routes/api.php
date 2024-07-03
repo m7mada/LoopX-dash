@@ -23,7 +23,7 @@ Route::middleware('auth:twins')->group(function () {
     Route::post('/user/create', [ThirdPartyApiController::class, 'createChatUser']);
     Route::post('/conversation/create', [ThirdPartyApiController::class, 'createConversation']);
     Route::post('/message/send', [ThirdPartyApiController::class, 'sendMessage']);
-    Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
+    //Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
 
 });
 
