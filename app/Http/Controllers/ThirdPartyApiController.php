@@ -100,7 +100,7 @@ class ThirdPartyApiController extends Controller
                 'x-workspace-id' => $twin->botbress_workspace_id,
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
-                'conversationId' => $request->header('conversationId'),
+                //'conversationId' => $request->header('conversationId'),
                 'x-user-key'=>$request->header('user-key'),
 
             ],
@@ -113,7 +113,7 @@ class ThirdPartyApiController extends Controller
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody(), true);
             sleep(15);
-            $messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693")->where("res.conversationId","conversationId 104")->get();
+            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $request->body('conversationId'))->get();
             return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
