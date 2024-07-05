@@ -123,7 +123,7 @@ class ThirdPartyApiController extends Controller
                     return response()->json($messageReply);
                 }
 
-                sleep(1);
+                sleep(2);
                 $tryContainer++ ;
             }
 
