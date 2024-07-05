@@ -86,50 +86,55 @@ class ThirdPartyApiController extends Controller
 
     public function sendMessage( Request $request){
 
-        $twin = Twin::find(Auth::guard('twins')->user()->id);
+        try{
+            $twin = Twin::find(Auth::guard('twins')->user()->id);
 
-        $params = $request->all();
+            $params = $request->all();
 
-        $apiUrl = $twin->botpress_webhook_link ;// Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
+            $apiUrl = $twin->botpress_webhook_link ;// Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
 
-        $client = new Client();
-        $options = [
-            'headers' => [
-                'Content-Type' => 'application/json',
-                'Authorization' => "Bearer ". $twin->bootpress_access_token,
-                'x-workspace-id' => $twin->botbress_workspace_id,
-                'x-bot-id' => $twin->botbress_bot_id,
-                'x-integration-id' => $twin->botbress_integration_key,
-                //'conversationId' => $request->header('conversationId'),
-                //'x-user-key'=>$request->header('user-key'),
+            $client = new Client();
+            $options = [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => "Bearer ". $twin->bootpress_access_token,
+                    'x-workspace-id' => $twin->botbress_workspace_id,
+                    'x-bot-id' => $twin->botbress_bot_id,
+                    'x-integration-id' => $twin->botbress_integration_key,
+                    //'conversationId' => $request->header('conversationId'),
+                    //'x-user-key'=>$request->header('user-key'),
 
-            ],
-        ];
+                ],
+            ];
 
 
-        $sentTime = Carbon::now();
-        $options['body'] = json_encode($params);
-        $response = $client->request("post", $apiUrl, $options);
+            $sentTime = Carbon::now();
+            $options['body'] = json_encode($params);
+            $response = $client->request("post", $apiUrl, $options);
 
-        if ($response->getStatusCode() === 200) {
-            // $data = json_decode($response->getBody(), true);
-            sleep(7);
+            if ($response->getStatusCode() === 200) {
+                // $data = json_decode($response->getBody(), true);
+                sleep(7);
 
-            $tryContainer = 0 ;
-            while($tryContainer < 10 ) {
-                $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
+                $tryContainer = 0 ;
+                while($tryContainer < 10 ) {
+                    $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
 
-                if( $messageReply->isNotEmpty() ){
-                    return response()->json($messageReply);
+                    if( $messageReply->isNotEmpty() ){
+                        return response()->json($messageReply);
+                    }
+
+                    sleep(2);
+                    $tryContainer++ ;
                 }
 
-                sleep(2);
-                $tryContainer++ ;
+                
+            } else {
+                return response()->json(['error' => "Request Error"], $response->getStatusCode());
             }
 
-            
-        } else {
-            return response()->json(['error' => "Request Error"], $response->getStatusCode());
+        }catch(Exception $e){
+            return response()->json(['error' => "An error occurred"], 500);
         }
     }
 
