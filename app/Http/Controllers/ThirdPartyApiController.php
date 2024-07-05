@@ -112,8 +112,9 @@ class ThirdPartyApiController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody(), true);
+            $afterDate = Carbon::parse($data['message']['createdAt']);
             sleep(15);
-            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'] )->get();
+            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'] )->where('created_at', '>', $afterDate->toDateTime())->get();
             return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
