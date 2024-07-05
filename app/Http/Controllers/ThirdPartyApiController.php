@@ -104,7 +104,8 @@ class ThirdPartyApiController extends Controller
                 'x-user-key'=>$request->header('user-key'),
 
             ],
-        ];
+        ];            //"botpressConversationId": "conv_01J18WJAQ0AG5CKPHV3PKFR8MX"
+
 
         $options['body'] = json_encode($params);
         $response = $client->request("post", $apiUrl, $options);
@@ -129,7 +130,7 @@ class ThirdPartyApiController extends Controller
 
     public function listTempMessages(){
 
-        dd(TempRecivedMessages::get());
+        dd(TempRecivedMessages::latest()->take(10)->get());
 
     }
 
