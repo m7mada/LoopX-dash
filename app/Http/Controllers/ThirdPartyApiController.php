@@ -9,6 +9,7 @@ use Auth ;
 use App\Models\Twin;
 use App\Models\TempRecivedMessages;
 use Carbon\Carbon;
+use Exception ;
 
 class ThirdPartyApiController extends Controller
 {
@@ -115,7 +116,7 @@ class ThirdPartyApiController extends Controller
             }catch(Exception $e){
                 return response()->json(['error' => "An error occurred"], 500);
             }
-            
+
             if ($response->getStatusCode() === 200) {
                 // $data = json_decode($response->getBody(), true);
                 sleep(7);
