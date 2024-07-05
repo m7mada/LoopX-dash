@@ -112,10 +112,22 @@ class ThirdPartyApiController extends Controller
         $response = $client->request("post", $apiUrl, $options);
 
         if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getBody(), true);
-            sleep(15);
-            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'] )->where('created_at', '>', $sentTime)->get();
-            return response()->json($messageReply);
+            // $data = json_decode($response->getBody(), true);
+            sleep(5);
+
+            $tryContainer = 0 ;
+            while($tryContainer < 10 ) {
+                $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
+
+                if( $messageReply->isNotEmpty() ){
+                    return response()->json($messageReply);
+                }
+
+                sleep(1);
+                $tryContainer++ ;
+            }
+
+            
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
         }
