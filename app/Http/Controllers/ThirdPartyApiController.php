@@ -113,7 +113,7 @@ class ThirdPartyApiController extends Controller
 
         if ($response->getStatusCode() === 200) {
             // $data = json_decode($response->getBody(), true);
-            sleep(5);
+            sleep(7);
 
             $tryContainer = 0 ;
             while($tryContainer < 10 ) {
