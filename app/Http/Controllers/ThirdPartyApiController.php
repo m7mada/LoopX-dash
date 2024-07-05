@@ -104,7 +104,7 @@ class ThirdPartyApiController extends Controller
                 'x-user-key'=>$request->header('user-key'),
 
             ],
-        ];            //"botpressConversationId": "conv_01J18WJAQ0AG5CKPHV3PKFR8MX"
+        ];
 
 
         $options['body'] = json_encode($params);
@@ -112,9 +112,8 @@ class ThirdPartyApiController extends Controller
 
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody(), true);
-            $afterDate = Carbon::parse($data['message']['createdAt']);
             sleep(15);
-            $messageReply = TempRecivedMessages::where('created_at','>', $afterDate->toDateTime())->get();
+            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->wehre("res.conversationId", $request->header('conversationId'))->get();
             return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
@@ -130,7 +129,7 @@ class ThirdPartyApiController extends Controller
 
     public function listTempMessages(){
 
-        dd(TempRecivedMessages::latest()->take(10)->get());
+        dd(TempRecivedMessages::get());
 
     }
 
