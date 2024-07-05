@@ -129,7 +129,7 @@ class ThirdPartyApiController extends Controller
 
             
         } else {
-            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+            return response()->json(['error' => "Request Error"], $response->getStatusCode());
         }
     }
 
