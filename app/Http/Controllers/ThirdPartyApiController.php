@@ -129,7 +129,7 @@ class ThirdPartyApiController extends Controller
 
     public function listTempMessages(){
 
-        dd(TempRecivedMessages::latest()->get(10));
+        dd(TempRecivedMessages::latest()->limit(10)->get());
 
     }
 
