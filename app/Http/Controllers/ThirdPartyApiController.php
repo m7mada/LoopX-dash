@@ -108,10 +108,14 @@ class ThirdPartyApiController extends Controller
             ];
 
 
-            $sentTime = Carbon::now();
-            $options['body'] = json_encode($params);
-            $response = $client->request("post", $apiUrl, $options);
-
+            try{
+                $sentTime = Carbon::now();
+                $options['body'] = json_encode($params);
+                $response = $client->request("post", $apiUrl, $options);
+            }catch(Exception $e){
+                return response()->json(['error' => "An error occurred"], 500);
+            }
+            
             if ($response->getStatusCode() === 200) {
                 // $data = json_decode($response->getBody(), true);
                 sleep(7);
