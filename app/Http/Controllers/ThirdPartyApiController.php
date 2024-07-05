@@ -101,20 +101,20 @@ class ThirdPartyApiController extends Controller
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
                 //'conversationId' => $request->header('conversationId'),
-                'x-user-key'=>$request->header('user-key'),
+                //'x-user-key'=>$request->header('user-key'),
 
             ],
         ];
 
 
+        $sentTime = Carbon::now();
         $options['body'] = json_encode($params);
         $response = $client->request("post", $apiUrl, $options);
 
         if ($response->getStatusCode() === 200) {
             $data = json_decode($response->getBody(), true);
-            $afterDate = Carbon::parse($data['message']['createdAt']);
             sleep(15);
-            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'] )->where('created_at', '>', $afterDate->toDateTime())->get();
+            $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'] )->where('created_at', '>', Carbon::parse($sentTime))->get();
             return response()->json($messageReply);
         } else {
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
