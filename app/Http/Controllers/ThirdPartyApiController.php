@@ -191,22 +191,22 @@ class ThirdPartyApiController extends Controller
     public function listTempMessages(){
 
 
-        $messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/7dc6e6f8-8bf6-4194-ae28-0caac4f21e63")->limit(10)->get();
+        // $messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/7dc6e6f8-8bf6-4194-ae28-0caac4f21e63")->limit(10)->get();
 
-        if ($messageReply->isNotEmpty()) {
-            // Map through the collection to remove specified fields
-            $filteredMessages = $messageReply->map(function ($message) {
-                $messageArray = $message->toArray();
-                unset($messageArray['res']['botpressUserId']);
-                unset($messageArray['res']['botpressMessageId']);
-                unset($messageArray['res']['botpressConversationId']);
-                unset($messageArray['res']['webhook']);
-                return $messageArray;
-            });
+        // if ($messageReply->isNotEmpty()) {
+        //     // Map through the collection to remove specified fields
+        //     $filteredMessages = $messageReply->map(function ($message) {
+        //         $messageArray = $message->toArray();
+        //         unset($messageArray['res']['botpressUserId']);
+        //         unset($messageArray['res']['botpressMessageId']);
+        //         unset($messageArray['res']['botpressConversationId']);
+        //         unset($messageArray['res']['webhook']);
+        //         return $messageArray;
+        //     });
 
-            return response()->json($filteredMessages);
-        }
-        //dd(TempRecivedMessages::latest()->limit(10)->get());
+        //     return response()->json($filteredMessages);
+        // }
+        dd(TempRecivedMessages::latest()->limit(10)->get());
 
         // dd($messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693")->where("res.conversationId","conversationId 104")->get());
     }
