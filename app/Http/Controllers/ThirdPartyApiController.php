@@ -141,12 +141,10 @@ class ThirdPartyApiController extends Controller
 
                 $tryContainer = 0 ;
                 while($tryContainer < 10 ) {
-                    $messageReply = TempRecivedMessages::where('res.webhook', $twin->webhook)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
+                    $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
 
                     if( $messageReply->isNotEmpty() ){
                         return response()->json($messageReply);
-
-                        //$messageReply->delete() ;
                     }
 
                     sleep(2);
@@ -182,9 +180,9 @@ class ThirdPartyApiController extends Controller
 
     public function listTempMessages(){
 
-        dd(TempRecivedMessages::latest()->limit(10)->get());
+        //dd(TempRecivedMessages::latest()->limit(10)->get());
 
-        // dd($messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693")->where("res.conversationId","conversationId 104")->get());
+        dd($messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693")->where("res.conversationId","conversationId 104")->get());
     }
 
     public function createChatUser( Request $request ){
