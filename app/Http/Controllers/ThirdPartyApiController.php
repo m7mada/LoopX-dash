@@ -152,7 +152,10 @@ class ThirdPartyApiController extends Controller
                             return $messageArray;
                         });
 
-                        TempRecivedMessages::where(1,1)->delete();
+
+                        
+
+                        TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/7dc6e6f8-8bf6-4194-ae28-0caac4f21e63")->delete();
                         
                         return response()->json($filteredMessages);
                     }
