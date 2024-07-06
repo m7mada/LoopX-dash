@@ -191,9 +191,9 @@ class ThirdPartyApiController extends Controller
             foreach( $messageReply as $message ){
                 $message->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
             }
-            $messageReply->makeHidden(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
+            $messageReply->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
 
-            return response()->json($message);
+            return response()->json($messageReply);
         }
 
         //dd(TempRecivedMessages::latest()->limit(10)->get());
