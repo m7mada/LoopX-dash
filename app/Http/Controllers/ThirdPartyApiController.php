@@ -150,7 +150,7 @@ class ThirdPartyApiController extends Controller
                     sleep(2);
                     $tryContainer++ ;
                 }
-                return response()->json(['error' => "Did'nt recieve a response"]);
+                return response()->json(['error' => "Didn't recieve a response"]);
 
 
             } else {
@@ -164,7 +164,7 @@ class ThirdPartyApiController extends Controller
 
     public function reciveMessages(Request $request){
 
-        $twin = Twin::where('botpress_webhook_link',$request->webhook)->first();
+        $twin = Twin::where('botpress_webhook_link',$request->webhook)->get();
 
         if( $twin->isNotEmpty() ){
 
