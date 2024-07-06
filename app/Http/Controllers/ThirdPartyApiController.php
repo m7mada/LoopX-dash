@@ -124,6 +124,7 @@ class ThirdPartyApiController extends Controller
             ];
 
 
+            $params['conversationId'] = "-----------------------".$params['conversationId'] ;
             try{
                 $sentTime = Carbon::now();
                 $options['body'] = json_encode($params);
