@@ -152,6 +152,8 @@ class ThirdPartyApiController extends Controller
                             return $messageArray;
                         });
 
+                        TempRecivedMessages::delete();
+                        
                         return response()->json($filteredMessages);
                     }
 
