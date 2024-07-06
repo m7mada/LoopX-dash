@@ -152,7 +152,7 @@ class ThirdPartyApiController extends Controller
                             return $messageArray;
                         });
 
-                        TempRecivedMessages::where('created_at', '<', $sentTime)->delete();
+                        TempRecivedMessages::where(1,1)->delete();
                         
                         return response()->json($filteredMessages);
                     }
