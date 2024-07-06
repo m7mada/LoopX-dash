@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::middleware('auth:twins')->group(function () {
-    Route::post('/user/create', [ThirdPartyApiController::class, 'createChatUser']);
-    Route::post('/conversation/create', [ThirdPartyApiController::class, 'createConversation']);
-    Route::post('/message/send', [ThirdPartyApiController::class, 'sendMessage']);
+    // Route::post('/user/create', [ThirdPartyApiController::class, 'createChatUser']);
+    // Route::post('/conversation/create', [ThirdPartyApiController::class, 'createConversation']);
+    Route::post('/v1/message/send', [ThirdPartyApiController::class, 'sendMessage']);
     //Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
 
 });
@@ -30,4 +30,4 @@ Route::middleware('auth:twins')->group(function () {
 
 Route::post('/recive_messages', [ThirdPartyApiController::class, 'reciveMessages']);
 
-Route::get('/recived_messages', [ThirdPartyApiController::class, 'listTempMessages']);
+// Route::get('/recived_messages', [ThirdPartyApiController::class, 'listTempMessages']);
