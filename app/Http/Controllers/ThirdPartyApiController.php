@@ -143,11 +143,19 @@ class ThirdPartyApiController extends Controller
                 while($tryContainer < 10 ) {
                     $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
 
-                    if( $messageReply->isNotEmpty() ){
 
-                        $messageReply->makeHidden(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
+                    if ($messageReply->isNotEmpty()) {
+                        // Map through the collection to remove un needed fields
+                        $filteredMessages = $messageReply->map(function ($message) {
+                            $messageArray = $message->toArray();
+                            unset($messageArray['res']['botpressUserId']);
+                            unset($messageArray['res']['botpressMessageId']);
+                            unset($messageArray['res']['botpressConversationId']);
+                            unset($messageArray['res']['webhook']);
+                            return $messageArray;
+                        });
 
-                        return response()->json($messageReply);
+                        return response()->json($filteredMessages);
                     }
 
                     sleep(2);
