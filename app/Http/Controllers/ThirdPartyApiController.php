@@ -18,7 +18,7 @@ class ThirdPartyApiController extends Controller
      * Base URL for the 3rd party API
      * @var string
      */
-    protected $baseUrl = 'https://api.botpress.cloud/v1/chat/';
+    // protected $baseUrl = 'https://api.botpress.cloud/v1/chat/';
 
     public function __invoke(Request $request, $endpoint)
     {
@@ -90,6 +90,24 @@ class ThirdPartyApiController extends Controller
         try{
             $twin = Twin::find(Auth::guard('twins')->user()->id);
 
+            $requiredFields = [
+                'id',
+                'botpress_webhook_link',
+                'botpress_access_token',
+                'botbress_workspace_id',
+                'botbress_bot_id',
+                'botbress_integration_key'
+            ];
+
+            // Check for missing fields
+            $missingFields = array_filter($requiredFields, fn($field) => empty ($twin->$field));
+
+            if (!empty($missingFields)) {
+                $missingFieldsList = implode(', ', array_map(fn($field) => ucfirst(str_replace('_', ' ', $field)), $missingFields));
+
+                return response()->json(['error' => "Not a Twin Or Missing integrations setings :  $missingFieldsList"], 400);
+            }
+
             $params = $request->all();
 
             $apiUrl = $twin->botpress_webhook_link ;// Something like this "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693";
@@ -132,8 +150,9 @@ class ThirdPartyApiController extends Controller
                     sleep(2);
                     $tryContainer++ ;
                 }
+                return response()->json(['error' => "Did'nt recieve a response"]);
 
-                
+
             } else {
                 return response()->json(['error' => "Request Error"], $response->getStatusCode());
             }
@@ -145,9 +164,18 @@ class ThirdPartyApiController extends Controller
 
     public function reciveMessages(Request $request){
 
-        TempRecivedMessages::create(["res"=>$request->all()]);
+        $twin = Twin::where('botpress_webhook_link',$request->webhook)->first();
 
-        return true ;
+        if( $twin->isNotEmpty() ){
+
+            TempRecivedMessages::create(["res" => $request->all()]);
+            return true;
+
+        }else{
+            return response()->json(['error' => "Twin Not Found"], 400); 
+        }
+
+
     }
 
     public function listTempMessages(){
