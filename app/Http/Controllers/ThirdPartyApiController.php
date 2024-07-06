@@ -180,9 +180,9 @@ class ThirdPartyApiController extends Controller
 
     public function listTempMessages(){
 
-        //dd(TempRecivedMessages::latest()->limit(10)->get());
+        dd(TempRecivedMessages::latest()->limit(10)->get());
 
-        dd($messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693")->where("res.conversationId","conversationId 104")->get());
+        // dd($messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/d98b5a30-b3b8-4e76-91ba-a1ddfff75693")->where("res.conversationId","conversationId 104")->get());
     }
 
     public function createChatUser( Request $request ){
