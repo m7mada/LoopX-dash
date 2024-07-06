@@ -141,10 +141,12 @@ class ThirdPartyApiController extends Controller
 
                 $tryContainer = 0 ;
                 while($tryContainer < 10 ) {
-                    $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
+                    $messageReply = TempRecivedMessages::where('res.webhook', str_replace("https://webhook.botpress.cloud/", '', $request->webhook))->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
 
                     if( $messageReply->isNotEmpty() ){
                         return response()->json($messageReply);
+
+                        //$messageReply->delete() ;
                     }
 
                     sleep(2);
@@ -171,7 +173,7 @@ class ThirdPartyApiController extends Controller
             unset($request->conversationId,$request->botpressUserId,$request->botpressMessageId,$request->botpressConversationId);
 
             $request->webhook = str_replace("https://webhook.botpress.cloud/",'',$request->webhook);
-            
+
             TempRecivedMessages::create(["res" => $request->all()]);
             return true;
 
