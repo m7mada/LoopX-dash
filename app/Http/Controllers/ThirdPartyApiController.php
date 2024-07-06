@@ -120,9 +120,6 @@ class ThirdPartyApiController extends Controller
                     'x-workspace-id' => $twin->botbress_workspace_id,
                     'x-bot-id' => $twin->botbress_bot_id,
                     'x-integration-id' => $twin->botbress_integration_key,
-                    //'conversationId' => $request->header('conversationId'),
-                    //'x-user-key'=>$request->header('user-key'),
-
                 ],
             ];
 
