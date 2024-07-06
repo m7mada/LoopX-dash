@@ -189,11 +189,11 @@ class ThirdPartyApiController extends Controller
         if ($messageReply->isNotEmpty()) {
 
             foreach( $messageReply as $message ){
-                $message->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
+                $userMessages[] = $message->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
             }
-            $messageReply->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
+            //$messageReply->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
 
-            return response()->json($messageReply);
+            return response()->json($userMessages);
         }
 
         //dd(TempRecivedMessages::latest()->limit(10)->get());
