@@ -153,9 +153,9 @@ class ThirdPartyApiController extends Controller
                         });
 
 
-                        
 
-                        TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/7dc6e6f8-8bf6-4194-ae28-0caac4f21e63")->delete();
+
+                        TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->delete();
                         
                         return response()->json($filteredMessages);
                     }
