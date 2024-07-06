@@ -186,15 +186,12 @@ class ThirdPartyApiController extends Controller
 
         $messageReply = TempRecivedMessages::where('res.webhook', "https://webhook.botpress.cloud/7dc6e6f8-8bf6-4194-ae28-0caac4f21e63")->limit(10)->get();
 
-        if ($messageReply->isNotEmpty()) {
-
-            foreach( $messageReply as $message ){
-                $userMessages[] = $message->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
-            }
-            //$messageReply->unset(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
-
-            return response()->json($userMessages);
-        }
+if ($messageReply->isNotEmpty()) {
+    // Hide the specified attributes for each messageReply item
+    $messageReply->makeHidden(['res.botpressUserId', 'res.botpressMessageId', 'res.botpressConversationId', 'res.webhook']);
+    
+    return response()->json($messageReply);
+}
 
         //dd(TempRecivedMessages::latest()->limit(10)->get());
 
