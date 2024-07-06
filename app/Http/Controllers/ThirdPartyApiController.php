@@ -168,6 +168,10 @@ class ThirdPartyApiController extends Controller
 
         if( $twin->isNotEmpty() ){
 
+            unset($request->conversationId,$request->botpressUserId,$request->botpressMessageId,$request->botpressConversationId);
+
+            $request->webhook = str_replace("https://webhook.botpress.cloud/",'',$request->webhook);
+            
             TempRecivedMessages::create(["res" => $request->all()]);
             return true;
 
