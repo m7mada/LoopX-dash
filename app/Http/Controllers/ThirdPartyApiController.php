@@ -126,8 +126,6 @@ class ThirdPartyApiController extends Controller
                 ],
             ];
 
-            $options['body']['userId'] = $twin->id . rand(999) ;
-            $options['body']['messageId'] = $twin->id . rand(999);
 
             try{
                 $sentTime = Carbon::now();
