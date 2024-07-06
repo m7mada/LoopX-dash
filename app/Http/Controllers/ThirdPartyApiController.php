@@ -164,7 +164,7 @@ class ThirdPartyApiController extends Controller
 
     public function reciveMessages(Request $request){
 
-        $twin = Twin::where('botpress_webhook_link',$request->webhook)->get();
+        $twin = Twin::where('botpress_webhook_link',$request->webhook)->first();
 
         if( $twin->isNotEmpty() ){
 
