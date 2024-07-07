@@ -105,7 +105,7 @@ class ThirdPartyApiController extends Controller
             if (!empty($missingFields)) {
                 $missingFieldsList = implode(', ', array_map(fn($field) => ucfirst(str_replace('_', ' ', $field)), $missingFields));
 
-                return response()->json(['error' => "Not a Twin Or Missing integrations setings :  ".str_replace('botpress','',$missingFieldsList)], 403);
+                return response()->json(['error' => "Not a Twin Or Missing integrations setings :  ".str_replace('Botpress','',$missingFieldsList)], 403);
             }
 
             $params = $request->all();
