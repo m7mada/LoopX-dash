@@ -292,4 +292,33 @@ class ThirdPartyApiController extends Controller
             return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
         }
     }
+
+    public function listConversations(Request $request)
+    {
+        $twin = Twin::find(Auth::guard('twins')->user()->id);
+        $apiUrl = $apiUrl = "https://api.botpress.cloud/v1/chat/conversations"; //. $twin->botpress_chat_webhook_id . "/conversations";
+
+        $client = new Client();
+        $options = [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => "Bearer " . $twin->bootpress_access_token,
+                'x-workspace-id' => $twin->botbress_workspace_id,
+                'x-bot-id' => $twin->botbress_bot_id,
+                'x-integration-id' => $twin->botbress_integration_key,
+            ],
+        ];
+
+        $params = $request->all();
+
+        $options['body'] = json_encode($params);
+
+        $response = $client->request("get", $apiUrl, $options);
+
+        if ($response->getStatusCode() === 200) {
+            return response()->json(json_decode($response->getBody(), true));
+        } else {
+            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+        }
+    }
 }
