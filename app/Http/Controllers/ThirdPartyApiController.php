@@ -320,7 +320,7 @@ class ThirdPartyApiController extends Controller
         $options = [
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => "Bearer " . $twin->bootpress_access_token,
+                'Authorization' => "Bearer " . $twin->botpress_access_token,
                 'x-workspace-id' => $twin->botbress_workspace_id,
                 'x-bot-id' => $twin->botbress_bot_id,
                 'x-integration-id' => $twin->botbress_integration_key,
