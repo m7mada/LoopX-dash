@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:twins')->group(function () {
     // Route::post('/user/create', [ThirdPartyApiController::class, 'createChatUser']);
-    // Route::post('/conversation/create', [ThirdPartyApiController::class, 'createConversation']);
+    Route::post('/v1/conversation/messages', [ThirdPartyApiController::class, 'listConversationMessages']);
     Route::post('/v1/message/send', [ThirdPartyApiController::class, 'sendMessage']);
     //Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
 
