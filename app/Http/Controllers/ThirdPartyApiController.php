@@ -269,6 +269,24 @@ class ThirdPartyApiController extends Controller
         $twin = Twin::find(Auth::guard('twins')->user()->id);
         $apiUrl = $apiUrl = "https://api.botpress.cloud/v1/chat/messages"; //. $twin->botpress_chat_webhook_id . "/conversations";
 
+        $requiredFields = [
+            'id',
+            'botpress_webhook_link',
+            'botpress_access_token',
+            'botbress_workspace_id',
+            'botbress_bot_id',
+            'botbress_integration_key'
+        ];
+
+        // Check for missing fields
+        $missingFields = array_filter($requiredFields, fn($field) => empty ($twin->$field));
+
+        if (!empty($missingFields)) {
+            $missingFieldsList = implode(', ', array_map(fn($field) => ucfirst(str_replace('_', ' ', $field)), $missingFields));
+
+            return response()->json(['error' => "Not a Twin Or Missing integrations setings :  " . str_replace('Botpress', '', $missingFieldsList)], 403);
+        }
+
         $client = new Client();
         $options = [
             'headers' => [
@@ -289,7 +307,7 @@ class ThirdPartyApiController extends Controller
         if ($response->getStatusCode() === 200) {
             return response()->json(json_decode($response->getBody(), true));
         } else {
-            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+            return response()->json(['error' => "There is an error getting messages"], $response->getStatusCode());
         }
     }
 
@@ -336,7 +354,7 @@ class ThirdPartyApiController extends Controller
         if ($response->getStatusCode() === 200) {
             return response()->json(json_decode($response->getBody(), true));
         } else {
-            return response()->json(['error' => $response->getReasonPhrase()], $response->getStatusCode());
+            return response()->json(['error' => "There is an error getting conversations"], $response->getStatusCode());
         }
     }
 }
