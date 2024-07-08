@@ -296,7 +296,25 @@ class ThirdPartyApiController extends Controller
     public function listConversations(Request $request)
     {
         $twin = Twin::find(Auth::guard('twins')->user()->id);
-        $apiUrl = $apiUrl = "https://api.botpress.cloud/v1/chat/conversations"; //. $twin->botpress_chat_webhook_id . "/conversations";
+        $apiUrl = $apiUrl = "https://api.botpress.cloud/v1/chat/conversations";
+
+        $requiredFields = [
+            'id',
+            'botpress_webhook_link',
+            'botpress_access_token',
+            'botbress_workspace_id',
+            'botbress_bot_id',
+            'botbress_integration_key'
+        ];
+
+        // Check for missing fields
+        $missingFields = array_filter($requiredFields, fn($field) => empty ($twin->$field));
+
+        if (!empty($missingFields)) {
+            $missingFieldsList = implode(', ', array_map(fn($field) => ucfirst(str_replace('_', ' ', $field)), $missingFields));
+
+            return response()->json(['error' => "Not a Twin Or Missing integrations setings :  " . str_replace('Botpress', '', $missingFieldsList)], 403);
+        }
 
         $client = new Client();
         $options = [
