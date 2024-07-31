@@ -138,7 +138,7 @@ class ThirdPartyApiController extends Controller
                 sleep(7);
 
                 $tryContainer = 0 ;
-                while($tryContainer < 10 ) {
+                while($tryContainer < 15 ) {
                     $messageReply = TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->get();
 
 
