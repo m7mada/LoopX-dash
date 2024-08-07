@@ -114,9 +114,9 @@
                                                                         <button wire:click="playPauseConversation('{{ $this->mt_twins->first()->botpress_conversation_id }}')"
                                                                             class="btn btn-icon btn-2 btn-link stop-icon" type="button">
                                                                             @if ( empty($this->mt_twins->first()->isPauseConversation) )
-                                                                            <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i> Pause</span>
+                                                                            <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
                                                                             @else
-                                                                            <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i>Play</span>
+                                                                            <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i></span>
                                                                             @endif
                                                                         </button>
                                                                     </div>
