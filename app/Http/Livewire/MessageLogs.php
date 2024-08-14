@@ -218,7 +218,7 @@ class MessageLogs extends Component
 
             $message->save();
 
-            $this->mt_twins = Messages::where('twin_id', $this->twin_id)->where('botpress_conversation_id', $this->botpress_conversation_id)->get();
+            $this->mt_twins = Messages::where('botpress_conversation_id', $this->botpress_conversation_id)->get();
 
 
             $this->inbutMessageToSendToUser = '';
