@@ -33,6 +33,7 @@ use App\Http\Livewire\ExampleLaravel\UserProfile;
 use App\Http\Livewire\ExampleLaravel\UserFormEdit;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Controllers\Admin\Pakedeg\pakedegController;
+use App\Http\Livewire\MessageManager;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,9 +70,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('billing', Billing::class)->name('billing');
     Route::get('twins', Twins::class)->name('twins');
-    Route::get('show-logs', MessageLogs::class)->name('show-logs');
+    //Route::get('show-logs', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
-
+    Route::get('show-logs/{id}/{conversationId}', MessageLogs::class)->name('show-conversation');
 
 
     Route::get('packages', PackageDateTable::class)->name('packages');

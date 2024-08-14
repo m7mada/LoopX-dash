@@ -84,7 +84,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <i  wire:click.prevent="showTwinConverssations({{$twin->id}});" class="fa fa-comments fixed-plugin-button-nav cursor-pointer"></i> | 
+                                                    <a href="/show-logs/{{$twin->id}}"><i class="fa fa-comments fixed-plugin-button-nav cursor-pointer"></i></a> | 
                                                     <i wire:click.prevent="editTwins({{$twin->id}});" class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
 
                                                 </td>

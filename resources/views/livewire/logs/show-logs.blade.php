@@ -20,7 +20,6 @@
                             </h6>
                         </div>
                     </div>
-
                     <div class="card-body px-0 pb-0">
                         <div class="table-responsive p-0">
                             @php
@@ -37,7 +36,7 @@
                                                     <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;max-height: calc(100vh - 316px);border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 24px;">
                                                         @forelse ($model->messages->groupBy('botpress_conversation_id') as $conversationId => $messages)
                                                         
-                                                        <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')">
+                                                        <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important" wire:click="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')">
                                                             <div class="d-flex align-items-start">
                                                                 
                                                                 <!-- <img style="border: 1px solid #adadad !important;" src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta1910/tanyadanuta191000003.jpg" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40"> -->
