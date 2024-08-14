@@ -36,7 +36,7 @@ class MessageLogs extends Component
             $this->twin_id = request()->id ;
             $this->botpress_conversation_id = request()->conversationId ;
 
-            $this->mt_twins = Messages::where('botpress_bot_id',$this->model->botbress_bot_id)->where('botpress_conversation_id', request()->conversationId )->get();
+            $this->mt_twins = Messages::where('botpress_conversation_id', request()->conversationId )->get();
         }
 
 
