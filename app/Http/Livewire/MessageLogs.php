@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\Messages;
 use App\Models\Twin;
+use App\Helpers\PotBressHelper;
 
 
 class MessageLogs extends Component
 {
-    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ;
+    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser;
 
     // protected $listeners = [
     //     'getMessges' => 'getMessges',
@@ -229,11 +230,6 @@ class MessageLogs extends Component
 
     }
 
-    public function showThis(){
-        //dd("Called");
-
-        $this->model = "asdfasdfasdf";
-    }
 
     
 }
