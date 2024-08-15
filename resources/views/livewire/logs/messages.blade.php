@@ -118,7 +118,7 @@
                                                                         </h7> --}}
 
                                                                         <h6 class="m-0 p-0" style="text-transform: capitalize;">
-                                                                            {{$this->mt_twins->first()->botpress_integration}} User
+                                                                            {{$this->mt_twins->first()->botpress_integration ?? '' }} User
                                                                         </h6>
 
 
