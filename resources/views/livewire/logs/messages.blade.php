@@ -52,7 +52,7 @@
                                                                     }) as $conversationId => $messages)
 
                                                                     
-                                                                <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important ; @if( ! empty( $this->mt_twins ) && isset($this->mt_twins->last()->botpress_conversation_id) && $this->mt_twins->last()->botpress_conversation_id == $messages->first()->botpress_conversation_id ) background-color: rgb(227, 227, 227); @endif" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')" >
+                                                                <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important ; @if( ! empty( $this->mt_twins ) && $this->mt_twins->last()->botpress_conversation_id == $messages->first()->botpress_conversation_id ) background-color: rgb(227, 227, 227); @endif" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')" >
                                                                     <div class="chat-item d-flex align-items-start">
                                                                         
                                                                         <!-- <img style="border: 1px solid #adadad !important;" src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta1910/tanyadanuta191000003.jpg" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40"> -->
@@ -64,7 +64,7 @@
                                                                                     {{ $messages->first()->botpress_integration }}
                                                                                 </div> -->
 
-                                                                                <div class="small" style="text-transform: capitalize;">{{ $messages->first()->botpress_integration ?? '' }} User </div>
+                                                                                <div class="small" style="text-transform: capitalize;">{{ $messages->first()->botpress_integration }} User </div>
                                                                                 <div class="small" style="font-size: 10px;">
                                                                                     <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
                                                                                     
@@ -118,7 +118,7 @@
                                                                         </h7> --}}
 
                                                                         <h6 class="m-0 p-0" style="text-transform: capitalize;">
-                                                                            {{$this->mt_twins->first()->botpress_integration ?? '' }} User
+                                                                            {{$this->mt_twins->first()->botpress_integration}} User
                                                                         </h6>
 
 

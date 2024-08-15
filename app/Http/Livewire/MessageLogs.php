@@ -41,50 +41,11 @@ class MessageLogs extends Component
 
             $this->mt_twins = Messages::where('botpress_conversation_id', request()->conversationId )->get();
         }
-
-
-        // if (Auth::user()->is_admin) {
-        //     //$this->model = Twin::where('id',request()->id)->with("files")->with("user")->first();
-        // }
-
-    
-
-        // $groupedData = \DB::connection('mongodb')->collection('twins_messages')
-        //     ->raw(function ($collection) {
-        //         return $collection->aggregate([
-        //             // Step 1: Match documents where twin_id equals the specific value
-        //             //['$match' => ['twin_external_id' => $this->model->twin_external_id]],
-
-        //             // Step 2: Sort the documents by created_at in descending order
-        //             ['$sort' => ['created_at' => -1]],
-
-        //             // Step 3: Group by botpress_conversation_id
-        //             [
-        //                 '$group' => [
-        //                     '_id' => '$botpress_conversation_id',
-        //                     'items' => [
-        //                         '$push' => '$$ROOT'  // Push the entire document into the items array
-        //                     ]
-        //                 ]
-        //             ]
-        //         ]);
-        // });
-
-        // $groupedCollection = collect($groupedData);
-        // dd($groupedCollection);
     
     }
     
     public function render()
     {
-
-            // $this->model = Twin::query()
-            //                 ->with("messages",function ($query) {
-            //                     $query->orderByCreatedAt('creaddted_at', 'desc');
-            //                 })
-            //                 ->with('messages.isPauseConversation')
-            //                 ->find(request()->id);
-        //dd($this->model);
 
         return view('livewire.logs.messages');
     }
