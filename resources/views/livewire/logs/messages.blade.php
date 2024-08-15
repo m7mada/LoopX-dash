@@ -24,7 +24,7 @@
 
                                                   
 
-                                                        <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 16px; @if( isset( request()->conversationId )) display:none @endif">
+                                                        <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;max-height: calc(100vh - 316px);border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 16px; @if( isset( request()->conversationId )) display:none @endif">
 
 
 
