@@ -64,7 +64,7 @@
                                                                                     {{ $messages->first()->botpress_integration }}
                                                                                 </div> -->
 
-                                                                                <div class="small" style="text-transform: capitalize;">{{ $messages->first()->botpress_integration }} User </div>
+                                                                                <div class="small" style="text-transform: capitalize;">{{ $messages->first()->botpress_integration ?? '' }} User </div>
                                                                                 <div class="small" style="font-size: 10px;">
                                                                                     <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
                                                                                     
