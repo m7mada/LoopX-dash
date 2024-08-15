@@ -21,7 +21,7 @@ class MessageLogs extends Component
             ->where('id',request()->id)
             ->with("messages", function ($query) {
                 if( request()->conversationId ){
-                    $query->where('botpress_conversation_id', '=', request()->conversationId);
+                   // $query->where('botpress_conversation_id', '=', request()->conversationId);
                 }
                 $query->where('role', '=', 'assistant');
                 // $startDate = Carbon::parse('2023-11-01'); // Replace with your desired start date
