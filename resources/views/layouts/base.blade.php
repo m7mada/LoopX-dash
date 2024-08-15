@@ -197,14 +197,6 @@
         $('#chat-messages').animate({ scrollTop: document.getElementById("chat-messages").scrollHeight }, 100);
     });
 
-    $('.chat-item').click(function(e) {
-        setTimeout(() => {
-            console.log($(this))
-            $(this).parent().css("background-color", "#e3e3e3");
-        }, 1500)
-     
-    })
-
 
 </script>
 
