@@ -13,9 +13,6 @@
                     </div>
                     <div class="card-body px-0 pb-0">
                         <div class="table-responsive p-0">
-                            @php
-                                use Carbon\Carbon;
-                            @endphp
                             @if (count($model->messages) > 0)
                                 <div class="card card-frame">
                                     <div class="card-body p-0">
@@ -24,11 +21,38 @@
                                                 <div class="card">
                                                     <div class="row g-0">
                                                         
-                                                        <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;max-height: calc(100vh - 316px);border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 24px; @if( isset( request()->conversationId )) display:none @endif">
-                                                            @forelse ($model->messages->groupBy('botpress_conversation_id') as $conversationId => $messages)
+
+                                                  
+
+                                                        <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 16px; @if( isset( request()->conversationId )) display:none @endif">
+
+
+
+
+                                                            <div class="px-4 d-none d-md-block">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="flex-grow-1">
+                                                                        <input type="text" class="form-control my-3 mb-0" placeholder="Search..." style="border: 1px solid #ddd;padding: 9px 12px;">
+                                                                    </div>
+
+                                                                
+                                                                </div>
+                                                                <!-- <div class="flex-grow-1">
+                                                                    <button style="margin-right: 0px !important;margin-left: 0 !important;box-shadow: none;font-size: 10px;padding: 6px 10px 4px 10px;border-radius: 4px;" type="button" class="ml-0 btn btn-primary btn-sm m-1">One</button>
+
+                                                                    <button style="margin-right: 0px !important;margin-left: 0 !important;box-shadow: none;font-size: 10px;padding: 6px 10px 4px 10px;border-radius: 4px;" type="button" class="ml-0 btn btn-primary btn-sm m-1">One</button>
+
+                                                                    <button style="margin-right: 0px !important;margin-left: 0 !important;box-shadow: none;font-size: 10px;padding: 6px 10px 4px 10px;border-radius: 4px;" type="button" class="ml-0 btn btn-primary btn-sm m-1">One</button>
+                                                                </div> -->
+                                                            </div>
+
+
+                                                            @forelse ($model->messages->groupBy('botpress_conversation_id')->sortByDesc(function ($item) {
+                                                                        return \Carbon\Carbon::parse($item->last()->created_at->format('M j, y g:iA'));
+                                                                    }) as $conversationId => $messages)
 
                                                                 <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')">
-                                                                    <div class="d-flex align-items-start">
+                                                                    <div class="chat-item d-flex align-items-start">
                                                                         
                                                                         <!-- <img style="border: 1px solid #adadad !important;" src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta1910/tanyadanuta191000003.jpg" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40"> -->
                                                                         <div class="flex-grow-1" style="margin-left: 10px;">
@@ -43,9 +67,9 @@
                                                                                 <div class="small" style="font-size: 10px;">
                                                                                     <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
                                                                                     
-                                                                                    <span onclick="copyText(event, '{{$model->messages[0]->botpress_conversation_id}}')" 
+                                                                                    <span onclick="copyText(event, '{{$conversationId}}')" 
                                                                                     style="padding: 4px 8px;background-color: #f3f3f3;border-radius: 6px;cursor: copy;"
-                                                                                    id="botpress_conversation_id_{{$model->messages[0]->botpress_conversation_id ?? '0'}}">
+                                                                                    id="botpress_conversation_id_{{$conversationId ?? '0'}}">
                                                                                     {{$conversationId ?? "0"}}
                                                                                         <i class="fa fa-clone" aria-hidden="true"></i>
                                                                                     </span>
@@ -97,9 +121,20 @@
                                                                         </h6>
 
 
-                                                                        <div class="d-flex flex-column align-items-center">
+                                                                        <div class="d-flex flex-row align-items-center">
                                                                             <button wire:click="playPauseConversation('{{ $this->mt_twins->first()->botpress_conversation_id }}')"
-                                                                                class="btn btn-icon btn-2 btn-link stop-icon" type="button">
+                                                                                type="button" style="
+                                                                                    border: 0;
+                                                                                    background-color: transparent;
+                                                                                    margin-right: 10px;
+                                                                                    font-size: 19px;
+                                                                                    width: 30px;
+                                                                                    height: 30px;
+                                                                                    padding: 0;
+                                                                                    display: flex;
+                                                                                    align-items: center;
+                                                                                    justify-content: center;
+                                                                                ">
                                                                                 @if ( empty($this->mt_twins->first()->isPauseConversation) )
                                                                                 <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
                                                                                 @else

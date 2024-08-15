@@ -8,16 +8,11 @@ use Livewire\Component;
 use App\Models\Messages;
 use App\Models\Twin;
 use App\Helpers\PotBressHelper;
-
+use Carbon\Carbon;
 
 class MessageLogs extends Component
 {
-    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser;
-
-    // protected $listeners = [
-    //     'getMessges' => 'getMessges',
-    // ];
-
+    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser , $conversationsGroup;
 
     public function mount(){
 
@@ -28,10 +23,16 @@ class MessageLogs extends Component
                     $query->where('botpress_conversation_id', '=', request()->conversationId);
                 }
                 $query->where('role', '=', 'assistant');
+                // $startDate = Carbon::parse('2023-11-01'); // Replace with your desired start date
+                // $endDate = Carbon::parse('2023-11-30');   // Replace with your desired end date
+                // //$query->whereBetween('created_at', [$startDate, $endDate]);
+
+                $query->orderBy('created_at', 'asc');
             })
             ->with("files")
             ->with("user")
             ->first();
+
 
         if( request()->conversationId ){
             $this->twin_id = request()->id ;
@@ -41,9 +42,9 @@ class MessageLogs extends Component
         }
 
 
-        if (Auth::user()->is_admin) {
-            //$this->model = Twin::where('id',request()->id)->with("files")->with("user")->first();
-        }
+        // if (Auth::user()->is_admin) {
+        //     //$this->model = Twin::where('id',request()->id)->with("files")->with("user")->first();
+        // }
 
     
 

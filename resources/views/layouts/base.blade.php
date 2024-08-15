@@ -183,23 +183,27 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
-        
-
 
     window.addEventListener('selectConversation', function () {
+        console.log('Selecting conversation');
          $('#chat-messages').animate({ scrollTop: document.getElementById("chat-messages").scrollHeight }, 100);
     });
 
 
-
-
     window.addEventListener('focusMessageInput', function () {
+        console.log('Focusing message input');
         $('#inbutMessageToSendToUser').focus();
         console.log(document.getElementById("chat-messages").scrollHeight)
         $('#chat-messages').animate({ scrollTop: document.getElementById("chat-messages").scrollHeight }, 100);
     });
 
-
+    $('.chat-item').click(function(e) {
+        setTimeout(() => {
+            console.log($(this))
+            $(this).parent().css("background-color", "#e3e3e3");
+        }, 1500)
+     
+    })
 
 
 </script>
