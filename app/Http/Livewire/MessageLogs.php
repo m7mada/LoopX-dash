@@ -53,15 +53,12 @@ class MessageLogs extends Component
     public function getMessges($twin_id, $botpress_conversation_id)
     {
 
-        // $this->model = Twin::where('twin_external_id',$twin_id)
-        //     ->with("messages", function ($query) {
-        //         if( request()->conversationId ){
-        //             dd("asdfasdf");
-        //         }
-        //         //$query->orderByCreatedAt('creaddted_at', 'desc');
-        //     })
-        //     ->with('messages.isPauseConversation')
-        //     ->first();
+        $this->model = Twin::where('twin_external_id',$twin_id)
+            ->with("messages", function ($query) {
+                $query->orderBy('created_at', 'asc');
+            })
+            ->with('messages.isPauseConversation')
+            ->first();
 
 
             // Message::where('botpress_conversation_id',$botpress_conversation_id)
