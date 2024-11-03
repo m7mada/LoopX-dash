@@ -53,22 +53,22 @@
                                                                 <label for="select1" class="form-label mb-0">Chanel</label>
                                                                 <div class="input-group input-group-outline mb-2">
                                                                     <select class="form-control form-control-sm" id="search_chanel" name="search_chanel">
-                                                                        <option value="facebook">FaceBook</option>
-                                                                        <option value="whatsapp">WhatsApp</option>
+                                                                        <option value="messenger">FaceBook</option>
+                                                                        <option value="Whatsapp">WhatsApp</option>
                                                                         <option value="telegram">Telegram</option>
                                                                         <option value="webchat">Website</option>
                                                                         <option value="" selected>All</option>
                                                                     </select>
                                                                 </div>
 
-                                                                <label for="select1" class="form-label mb-0">Conversation Status</label>
+                                                                <!-- <label for="select1" class="form-label mb-0">Conversation Status</label>
                                                                 <div class="input-group input-group-outline mb-2">
                                                                     <select class="form-control form-control-sm" id="search_conversation_status" name="search_conversation_status">
                                                                         <option value="active">Active</option>
                                                                         <option value="paused">Paused</option>
                                                                         <option value="" selected>All</option>
                                                                     </select>
-                                                                </div>
+                                                                </div> -->
 
                                                                 <div class="mb-3 text-center">
                                                                     <button id="done-logs-filter" class="btn btn-icon btn-3 btn-primary" type="submit">
