@@ -77,6 +77,29 @@ class MessageLogs extends Component
 
         $this->model = Twin::where('twin_external_id',$twin_id)
             ->with("messages", function ($query) {
+                if (request()->search_conversation_id) {
+                    $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
+                }
+
+                $query->where('botpress_channel', '=', 'channel');
+
+                if (request()->search_date_from || request()->search_date_to) {
+                    $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();
+                    ;
+                    $endDate = request()->has('search_date_to') ? Carbon::parse(request()->search_date_to) : now();
+                    $query->whereBetween('created_at', [$startDate, $endDate]);
+                }
+
+                if (request()->search_chanel) {
+                    $query->where('botpress_integration', '=', request()->search_chanel);
+                }
+
+                // if(request()->search_conversation_status == 'paused'){
+                //     $pausedConversationIds = Conversations::pluck('conversation_id')->toArray();
+                //     $query->whereIn('botpress_conversation_id', $pausedConversationIds);
+                // }
+    
+
                 $query->orderBy('created_at', 'asc');
             })
             ->with('messages.isPauseConversation')

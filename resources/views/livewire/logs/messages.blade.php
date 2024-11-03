@@ -53,7 +53,7 @@
                                                                 <label for="select1" class="form-label mb-0">Chanel</label>
                                                                 <div class="input-group input-group-outline mb-2">
                                                                     <select class="form-control form-control-sm" id="search_chanel" name="search_chanel">
-                                                                        <option value="messenger">FaceBook</option>
+                                                                        <option value="messenger">Messenger</option>
                                                                         <option value="Whatsapp">WhatsApp</option>
                                                                         <option value="telegram">Telegram</option>
                                                                         <option value="webchat">Website</option>
