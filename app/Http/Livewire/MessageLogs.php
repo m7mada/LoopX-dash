@@ -16,12 +16,19 @@ use Carbon\Carbon;
 
 class MessageLogs extends Component
 {
-    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser , $conversationsGroup;
+    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser , $conversationsGroup, $filters;
 
     public function mount(Request $request){
         // $pausedConversationIds = Conversations::where('status', 'paused')->pluck('conversation_id')->toArray();
 
         // dd($pausedConversationIds);
+
+        $this->filters = [request()->search_conversation_id,
+                    request()->search_date_from,
+                    request()->search_date_to,
+                    request()->search_chanel,
+                    request()->search_conversation_status,
+                    ];
 
         $this->model = Twin::where("user_id", Auth::user()->id)
             ->where('id',request()->id)
@@ -90,19 +97,18 @@ class MessageLogs extends Component
 
         $this->twin_id = $twin_id;
         $this->botpress_conversation_id = $botpress_conversation_id;
-
         $this->mt_twins = Messages::where('twin_id', $twin_id)
-            ->when(request()->has('search_conversation_id'), function ($query) {
-                $query->where('botpress_conversation_id', request()->search_conversation_id);
+            ->when($this->filters['search_conversation_id'], function ($query) {
+                $query->where('botpress_conversation_id', $this->filters['search_conversation_id']);
             })
             ->where('botpress_channel', '=', 'channel')
-            ->when(request()->has('search_date_from') || request()->has('search_date_to'), function ($query) {
-                $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();
-                $endDate = request()->has('search_date_to') ? Carbon::parse(request()->search_date_to) : now();
+            ->when($this->filters['search_date_from'] || $this->filters['search_date_to'], function ($query) {
+                $startDate = $this->filters['search_date_from'] ? Carbon::parse($this->filters['search_date_from']) : now()->subMonth();
+                $endDate = $this->filters['search_date_to'] ? Carbon::parse($this->filters['search_date_to']) : now();
                 $query->whereBetween('created_at', [$startDate, $endDate]);
             })
-            ->when(request()->has('search_chanel'), function ($query) {
-                $query->where('botpress_integration', request()->search_chanel);
+            ->when($this->filters['search_chanel'], function ($query) {
+                $query->where('botpress_integration', $this->filters['search_chanel']);
             })
             ->get();
 
