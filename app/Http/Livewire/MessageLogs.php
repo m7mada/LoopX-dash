@@ -42,12 +42,12 @@ class MessageLogs extends Component
                     $query->where('botpress_integration', '=', request()->search_chanel);
                 }
 
-                // if(request()->search_conversation_status == 'paused'){
+                if(request()->search_conversation_status == 'paused'){
 
-                //     $pausedConversationIds = Conversations::where('status', 'paused')->pluck('conversation_id')->toArray();
+                    $pausedConversationIds = Conversations::where('status', 'paused')->pluck('conversation_id')->toArray();
 
-                //     $query->whereIn('botpress_conversation_id', $pausedConversationIds);
-                // }
+                    $query->whereIn('botpress_conversation_id', $pausedConversationIds);
+                }
                 
 
                 $query->orderBy('created_at', 'asc');
