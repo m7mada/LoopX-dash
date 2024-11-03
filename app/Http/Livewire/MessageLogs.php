@@ -16,12 +16,20 @@ use Carbon\Carbon;
 
 class MessageLogs extends Component
 {
-    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser , $conversationsGroup;
+    public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser , $conversationsGroup, $filters;
 
     public function mount(Request $request){
         // $pausedConversationIds = Conversations::where('status', 'paused')->pluck('conversation_id')->toArray();
 
         // dd($pausedConversationIds);
+
+        $this->filters = [
+            'search_conversation_id' => request()->search_conversation_id,
+            'search_date_from' => request()->search_date_from,
+            'search_date_to' => request()->search_date_to,
+            'search_chanel' => request()->search_chanel,
+            'search_conversation_status' => request()->search_conversation_status
+        ];
 
         $this->model = Twin::where("user_id", Auth::user()->id)
             ->where('id',request()->id)
@@ -74,11 +82,27 @@ class MessageLogs extends Component
     public function getMessges($twin_id, $botpress_conversation_id)
     {
 
+        //dd($this->filters);
         $this->model = Twin::where('twin_external_id',$twin_id)
             ->with("messages", function ($query) {
                 $query->orderBy('created_at', 'asc');
                 $query->where('botpress_channel', '=', 'channel');
-                
+
+                if ($this->filters['search_conversation_id']) {
+                    $query->where('botpress_conversation_id', '=', $this->filters['search_conversation_id']);
+                }
+                $query->where('botpress_channel', '=', 'channel');
+
+                if ($this->filters['search_date_from'] || $this->filters['search_date_to']) {
+                    $startDate = $this->filters['search_date_from'] ? Carbon::parse($this->filters['search_date_from']) : now()->subMonth();
+                    ;
+                    $endDate = $this->filters['search_date_to'] ? Carbon::parse($this->filters['search_date_to']) : now();
+                    $query->whereBetween('created_at', [$startDate, $endDate]);
+                }
+
+                if ($this->filters['search_chanel']) {
+                    $query->where('botpress_integration', '=', $this->filters['search_chanel']);
+                }
             })
             ->first();
 
@@ -94,6 +118,17 @@ class MessageLogs extends Component
         $this->mt_twins = Messages::where('twin_id', $twin_id)
                                     ->where('botpress_conversation_id', $botpress_conversation_id)
                                     ->where('botpress_channel', '=', 'channel')
+                                    ->when($this->filters['search_chanel'],function($query){
+                                        $query->where('botpress_integration', '=', $this->filters['search_chanel']);
+                                    })
+                                    ->when($this->filters['search_conversation_id'], function ($query) {
+                                        $query->where('botpress_conversation_id', $this->filters['search_conversation_id']);
+                                    })
+                                    ->when($this->filters['search_date_from'] || $this->filters['search_date_to'], function ($query) {
+                                        $startDate = $this->filters['search_date_from'] ? Carbon::parse($this->filters['search_date_from']) : now()->subMonth();
+                                        $endDate = $this->filters['search_date_to'] ? Carbon::parse($this->filters['search_date_to']) : now();
+                                        $query->whereBetween('created_at', [$startDate, $endDate]);
+                                    })
                                     ->get();
 
     
