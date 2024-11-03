@@ -198,6 +198,25 @@
     });
 
 
+    var showLogsFilter = false;
+
+    $('#show-hide-logs-filter').click(() => {
+        if(showLogsFilter) {
+            $('#logs-filter').css({ left: '-25%' });
+        }else {
+            $('#logs-filter').css({ left: '0' });
+        }
+        showLogsFilter = !showLogsFilter;
+    })
+
+    $('#done-logs-filter').click(() => {
+        // $('#logs-filter').css({ left: '-25%' });
+        // showLogsFilter = false;
+        $("#search_conversation_id").val($("#searchConversationInput").val());
+    })
+  
+
+
 </script>
 
 

@@ -9,24 +9,46 @@ use App\Models\Messages;
 use App\Models\Twin;
 use App\Models\Conversations ;
 use App\Helpers\PotBressHelper;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 
 class MessageLogs extends Component
 {
     public $model = Twin::class , $twin , $mt_twins = [] , $testVar ,$twinMessages , $inbutMessageToSendToUser , $conversationsGroup;
 
-    public function mount(){
+    public function mount(Request $request){
+        // $pausedConversationIds = Conversations::where('status', 'paused')->pluck('conversation_id')->toArray();
+
+        // dd($pausedConversationIds);
 
         $this->model = Twin::where("user_id", Auth::user()->id)
             ->where('id',request()->id)
             ->with("messages", function ($query) {
-                if( request()->conversationId ){
-                   // $query->where('botpress_conversation_id', '=', request()->conversationId);
+
+                if( request()->search_conversation_id ){
+                   $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
                 }
-                $query->where('role', '=', 'assistant');
-                // $startDate = Carbon::parse('2023-11-01'); // Replace with your desired start date
-                // $endDate = Carbon::parse('2023-11-30');   // Replace with your desired end date
-                // //$query->whereBetween('created_at', [$startDate, $endDate]);
+                //$query->where('role', '=', 'assistant');
+
+                if(request()->search_date_from || request()->search_date_to){
+                    $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();;
+                    $endDate = request()->has('search_date_to') ? Carbon::parse(request()->search_date_to) : now();
+                    $query->whereBetween('created_at', [$startDate, $endDate]);
+                }
+
+                if( request()->search_chanel ){
+                    $query->where('botpress_integration', '=', request()->search_chanel);
+                }
+
+                // if(request()->search_conversation_status == 'paused'){
+
+                //     $pausedConversationIds = Conversations::where('status', 'paused')->pluck('conversation_id')->toArray();
+
+                //     $query->whereIn('botpress_conversation_id', $pausedConversationIds);
+                // }
+                
 
                 $query->orderBy('created_at', 'asc');
             })
@@ -35,6 +57,7 @@ class MessageLogs extends Component
             ->first();
 
 
+            //dd($this->model->messages->last());
         if( request()->conversationId ){
             $this->twin_id = request()->id ;
             $this->botpress_conversation_id = request()->conversationId ;

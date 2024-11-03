@@ -19,9 +19,69 @@
                                         <main class="content">
                                             <div >
                                                 <div class="card">
-                                                    <div class="row g-0">
+                                                    <div class="row g-0" style="position: relative;">
                                                         
 
+                                                    <div class="col-12 col-lg-5 col-xl-3 border-right" id="logs-filter" style="padding: 10px 5px 0 5px;transition: 0.4s;position: absolute;left: -25%;border: 1px solid #ddd;z-index: 1;top: 74px;bottom: 0;border-top: 0px solid #ddd;">
+                                                        <div style="padding: 0 15px;border-top: 1px solid #ddd;background-color: #fff;height: 100%;">
+
+
+                                                            <form class="mt-2" name="messages_filer" method="get">
+
+                                                                <!-- <label class="form-label mb-0">Text</label>
+                                                                <div class="input-group input-group-outline mb-2">
+                                                                    <input type="text" class="form-control form-control-sm">
+                                                                </div> -->
+
+
+                                                                <label class="form-label mb-0">Date From</label>
+                                                                <div class="input-group input-group-outline mb-2">
+                                                                    <input name="search_date_from" type="datetime-local" class="form-control form-control-sm">
+                                                                </div>
+                                                                
+                                                                <label class="form-label mb-0">Date To</label>
+                                                                <div class="input-group input-group-outline mb-2">
+                                                                    <input name="search_date_to" type="datetime-local" class="form-control form-control-sm">
+                                                                </div>
+
+                                                                <!-- <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="">
+                                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Checked switch</label>
+                                                                </div> -->
+
+
+                                                                <label for="select1" class="form-label mb-0">Chanel</label>
+                                                                <div class="input-group input-group-outline mb-2">
+                                                                    <select class="form-control form-control-sm" id="search_chanel" name="search_chanel">
+                                                                        <option value="facebook">FaceBook</option>
+                                                                        <option value="whatsapp">WhatsApp</option>
+                                                                        <option value="telegram">Telegram</option>
+                                                                        <option value="webchat">Website</option>
+                                                                        <option value="" selected>All</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <label for="select1" class="form-label mb-0">Conversation Status</label>
+                                                                <div class="input-group input-group-outline mb-2">
+                                                                    <select class="form-control form-control-sm" id="search_conversation_status" name="search_conversation_status">
+                                                                        <option value="active">Active</option>
+                                                                        <option value="paused">Paused</option>
+                                                                        <option value="" selected>All</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="mb-3 text-center">
+                                                                    <button id="done-logs-filter" class="btn btn-icon btn-3 btn-primary" type="submit">
+                                                                        <span class="btn-inner--text">Filter</span>
+                                                                    </button>
+                                                                </div>
+
+                                                                <input type="hidden" name="search_conversation_id" id="search_conversation_id" >
+                                                                
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
                                                   
 
                                                         <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;overflow-x: hidden;max-height: calc(100vh - 316px);border-right: 1px solid #ddd;border-top: 1px solid #ddd;margin-top: 16px; @if( isset( request()->conversationId )) display:none @endif">
@@ -29,21 +89,16 @@
 
 
 
-                                                            <div class="px-4 d-none d-md-block">
+                                                            <div class="px-2 d-none d-md-block">
                                                                 <div class="d-flex align-items-center">
-                                                                    <div class="flex-grow-1">
-                                                                        <input type="text" class="form-control my-3 mb-0" placeholder="Search..." style="border: 1px solid #ddd;padding: 9px 12px;">
+                                                                    <div class="flex-grow-1 d-flex align-items-center">
+                                                                        <input type="text" class="form-control my-3 mb-0" id="searchConversationInput" placeholder="Search..." style="border: 1px solid #ddd;padding: 9px 12px;">
+                                                                        <button id="show-hide-logs-filter" style="margin-right: 0px !important;margin-left: 5px !important;box-shadow: none;padding: 6px 0px 4px 0px;border-radius: 4px;height: 42px;width: 40px;" type="button" class="my-3 mb-0 btn btn-primary btn-sm m-1"><i style="font-size: 0.7rem;" class="fa fa-filter"></i></button>
                                                                     </div>
 
                                                                 
                                                                 </div>
-                                                                <!-- <div class="flex-grow-1">
-                                                                    <button style="margin-right: 0px !important;margin-left: 0 !important;box-shadow: none;font-size: 10px;padding: 6px 10px 4px 10px;border-radius: 4px;" type="button" class="ml-0 btn btn-primary btn-sm m-1">One</button>
-
-                                                                    <button style="margin-right: 0px !important;margin-left: 0 !important;box-shadow: none;font-size: 10px;padding: 6px 10px 4px 10px;border-radius: 4px;" type="button" class="ml-0 btn btn-primary btn-sm m-1">One</button>
-
-                                                                    <button style="margin-right: 0px !important;margin-left: 0 !important;box-shadow: none;font-size: 10px;padding: 6px 10px 4px 10px;border-radius: 4px;" type="button" class="ml-0 btn btn-primary btn-sm m-1">One</button>
-                                                                </div> -->
+                                                                
                                                             </div>
 
 
@@ -85,17 +140,7 @@
                                                                         </div>
 
                                                                         <div class="d-flex flex-column align-items-center">
-
-                                                                            
-
                                                                             <div class="badge bg-success float-right" style="background: #9094e9 !important;padding: 4px 10px;font-size: 10px;min-width: 25px;height: 25px;border-radius: 20px;line-height: 18px;margin-top: 18px;">{{count($messages)}}</div>
-                                                                            <!-- <button wire:click="playPauseConversation('{{ $messages->first()->botpress_conversation_id }}')" class="btn btn-icon btn-2 btn-link stop-icon mt-0 mx-1" type="button">
-                                                                                @if ( empty($messages->first()->isPauseConversation) )
-                                                                                    <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
-                                                                                @else
-                                                                                    <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i></span>                                                                        
-                                                                                @endif
-                                                                            </button> -->
                                                                         </div>
                                                                         
 
