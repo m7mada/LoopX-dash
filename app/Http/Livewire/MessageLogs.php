@@ -30,7 +30,7 @@ class MessageLogs extends Component
                 if( request()->search_conversation_id ){
                    $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
                 }
-                //$query->where('role', '=', 'assistant');
+                $query->where('role', '=', 'assistant');
 
                 if(request()->search_date_from || request()->search_date_to){
                     $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();;
@@ -42,13 +42,10 @@ class MessageLogs extends Component
                     $query->where('botpress_integration', '=', request()->search_chanel);
                 }
 
-                if(request()->search_conversation_status == 'paused'){
-
-                    $pausedConversationIds = Conversations::pluck('conversation_id')->toArray();
-
-                    dd($pausedConversationIds);
-                    $query->whereIn('botpress_conversation_id', $pausedConversationIds);
-                }
+                // if(request()->search_conversation_status == 'paused'){
+                //     $pausedConversationIds = Conversations::pluck('conversation_id')->toArray();
+                //     $query->whereIn('botpress_conversation_id', $pausedConversationIds);
+                // }
                 
 
                 $query->orderBy('created_at', 'asc');

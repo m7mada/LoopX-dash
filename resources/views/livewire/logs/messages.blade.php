@@ -36,12 +36,12 @@
 
                                                                 <label class="form-label mb-0">Date From</label>
                                                                 <div class="input-group input-group-outline mb-2">
-                                                                    <input name="search_date_from" type="datetime-local" class="form-control form-control-sm">
+                                                                    <input name="search_date_from" type="date" class="form-control form-control-sm">
                                                                 </div>
                                                                 
                                                                 <label class="form-label mb-0">Date To</label>
                                                                 <div class="input-group input-group-outline mb-2">
-                                                                    <input name="search_date_to" type="datetime-local" class="form-control form-control-sm">
+                                                                    <input name="search_date_to" type="date" class="form-control form-control-sm">
                                                                 </div>
 
                                                                 <!-- <div class="form-check form-switch">
