@@ -111,8 +111,6 @@ class MessageLogs extends Component
         }
 
         $this->mt_twins = Messages::where('twin_id', $this->twin_id)->where('botpress_conversation_id', $conversationId)->get();
-
-        dd($conversation) ;
     }
 
     public function sendMessageToUser()
