@@ -92,7 +92,7 @@
                                                             <div class="px-2 d-none d-md-block">
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="flex-grow-1 d-flex align-items-center">
-                                                                        <input type="text" class="form-control my-3 mb-0" id="searchConversationInput" placeholder="Search..." style="border: 1px solid #ddd;padding: 9px 12px;">
+                                                                        <input type="text" class="form-control my-3 mb-0" id="searchConversationInput" placeholder="Search For Conversation..." style="border: 1px solid #ddd;padding: 9px 12px;">
                                                                         <button id="show-hide-logs-filter" style="margin-right: 0px !important;margin-left: 5px !important;box-shadow: none;padding: 6px 0px 4px 0px;border-radius: 4px;height: 42px;width: 40px;" type="button" class="my-3 mb-0 btn btn-primary btn-sm m-1"><i style="font-size: 0.7rem;" class="fa fa-filter"></i></button>
                                                                     </div>
 
