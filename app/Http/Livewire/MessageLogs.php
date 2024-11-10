@@ -132,7 +132,7 @@ class MessageLogs extends Component
                                     ->get();
 
     
-       dd($this->model->messages);
+       dd($this->model->messages->last());
         //$this->dispatchBrowserEvent('selectConversation');
 
     }
