@@ -239,7 +239,7 @@
                                                                             <div class="text-muted small text-nowrap mt-2">
                                                                                 </div>
                                                                         </div>
-                                                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3" @if( $item->response_language == "ar") @endif>
                                                                             {{$item->content}}
                                                                             <span class="chat-message-data">{{ $item->created_at->format('M j, y g:iA') }}</span>
                                                                         </div>
