@@ -211,6 +211,7 @@
 
     $('#done-logs-filter').click(() => {
         $('#logs-filter').css({ left: '-25%' });
+        $('#logs-filter').toggle();
         showLogsFilter = false;
         $("#search_conversation_id").val($("#searchConversationInput").val());
     })
