@@ -164,8 +164,6 @@
 
                                                                         <h6 class="m-0 p-0" style="text-transform: capitalize;">
                                                                             {{$this->mt_twins->first()->botpress_integration ?? '' }} User
-
-                                                                            @if( !empty($this->mt_twins->first()->botpress_userData) ) @dump( $this->mt_twins->first()->botpress_userData) @endif
                                                                         </h6>
 
 
