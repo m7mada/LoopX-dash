@@ -22,7 +22,7 @@
                                                     <div class="row g-0" style="position: relative;">
                                                         
 
-                                                    <div class="col-12 col-lg-5 col-xl-3 border-right" id="logs-filter" style="padding: 10px 5px 0 5px;transition: 0.4s;position: absolute;left: -25%;border: 1px solid #ddd;z-index: 1;top: 74px;bottom: 0;border-top: 0px solid #ddd;">
+                                                    <div class="col-12 col-lg-5 col-xl-3 border-right" id="logs-filter" style="padding: 10px 5px 0 5px;transition: 0.4s;position: absolute;left: -100%;border: 1px solid #ddd;z-index: 1;top: 74px;bottom: 0;border-top: 0px solid #ddd;">
                                                         <div style="padding: 0 15px;border-top: 1px solid #ddd;background-color: #fff;height: 100%;">
 
 
@@ -89,7 +89,7 @@
 
 
 
-                                                            <div class="px-2 d-none d-md-block">
+                                                            <div class="px-2 d-md-block">
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="flex-grow-1 d-flex align-items-center">
                                                                         <input type="text" class="form-control my-3 mb-0" id="searchConversationInput" placeholder="Search For Conversation..." style="border: 1px solid #ddd;padding: 9px 12px;">
