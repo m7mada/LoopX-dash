@@ -210,9 +210,8 @@
     })
 
     $('#done-logs-filter').click(() => {
-        $('#logs-filter').css({ left: '-25%' });
-        $('#logs-filter').toggle();
-        showLogsFilter = false;
+        // $('#logs-filter').css({ left: '-25%' });
+        // showLogsFilter = false;
         $("#search_conversation_id").val($("#searchConversationInput").val());
     })
   
