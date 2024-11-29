@@ -113,11 +113,6 @@
                                                                         <!-- <img style="border: 1px solid #adadad !important;" src="https://images.assetsdelivery.com/compings_v2/tanyadanuta/tanyadanuta1910/tanyadanuta191000003.jpg" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40"> -->
                                                                         <div class="flex-grow-1" style="margin-left: 10px;">
                                                                             @if($messages->isNotEmpty())
-                                                                                <!-- <div class="small">{{ $messages->first()->created_at->format('Y-m-d H:i:s') }}</div>
-                                                                                <div class="small">
-                                                                                    <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
-                                                                                    {{ $messages->first()->botpress_integration }}
-                                                                                </div> -->
 
                                                                                 <div class="small" style="text-transform: capitalize;">
 
@@ -132,7 +127,7 @@
                                                                                     id="botpress_conversation_id_{{$conversationId ?? '0'}}">
                                                                                     {{$conversationId ?? "0"}}
                                                                                         <i class="fa fa-clone" aria-hidden="true"></i>
-                                                                            </span>
+                                                                                    </span>
                                                                                     <div class="small" style="font-size: 11px;display: flex;flex-direction: column;justify-content: center;align-items: self-start;margin-top: 5px;">
                                                                                         <span>{{ $messages->last()->created_at->format('M j, y g:iA') }}</span>
                                                                                     </div>
