@@ -63,7 +63,7 @@ class MessageLogs extends Component
             ->first();
 
 
-            //dd($this->model->messages->last());
+        //dd($this->model->messages->limit(10));
         if( request()->conversationId ){
             $this->twin_id = request()->id ;
             $this->botpress_conversation_id = request()->conversationId ;
