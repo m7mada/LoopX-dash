@@ -54,7 +54,7 @@
                                                                 <div class="input-group input-group-outline mb-2">
                                                                     <select class="form-control form-control-sm" id="search_chanel" name="search_chanel">
                                                                         <option value="messenger">Messenger</option>
-                                                                        <option value="Whatsapp">WhatsApp</option>
+                                                                        <option value="whatsapp">WhatsApp</option>
                                                                         <option value="telegram">Telegram</option>
                                                                         <option value="webchat">Website</option>
                                                                         <option value="" selected>All</option>
