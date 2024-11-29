@@ -129,7 +129,7 @@
                                                                                     {{$conversationId ?? "0"}}
                                                                                         <i class="fa fa-clone" aria-hidden="true"></i>
                                                                                     </span>
-
+                                                                                    {{--
                                                                                     <div class="small">
 
                                                                                         @if( is_array( $messages->last()->botpress_userData ))
@@ -140,6 +140,7 @@
                                                                                             @endforelse
                                                                                         @endif
                                                                                     </div>
+                                                                                    --}}
                                                                                     <div class="small" style="font-size: 11px;display: flex;flex-direction: column;justify-content: center;align-items: self-start;margin-top: 5px;">
                                                                                         <span>{{ $messages->last()->created_at->format('M j, y g:iA') }}</span>
                                                                                     </div>
@@ -174,14 +175,15 @@
                                                                         <h6 class="m-0 p-0" style="text-transform: capitalize;">
                                                                             {{$this->mt_twins->first()->botpress_integration ?? '' }} User 
                                                                         </h6>
-                                                                        <!-- <div class="small">
+                                                                        <div class="small">
+                                                                            @if( is_array($this->mt_twins->last()->botpress_userData))
                                                                                 @forelse($this->mt_twins->last()->botpress_userData as $key=>$value)
                                                                                     {{ $key }} : {{$value}} <br>
                                                                                 @empty
                                                                                 -
                                                                                 @endforelse
-
-                                                                        </div> -->
+                                                                            @endif
+                                                                        </div>
 
 
                                                                         <div class="d-flex flex-row align-items-center">
