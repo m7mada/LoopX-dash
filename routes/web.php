@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReportingController;
 use App\Http\Livewire\RTL;
 use GuzzleHttp\Middleware;
 use App\Http\Livewire\Order;
@@ -81,4 +82,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('packages/show/{id}', PackageFormShow::class)->name('showpackage');
     Route::post('package/billing', [OrderController::class, 'store'])->name('store.order');
     Route::get('orders', OrderDatatable::class)->name('order');
+    Route::get('reports/customers/wallet',[ ReportingController::class,'customersWallet']);
 });
