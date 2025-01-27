@@ -373,6 +373,12 @@ class ThirdPartyApiController extends Controller
 
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
+        }elseif($request->object == "whatsapp_business_account" ){
+            $displayPhoneNumber = $request->entry[0]['changes'][0]['value']['metadata']['display_phone_number'];
+            $phoneNumberId = $request->entry[0]['changes'][0]['value']['metadata']['phone_number_id'];
+
+            $twin = Twin::where('wa_phone_number', $displayPhoneNumber)->where('wa_phone_number_id', $phoneNumberId)->first();
+
         }
 
         if (empty($twin)) {
