@@ -364,37 +364,28 @@ class ThirdPartyApiController extends Controller
 
     public function proxyFBAppTobootPress(Request $request){
 
+        $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
 
-        Log::info($request->all());
+        if( empty($twin ) ){
+            return false;
+        }
 
 
-        //dd($request->all());
+        //Log::info($request->all());
+
 
         if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
 
             return response($request->hub_challenge, '200');
         }
 
-        if($request->entry[0]['id'] == 106256324613092 ){ // wa7ed tera 
-            $webhookUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
-
-        }else{
-            $webhookUrl = 'https://webhook.botpress.cloud/6984d2fb-9571-4de6-aced-d83a53deffd5';
-
-        }
-
-
         try {
-            // Send the POST request to the webhook URL
-            $response = Http::post($webhookUrl, $request->all());
-
-            // Log the response for debugging
+            $response = Http::post($twin->webhook_callback_url, $request->all());
             Log::info('Webhook Response:', [
                 'status' => $response->status(),
                 'body' => $response->body(),
             ]);
 
-            // Return the response
             return $response->json();
         } catch (\Exception $e) {
             // Log any errors that occur
