@@ -363,6 +363,7 @@ class ThirdPartyApiController extends Controller
     public function proxyFBAppTobootPress(Request $request){
 
 
+        Log::info($request->all());
         Log::info("this is the proxy request");
         // $targetUrl = 'https://api.example.com/endpoint';
 
