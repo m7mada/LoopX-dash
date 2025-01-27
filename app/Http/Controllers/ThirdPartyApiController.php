@@ -365,6 +365,11 @@ class ThirdPartyApiController extends Controller
 
         Log::info($request->all());
         Log::info("this is the proxy request");
+
+        if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
+
+            return response($request->hub_challenge, '200');
+        }
         // $targetUrl = 'https://api.example.com/endpoint';
 
         // if( $v=1 ){
