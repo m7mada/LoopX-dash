@@ -397,7 +397,7 @@ class ThirdPartyApiController extends Controller
             ->$method($targetUrl, $method === 'GET' ? $queryParams : $requestData);
 
 
-        Log::info( $response->all());
+        //Log::info( $response->all());
         // Return the response from the target endpoint
         return response($response->body(), $response->status())
             ->withHeaders($response->headers());
