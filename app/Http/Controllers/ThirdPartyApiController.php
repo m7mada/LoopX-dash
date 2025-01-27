@@ -373,12 +373,13 @@ class ThirdPartyApiController extends Controller
 
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
+            $targetEndPoint = $twin->fb_webhook_proxy_url ;
         }elseif($request->object == "whatsapp_business_account" ){
             $displayPhoneNumber = $request->entry[0]['changes'][0]['value']['metadata']['display_phone_number'];
             $phoneNumberId = $request->entry[0]['changes'][0]['value']['metadata']['phone_number_id'];
 
             $twin = Twin::where('wa_phone_number', $displayPhoneNumber)->where('wa_phone_number_id', $phoneNumberId)->first();
-
+            $targetEndPoint = $twin->wa_webhook_proxy_url;
         }
 
         if (empty($twin)) {
@@ -386,7 +387,7 @@ class ThirdPartyApiController extends Controller
         }
 
         try {
-            $response = Http::post($twin->webhook_proxy_url, $request->all());
+            $response = Http::post($targetEndPoint, $request->all());
             Log::info('Webhook Response:', [
                 'status' => $response->status(),
                 'body' => $response->body(),
