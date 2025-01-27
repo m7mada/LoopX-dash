@@ -24,10 +24,10 @@ Route::middleware('auth:twins')->group(function () {
     Route::post('/v1/conversation/messages', [ThirdPartyApiController::class, 'listConversationMessages']);
     Route::post('/v1/message/send', [ThirdPartyApiController::class, 'sendMessage']);
     //Route::any('/{endpoint}', [ThirdPartyApiController::class, 'proxy'])->where('endpoint', '.+');
-    Route::any('/proxyFBAppTobootPress', [ThirdPartyApiController::class, 'proxyFBAppTobootPress']);
 
 
 });
+Route::any('/proxyFBAppTobootPress', [ThirdPartyApiController::class, 'proxyFBAppTobootPress']);
 
 
 Route::post('/recive_messages', [ThirdPartyApiController::class, 'reciveMessages']);
