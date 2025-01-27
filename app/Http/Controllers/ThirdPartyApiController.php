@@ -371,7 +371,9 @@ class ThirdPartyApiController extends Controller
 
         Log::info($request->all());
 
-        $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
+        if($request->object == "page" ){
+            $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
+        }
 
         if (empty($twin)) {
             return false;
