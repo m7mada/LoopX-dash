@@ -363,7 +363,7 @@ class ThirdPartyApiController extends Controller
     public function proxyFBAppTobootPress(Request $request){
 
 
-        Log::info($request->data['entry'][0]['id']);
+        Log::info($request->entry[0]['id']);
 
 
 
