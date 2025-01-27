@@ -368,44 +368,46 @@ class ThirdPartyApiController extends Controller
         Log::info($request->all());
 
 
+        //dd($request->all());
 
         if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
 
             return response($request->hub_challenge, '200');
         }
-        // $targetUrl = 'https://api.example.com/endpoint';
 
         if($request->entry[0]['id'] == 106256324613092 ){ // wa7ed tera 
-            $targetUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
+            $webhookUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
 
         }else{
-            $targetUrl = 'https://webhook.botpress.cloud/6984d2fb-9571-4de6-aced-d83a53deffd5';
+            $webhookUrl = 'https://webhook.botpress.cloud/6984d2fb-9571-4de6-aced-d83a53deffd5';
 
         }
 
-        // Get all query parameters from the incoming request
-        $queryParams = $request->query();
 
-        // Get all request data (for POST, PUT, PATCH requests)
-        $requestData = $request->all();
+        try {
+            // Send the POST request to the webhook URL
+            $response = Http::post($webhookUrl, $request->all());
 
-        // Get the request method
-        $method = $request->method();
+            // Log the response for debugging
+            Log::info('Webhook Response:', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
 
-        // Forward the request to the target URL
-        $response = Http::withHeaders($request->header())
-            ->$method($targetUrl, $requestData);
+            // Return the response
+            return $response->json();
+        } catch (\Exception $e) {
+            // Log any errors that occur
+            Log::error('Webhook Request Failed:', [
+                'message' => $e->getMessage(),
+            ]);
 
-        Log::info('Target Response:', [
-            'status' => $response->status(),
-            'body' => $response->body(),
-            'headers' => $response->headers(),
-        ]);
-
-        //Log::info( $response->all());
-        // Return the response from the target endpoint
-        return response($response->body(), $response->status())
-            ->withHeaders($response->headers());
+            // Return an error response
+            return [
+                'error' => 'Webhook request failed',
+                'message' => $e->getMessage(),
+            ];
+        }
 
     }
 }
