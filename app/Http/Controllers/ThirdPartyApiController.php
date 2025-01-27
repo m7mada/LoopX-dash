@@ -10,6 +10,7 @@ use App\Models\Twin;
 use App\Models\TempRecivedMessages;
 use Carbon\Carbon;
 use Exception ;
+use Log ;
 
 class ThirdPartyApiController extends Controller
 {
@@ -356,5 +357,39 @@ class ThirdPartyApiController extends Controller
         } else {
             return response()->json(['error' => "There is an error getting conversations"], $response->getStatusCode());
         }
+    }
+
+
+    public function proxyFBAppTobootPress(Request $request){
+
+
+        Log::info("this is the proxy request");
+        $targetUrl = 'https://api.example.com/endpoint';
+
+        if( $v=1 ){
+            $targetUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
+
+        }else{
+            $targetUrl = 'https://webhook.botpress.cloud/6984d2fb-9571-4de6-aced-d83a53deffd5';
+
+        }
+
+        // Get all query parameters from the incoming request
+        $queryParams = $request->query();
+
+        // Get all request data (for POST, PUT, PATCH requests)
+        $requestData = $request->all();
+
+        // Get the request method
+        $method = $request->method();
+
+        // Forward the request to the target URL
+        $response = Http::withHeaders($request->header())
+            ->$method($targetUrl, $method === 'GET' ? $queryParams : $requestData);
+
+        // Return the response from the target endpoint
+        return response($response->body(), $response->status())
+            ->withHeaders($response->headers());
+
     }
 }
