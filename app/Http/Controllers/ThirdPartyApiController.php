@@ -380,7 +380,7 @@ class ThirdPartyApiController extends Controller
         }
 
         try {
-            $response = Http::post($twin->webhook_callback_url, $request->all());
+            $response = Http::post($twin->webhook_proxy_url, $request->all());
             Log::info('Webhook Response:', [
                 'status' => $response->status(),
                 'body' => $response->body(),
