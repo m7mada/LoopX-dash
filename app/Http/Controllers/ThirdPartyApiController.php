@@ -364,6 +364,8 @@ class ThirdPartyApiController extends Controller
 
     public function proxyFBAppTobootPress(Request $request){
 
+        Log::info($request->all());
+
         $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
 
         if( empty($twin ) ){
@@ -371,7 +373,6 @@ class ThirdPartyApiController extends Controller
         }
 
 
-        //Log::info($request->all());
 
 
         if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
