@@ -363,8 +363,9 @@ class ThirdPartyApiController extends Controller
     public function proxyFBAppTobootPress(Request $request){
 
 
-        Log::info($request->all());
-        Log::info("this is the proxy request");
+        Log::info($request->data['entry'][0]['id']);
+
+
 
         if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
 
@@ -372,13 +373,13 @@ class ThirdPartyApiController extends Controller
         }
         // $targetUrl = 'https://api.example.com/endpoint';
 
-        // if( $v=1 ){
-        //     $targetUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
+        if( $v=1 ){
+            $targetUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
 
-        // }else{
-        //     $targetUrl = 'https://webhook.botpress.cloud/6984d2fb-9571-4de6-aced-d83a53deffd5';
+        }else{
+            $targetUrl = 'https://webhook.botpress.cloud/6984d2fb-9571-4de6-aced-d83a53deffd5';
 
-        // }
+        }
 
         // // Get all query parameters from the incoming request
         // $queryParams = $request->query();
