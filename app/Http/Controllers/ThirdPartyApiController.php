@@ -394,7 +394,7 @@ class ThirdPartyApiController extends Controller
 
         // Forward the request to the target URL
         $response = Http::withHeaders($request->header())
-            ->$method($targetUrl, $method === 'GET' ? $queryParams : $requestData);
+            ->$method($targetUrl, $requestData);
 
         Log::info('Target Response:', [
             'status' => $response->status(),
