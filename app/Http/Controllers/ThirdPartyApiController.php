@@ -11,6 +11,8 @@ use App\Models\TempRecivedMessages;
 use Carbon\Carbon;
 use Exception ;
 use Log ;
+use Illuminate\Support\Facades\Http;
+
 
 class ThirdPartyApiController extends Controller
 {
@@ -363,7 +365,7 @@ class ThirdPartyApiController extends Controller
     public function proxyFBAppTobootPress(Request $request){
 
 
-        Log::info($request->entry[0]['id']);
+        Log::info($request->all());
 
 
 
@@ -373,7 +375,7 @@ class ThirdPartyApiController extends Controller
         }
         // $targetUrl = 'https://api.example.com/endpoint';
 
-        if( $v=1 ){
+        if($request->entry[0]['id'] == 106256324613092 ){ // wa7ed tera 
             $targetUrl = 'https://webhook.botpress.cloud/d0a651f7-3bf2-4272-a2f6-bd90e18960fd';
 
         }else{
@@ -381,22 +383,24 @@ class ThirdPartyApiController extends Controller
 
         }
 
-        // // Get all query parameters from the incoming request
-        // $queryParams = $request->query();
+        // Get all query parameters from the incoming request
+        $queryParams = $request->query();
 
-        // // Get all request data (for POST, PUT, PATCH requests)
-        // $requestData = $request->all();
+        // Get all request data (for POST, PUT, PATCH requests)
+        $requestData = $request->all();
 
-        // // Get the request method
-        // $method = $request->method();
+        // Get the request method
+        $method = $request->method();
 
-        // // Forward the request to the target URL
-        // $response = Http::withHeaders($request->header())
-        //     ->$method($targetUrl, $method === 'GET' ? $queryParams : $requestData);
+        // Forward the request to the target URL
+        $response = Http::withHeaders($request->header())
+            ->$method($targetUrl, $method === 'GET' ? $queryParams : $requestData);
 
-        // // Return the response from the target endpoint
-        // return response($response->body(), $response->status())
-        //     ->withHeaders($response->headers());
+
+        Log::info( $response->all());
+        // Return the response from the target endpoint
+        return response($response->body(), $response->status())
+            ->withHeaders($response->headers());
 
     }
 }
