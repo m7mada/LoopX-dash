@@ -514,10 +514,28 @@ class ThirdPartyApiController extends Controller
             ]);
 
 
+            Log::info("api message",[
+                "role" => "assistant",
+                "content" => $request->message,
+                "twin_id" => $twin->id,
+                "botpress_user_id" => $request->user_id,
+                "botpress_bot_id" => $twin->botpress_bot_id,
+                "botpress_conversation_id" => $request->conversation_id,
+                "botpress_messageId" => "internal" . rand(6, 8),
+                "botpress_integration" => 'console',
+                "botpress_channel" => null,
+                "botpress_eventId" => null,
+                "botpress_eventType" => null,
+                "botpress_createdOn" => null,
+                "created_at" => now(),
+                "event_payload" => (object) [],
+                "botpress_user_out_id" => "123456789s",
+
+            ]);
             $message = new Messages([
                 "role" => "assistant",
                 "content" => $request->message,
-                "twin_id" => $twin->twin_external_id,
+                "twin_id" => $twin->id,
                 "botpress_user_id" => $request->user_id,
                 "botpress_bot_id" => $twin->botpress_bot_id,
                 "botpress_conversation_id" => $request->conversation_id,
