@@ -467,14 +467,15 @@ class ThirdPartyApiController extends Controller
         //     'tags' => (object) [],
         //     'payload' => (object) []
         // ]);
-        // $outgoingUserId = collect($bot->getMessages([
-        //     'botId' => $twin->botbress_bot_id,
-        //     'userId' => $this->mt_twins[0]->botpress_user_id,
-        //     'conversationId' => $this->conversation_id,
-        //     'tags' => (object) [],
-        //     'payload' => (object) []
-        // ])['messages'])->firstWhere('direction', 'outgoing');
+        $outgoingUserId = collect($bot->getMessages([
+            'botId' => $twin->botbress_bot_id,
+            // 'userId' => $this->mt_twins[0]->botpress_user_id,
+            'conversationId' => $request->conversationId,
+            'tags' => (object) [],
+            'payload' => (object) []
+        ])['messages'])->firstWhere('direction', 'outgoing');
 
+        dd($outgoingUserId);
         //dd( $bot['userId'] );
 
         // Log::info($bot->getMessages([
@@ -514,24 +515,7 @@ class ThirdPartyApiController extends Controller
             ]);
 
 
-            Log::info("api message", [
-                "role" => "assistant",
-                "content" => $request->message,
-                "twin_id" => $twin->id,
-                "botpress_user_id" => $request->user_id,
-                "botpress_bot_id" => $twin->botpress_bot_id,
-                "botpress_conversation_id" => $request->conversation_id,
-                "botpress_messageId" => "internal" . rand(6, 8),
-                "botpress_integration" => 'console',
-                "botpress_channel" => null,
-                "botpress_eventId" => null,
-                "botpress_eventType" => null,
-                "botpress_createdOn" => null,
-                "created_at" => now(),
-                "event_payload" => (object) [],
-                "botpress_user_out_id" => "123456789s",
 
-            ]);
             $message = new Messages([
                 "role" => "assistant",
                 "content" => $request->message,
