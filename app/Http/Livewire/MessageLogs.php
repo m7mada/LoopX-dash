@@ -217,6 +217,24 @@ class MessageLogs extends Component
             ]);
 
 
+            Log::info("message",[
+                "role" => "assistant",
+                "content" => $this->inbutMessageToSendToUser,
+                "twin_id" => $this->twin_id,
+                "botpress_user_id" => $this->mt_twins[0]->botpress_user_id,
+                "botpress_bot_id" => $this->mt_twins[0]->botpress_bot_id,
+                "botpress_conversation_id" => $this->botpress_conversation_id,
+                "botpress_messageId" => "internal" . rand(6, 8),
+                "botpress_integration" => 'console',
+                "botpress_channel" => null,
+                "botpress_eventId" => null,
+                "botpress_eventType" => null,
+                "botpress_createdOn" => null,
+                "created_at" => now(),
+                "event_payload" => (object) [],
+                "botpress_user_out_id" => "123456789s",
+
+            ]);
             $message = new Messages([
                 "role" => "assistant",
                 "content" => $this->inbutMessageToSendToUser,
