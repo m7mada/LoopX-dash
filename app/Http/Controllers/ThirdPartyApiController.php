@@ -16,6 +16,9 @@ use Log ;
 use Illuminate\Support\Facades\Http;
 use App\Helpers\PotBressHelper;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+
 
 
 class ThirdPartyApiController extends Controller
@@ -416,6 +419,22 @@ class ThirdPartyApiController extends Controller
 
     public function sendMessageToUser( Request $request,)
     {
+
+        // Validate the request
+        try {
+            $validator = Validator::make($request->all(), [
+                'message' => 'required|string', // Ensure 'message' is present and is a string
+                'conversationId' => 'required',
+            ]);
+
+            // If validation fails, throw an exception
+            if ($validator->fails()) {
+                throw new ValidationException($validator);
+            }
+        } catch (ValidationException $e) {
+            // Return validation errors
+            return response()->json(['error' => $e->errors()], 422);
+        }
 
         // Auth user 
 
