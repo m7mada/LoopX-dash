@@ -488,7 +488,7 @@ class ThirdPartyApiController extends Controller
 
             $bot = $bot->sendMessage([
                 'botId' => $twin->botbress_bot_id,
-                'userId' => $outgoingUserId,
+                'userId' => $outgoingUserId['userId'],
                 'conversationId' => $request->conversationId,
                 'type' => 'choice',
                 'tags' => (object) [],
@@ -504,7 +504,7 @@ class ThirdPartyApiController extends Controller
                 "role" => "assistant",
                 "content" => $request->message,
                 "twin_id" => $twin->id,
-                "botpress_user_id" => $outgoingUserId,
+                "botpress_user_id" => $outgoingUserId['userId'],
                 "botpress_bot_id" => $twin->botpress_bot_id,
                 "botpress_conversation_id" => $request->conversationId,
                 "botpress_messageId" => "internal" . rand(6, 8),
@@ -515,7 +515,7 @@ class ThirdPartyApiController extends Controller
                 "botpress_createdOn" => null,
                 "created_at" => now(),
                 "event_payload" => (object) [],
-                "botpress_user_out_id" => $outgoingUserId,
+                "botpress_user_out_id" => $outgoingUserId['userId'],
 
             ]);
 
