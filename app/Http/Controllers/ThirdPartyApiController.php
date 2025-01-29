@@ -517,7 +517,7 @@ class ThirdPartyApiController extends Controller
             $message = new Messages([
                 "role" => "assistant",
                 "content" => $request->message,
-                "twin_id" => $twin->id,
+                "twin_id" => $twin->twin_external_id,
                 "botpress_user_id" => $request->user_id,
                 "botpress_bot_id" => $twin->botpress_bot_id,
                 "botpress_conversation_id" => $request->conversation_id,
