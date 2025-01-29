@@ -8,10 +8,14 @@ use GuzzleHttp\Exception\RequestException;
 use Auth ;
 use App\Models\Twin;
 use App\Models\TempRecivedMessages;
+use App\Models\Messages;
+
 use Carbon\Carbon;
 use Exception ;
 use Log ;
 use Illuminate\Support\Facades\Http;
+use App\Helpers\PotBressHelper;
+
 
 
 class ThirdPartyApiController extends Controller
@@ -369,7 +373,7 @@ class ThirdPartyApiController extends Controller
             return response($request->hub_challenge, '200');
         }
 
-        Log::info($request->all());
+        //Log::info($request->all());
 
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
@@ -381,6 +385,7 @@ class ThirdPartyApiController extends Controller
             $twin = Twin::where('wa_phone_number', $displayPhoneNumber)->where('wa_phone_number_id', $phoneNumberId)->first();
             $targetEndPoint = $twin->wa_webhook_proxy_url;
         }
+        
 
         if (empty($twin)) {
             return false;
@@ -388,23 +393,155 @@ class ThirdPartyApiController extends Controller
 
         try {
             $response = Http::post($targetEndPoint, $request->all());
-            Log::info('Webhook Response:', [
-                'status' => $response->status(),
-                'body' => $response->body(),
-            ]);
+            // Log::info('Webhook Response:', [
+            //     'status' => $response->status(),
+            //     'body' => $response->body(),
+            // ]);
 
             return $response->json();
         } catch (\Exception $e) {
             // Log any errors that occur
-            Log::error('Webhook Request Failed:', [
-                'message' => $e->getMessage(),
-            ]);
+            // Log::error('Webhook Request Failed:', [
+            //     'message' => $e->getMessage(),
+            // ]);
 
             // Return an error response
             return [
                 'error' => 'Webhook request failed',
                 'message' => $e->getMessage(),
             ];
+        }
+
+    }
+
+    public function sendMessageToUser( Request $request,)
+    {
+
+        // Auth user 
+
+        try{
+            $twin = Twin::find(Auth::guard('twins')->user()->id);
+
+            $requiredFields = [
+                'id',
+                'botpress_webhook_link',
+                'botpress_access_token',
+                'botbress_workspace_id',
+                'botbress_bot_id',
+                'botbress_integration_key',
+
+                // 'message',
+                // 'user_id',
+                // 'conversation_id'
+            ];
+
+            // Check for missing fields
+            $missingFields = array_filter($requiredFields, fn($field) => empty($twin->$field));
+
+            if (!empty($missingFields)) {
+                $missingFieldsList = implode(', ', array_map(fn($field) => ucfirst(str_replace('_', ' ', $field)), $missingFields));
+
+                return response()->json(['error' => "Not a Twin Or Missing integrations setings :  " . str_replace('Botpress', '', $missingFieldsList)], 403);
+            }
+
+        } catch (Exception $e) {
+            return response()->json(['error' => "Cant auth user"], 403);
+        }
+
+
+
+
+
+
+        //dd($this->mt_twins->where('botpress_conversation_id', $this->botpress_conversation_id)->whereNotNull('botpress_user_out_id')->count());
+        // $userOutId = $this->mt_twins->where('botpress_conversation_id', $this->botpress_conversation_id)->whereNotNull('botpress_user_out_id')->where('role','assistant');
+
+        $bot = new PotBressHelper($twin);
+
+        //if( ! $userOutId->count() ){
+
+        //     dd([
+        //     'botId' => $this->model->botbress_bot_id,
+        //     'userId' => $this->mt_twins[0]->botpress_user_id,
+        //     'conversationId' => $this->botpress_conversation_id,
+        //     'tags' => (object) [],
+        //     'payload' => (object) []
+        // ]);
+        // $outgoingUserId = collect($bot->getMessages([
+        //     'botId' => $twin->botbress_bot_id,
+        //     'userId' => $this->mt_twins[0]->botpress_user_id,
+        //     'conversationId' => $this->conversation_id,
+        //     'tags' => (object) [],
+        //     'payload' => (object) []
+        // ])['messages'])->firstWhere('direction', 'outgoing');
+
+        //dd( $bot['userId'] );
+
+        // Log::info($bot->getMessages([
+        //     'botId' => $this->model->botbress_bot_id,
+        //     'userId' => $this->mt_twins[0]->botpress_user_id,
+        //     'conversationId' => $this->botpress_conversation_id,
+        //     'tags' => (object) [],
+        //     'payload' => (object) []
+        // ]));
+
+        //}
+        try {
+
+
+            // \Log::info("api_message",[
+            //     'botId'=> $this->mt_twins[0]->botpress_bot_id,
+            //     'userId'=> $this->mt_twins[0]->botpress_user_id,
+            //     'conversationId'=>$this->botpress_conversation_id,
+            //     'type'=> 'choice',
+            //     'tags'=> (object) [],
+            //     'payload'=>[
+            //          "text"=> $this->inbutMessageToSendToUser ,
+            //          "options"=>[]
+            //     ]
+            // ]);
+
+            $bot = $bot->sendMessage([
+                'botId' => $twin->botbress_bot_id,
+                'userId' => $request->userId,
+                'conversationId' => $request->conversationId,
+                'type' => 'choice',
+                'tags' => (object) [],
+                'payload' => [
+                    "text" => $request->message,
+                    "options" => []
+                ]
+            ]);
+
+
+            $message = new Messages([
+                "role" => "assistant",
+                "content" => $request->message,
+                "twin_id" => $twin->id,
+                "botpress_user_id" => $request->user_id,
+                "botpress_bot_id" => $twin->botpress_bot_id,
+                "botpress_conversation_id" => $request->conversation_id,
+                "botpress_messageId" => "internal" . rand(6, 8),
+                "botpress_integration" => 'console',
+                "botpress_channel" => null,
+                "botpress_eventId" => null,
+                "botpress_eventType" => null,
+                "botpress_createdOn" => null,
+                "created_at" => now(),
+                "event_payload" => (object) [],
+                "botpress_user_out_id" => "123456789s",
+
+            ]);
+
+            $message->save();
+
+            return response()->json(['data' => "Sent"], 200);
+
+
+
+        } catch (\Excetion $ex) {
+            return response()->json(['error' => "Something went wrong !!"], 500);
+
         }
 
     }

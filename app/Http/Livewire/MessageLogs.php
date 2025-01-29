@@ -11,6 +11,7 @@ use App\Models\Conversations ;
 use App\Helpers\PotBressHelper;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Log ;
 
 
 
@@ -179,7 +180,7 @@ class MessageLogs extends Component
 
         //dd( $bot['userId'] );
 
-        \Log::info($bot->getMessages([
+        Log::info($bot->getMessages([
             'botId' => $this->model->botbress_bot_id,
             'userId' => $this->mt_twins[0]->botpress_user_id,
             'conversationId' => $this->botpress_conversation_id,
