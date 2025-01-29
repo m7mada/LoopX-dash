@@ -514,7 +514,7 @@ class ThirdPartyApiController extends Controller
             ]);
 
 
-            Log::info("api message",[
+            Log::info("api message", [
                 "role" => "assistant",
                 "content" => $request->message,
                 "twin_id" => $twin->id,
