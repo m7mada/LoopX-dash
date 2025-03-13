@@ -20,7 +20,7 @@
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder">{{$this->customersTotalMessages}} </span>
+                            <p class="mb-0"><span class="text-success text-sm font-weight-bolder"> </span>
                                 Total Messages </p>
                         </div>
                     </div>
