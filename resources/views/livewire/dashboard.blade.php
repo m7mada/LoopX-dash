@@ -5,7 +5,7 @@
 
           <div class="row">
 
-            @if( Auth::user()->is_admin )
+            @if(Auth::user()->is_admin)
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -24,6 +24,8 @@
                                 Total Messages </p>
                         </div>
                     </div>
+
+                    {{ $userTwins->links() }}
                 </div>
 
                 <div class="row"><br></div>
