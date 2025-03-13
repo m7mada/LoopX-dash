@@ -25,23 +25,25 @@ class Dashboard extends Component
                                 ->with('files')
                                 ->get();
 
-        if( Auth::user()->is_admin ){
-            $this->userTwins = Twin::get();
-            $this->customersCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
 
-            foreach( $this->userTwins as $customerTwin ){
-                $this->customersTotalMessages += Messages::where('twin_id', $customerTwin->twin_external_id)
-                                    ->where('role', 'assistant')
-                                    ->count();
+        // if( Auth::user()->is_admin ){
+        //     $this->userTwins = Twin::get();
+        //     $this->customersCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
 
-                $this->customersTotalMessagesCost += $customerTwin->messages->sum("total_cost") ;
+        //     foreach( $this->userTwins as $customerTwin ){
+        //         $this->customersTotalMessages += Messages::where('twin_id', $customerTwin->twin_external_id)
+        //                             ->where('role', 'assistant')
+        //                             ->count();
+
+        //         $this->customersTotalMessagesCost += $customerTwin->messages->sum("total_cost") ;
 
             
-            }
+        //     }
 
-            // dd($this->customersCridets[0]->total_credits);
-            $this->customersRemainingCridets = $this->customersCridets[0]->total_credits - $this->customersTotalMessagesCost ;
-        }
+        //     // dd($this->customersCridets[0]->total_credits);
+        //     $this->customersRemainingCridets = $this->customersCridets[0]->total_credits - $this->customersTotalMessagesCost ;
+        // }
+
 
         $this->userTwins->transform(function ($twin) {
             $twin->color = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
