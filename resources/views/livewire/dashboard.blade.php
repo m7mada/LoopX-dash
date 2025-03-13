@@ -25,7 +25,6 @@
                         </div>
                     </div>
 
-                    {{ $this->customersTwins->links() }}
                 </div>
 
                 <div class="row"><br></div>
