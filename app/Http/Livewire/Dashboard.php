@@ -40,7 +40,7 @@ class Dashboard extends Component
             
             // }
 
-            dd($this->customersTotalCridets[0]->total_credits);
+            dd($this->customersTotalCridets);
             $this->customersRemainingCridets = $this->customersCridets[0]->total_credits - $this->customersTotalMessagesCost ;
         }
 
