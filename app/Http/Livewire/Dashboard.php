@@ -15,8 +15,8 @@ use DB ;
 
 class Dashboard extends Component
 {
-    protected $userTwins ;
-    public  $totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost , $customersCridets, $customersTotalMessages , $customersTotalMessagesCost, $customersRemainingCridets;
+    protected $customersTwins ;
+    public  $userTwins,$totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost , $customersCridets, $customersTotalMessages , $customersTotalMessagesCost, $customersRemainingCridets;
     public function render()
     {
         $this->userTwins = Twin::where("user_id",Auth::user()->id)
@@ -27,10 +27,10 @@ class Dashboard extends Component
                                 ->get();
 
         if( Auth::user()->is_admin ){
-            $this->userTwins = Twin::where("user_id", "<>", Auth::user()->id)->paginate(20);
+            $this->customersTwins = Twin::where("user_id", "<>", Auth::user()->id)->paginate(20);
             $this->customersCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
 
-            foreach( $this->userTwins as $customerTwin ){
+            foreach( $this->customersTwins as $customerTwin ){
                 $this->customersTotalMessages += Messages::where('twin_id', $customerTwin->twin_external_id)
                                     ->where('role', 'assistant')
                                     ->count();
