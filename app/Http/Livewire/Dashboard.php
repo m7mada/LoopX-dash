@@ -15,7 +15,8 @@ use DB ;
 
 class Dashboard extends Component
 {
-    public $userTwins , $totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost , $customersCridets, $customersTotalMessages , $customersTotalMessagesCost, $customersRemainingCridets;
+    protected $userTwins ;
+    public  $totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost , $customersCridets, $customersTotalMessages , $customersTotalMessagesCost, $customersRemainingCridets;
     public function render()
     {
         $this->userTwins = Twin::where("user_id",Auth::user()->id)
