@@ -42,6 +42,7 @@ class Dashboard extends Component
             $this->customersRemainingCridets = $this->customersCridets[0]->total_credits - $this->customersTotalMessagesCost ;
         }
 
+
         $this->userTwins->transform(function ($twin) {
             $twin->color = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
             $twin->messages_count = count($twin->messages->where('role','=','assistant')) ;
