@@ -43,7 +43,7 @@ class Dashboard extends Component
             $totalUsed = Messages::query()->where('role', 'assistant')->sum("total_cost");
 
             // dd($this->customersTotalCridets , $totalUsed);
-            $this->customersRemainingCridets = $this->customersTotalCridets[0]->total_credits - $totalUsed ;
+            $this->customersRemainingCridets = ($this->customersTotalCridets[0]->total_credits - $totalUsed ) * 0.65 ;
         }
 
 
