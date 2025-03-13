@@ -30,7 +30,7 @@ class Dashboard extends Component
         if( Auth::user()->is_admin ){
             $this->customersTwins = Twin::whereNotIn("user_id", User::where('is_admin',1)->pluck('id'))->get();
 
-            $this->customersTotalCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND orders.user_id not in ( SELECT user_id from users WHERE is_admin = 1 ) AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
+            $this->customersTotalCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND orders.user_id not in ( SELECT id from users WHERE is_admin = 1 ) AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
             // foreach( $this->customersTwins as $customerTwin ){
             //     $this->customersTotalMessages += Messages::where('twin_id', $customerTwin->twin_external_id)
             //                         ->where('role', 'assistant')
