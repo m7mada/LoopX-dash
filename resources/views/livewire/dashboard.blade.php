@@ -5,7 +5,7 @@
 
           <div class="row">
 
-            @if(\Auth::user()->is_admin)
+            @if( Auth::user()->is_admin )
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -15,7 +15,7 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Remaining Customers Wallet</p>
-                                <h4 class="mb-0">{{$customersRemainingCridets}}</h4>
+                                <h4 class="mb-0">{{$this->customersRemainingCridets}}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
