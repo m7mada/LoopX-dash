@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Twin;
@@ -27,19 +28,19 @@ class Dashboard extends Component
                                 ->get();
 
         if( Auth::user()->is_admin ){
-            $this->customersTwins = Twin::where("user_id", "<>", Auth::user()->id)->paginate(20);
-            $this->customersCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
+            $this->customersTwins = Twin::whereNotIn("user_id", User::where('is_admin',1)->pluck('id'))->get();
 
-            foreach( $this->customersTwins as $customerTwin ){
-                $this->customersTotalMessages += Messages::where('twin_id', $customerTwin->twin_external_id)
-                                    ->where('role', 'assistant')
-                                    ->count();
+            $this->customersTotalCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND orders.user_id not in ( SELECT user_id from users WHERE is_admin = 1 ) AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
+            // foreach( $this->customersTwins as $customerTwin ){
+            //     $this->customersTotalMessages += Messages::where('twin_id', $customerTwin->twin_external_id)
+            //                         ->where('role', 'assistant')
+            //                         ->count();
 
-                $this->customersTotalMessagesCost += $customerTwin->messages->sum("total_cost") ;
+            //     $this->customersTotalMessagesCost += $customerTwin->messages->sum("total_cost") ;
             
-            }
+            // }
 
-            // dd($this->customersCridets[0]->total_credits);
+            dd($this->customersTotalCridets[0]->total_credits);
             $this->customersRemainingCridets = $this->customersCridets[0]->total_credits - $this->customersTotalMessagesCost ;
         }
 
