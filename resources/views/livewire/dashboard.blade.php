@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    {{ $this->userTwins->links() }}
+                    {{ $this->customersTwins->links() }}
                 </div>
 
                 <div class="row"><br></div>
