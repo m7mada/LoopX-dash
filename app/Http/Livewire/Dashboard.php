@@ -26,7 +26,7 @@ class Dashboard extends Component
                                 ->get();
 
         if( Auth::user()->is_admin ){
-            $this->userTwins = Twin::limit(20)->get();
+            $this->userTwins = Twin::where("user_id","<>", Auth::user()->id)->limit(20)->get();
             $this->customersCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
 
             foreach( $this->userTwins as $customerTwin ){
