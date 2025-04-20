@@ -35,6 +35,7 @@ use App\Http\Livewire\ExampleLaravel\UserFormEdit;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Controllers\Admin\Pakedeg\pakedegController;
 use App\Http\Livewire\MessageManager;
+use App\Http\Controllers\chanelConnectorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,4 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('package/billing', [OrderController::class, 'store'])->name('store.order');
     Route::get('orders', OrderDatatable::class)->name('order');
     Route::get('reports/customers/wallet',[ ReportingController::class,'customersWallet']);
+
+    Route::get('connectorCallback', [chanelConnectorsController::class,'connectorCallback'])->name('connectorCallback');
+    Route::get('successConnection', [chanelConnectorsController::class,'successConnection'])->name('successConnection');
 });
