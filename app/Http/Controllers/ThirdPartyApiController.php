@@ -396,17 +396,17 @@ class ThirdPartyApiController extends Controller
 
         try {
             $response = Http::post($targetEndPoint, $request->all());
-            // Log::info('Webhook Response:', [
-            //     'status' => $response->status(),
-            //     'body' => $response->body(),
-            // ]);
+            Log::info('Webhook Response:', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
 
             return $response->json();
         } catch (\Exception $e) {
             // Log any errors that occur
-            // Log::error('Webhook Request Failed:', [
-            //     'message' => $e->getMessage(),
-            // ]);
+            Log::error('Webhook Request Failed:', [
+                'message' => $e->getMessage(),
+            ]);
 
             // Return an error response
             return [
