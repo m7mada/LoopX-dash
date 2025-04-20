@@ -376,7 +376,7 @@ class ThirdPartyApiController extends Controller
             return response($request->hub_challenge, '200');
         }
 
-        //Log::info($request->all());
+        Log::info($request->all());
 
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
