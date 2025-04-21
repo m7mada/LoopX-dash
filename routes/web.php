@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('billing', Billing::class)->name('billing');
     Route::get('twins', Twins::class)->name('twins');
+    Route::get('twin/{id}', Twins::class)->name('twin');
+    Route::get('twin/{id}/callback', [Twins::class,'showFacebookMessengerAuthPages'])->name('twin-callback');
     //Route::get('show-logs', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}/{conversationId}', MessageLogs::class)->name('show-conversation');

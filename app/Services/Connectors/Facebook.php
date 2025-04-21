@@ -19,9 +19,9 @@ class Facebook extends Connector
         return redirect($url);
     }
 
-    public function callback(Request $request)
+    public function callback($code)
     {
-        $code = $request->input('code');
+
         $tokenResponse = Http::asForm()->post('https://graph.facebook.com/v18.0/oauth/access_token', [
             'client_id' => config('services.facebook.app_id'),
             'client_secret' => config('services.facebook.app_secret'),
@@ -29,13 +29,20 @@ class Facebook extends Connector
             'code' => $code,
         ])->json();
 
+        // dd( $tokenResponse );
+
+        if (isset($tokenResponse['error'])) {
+           return $tokenResponse;
+        }
         session(['user_access_token' => $tokenResponse['access_token']]);
 
         $pages = Http::get("https://graph.facebook.com/v18.0/me/accounts", [
-            'access_token' => session('user_access_token'),
+            'access_token' =>$tokenResponse['access_token'],
         ])->json()['data'];
 
-        return view('select-page', ['pages' => $pages]);
+        return $pages ;
+
+        // return view('select-page', ['pages' => $pages]);
     }
 
     public function verifyWebhook(Request $request)
@@ -71,25 +78,25 @@ class Facebook extends Connector
         return response('EVENT_RECEIVED', 200);
     }
 
-    public function confirmPage(Request $request)
+    public function confirmPage($page)
     {
-        $pageId = $request->input('page_id');
         $pages = Http::get("https://graph.facebook.com/v18.0/me/accounts", [
             'access_token' => session('user_access_token'),
-        ])->json()['data'];
+        ])->json();
+
+        // dd($page['id']);
+        if(!isset($pages['data'])) {
+            return $pages;
+        }
     
         // Find the selected page's access token
-        $selectedPage = collect($pages)->firstWhere('id', $pageId);
+        $selectedPage = collect($pages)->firstWhere('id', $page['id']);
         if (!$selectedPage) {
             return redirect()->back()->withErrors(['error' => 'Invalid page selection.']);
         }
     
-        // $subscriptions = Http::get("https://graph.facebook.com/v22.0/".$pageId."/subscribed_apps?subscribed_fields=messages,messaging_postbacks&access_token=".$selectedPage['access_token'], [
-        //     'access_token' =>$selectedPage['access_token'],
-        // ])->json();
 
-
-        $subscriptions = Http::post("https://graph.facebook.com/v22.0/{$pageId}/subscribed_apps", [
+        $subscriptions = Http::post("https://graph.facebook.com/v22.0/{$page['id']}/subscribed_apps", [
             'subscribed_fields' => 'messages,messaging_postbacks',
             'access_token' => $selectedPage['access_token'],
         ]);
@@ -98,10 +105,11 @@ class Facebook extends Connector
         // dd($subscriptions);
         dd($selectedPage['access_token'] );
 
-        // Store the selected page ID and access token
-        session(['selected_page_id' => $pageId]);
-        session(['page_access_token' => $selectedPage['access_token']]);
+        // // Store the selected page ID and access token
+        // session(['selected_page_id' => $pageId]);
+        // session(['page_access_token' => $selectedPage['access_token']]);
     
-        return view('confirmation',compact('pageId', 'selectedPage', 'subscriptions'));
+        return $selectedPage['access_token'] ;
+        // return view('confirmation',compact('pageId', 'selectedPage', 'subscriptions'));
     }
 }

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Http;
 use App\Helpers\PotBressHelper;
 use Str ;
 use Unipile\UnipileSDK;
+use App\Services\Connectors\Facebook as FacebookConnector; 
+use Illuminate\Support\Facades\Request;
 
 
 
@@ -27,9 +29,9 @@ class Twins extends Component
     public $listTwins = true ;
     public $showForm = false ;
     public $showLogs = false ;
-    public $currentStep = 0 ;
+    public $currentStep = 1 ;
     public $addTwins = false ;
-    public $files=[], $newFiles = [] ,$twinMessages , $inbutMessageToSendToUser;
+    public $files=[], $newFiles = [] ,$twinMessages , $inbutMessageToSendToUser , $authPages;
     public $twin_id;
     public $botpress_conversation_id;
     public $mt_twins = [] ;
@@ -71,11 +73,17 @@ class Twins extends Component
     ];
 
 
-    public function mount(){
+    public function mount($id = null ){
+
+
+        if( isset($id) ){
+            $this->twin_id = $id ;
+        }
+   
         $this->model = Twin::where("user_id",Auth::user()->id)
-                            ->with("messages",function($query){
-                                $query->where('role','=','assistant');
-                            })
+                            // ->with("messages",function($query){
+                            //     $query->where('role','=','assistant');
+                            // })
                             ->with("files")
                             ->with("user")
                             ->get();
@@ -90,6 +98,39 @@ class Twins extends Component
     }
 
     public function render(){
+
+        if( isset($this->twin_id) && $this->currentStep == 1 ){
+
+            // dd("asdfasdf");
+            try{
+                $this->listTwins = false ;
+                $this->model = Twin::find($this->twin_id);
+                $this->model->api_token = "***** ".substr($this->model->api_token,-4);
+                $this->showForm = true ;
+
+                // $this->currentRoute = Request::route()->getName();
+                // if( $this->currentRoute == "twin-callback" ){
+                //     $this->code = Request::query('code');
+
+                //     if( isset( $this->code ) ){
+                //         $this->currentStep = 5 ;
+                //     }
+                // }
+                $this->authPages = Request::query('pages');
+
+                if( isset( $this->authPages ) ){
+
+                    // dd(session('auth_pages'));
+                    $this->authPages = session('auth_pages') ;
+                    $this->currentStep = 5 ;
+                    // $this->showFacebookMessengerAuthPages(  $this->code ) ;
+                }
+    
+            }catch(\Excetion $ex){
+                session()->flash('error','Something gose wrong !!');
+            }
+
+        }
         $this->listTwins = true ;
         return view('livewire.twins.twins');
     }
@@ -107,6 +148,7 @@ class Twins extends Component
 
 
         try{
+            
             $this->model = Twin::find($id);
             $this->model->api_token = "***** ".substr($this->model->api_token,-4);
 
@@ -409,5 +451,48 @@ class Twins extends Component
         // dd($this->linkedAccounts['items']);
 
         // dd($accounts);
+    }
+
+    public function connectFacebookMessenger( FacebookConnector $facebookConnector){
+        $facebookConnector->connect() ;
+    }
+
+    public function showFacebookMessengerAuthPages( FacebookConnector $facebookConnector , Request $request , $id){
+        $this->pages = $facebookConnector->callback( Request::query('code') ) ;
+
+        $this->pages = [
+            [
+                'access_token' => 'EAAZAQZA5mdy1QBO8zoEuWB0eZA02EqnZBUPA1wA1zztRKKsMtZBVistVZB9dE9kekCPlZCOkbdwtpcjWLUjgR2uBkIyNV2kmz4933nxUaoZCbnldmQ3iJydePgXHGyC1DYqy6mNgVNn15YBL8W5fGu8ve48Q4VQ ▶',
+                'category' => 'Software Company',
+                'category_list' => [], // The "[▶]" indicates an empty array
+                'name' => 'Genudo',
+                'id' => '121454467723162',
+                'tasks' => [], // The "[▶]" indicates an empty array
+            ],
+            [
+                'access_token' => 'EAAZAQZA5mdy1QBO2o0SGLQ9arsUZBHT2Fl9mQsxNouVc5jdHA1T17jZBA21BQrgcw2wFmsINxR1jPeTZCyYvnM2OKgYjd3VlGeCXmhlWNESXaKXCbcvzvK4J38Sf5Yt2jJZCLZCfrmVzmNVEUjgvQ4JOQUMJAcM ▶',
+                'category' => 'Software Company',
+                'category_list' => [], // The "[▶]" indicates an empty array
+                'name' => '360Code',
+                'id' => '575375045831855',
+                'tasks' => [], // The "[▶]" indicates an empty array
+            ],
+        ];
+        session(['auth_pages' => $this->pages ]);
+
+
+
+
+        
+        // if($this->pages['error']){
+        //     return redirect(url('/twin/'.$id )) ;            
+        // }
+        return redirect(url("/twin/".$id."/?pages=1") ) ;
+    }
+
+    public function selectFbPage( FacebookConnector $facebookConnector ,  $page ) {
+        $connectedPage = $facebookConnector->confirmPage( $page ) ;
+
+        dd($connectedPage);
     }
 }
