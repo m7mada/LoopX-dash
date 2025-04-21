@@ -47,6 +47,11 @@
 
                             @endif
 
+                            <div class="stepwizard-step">
+                                <a href="#step-5" wire:click="initUnipile();" type="button" class="btn btn-circle {{ $currentStep != 5 ? 'btn-secondary' : 'btn-primary' }}">4</a>
+                                <p>Connections </p>
+                            </div>
+
                         </div>
                     </div>
                     <div class="px-4 p-2 row setup-content {{ $currentStep != 1 ? 'displayNone' : '' }}" id="step-1">
@@ -536,6 +541,61 @@
                         </div>
 
                     @endif
+
+
+                    <div class="px-4 p-2 row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
+                        <div class="col-xs-12">
+                            <div class="col-md-12">
+
+                                
+
+                                <div class="row ">
+                                    <div class="col-md-6">
+                                        <h4 class="mb-3">Connect Chanle: </h4>
+
+                                        @if( isset($connectionLink ))
+                                            <iframe src="{{ $connectionLink }}" style="width: 100%; height: 800px; border: none;"></iframe>
+                                        @endif
+                                        {{-- <div class="mb-3"></div> --}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="mb-3">Current Chanle: </h4>
+                                        @if ( isset($linkedAccounts ) )
+                                        @forelse ($linkedAccounts['items'] as $linkedAccount  )
+
+                                            {{ $linkedAccount['name'] }} | {{ $linkedAccount['type']}}
+
+                                            @forelse ( $linkedAccount['sources'] as $accountSource )
+                                                <span class="badge badge-primary">{{ $accountSource['status'] }}</span>
+                                                
+                                            @empty
+                                                NA
+                                            @endforelse
+
+
+                                            <a href="javascript:;" wire:click.prevent="removeLinkedAccount({{$linkedAccount['id']}})"  class="text-secondary font-weight-normal text-xs" data-toggle="tooltip" data-original-title="Delete file">
+                                                Delete
+                                            </a> 
+                                            <hr>
+                                            <br>
+
+                                        @empty
+                                            NA
+                                        @endforelse
+                                        @endif
+                                        
+                                    </div>
+
+                                </div>
+
+                                <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="$set('currentStep', '3')">Back</button>
+                                {{-- <button class="btn btn-primary nextBtn btn-lg pull-right" wire:click.prevent="updateTwin()" type="button" >Next</button> --}}
+
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a73474bfb6535059330d3b667d68a22",
+    "content-hash": "2bf3e20a6fd4de3d762667c2d06ef130",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -6812,6 +6812,47 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
+            "name": "unipile/unipile-php-sdk",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unipile/unipile-php-sdk.git",
+                "reference": "14a53d9eda7c4b3398200a5de33c537de9551c70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unipile/unipile-php-sdk/zipball/14a53d9eda7c4b3398200a5de33c537de9551c70",
+                "reference": "14a53d9eda7c4b3398200a5de33c537de9551c70",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Unipile\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arnaud Hartmann",
+                    "email": "arnaud@unipile.com"
+                }
+            ],
+            "description": "Unipile PHP SDK",
+            "support": {
+                "issues": "https://github.com/unipile/unipile-php-sdk/issues",
+                "source": "https://github.com/unipile/unipile-php-sdk/tree/v1.0.0"
+            },
+            "abandoned": true,
+            "time": "2023-10-17T12:47:08+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.0",
             "source": {
@@ -9858,12 +9899,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

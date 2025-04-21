@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Helpers\PotBressHelper;
 use Str ;
+use Unipile\UnipileSDK;
+
 
 
 class Twins extends Component
@@ -374,5 +376,38 @@ class Twins extends Component
 
     public function getApiToken(){
         $this->model->api_token = $this->model->api_token ;
+    }
+
+    public function initUnipile(){
+        $this->currentStep = 5 ;
+
+
+        // curl --request GET --url https://api11.unipile.com:14100/api/v1/accounts --header 'X-API-KEY:m5MTkqt7.qk/xoTPS1inpItzQ8/VHzaFTDAfHkFVFUYxGYv+JimI=' --header 'accept: application/json'
+
+
+        $baseUri = 'https://api11.unipile.com:14100/api/v1/accounts';
+        $token = 'm5MTkqt7.qk/xoTPS1inpItzQ8/VHzaFTDAfHkFVFUYxGYv+JimI=';
+        $unipileSDK = new UnipileSDK($baseUri, $token);
+        $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+    
+        // dd(url('connectorCallback'));
+        $linkAccount = $unipileSDK->Account->createHostedLink(
+            'PT1H',
+            'My User ID',
+            url('successConnection'),
+            $actual_link.'?status=fail',
+            url('connectorCallback'),
+            '',
+            '*'
+        );
+
+        $this->connectionLink = $linkAccount['url'];
+
+        $linkedAccounts = $unipileSDK->Account->list();
+        $this->linkedAccounts = $linkedAccounts;
+        // dd($this->linkedAccounts['items']);
+
+        // dd($accounts);
     }
 }
