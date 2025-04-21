@@ -14,6 +14,14 @@ return [
     |
     */
 
+    'facebook'=>[
+        'app_id' => env('FACEBOOK_APP_ID'),
+        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'verify_token' => env('FACEBOOK_VERIFY_TOKEN'),
+        'page_access_token' => env('FACEBOOK_PAGE_ACCESS_TOKEN'),
+        'redirect_uri' => env('FACEBOOK_REDIRECT_URI'),
+    ],
+
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),

@@ -35,6 +35,7 @@ use App\Http\Livewire\ExampleLaravel\UserFormEdit;
 use App\Http\Livewire\ExampleLaravel\UserManagement;
 use App\Http\Controllers\Admin\Pakedeg\pakedegController;
 use App\Http\Livewire\MessageManager;
+use App\Http\Controllers\chanelConnectorsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('billing', Billing::class)->name('billing');
     Route::get('twins', Twins::class)->name('twins');
+    Route::get('twin/{id}', Twins::class)->name('twin');
+    Route::get('twin/{id}/callback', [Twins::class,'showFacebookMessengerAuthPages'])->name('twin-callback');
     //Route::get('show-logs', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}', MessageLogs::class)->name('show-logs');
     Route::get('show-logs/{id}/{conversationId}', MessageLogs::class)->name('show-conversation');
@@ -83,4 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('package/billing', [OrderController::class, 'store'])->name('store.order');
     Route::get('orders', OrderDatatable::class)->name('order');
     Route::get('reports/customers/wallet',[ ReportingController::class,'customersWallet']);
+
+    Route::get('connectorCallback', [chanelConnectorsController::class,'connectorCallback'])->name('connectorCallback');
+    Route::get('successConnection', [chanelConnectorsController::class,'successConnection'])->name('successConnection');
 });

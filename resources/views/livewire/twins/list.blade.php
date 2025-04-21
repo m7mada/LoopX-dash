@@ -31,10 +31,10 @@
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Status</th>
-                                            <th
+                                            {{-- <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
                                                 Usage</th>
-                                            <th></th>
+                                            <th></th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -69,7 +69,7 @@
                                                         <span class="badge badge-warning">Stoped</span>
                                                     @endif
                                                 </td>
-                                                <td class="align-middle text-center">
+                                                {{-- <td class="align-middle text-center">
 
                                                     <div class="d-flex align-items-center justify-content-center">
                                                         <span class="me-2 text-xs font-weight-bold">{{count($twin->messages->where('role', '=', 'assistant'))}} Reply </span>
@@ -82,10 +82,10 @@
                                                             </div>
                                                         </div> -->
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                                 <td class="align-middle">
                                                     <a href="/show-logs/{{$twin->id}}/"><i class="fa fa-comments fixed-plugin-button-nav cursor-pointer"></i></a> | 
-                                                    <i wire:click.prevent="editTwins({{$twin->id}});" class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i>
+                                                    <a href="/twin/{{$twin->id}}/"><i class="fa fa-cog fixed-plugin-button-nav cursor-pointer" aria-hidden="true"></i></a>
 
                                                 </td>
                                             </tr>
