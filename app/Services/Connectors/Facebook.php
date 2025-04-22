@@ -96,6 +96,8 @@ class Facebook extends Connector
             return redirect()->back()->withErrors(['error' => 'Invalid page selection.']);
         }
     
+        dd( $page['id'] );
+        dd(  $selectedPage['access_token'] );
 
         $subscriptions = Http::post("https://graph.facebook.com/v22.0/{$page['id']}/subscribed_apps", [
             'subscribed_fields' => 'messages,messaging_postbacks',
