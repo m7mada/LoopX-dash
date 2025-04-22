@@ -454,7 +454,9 @@ class Twins extends Component
     }
 
     public function connectFacebookMessenger( FacebookConnector $facebookConnector){
-        $facebookConnector->connect() ;
+        // dd($this->twin_id);
+        
+        $facebookConnector->connect( $this->twin_id ) ;
     }
 
     public function showFacebookMessengerAuthPages( FacebookConnector $facebookConnector , Request $request , $id){

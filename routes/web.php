@@ -90,3 +90,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('connectorCallback', [chanelConnectorsController::class,'connectorCallback'])->name('connectorCallback');
     Route::get('successConnection', [chanelConnectorsController::class,'successConnection'])->name('successConnection');
 });
+
+Route::get('/facebook/callback', function () {
+
+    return redirect('/twin/'.session('connection_for_twin_id').'/callback');
+})->name('facebook.callback');

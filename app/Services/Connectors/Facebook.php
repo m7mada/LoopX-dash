@@ -9,10 +9,11 @@ use App\Jobs\SendFacebookReply;
 
 class Facebook extends Connector
 {
-    public function connect()
+    public function connect($twinId)
     {
+        session(['connection_for_twin_id' => $twinId]);
         $url = "https://www.facebook.com/v18.0/dialog/oauth?client_id=" . config('services.facebook.app_id') .
-            "&redirect_uri=" . urlencode(config('services.facebook.redirect_uri')."?twin_id=22") .
+            "&redirect_uri=" . urlencode(config('services.facebook.redirect_uri')) .
             "&scope=pages_manage_metadata,pages_messaging";
 
             // dd(config('services.facebook.app_id'));
