@@ -93,5 +93,5 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/facebook/callback', function () {
 
-    return redirect('/twin/'.session('connection_for_twin_id').'/callback');
+    return redirect('/twin/'.session('connection_for_twin_id').'/callback?code='.request('code'));
 })->name('facebook.callback');
