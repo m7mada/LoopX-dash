@@ -33,8 +33,8 @@
                                                 Status</th>
                                             {{-- <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                                                Usage</th>
-                                            <th></th> --}}
+                                                Usage</th>--}}
+                                            <th></th> 
                                         </tr>
                                     </thead>
                                     <tbody>
