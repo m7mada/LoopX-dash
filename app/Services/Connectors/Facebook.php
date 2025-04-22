@@ -81,37 +81,24 @@ class Facebook extends Connector
 
     public function confirmPage($page)
     {
-        dd( $page['id'] );
-
         $pages = Http::get("https://graph.facebook.com/v18.0/me/accounts", [
             'access_token' => session('user_access_token'),
         ])->json();
-
-        // dd($page['id']);
         if(!isset($pages['data'])) {
             return $pages;
         }
-    
+
         // Find the selected page's access token
-        $selectedPage = collect($pages)->firstWhere('id', $page['id']);
+        $selectedPage = collect($pages['data'])->firstWhere('id', $page['id']);
         if (!$selectedPage) {
             return redirect()->back()->withErrors(['error' => 'Invalid page selection.']);
         }
     
-        dd(  $selectedPage['access_token'] );
-
         $subscriptions = Http::post("https://graph.facebook.com/v22.0/{$page['id']}/subscribed_apps", [
             'subscribed_fields' => 'messages,messaging_postbacks',
             'access_token' => $selectedPage['access_token'],
         ]);
 
-
-        // dd($subscriptions);
-        // dd($selectedPage['access_token'] );
-
-        // // Store the selected page ID and access token
-        // session(['selected_page_id' => $pageId]);
-        // session(['page_access_token' => $selectedPage['access_token']]);
     
         session()->forget(['user_access_token','connection_for_twin_id','user_access_token','auth_pages']);
         return $subscriptions  ;
