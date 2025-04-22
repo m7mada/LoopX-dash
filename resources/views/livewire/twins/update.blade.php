@@ -578,12 +578,12 @@
                                                 <button class="btn btn-primary mb-3" wire:click.prevent="connectFacebookMessenger">
                                                     <i class="fab fa-facebook"></i> Connect Facebook
                                                 </button>
-                                                <button class="btn btn-success mb-3" wire:click.prevent="connectWhatsapp">
+                                                {{-- <button class="btn btn-success mb-3" wire:click.prevent="connectWhatsapp">
                                                     <i class="fab fa-whatsapp"></i> Connect WhatsApp
                                                 </button>
                                                 <button class="btn btn-info mb-3" wire:click.prevent="connectInstagram">
                                                     <i class="fab fa-instagram"></i> Connect Instagram
-                                                </button>
+                                                </button> --}}
                                             </div>
                                         @endif
                                         {{-- @if( isset($connectionLink ))
