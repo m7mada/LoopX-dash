@@ -104,13 +104,13 @@ class Facebook extends Connector
 
 
         // dd($subscriptions);
-        dd($selectedPage['access_token'] );
+        // dd($selectedPage['access_token'] );
 
         // // Store the selected page ID and access token
         // session(['selected_page_id' => $pageId]);
         // session(['page_access_token' => $selectedPage['access_token']]);
     
-        return $selectedPage['access_token'] ;
+        return $selectedPage ;
         // return view('confirmation',compact('pageId', 'selectedPage', 'subscriptions'));
     }
 }
