@@ -81,6 +81,8 @@ class Facebook extends Connector
 
     public function confirmPage($page)
     {
+        dd( $page['id'] );
+
         $pages = Http::get("https://graph.facebook.com/v18.0/me/accounts", [
             'access_token' => session('user_access_token'),
         ])->json();
@@ -96,7 +98,6 @@ class Facebook extends Connector
             return redirect()->back()->withErrors(['error' => 'Invalid page selection.']);
         }
     
-        dd( $page['id'] );
         dd(  $selectedPage['access_token'] );
 
         $subscriptions = Http::post("https://graph.facebook.com/v22.0/{$page['id']}/subscribed_apps", [
