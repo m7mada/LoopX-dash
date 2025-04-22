@@ -495,9 +495,9 @@ class Twins extends Component
     public function selectFbPage( FacebookConnector $facebookConnector ,  $page ) {
         $connectedPage = $facebookConnector->confirmPage( $page ) ;
 
-        $updateTwin = Twin::find($this->twin_id)->update(["fb_page_id"=>$page["id"]]);
+        // $updateTwin = Twin::find($this->twin_id)->update(["fb_page_id"=>$page["id"]]);
 
-        if ( ! $updateTwin ){
+        if ( ! Twin::find($this->twin_id)->update(["fb_page_id"=>$page["id"]]) ){
             session()->flash('error','Page associated to another Twin !!');
         }
         if ($connectedPage->successful()) { 
