@@ -495,6 +495,14 @@ class Twins extends Component
     public function selectFbPage( FacebookConnector $facebookConnector ,  $page ) {
         $connectedPage = $facebookConnector->confirmPage( $page ) ;
 
+        if ($connectedPage->successful()) { // Laravel's helper to check for 2xx status codes
+            dd('Facebook API call was successful!');
+            $this->errorMessage = ''; // Clear any previous error message
+
+            // You can also process the response data here:
+            // $data = $response->json();
+            // dd($data);
+        }
         dd($connectedPage);
     }
 }
