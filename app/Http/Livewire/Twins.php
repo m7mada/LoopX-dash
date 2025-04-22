@@ -462,24 +462,24 @@ class Twins extends Component
     public function showFacebookMessengerAuthPages( FacebookConnector $facebookConnector , Request $request , $id){
         $this->pages = $facebookConnector->callback( Request::query('code') ) ;
 
-        $this->pages = [
-            [
-                'access_token' => 'EAAZAQZA5mdy1QBO8zoEuWB0eZA02EqnZBUPA1wA1zztRKKsMtZBVistVZB9dE9kekCPlZCOkbdwtpcjWLUjgR2uBkIyNV2kmz4933nxUaoZCbnldmQ3iJydePgXHGyC1DYqy6mNgVNn15YBL8W5fGu8ve48Q4VQ ▶',
-                'category' => 'Software Company',
-                'category_list' => [], // The "[▶]" indicates an empty array
-                'name' => 'Genudo',
-                'id' => '121454467723162',
-                'tasks' => [], // The "[▶]" indicates an empty array
-            ],
-            [
-                'access_token' => 'EAAZAQZA5mdy1QBO2o0SGLQ9arsUZBHT2Fl9mQsxNouVc5jdHA1T17jZBA21BQrgcw2wFmsINxR1jPeTZCyYvnM2OKgYjd3VlGeCXmhlWNESXaKXCbcvzvK4J38Sf5Yt2jJZCLZCfrmVzmNVEUjgvQ4JOQUMJAcM ▶',
-                'category' => 'Software Company',
-                'category_list' => [], // The "[▶]" indicates an empty array
-                'name' => '360Code',
-                'id' => '575375045831855',
-                'tasks' => [], // The "[▶]" indicates an empty array
-            ],
-        ];
+        // $this->pages = [
+        //     [
+        //         'access_token' => 'EAAZAQZA5mdy1QBO8zoEuWB0eZA02EqnZBUPA1wA1zztRKKsMtZBVistVZB9dE9kekCPlZCOkbdwtpcjWLUjgR2uBkIyNV2kmz4933nxUaoZCbnldmQ3iJydePgXHGyC1DYqy6mNgVNn15YBL8W5fGu8ve48Q4VQ ▶',
+        //         'category' => 'Software Company',
+        //         'category_list' => [], // The "[▶]" indicates an empty array
+        //         'name' => 'Genudo',
+        //         'id' => '121454467723162',
+        //         'tasks' => [], // The "[▶]" indicates an empty array
+        //     ],
+        //     [
+        //         'access_token' => 'EAAZAQZA5mdy1QBO2o0SGLQ9arsUZBHT2Fl9mQsxNouVc5jdHA1T17jZBA21BQrgcw2wFmsINxR1jPeTZCyYvnM2OKgYjd3VlGeCXmhlWNESXaKXCbcvzvK4J38Sf5Yt2jJZCLZCfrmVzmNVEUjgvQ4JOQUMJAcM ▶',
+        //         'category' => 'Software Company',
+        //         'category_list' => [], // The "[▶]" indicates an empty array
+        //         'name' => '360Code',
+        //         'id' => '575375045831855',
+        //         'tasks' => [], // The "[▶]" indicates an empty array
+        //     ],
+        // ];
         session(['auth_pages' => $this->pages ]);
 
 
