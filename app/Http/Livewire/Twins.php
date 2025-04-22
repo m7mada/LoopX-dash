@@ -499,8 +499,8 @@ class Twins extends Component
             if ($connectedPage->successful()) { 
                 $updateTwin = Twin::find($this->twin_id)->update(["fb_page_id" => $page["id"]]);
                 $this->successMessage = 'Facebook API call was successful!';
-                $this->authPages = $page ;
-                session()->flash('status','Facebook Page Connected successfuly');
+                $this->authPages = [$page] ;
+                session()->flash('success','Facebook Page Connected successfuly');
             }
         } catch (\Exception $ex) {
             session()->flash('error','Page associated to another Twin !!');
