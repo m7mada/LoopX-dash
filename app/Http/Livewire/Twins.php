@@ -496,11 +496,14 @@ class Twins extends Component
         $connectedPage = $facebookConnector->confirmPage( $page ) ;
 
         $updateTwin = Twin::find($this->twin_id)->update(["fb_page_id"=>$page["id"]]);
-        if ($connectedPage->successful()) { // Laravel's helper to check for 2xx status codes
-            $this->successMessage = 'Facebook API call was successful!';
-            // $this->errorMessage = ''; // Clear any previous error message
-            $this->authPages = $page ;
 
+        if ( ! $updateTwin ){
+            session()->flash('error','Page associated to another Twin !!');
+        }
+        if ($connectedPage->successful()) { 
+            $this->successMessage = 'Facebook API call was successful!';
+            $this->authPages = $page ;
+            session()->flash('status','Facebook Page Connected successfuly');
         }
         // dd($connectedPage);
     }
