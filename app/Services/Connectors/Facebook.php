@@ -110,7 +110,7 @@ class Facebook extends Connector
         // session(['selected_page_id' => $pageId]);
         // session(['page_access_token' => $selectedPage['access_token']]);
     
-        return $selectedPage ;
+        return $subscriptions  ;
         // return view('confirmation',compact('pageId', 'selectedPage', 'subscriptions'));
     }
 }
