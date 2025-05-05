@@ -294,7 +294,7 @@
                                         <div class="d-flex justify-center-center">
                                             <div class="col-12 card m-2 p-2">
                                                 <div>
-                                                    <spn>API Token:</spn> <a href="#" wire:click.prevent="getApiToken()"> {{ $model->api_token }} </a>
+                                                    <spn>API Token:</spn> <a href="#" wire:click.prevent="getApiToken()"> {{ $model->api_token }} <br>{{ $apiToken }} </a>
                                                 </div>
                                                 <div>
                                                     <button class="btn btn-secondary pull-right" wire:click.prevent="updateApiToken()" wire:confirm="aasdfasdf" type="button" >Update Api Token</button>
@@ -578,17 +578,17 @@
                                                 <button class="btn btn-primary mb-3" wire:click.prevent="connectFacebookMessenger">
                                                     <i class="fab fa-facebook"></i> Connect Facebook
                                                 </button>
-                                                {{-- <button class="btn btn-success mb-3" wire:click.prevent="connectWhatsapp">
+                                                 <button class="btn btn-success mb-3" wire:click.prevent="connectWhatsapp">
                                                     <i class="fab fa-whatsapp"></i> Connect WhatsApp
                                                 </button>
-                                                <button class="btn btn-info mb-3" wire:click.prevent="connectInstagram">
+                                                {{--<button class="btn btn-info mb-3" wire:click.prevent="connectInstagram">
                                                     <i class="fab fa-instagram"></i> Connect Instagram
                                                 </button> --}}
                                             </div>
                                         @endif
-                                        {{-- @if( isset($connectionLink ))
+                                        @if( isset($connectionLink ))
                                             <iframe src="{{ $connectionLink }}" style="width: 100%; height: 800px; border: none;"></iframe>
-                                        @endif  --}}
+                                        @endif 
                                         <div class="mb-3"></div>
                                     </div>
                                     <div class="col-md-6">

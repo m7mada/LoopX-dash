@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Helpers\PotBressHelper;
 use Str ;
-use Unipile\UnipileSDK;
 use App\Services\Connectors\Facebook as FacebookConnector; 
+use App\Services\Connectors\Unipile;
 use Illuminate\Support\Facades\Request;
 
 
@@ -31,7 +31,7 @@ class Twins extends Component
     public $showLogs = false ;
     public $currentStep = 1 ;
     public $addTwins = false ;
-    public $files=[], $newFiles = [] ,$twinMessages , $inbutMessageToSendToUser , $authPages;
+    public $files=[], $newFiles = [] ,$twinMessages , $inbutMessageToSendToUser , $authPages, $api_token, $apiToken;
     public $twin_id;
     public $botpress_conversation_id;
     public $mt_twins = [] ;
@@ -417,40 +417,14 @@ class Twins extends Component
     }
 
     public function getApiToken(){
-        $this->model->api_token = $this->model->api_token ;
+
+        // $this->model->api_token = $this->model->api_token;
+        $this->apiToken = $this->model->api_token;
     }
 
-    public function initUnipile(){
-        $this->currentStep = 5 ;
+    public function connectWhatsapp( Unipile $unipileConnector ){
+        $this->linkedAccounts = $unipileConnector->initUnipileChoseScreen();
 
-
-        // curl --request GET --url https://api11.unipile.com:14100/api/v1/accounts --header 'X-API-KEY:m5MTkqt7.qk/xoTPS1inpItzQ8/VHzaFTDAfHkFVFUYxGYv+JimI=' --header 'accept: application/json'
-
-
-        $baseUri = 'https://api11.unipile.com:14100/api/v1/accounts';
-        $token = 'm5MTkqt7.qk/xoTPS1inpItzQ8/VHzaFTDAfHkFVFUYxGYv+JimI=';
-        $unipileSDK = new UnipileSDK($baseUri, $token);
-        $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-
-    
-        // dd(url('connectorCallback'));
-        $linkAccount = $unipileSDK->Account->createHostedLink(
-            'PT1H',
-            'My User ID',
-            url('successConnection'),
-            $actual_link.'?status=fail',
-            url('connectorCallback'),
-            '',
-            '*'
-        );
-
-        $this->connectionLink = $linkAccount['url'];
-
-        $linkedAccounts = $unipileSDK->Account->list();
-        $this->linkedAccounts = $linkedAccounts;
-        // dd($this->linkedAccounts['items']);
-
-        // dd($accounts);
     }
 
     public function connectFacebookMessenger( FacebookConnector $facebookConnector){
