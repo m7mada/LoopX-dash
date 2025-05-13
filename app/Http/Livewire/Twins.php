@@ -469,18 +469,25 @@ class Twins extends Component
     public function selectFbPage( FacebookConnector $facebookConnector ,  $page ) {
         $connectedPage = $facebookConnector->confirmPage( $page ) ;
 
+        if( isset($connectedPage["error"]) ){
+            session()->flash('error',$connectedPage["error"]["message"]);
+            return ;
+        }
         try {
-            if ($connectedPage->successful()) { 
-                $updateTwin = Twin::find($this->twin_id)->update(["fb_page_id" => $page["id"]]);
+            if ($connectedPage[0]["success"] == true ) { 
+                $updateTwin = Twin::find($this->twin_id)->update(
+                                                            ["fb_page_id" => $page["id"],
+                                                                         "fb_page_access_token" => $connectedPage[1]["access_token"]
+                                                                        ]);
                 $this->successMessage = 'Facebook API call was successful!';
                 $this->authPages = [$page] ;
+
+dd($connectedPage[1]);
                 session()->flash('success','Facebook Page Connected successfuly');
             }
         } catch (\Exception $ex) {
             session()->flash('error','Page associated to another Twin !!');
         }
 
-
-        // dd($connectedPage);
     }
 }

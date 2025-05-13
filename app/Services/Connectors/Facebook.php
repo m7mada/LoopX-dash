@@ -101,7 +101,7 @@ class Facebook extends Connector
 
     
         session()->forget(['user_access_token','connection_for_twin_id','user_access_token','auth_pages']);
-        return $subscriptions  ;
+        return [ $subscriptions , $selectedPage  ] ;
         // return view('confirmation',compact('pageId', 'selectedPage', 'subscriptions'));
     }
 }

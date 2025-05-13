@@ -551,7 +551,7 @@
 
                                 <div class="row ">
                                     <div class="col-md-6">
-                                        <h4 class="mb-3">Connect Chanle: </h4>
+                                        <h4 class="mb-3">Connect Channel: </h4>
 
                                         @if( $authPages )
 
@@ -578,9 +578,9 @@
                                                 <button class="btn btn-primary mb-3" wire:click.prevent="connectFacebookMessenger">
                                                     <i class="fab fa-facebook"></i> Connect Facebook
                                                 </button>
-                                                 <button class="btn btn-success mb-3" wire:click.prevent="connectWhatsapp">
+                                                 {{-- <button class="btn btn-success mb-3" wire:click.prevent="connectWhatsapp">
                                                     <i class="fab fa-whatsapp"></i> Connect WhatsApp
-                                                </button>
+                                                </button> --}}
                                                 {{--<button class="btn btn-info mb-3" wire:click.prevent="connectInstagram">
                                                     <i class="fab fa-instagram"></i> Connect Instagram
                                                 </button> --}}
@@ -592,7 +592,7 @@
                                         <div class="mb-3"></div>
                                     </div>
                                     <div class="col-md-6">
-                                        <h4 class="mb-3">Current Chanle: </h4>
+                                        <h4 class="mb-3">Current Channel: </h4>
                                         {{-- @if ( isset($linkedAccounts ) )
                                         @forelse ($linkedAccounts['items'] as $linkedAccount  )
 
