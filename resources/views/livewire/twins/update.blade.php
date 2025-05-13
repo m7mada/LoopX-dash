@@ -591,9 +591,9 @@
                                         @endif 
                                         <div class="mb-3"></div>
                                     </div>
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <h4 class="mb-3">Current Channel: </h4>
-                                        {{-- @if ( isset($linkedAccounts ) )
+                                        @if ( isset($linkedAccounts ) )
                                         @forelse ($linkedAccounts['items'] as $linkedAccount  )
 
                                             {{ $linkedAccount['name'] }} | {{ $linkedAccount['type']}}
@@ -617,11 +617,11 @@
                                         @endforelse
                                         @endif
 
-                                        --}}
+                                        
 
                                         
                                         
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 
