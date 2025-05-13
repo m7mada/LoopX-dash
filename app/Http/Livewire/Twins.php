@@ -482,7 +482,6 @@ class Twins extends Component
                 $this->successMessage = 'Facebook API call was successful!';
                 $this->authPages = [$page] ;
 
-dd($connectedPage[1]);
                 session()->flash('success','Facebook Page Connected successfuly');
             }
         } catch (\Exception $ex) {
