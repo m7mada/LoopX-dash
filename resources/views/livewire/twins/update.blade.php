@@ -148,7 +148,7 @@
                                         </div> -->
                                     </div>
 
-                                    <hr>
+                                    {{-- <hr>
                                     <div>
                                         <h4 class="mb-3">Twin Capabilities: </h4>
                                     </div>
@@ -285,7 +285,7 @@
                                             </div>
                                         </div>
                                         
-                                    </div>
+                                    </div> --}}
                                     @if(!$addTwins)
                                         <hr>
                                         <div>
