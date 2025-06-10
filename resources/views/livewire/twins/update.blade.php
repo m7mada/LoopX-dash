@@ -79,7 +79,7 @@
                                             </div>
                                         </div>
 
-                                        {{--
+                                        {{-- 
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.kb_model_name') is-invalid @enderror ">
                                                 <label for="kb_model_name" class="ms-0">Model:* @error('model.kb_model_name') {{$message}} @enderror</label>
@@ -111,7 +111,7 @@
                                             </div>
                                         </div> -->
 
-                                        {{--
+                                        
                                         <div class="col-md-6">
                                             <div class="input-group input-group-outline mb-4 @error('model.agent_dialect') is-invalid @enderror ">
                                                 <label for="agent_dialect" class="ms-0">Twin Dialect:*</label>@error('model.agent_dialect') {{$message}} @enderror 
@@ -134,7 +134,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        --}}
+                                        
                                         <!-- <div class="col-md-6">
                                             <div class="input-group mb-4">
                                                 <label for="user_dialect" class="ms-0">User Dialect</label>
