@@ -17,7 +17,7 @@ use DB ;
 class Dashboard extends Component
 {
     protected $customersTwins ;
-    public  $userTwins,$totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost , $customersCridets, $customersTotalMessages , $customersTotalMessagesCost, $customersRemainingCridets;
+    public  $userTwins,$totalUsage , $lastWeekUsages, $totalConversasions , $lastWeekConversasions , $servedUsers , $servedUsersLastMonth , $twinMessages , $userOrders , $messagesCost , $customersCridets, $customersTotalMessages , $customersTotalMessagesCost, $customersRemainingCridets,$totalCustomersUsed;
     public function render()
     {
         $this->userTwins = Twin::where("user_id",Auth::user()->id)
@@ -28,7 +28,7 @@ class Dashboard extends Component
                                 ->get();
 
         if( Auth::user()->is_admin ){
-            // $this->customersTwins = Twin::whereNotIn("user_id", User::where('is_admin',1)->pluck('id'))->get();
+            $this->customersTwins = Twin::whereNotIn("user_id", User::where('is_admin',1)->pluck('twin_external_id'))->get();
 
             $this->customersTotalCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND orders.user_id not in ( SELECT id from users WHERE is_admin = 1 ) AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
             // foreach( $this->customersTwins as $customerTwin ){
@@ -40,10 +40,10 @@ class Dashboard extends Component
             
             // }
 
-            $totalUsed = Messages::query()->where('role', 'assistant')->sum("total_cost");
+            $this->totalCustomersUsed = Messages::query()->where('role', 'assistant')->whereIn("twin_id",$this->customersTwins)->sum("total_cost");
 
             // dd($this->customersTotalCridets , $totalUsed);
-            $this->customersRemainingCridets = ($this->customersTotalCridets[0]->total_credits - $totalUsed ) * 0.65 ;
+            $this->customersRemainingCridets = ($this->customersTotalCridets[0]->total_credits - $this->totalCustomersUsed ) * 0.65 ;
         }
 
 
