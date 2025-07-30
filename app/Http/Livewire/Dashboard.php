@@ -28,7 +28,7 @@ class Dashboard extends Component
                                 ->get();
 
         if( Auth::user()->is_admin ){
-            $this->customersTwins = Twin::whereNotIn("user_id", User::where('is_admin',1)->pluck('twin_external_id'))->get();
+            $this->customersTwins = Twin::whereNotIn("user_id", User::where('is_admin',1)->pluck('id'))->pluck("twin_external_id");
 
             $this->customersTotalCridets = DB::select("SELECT SUM(order_lines.value) as total_credits FROM order_lines WHERE order_lines.order_id IN ( SELECT id FROM orders WHERE orders.is_paid = 1 AND orders.user_id not in ( SELECT id from users WHERE is_admin = 1 ) AND order_lines.benefit_id = ( SELECT id FROM benefits WHERE benefits.type = 'cridet' ))");
             // foreach( $this->customersTwins as $customerTwin ){
