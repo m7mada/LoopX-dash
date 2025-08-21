@@ -15,10 +15,10 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-sm mb-0 text-capitalize">Remaining Customers Wallet</p><br>
-                                <p class="mb-0">{{$this->customersRemainingCridets}} including %65</p><br>
-                                <p class="mb-0">{{$this->totalCustomersUsed}} Total Customres usage with %65</p><br>
-                                <p class="mb-0">{{$this->customersTotalCridets[0]->total_credits}} Total Customres Paid</p><br>
-                                <p class="mb-0">{{$this->customersTotalCridets[0]->total_credits + $this->customersTotalCridets[0]->total_credits * 0.35 }} Expected Customres Cost</p>
+                                <p class="mb-0">{{$this->customersRemainingCridets ?? '' }} including %65</p><br>
+                                <p class="mb-0">{{$this->totalCustomersUsed ?? ''}} Total Customres usage with %35</p><br>
+                                <p class="mb-0">{{$this->customersTotalCridets[0]->total_credits ?? '' }} Total Customres Paid</p><br>
+                                <p class="mb-0">{{$this->customersTotalCridets[0]->total_credits + $this->customersTotalCridets[0]->total_credits * 0.35 ?? ''}} Expected Customres Cost</p>
 
                                 
                             </div>
