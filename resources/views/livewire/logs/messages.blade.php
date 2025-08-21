@@ -162,7 +162,7 @@
                                                                             {{$this->mt_twins->first()->botpress_integration ?? '' }} User 
                                                                         </h6>
                                                                         <div class="small">
-                                                                            @if( is_array($this->mt_twins->last()->botpress_userData) && ! empty($this->mt_twins->last()->botpress_userData) )
+                                                                            @if( isset($this->mt_twins->last()->botpress_userData ) && is_array($this->mt_twins->last()->botpress_userData) && ! empty($this->mt_twins->last()->botpress_userData) )
                                                                                 @forelse($this->mt_twins->last()->botpress_userData as $key=>$value)
                                                                                     {{ $key }} : {{$value}} <br>
                                                                                 @empty
