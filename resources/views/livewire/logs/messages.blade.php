@@ -106,7 +106,7 @@
                                                                 $lastMonth = \Carbon\Carbon::now()->subMonth();
                                                                 $filteredMessages = $model->messages->filter(function($msg) use ($lastMonth) {
                                                                     return $msg->created_at >= $lastMonth;
-                                                                })->take(5000);
+                                                                })->take(500);
                                                             @endphp
 
                                                             @forelse ($filteredMessages->groupBy('botpress_conversation_id')->sortByDesc(function ($item) {
