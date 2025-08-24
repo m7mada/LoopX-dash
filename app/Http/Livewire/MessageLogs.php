@@ -34,32 +34,32 @@ class MessageLogs extends Component
 
         $this->model = Twin::where("user_id", Auth::user()->id)
             ->where('id',request()->id)
-            ->with("messages", function ($query) {
-                $query->limit(5000);
+            // ->with("messages", function ($query) {
+            //     $query->limit(5000);
 
-                if( request()->search_conversation_id ){
-                   $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
-                }
-                // $query->where('botpress_channel', '!=', 'emulator');
+            //     if( request()->search_conversation_id ){
+            //        $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
+            //     }
+            //     // $query->where('botpress_channel', '!=', 'emulator');
 
-                if(request()->search_date_from || request()->search_date_to){
-                    $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();;
-                    $endDate = request()->has('search_date_to') ? Carbon::parse(request()->search_date_to) : now();
-                    $query->whereBetween('created_at', [$startDate, $endDate]);
-                }
+            //     if(request()->search_date_from || request()->search_date_to){
+            //         $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();;
+            //         $endDate = request()->has('search_date_to') ? Carbon::parse(request()->search_date_to) : now();
+            //         $query->whereBetween('created_at', [$startDate, $endDate]);
+            //     }
 
-                if( request()->search_chanel ){
-                    $query->where('botpress_integration', '=', request()->search_chanel);
-                }
+            //     if( request()->search_chanel ){
+            //         $query->where('botpress_integration', '=', request()->search_chanel);
+            //     }
 
-                // if(request()->search_conversation_status == 'paused'){
-                //     $pausedConversationIds = Conversations::pluck('conversation_id')->toArray();
-                //     $query->whereIn('botpress_conversation_id', $pausedConversationIds);
-                // }
+            //     // if(request()->search_conversation_status == 'paused'){
+            //     //     $pausedConversationIds = Conversations::pluck('conversation_id')->toArray();
+            //     //     $query->whereIn('botpress_conversation_id', $pausedConversationIds);
+            //     // }
                 
 
-                $query->orderBy('created_at', 'asc');
-            })
+            //     $query->orderBy('created_at', 'asc');
+            // })
             ->with("files")
             ->with("user")
             ->first();
