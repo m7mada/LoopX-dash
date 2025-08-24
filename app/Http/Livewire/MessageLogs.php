@@ -78,7 +78,7 @@ class MessageLogs extends Component
     public function render()
     {
 
-        return view('livewire.logs.messages');
+        // return view('livewire.logs.messages');
     }
 
     public function getMessges($twin_id, $botpress_conversation_id)
