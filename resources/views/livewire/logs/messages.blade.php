@@ -121,7 +121,7 @@
                                                                                     {{ $messages->last()->botpress_userData['fullName'] ?? $messages->first()->botpress_integration . "User" }}
                                                                                 </div>
                                                                                 <div class="small" style="font-size: 10px;">
-                                                                                    <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
+                                                                                    {{-- <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span> --}}
                                                                                     <span onclick="copyText(event, '{{$conversationId}}')" 
                                                                                     style="padding: 4px 8px;background-color: #f3f3f3;border-radius: 6px;cursor: copy;"
                                                                                     id="botpress_conversation_id_{{$conversationId ?? '0'}}">
@@ -181,11 +181,14 @@
                                                                                     align-items: center;
                                                                                     justify-content: center;
                                                                                 ">
+                                                                                {{-- -
                                                                                 @if ( empty($this->mt_twins->first()->isPauseConversation) )
                                                                                 <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
                                                                                 @else
                                                                                 <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i></span>
                                                                                 @endif
+                                                                                --}}
+                                                                                
                                                                             </button>
                                                                             @if( ! request()->conversationId )
                                                                                 <a target="_blank" href="{{ $this->mt_twins->first()->botpress_conversation_id }}"> <span class="btn-inner--icon"><i class="fa fa-external-link"></i></span></a>
