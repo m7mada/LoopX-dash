@@ -35,6 +35,7 @@ class MessageLogs extends Component
         $this->model = Twin::where("user_id", Auth::user()->id)
             ->where('id',request()->id)
             ->with("messages", function ($query) {
+                $query->limit(5000);
 
                 if( request()->search_conversation_id ){
                    $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
@@ -58,7 +59,6 @@ class MessageLogs extends Component
                 
 
                 $query->orderBy('created_at', 'asc');
-                $query->limit(5000);
             })
             ->with("files")
             ->with("user")
@@ -106,7 +106,6 @@ class MessageLogs extends Component
                 if ($this->filters['search_chanel']) {
                     $query->where('botpress_integration', '=', $this->filters['search_chanel']);
                 }
-                $query->limit(5000);
             })
             
             ->first();
