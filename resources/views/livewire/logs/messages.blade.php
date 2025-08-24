@@ -106,7 +106,7 @@
                                                             $filteredMessages = $model->messages()
                                                                     ->where('created_at', '>=', \Carbon\Carbon::now()->subMonth())
                                                                     ->orderBy('created_at', 'desc')
-                                                                    ->limit(5000)
+                                                                    //->limit(5000)
                                                                     ->get()
                                                                     ->groupBy('botpress_conversation_id')
                                                                     ->sortByDesc(function ($item) {
