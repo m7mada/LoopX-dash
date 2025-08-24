@@ -214,7 +214,6 @@
 
                                                             <div class="position-relative chat-messages-box">
                                                                 <div class="chat-messages p-4" id="chat-messages" style="height: calc(100vh - 326px);">
-                                                                    @if($messages)
                                                                     @forelse ($mt_twins as $item )
 
                                                                     @if ( $item->role == "user")
@@ -246,7 +245,6 @@
                                                                     @empty
                                                                     <span>No Messages Selected !</span>
                                                                     @endforelse
-                                                                    @endif 
 
 
                                                                 </div>
