@@ -109,7 +109,7 @@
                                                                 });
                                                             @endphp
 
-                                                            @forelse ($filteredMessages->groupBy('botpress_conversation_id')->sortByDesc(function ($item) {
+                                                            @forelse ($filteredMessages->limit(5000)->groupBy('botpress_conversation_id')->sortByDesc(function ($item) {
                                                                         return \Carbon\Carbon::parse($item->last()->created_at->format('M j, y g:iA'));
                                                                     }) as $conversationId => $messages)
 
