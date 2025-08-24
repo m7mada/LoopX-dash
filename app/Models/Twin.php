@@ -25,7 +25,7 @@ class Twin extends Model
 
     public function messages(): HasMany 
     {
-        $instance = $this->newRelatedInstance(Messages::class);
+        // $instance = $this->newRelatedInstance(Messages::class);
 
         return $this->hasManyMongo(Messages::class,"twin_id","twin_external_id");
     }

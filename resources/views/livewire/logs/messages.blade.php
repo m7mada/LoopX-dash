@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body px-0 pb-0">
                         <div class="table-responsive p-0">
-                            @if (count($model->messages) > 0)
+                            
                                 <div class="card card-frame">
                                     <div class="card-body p-0">
                                         <main class="content">
@@ -103,25 +103,36 @@
 
 
                                                             @php
-                                                                $lastMonth = \Carbon\Carbon::now()->subMonth();
-                                                                $filteredMessages = $model->messages->filter(function($msg) use ($lastMonth) {
-                                                                    return $msg->created_at >= $lastMonth;
-                                                                })->take(500);
+                                                            $filteredMessages = $model->messages()
+                                                                    ->where('created_at', '>=', \Carbon\Carbon::now()->subMonth())
+                                                                    ->orderBy('created_at', 'desc')
+                                                                    ->limit(5000)
+                                                                    ->get()
+                                                                    ->groupBy('botpress_conversation_id')
+                                                                    ->sortByDesc(function ($item) {
+                                                                        return \Carbon\Carbon::parse($item->last()->created_at->format('M j, y g:iA'));
+                                                                    });
+
                                                             @endphp
 
-                                                            @forelse ($filteredMessages->groupBy('botpress_conversation_id')->sortByDesc(function ($item) {
-                                                                        return \Carbon\Carbon::parse($item->last()->created_at->format('M j, y g:iA'));
-                                                                    }) as $conversationId => $messages)
 
+                                                            @forelse ($filteredMessages as $conversationId => $messages)
+
+                                                                    
                                                                 <a class="list-group-item list-group-item-action border-0" style="border-bottom: 1px solid #ddd !important ; @if( ! empty( $this->mt_twins ) && isset( $this->mt_twins->last()->botpress_conversation_id ) && $this->mt_twins->last()->botpress_conversation_id == $messages->first()->botpress_conversation_id ) background-color: rgb(227, 227, 227); @endif" wire:click.prevent="getMessges('{{ $messages->first()->twin_id }}', '{{ $messages->first()->botpress_conversation_id }}')" >
                                                                     <div class="chat-item d-flex align-items-start">
+                                                                        
                                                                         <div class="flex-grow-1" style="margin-left: 10px;">
                                                                             @if($messages->isNotEmpty())
+
                                                                                 <div class="small" style="text-transform: capitalize;">
+
                                                                                     {{ $messages->last()->botpress_userData['fullName'] ?? $messages->first()->botpress_integration . "User" }}
+                                                                                
                                                                                 </div>
                                                                                 <div class="small" style="font-size: 10px;">
-                                                                                    {{-- <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span> --}}
+                                                                                    <span class="fas fa-circle "></span>
+                                                                                    
                                                                                     <span onclick="copyText(event, '{{$conversationId}}')" 
                                                                                     style="padding: 4px 8px;background-color: #f3f3f3;border-radius: 6px;cursor: copy;"
                                                                                     id="botpress_conversation_id_{{$conversationId ?? '0'}}">
@@ -131,15 +142,20 @@
                                                                                     <div class="small" style="font-size: 11px;display: flex;flex-direction: column;justify-content: center;align-items: self-start;margin-top: 5px;">
                                                                                         <span>{{ $messages->last()->created_at->format('M j, y g:iA') }}</span>
                                                                                     </div>
+
                                                                                 </div>
                                                                             @endif
                                                                         </div>
+
                                                                         <div class="d-flex flex-column align-items-center">
                                                                             <div class="badge bg-success float-right" style="background: #9094e9 !important;padding: 4px 10px;font-size: 10px;min-width: 25px;height: 25px;border-radius: 20px;line-height: 18px;margin-top: 18px;">{{count($messages)}}</div>
                                                                         </div>
+                                                                        
+
                                                                     </div>
                                                                 </a>
-                                                            @empty
+
+                                                                @empty
                                                             @endforelse
 
                                                             <hr class="d-block d-lg-none mt-1 mb-0">
@@ -181,14 +197,11 @@
                                                                                     align-items: center;
                                                                                     justify-content: center;
                                                                                 ">
-                                                                                {{-- -
                                                                                 @if ( empty($this->mt_twins->first()->isPauseConversation) )
                                                                                 <span class="btn-inner--icon"><i class="fa fa-pause-circle-o"></i></span>
                                                                                 @else
                                                                                 <span class="btn-inner--icon"><i class="fa fa-play-circle-o"></i></span>
                                                                                 @endif
-                                                                                --}}
-                                                                                
                                                                             </button>
                                                                             @if( ! request()->conversationId )
                                                                                 <a target="_blank" href="{{ $this->mt_twins->first()->botpress_conversation_id }}"> <span class="btn-inner--icon"><i class="fa fa-external-link"></i></span></a>
@@ -201,7 +214,7 @@
 
                                                             <div class="position-relative chat-messages-box">
                                                                 <div class="chat-messages p-4" id="chat-messages" style="height: calc(100vh - 326px);">
-                                                                    @if($filteredMessages)
+                                                                    @if($messages)
                                                                     @forelse ($mt_twins as $item )
 
                                                                     @if ( $item->role == "user")
@@ -254,7 +267,7 @@
                                         </main>
                                     </div>
                                 </div>
-                            @endif
+                            
                         </div>
                     </div>
                 </div>
