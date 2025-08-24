@@ -86,27 +86,27 @@ class MessageLogs extends Component
 
         //dd($this->filters);
         $this->model = Twin::where('twin_external_id',$twin_id)
-            ->with("messages", function ($query) {
-                $query->orderBy('created_at', 'asc');
-                // $query->where('botpress_channel', '!=', 'emulator');
-                // $query->whereBetween('created_at', [now()->subMonth(), now()]);
+            // ->with("messages", function ($query) {
+            //     $query->orderBy('created_at', 'asc');
+            //     // $query->where('botpress_channel', '!=', 'emulator');
+            //     // $query->whereBetween('created_at', [now()->subMonth(), now()]);
 
 
-                if ($this->filters['search_conversation_id']) {
-                    $query->where('botpress_conversation_id', '=', $this->filters['search_conversation_id']);
-                }
+            //     if ($this->filters['search_conversation_id']) {
+            //         $query->where('botpress_conversation_id', '=', $this->filters['search_conversation_id']);
+            //     }
 
-                if ($this->filters['search_date_from'] || $this->filters['search_date_to']) {
-                    $startDate = $this->filters['search_date_from'] ? Carbon::parse($this->filters['search_date_from']) : now()->subMonth();
-                    ;
-                    $endDate = $this->filters['search_date_to'] ? Carbon::parse($this->filters['search_date_to']) : now();
-                    $query->whereBetween('created_at', [$startDate, $endDate]);
-                }
+            //     if ($this->filters['search_date_from'] || $this->filters['search_date_to']) {
+            //         $startDate = $this->filters['search_date_from'] ? Carbon::parse($this->filters['search_date_from']) : now()->subMonth();
+            //         ;
+            //         $endDate = $this->filters['search_date_to'] ? Carbon::parse($this->filters['search_date_to']) : now();
+            //         $query->whereBetween('created_at', [$startDate, $endDate]);
+            //     }
 
-                if ($this->filters['search_chanel']) {
-                    $query->where('botpress_integration', '=', $this->filters['search_chanel']);
-                }
-            })
+            //     if ($this->filters['search_chanel']) {
+            //         $query->where('botpress_integration', '=', $this->filters['search_chanel']);
+            //     }
+            //})
             
             ->first();
 
