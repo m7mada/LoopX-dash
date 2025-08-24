@@ -58,6 +58,7 @@ class MessageLogs extends Component
                 
 
                 $query->orderBy('created_at', 'asc');
+                $query->limit(5000);
             })
             ->with("files")
             ->with("user")
