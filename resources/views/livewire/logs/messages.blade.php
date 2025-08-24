@@ -104,11 +104,9 @@
 
                                                             @php
                                                                 $lastMonth = \Carbon\Carbon::now()->subMonth();
-                                                                $filteredMessages = $model->messages
-                                                                    ->filter(function($msg) use ($lastMonth) {
-                                                                        return $msg->created_at >= $lastMonth;
-                                                                    })
-                                                                    ->take(5000); // Limit to 5000 messages
+                                                                $filteredMessages = $model->messages->filter(function($msg) use ($lastMonth) {
+                                                                    return $msg->created_at >= $lastMonth;
+                                                                })->take(5000);
                                                             @endphp
 
                                                             @forelse ($filteredMessages->groupBy('botpress_conversation_id')->sortByDesc(function ($item) {
@@ -122,27 +120,6 @@
                                                                                 <div class="small" style="text-transform: capitalize;">
                                                                                     {{ $messages->last()->botpress_userData['fullName'] ?? $messages->first()->botpress_integration . "User" }}
                                                                                 </div>
-                                                                            @endif
-                                                                            <div class="small" style="font-size: 10px;">
-                                                                                <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
-                                                                                <span onclick="copyText(event, '{{$conversationId}}')" 
-                                                                                style="padding: 4px 8px;background-color: #f3f3f3;border-radius: 6px;cursor: copy;"
-                                                                                id="botpress_conversation_id_{{$conversationId ?? '0'}}">
-                                                                                {{$conversationId ?? "0"}}
-                                                                                    <i class="fa fa-clone" aria-hidden="true"></i>
-                                                                                </span>
-                                                                                <div class="small" style="font-size: 11px;display: flex;flex-direction: column;justify-content: center;align-items: self-start;margin-top: 5px;">
-                                                                                    <span>{{ $messages->last()->created_at->format('M j, y g:iA') }}</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        
-                                                                        <div class="d-flex flex-column align-items-center">
-                                                                            <div class="badge bg-success float-right" style="background: #9094e9 !important;padding: 4px 10px;font-size: 10px;min-width: 25px;height: 25px;border-radius: 20px;line-height: 18px;margin-top: 18px;">{{count($messages)}}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                            @empty
-                                                            @endforelse
                                                                                 <div class="small" style="font-size: 10px;">
                                                                                     <span class="fas fa-circle @if ( empty($messages->first()->isPauseConversation) )chat-online @else text-danger @endif"></span>
                                                                                     <span onclick="copyText(event, '{{$conversationId}}')" 
