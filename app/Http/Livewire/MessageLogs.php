@@ -88,7 +88,7 @@ class MessageLogs extends Component
         $this->model = Twin::where('twin_external_id',$twin_id)
             ->with("messages", function ($query) {
                 $query->orderBy('created_at', 'asc');
-                $query->where('botpress_channel', '!=', 'emulator');
+                // $query->where('botpress_channel', '!=', 'emulator');
                 // $query->whereBetween('created_at', [now()->subMonth(), now()]);
 
 
@@ -122,7 +122,7 @@ class MessageLogs extends Component
 
         $this->mt_twins = Messages::where('twin_id', $twin_id)
                                     ->where('botpress_conversation_id', $botpress_conversation_id)
-                                    ->where('botpress_channel', '!=', 'emulator')
+                                    // ->where('botpress_channel', '!=', 'emulator')
                                     ->when($this->filters['search_chanel'],function($query){
                                         $query->where('botpress_integration', '=', $this->filters['search_chanel']);
                                     })
