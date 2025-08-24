@@ -39,7 +39,7 @@ class MessageLogs extends Component
                 if( request()->search_conversation_id ){
                    $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
                 }
-                $query->where('botpress_channel', '=', 'channel');
+                // $query->where('botpress_channel', '=', 'channel');
 
                 if(request()->search_date_from || request()->search_date_to){
                     $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();;
@@ -117,7 +117,7 @@ class MessageLogs extends Component
 
         $this->mt_twins = Messages::where('twin_id', $twin_id)
                                     ->where('botpress_conversation_id', $botpress_conversation_id)
-                                    ->where('botpress_channel', '=', 'channel')
+                                    // ->where('botpress_channel', '=', 'channel')
                                     ->when($this->filters['search_chanel'],function($query){
                                         $query->where('botpress_integration', '=', $this->filters['search_chanel']);
                                     })
