@@ -87,7 +87,7 @@ class MessageLogs extends Component
         $this->model = Twin::where('twin_external_id',$twin_id)
             ->with("messages", function ($query) {
                 $query->orderBy('created_at', 'asc');
-                // $query->where('botpress_channel', '=', 'channel');
+                $query->where('botpress_channel', '=', 'channel');
 
                 if ($this->filters['search_conversation_id']) {
                     $query->where('botpress_conversation_id', '=', $this->filters['search_conversation_id']);
