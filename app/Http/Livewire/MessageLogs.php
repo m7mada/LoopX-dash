@@ -39,7 +39,7 @@ class MessageLogs extends Component
                 if( request()->search_conversation_id ){
                    $query->where('botpress_conversation_id', '=', request()->search_conversation_id);
                 }
-                $query->where('botpress_channel', '!=', 'emulator');
+                // $query->where('botpress_channel', '!=', 'emulator');
 
                 if(request()->search_date_from || request()->search_date_to){
                     $startDate = request()->has('search_date_from') ? Carbon::parse(request()->search_date_from) : now()->subMonth();;
