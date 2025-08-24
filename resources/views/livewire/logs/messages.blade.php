@@ -135,7 +135,7 @@
                                                                                     <span>{{ $messages->last()->created_at->format('M j, y g:iA') }}</span>
                                                                                 </div>
                                                                             </div>
-                                                                        @endif
+                                                                        
                                                                         <div class="d-flex flex-column align-items-center">
                                                                             <div class="badge bg-success float-right" style="background: #9094e9 !important;padding: 4px 10px;font-size: 10px;min-width: 25px;height: 25px;border-radius: 20px;line-height: 18px;margin-top: 18px;">{{count($messages)}}</div>
                                                                         </div>
