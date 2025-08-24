@@ -88,7 +88,8 @@ class MessageLogs extends Component
             ->with("messages", function ($query) {
                 $query->orderBy('created_at', 'asc');
                 $query->where('botpress_channel', '!=', 'emulator');
-                $query->whereBetween('created_at', [now()->subMonth(), now()]);
+                // $query->whereBetween('created_at', [now()->subMonth(), now()]);
+
 
                 if ($this->filters['search_conversation_id']) {
                     $query->where('botpress_conversation_id', '=', $this->filters['search_conversation_id']);
@@ -104,6 +105,7 @@ class MessageLogs extends Component
                 if ($this->filters['search_chanel']) {
                     $query->where('botpress_integration', '=', $this->filters['search_chanel']);
                 }
+                $query->limit(5000);
             })
             
             ->first();
