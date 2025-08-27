@@ -64,6 +64,9 @@ class MessageLogs extends Component
             ->with("user")
             ->first();
 
+        if( !$this->model ){
+            return abort(404);
+        }
 
         //dd($this->model->messages->limit(10));
         if( request()->conversationId ){
