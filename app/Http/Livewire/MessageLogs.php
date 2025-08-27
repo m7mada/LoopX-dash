@@ -89,6 +89,7 @@ class MessageLogs extends Component
 
         //dd($this->filters);
         $this->model = Twin::where('twin_external_id',$twin_id)
+                ->where("user_id", Auth::user()->id)    
             // ->with("messages", function ($query) {
             //     $query->orderBy('created_at', 'asc');
             //     // $query->where('botpress_channel', '!=', 'emulator');
