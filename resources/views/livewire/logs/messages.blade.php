@@ -106,6 +106,17 @@
                                                             $filteredMessages = $model->messages()
                                                                     ->where('created_at', '>=', \Carbon\Carbon::now()->subMonth())
                                                                     ->orderBy('created_at', 'desc')
+                                                                    ->when($this->filters['search_chanel'],function($query){
+                                                                        $query->where('botpress_integration', '=', $this->filters['search_chanel']);
+                                                                    })
+                                                                    ->when($this->filters['search_conversation_id'], function ($query) {
+                                                                        $query->where('botpress_conversation_id', $this->filters['search_conversation_id']);
+                                                                    })
+                                                                    ->when($this->filters['search_date_from'] || $this->filters['search_date_to'], function ($query) {
+                                                                        $startDate = $this->filters['search_date_from'] ? \Carbon\Carbon::parse($this->filters['search_date_from']) : now()->subMonth();
+                                                                        $endDate = $this->filters['search_date_to'] ? \Carbon\Carbon::parse($this->filters['search_date_to']) : now();
+                                                                        $query->whereBetween('created_at', [$startDate, $endDate]);
+                                                                    })
                                                                     ->limit(5000)
                                                                     ->get()
                                                                     ->groupBy('botpress_conversation_id')
