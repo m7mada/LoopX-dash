@@ -195,20 +195,20 @@ class MessageLogs extends Component
         try {
 
 
-            // \Log::info("api_message",[
-            //     'botId'=> $this->mt_twins[0]->botpress_bot_id,
-            //     'userId'=> $this->mt_twins[0]->botpress_user_id,
-            //     'conversationId'=>$this->botpress_conversation_id,
-            //     'type'=> 'choice',
-            //     'tags'=> (object) [],
-            //     'payload'=>[
-            //          "text"=> $this->inbutMessageToSendToUser ,
-            //          "options"=>[]
-            //     ]
-            // ]);
+            \Log::info("api_message",[
+                'botId'=> $this->model->botbress_bot_id,
+                'userId'=> $this->mt_twins[0]->botpress_user_id,
+                'conversationId'=>$this->botpress_conversation_id,
+                'type'=> 'choice',
+                'tags'=> (object) [],
+                'payload'=>[
+                     "text"=> $this->inbutMessageToSendToUser ,
+                     "options"=>[]
+                ]
+            ]);
 
             $bot = $bot->sendMessage([
-                'botId' => $this->mt_twins[0]->botpress_bot_id,
+                'botId' => $this->model->botbress_bot_id,
                 'userId' => $outgoingUserId['userId'],
                 'conversationId' => $this->botpress_conversation_id,
                 'type' => 'choice',
