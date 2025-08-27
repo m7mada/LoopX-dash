@@ -65,7 +65,7 @@ class MessageLogs extends Component
             ->first();
 
         if( !$this->model ){
-            return abort(404);
+            return redirect()->route('twins.index') ->with('error', 'Twin not found or you do not have permission to access it.');
         }
 
         //dd($this->model->messages->limit(10));
