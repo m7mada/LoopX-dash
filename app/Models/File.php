@@ -11,6 +11,8 @@ class File extends Model
 
     protected $fillable = ['path','name','extension','size','twin_id'] ;
 
+    protected $appends = ['short_path'];
+
     public function getPathAttribute($value): ?string
     {
         if ($value)
@@ -24,6 +26,14 @@ class File extends Model
             return round($value / 1000000, 2) . ' MB';
         else
             return round($value / 1000, 2) . ' KB';
+    }
+
+    public function getShortPathAttribute(): ?string
+    {
+        if ($this->path) {
+            return $this->getAttributes()['path'];
+        }
+        return null;
     }
 
 
