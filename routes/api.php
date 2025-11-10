@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\TwinController;
 use App\Http\Controllers\ThirdPartyApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,11 @@ Route::any('/proxyFBAppTobootPress', [ThirdPartyApiController::class, 'proxyFBAp
 Route::post('/recive_messages', [ThirdPartyApiController::class, 'reciveMessages']);
 
 // Route::get('/recived_messages', [ThirdPartyApiController::class, 'listTempMessages']);
+
+Route::prefix('twins')->group(function () {
+    Route::post('files/upload', [TwinController::class, 'uploadFile']);
+    Route::post('files/remove', [TwinController::class, 'removeFile']);
+    Route::post('train', [TwinController::class, 'train']);
+    Route::post('update', [TwinController::class, 'update']);
+});
+

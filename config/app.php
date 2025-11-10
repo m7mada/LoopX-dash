@@ -64,6 +64,8 @@ return [
     'botbress_token' => env('BOTBRESS_TOKEN'),
     'botbress_workspace_id' => env('BOTBRESS_WORKSPACE_ID'),
 
+    'twin_token' => env('TWIN_TOKEN', 't8NmnHxl85ggUuAgVxZhPFSfd5KKqx9WriPfvB4okkG3TQeMiBRVa1ZBJ1Cs'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
