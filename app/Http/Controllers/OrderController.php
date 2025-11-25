@@ -22,9 +22,9 @@ class OrderController extends Controller
             'package_price_id' => 'required|exists:packages_prices,id',
 
         ]);
-        
+
         $packcagePrice = PackagesPrice::find($data['package_price_id']) ;
-        
+
         $insertedOrder = Order::create([
             'name' => $data['name'],
             'phone' => $data['phone'],
@@ -42,7 +42,7 @@ class OrderController extends Controller
                 'referance_package_id'=> $packcagePrice->id,
                 'benefit_id'=> $line->benefit_id,
                 'value'=> $line->value,
-                'expire_time'=> ( $line->benefit->type == 'saas') ? Carbon::now()->addMonth($line->value) : null,
+                'expire_time'=> ( $line->benefit->type == 'saas') ? Carbon::now()->addMonths($line->value) : null,
             ];
         }
 

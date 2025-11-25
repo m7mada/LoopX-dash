@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\TwinController;
 use App\Http\Controllers\ThirdPartyApiController;
 use Illuminate\Http\Request;
@@ -43,4 +44,7 @@ Route::prefix('twins')->group(function () {
     Route::post('train', [TwinController::class, 'train']);
     Route::post('update', [TwinController::class, 'update']);
 });
+
+Route::get('latest-orders', [OrderController::class, 'latestOrders']);
+Route::get('user-credit/{id}', [OrderController::class, 'userCredit']);
 
