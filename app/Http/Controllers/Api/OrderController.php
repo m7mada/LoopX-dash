@@ -9,6 +9,15 @@ use App\Models\Twin;
 
 class OrderController extends Controller
 {
+
+    public function __construct()
+    {
+        $twinToken = config('app.twin_token');
+        if ($twinToken !== request('twin_token')) {
+            throw new \Exception('Wrong Twin Token');
+        }
+    }
+
     public function userCredit(int $userId)
     {
         $totalCredit = Order::query()
