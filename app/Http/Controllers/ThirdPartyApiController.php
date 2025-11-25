@@ -492,7 +492,7 @@ class ThirdPartyApiController extends Controller
         //}
         try {
 
-            \Log::info("Outgoing User Id", $outgoingUserId );
+            Log::info("Outgoing User Id", $outgoingUserId );
 
             // \Log::info("api_message",[
             //     'botId'=> $this->mt_twins[0]->botpress_bot_id,
