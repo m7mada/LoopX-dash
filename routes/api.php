@@ -46,4 +46,5 @@ Route::prefix('twins')->group(function () {
 });
 
 Route::get('latest-orders', [OrderController::class, 'latestOrders']);
+Route::get('user-credit/{id}', [OrderController::class, 'userCredit']);
 

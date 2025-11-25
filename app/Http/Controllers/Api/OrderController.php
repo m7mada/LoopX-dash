@@ -3,10 +3,41 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Messages;
 use App\Models\Order;
+use App\Models\Twin;
 
 class OrderController extends Controller
 {
+    public function userCredit(int $userId)
+    {
+        $totalCredit = Order::query()
+            ->where('orders.is_paid', 1)
+            ->where('orders.user_id', $userId)
+            ->join('order_lines', 'order_lines.order_id', '=', 'orders.id')
+            ->join('benefits', 'benefits.id', '=', 'order_lines.benefit_id')
+            ->where('benefits.type', 'cridet')
+            ->sum('order_lines.value');
+
+        $userTwins = Twin::query()
+            ->where('user_id', $userId)
+            ->pluck('twin_external_id')
+            ->toArray();
+
+        $usedCredit = Messages::query()
+            ->where('role', 'assistant')
+            ->whereIn("twin_id", $userTwins)
+            ->sum("total_cost");
+
+        $remaining = ($totalCredit - $usedCredit) * 0.65;
+        return response()->json([
+            'message' => 'Credit Details',
+            'data' => [
+                'total_credit' => $totalCredit,
+                'remaining_credit' => $remaining,
+            ]
+        ]);
+    }
     public function latestOrders()
     {
         $response = [];

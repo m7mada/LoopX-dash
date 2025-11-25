@@ -20,7 +20,7 @@
                                 <p class="mb-0">{{$this->customersTotalCridets[0]->total_credits ?? '' }} Total Customres Paid</p><br>
                                 <p class="mb-0">{{$this->customersTotalCridets[0]->total_credits + $this->customersTotalCridets[0]->total_credits * 0.35 ?? ''}} Expected Customres Cost</p>
 
-                                
+
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
@@ -101,7 +101,7 @@
                           <div class="text-end pt-1">
                               <p class="text-sm mb-0 text-capitalize">Messages per conversions</p>
                               <h4 class="mb-0">
-                                @if($totalUsage)  
+                                @if($totalUsage)
                                     {{ round($totalUsage / $totalConversasions) }}
                                 @else
                                     0
@@ -117,7 +117,7 @@
           </div>
 
             <div class="row mt-4">
-                
+
                 <div class="col-lg-6 mt-4 mt-lg-0">
                     <div class="card">
                         <div class="card-header pb-0 p-3">
@@ -167,7 +167,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                @endforelse                                      
+                                                @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -226,7 +226,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                @endforelse                                      
+                                                @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -360,7 +360,7 @@
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
-                                                    
+
 
                                                             <img src="{{ asset('assets') }}/img/favicon.png" class="avatar avatar-sm rounded-circle me-2" alt="Twin">
                                                     </div>
@@ -410,7 +410,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>   
+                                        </tr>
                                      @endforelse
                                   </tbody>
                               </table>
@@ -442,9 +442,9 @@
                                     </div>
                                     </div>
                                 @empty
-                                    
+
                                 @endforelse
-                              
+
                           </div>
                       </div>
                   </div>
