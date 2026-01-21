@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CallReceiver;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -32,7 +33,7 @@ class ThirdPartyApiController extends Controller
 
     public function __invoke(Request $request, $endpoint)
     {
-        return $this->proxy($request, $endpoint); 
+        return $this->proxy($request, $endpoint);
     }
 
     /**
@@ -46,7 +47,7 @@ class ThirdPartyApiController extends Controller
     {
         $twin = Twin::find(Auth::guard('twins')->user()->id);
         // Allowed endpoints
-        if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) { 
+        if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) {
             return response()->json(['error' => 'Invalid endpoint'], 400);
         }
 
@@ -54,7 +55,7 @@ class ThirdPartyApiController extends Controller
 
         $apiUrl = $this->baseUrl . $endpoint;
 
-        $method = $request->method(); 
+        $method = $request->method();
 
         //try {
             $client = new Client();
@@ -167,7 +168,7 @@ class ThirdPartyApiController extends Controller
 
 
                         TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->delete();
-                        
+
                         return response()->json($filteredMessages);
                     }
 
@@ -196,7 +197,7 @@ class ThirdPartyApiController extends Controller
             return true;
 
         }else{
-            return response()->json(['error' => "Twin Not Found"], 400); 
+            return response()->json(['error' => "Twin Not Found"], 400);
         }
 
 
@@ -323,6 +324,11 @@ class ThirdPartyApiController extends Controller
 
     public function listConversations(Request $request)
     {
+        dispatch(new CallReceiver(
+            body: $request->all(),
+            headers: $request->headers->all()
+        ));
+
         $twin = Twin::find(Auth::guard('twins')->user()->id);
         $apiUrl = $apiUrl = "https://api.botpress.cloud/v1/chat/conversations";
 
@@ -388,7 +394,7 @@ class ThirdPartyApiController extends Controller
             $twin = Twin::where('wa_phone_number', $displayPhoneNumber)->where('wa_phone_number_id', $phoneNumberId)->first();
             $targetEndPoint = $twin->wa_webhook_proxy_url;
         }
-        
+
 
         if (empty($twin)) {
             return false;
@@ -436,7 +442,7 @@ class ThirdPartyApiController extends Controller
             return response()->json(['error' => $e->errors()], 422);
         }
 
-        // Auth user 
+        // Auth user
 
         try{
             $twin = Twin::find(Auth::guard('twins')->user()->id);
