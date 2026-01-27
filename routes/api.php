@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\TwinController;
 use App\Http\Controllers\ThirdPartyApiController;
@@ -47,4 +48,6 @@ Route::prefix('twins')->group(function () {
 
 Route::get('latest-orders', [OrderController::class, 'latestOrders']);
 Route::get('user-credit/{id}', [OrderController::class, 'userCredit']);
+
+Route::get('messages', [MessageController::class, 'index']);
 
