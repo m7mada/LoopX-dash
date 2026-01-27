@@ -26,7 +26,7 @@ class MessageController extends Controller
                 }
             })
             ->paginate(
-                perPage: $request->get('per_page', 50),
+                perPage: (int) $request->get('per_page', 50),
             );
 
         return response()->json($rows);
