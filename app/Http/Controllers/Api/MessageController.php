@@ -25,6 +25,10 @@ class MessageController extends Controller
                     $query->where('twin_id', $request->get('twin_id'));
                 }
             })
+            ->orderBy(
+                column: $request->get('order_by', 'created_at'),
+                direction: $request->get('order_direction', 'desc'),
+            )
             ->paginate(
                 perPage: (int) $request->get('per_page', 50),
             );
