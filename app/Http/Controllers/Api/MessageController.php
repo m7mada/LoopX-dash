@@ -30,7 +30,7 @@ class MessageController extends Controller
                 direction: $request->get('order_direction', 'desc'),
             )
             ->paginate(
-                perPage: (int) $request->get('per_page', 50),
+                perPage: (int) $request->get('per_page', 1000),
             );
 
         return response()->json($rows);
