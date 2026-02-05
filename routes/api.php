@@ -50,4 +50,5 @@ Route::get('latest-orders', [OrderController::class, 'latestOrders']);
 Route::get('user-credit/{id}', [OrderController::class, 'userCredit']);
 
 Route::get('messages', [MessageController::class, 'index']);
+Route::get('paused-conversations', [MessageController::class, 'pausedConversations']);
 
