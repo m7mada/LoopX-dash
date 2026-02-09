@@ -372,10 +372,8 @@ class ThirdPartyApiController extends Controller
 
     public function proxyFBAppTobootPress(Request $request){
 
-        dispatch(new CallReceiver(
-            body: $request->all(),
-            headers: $request->headers->all()
-        ));
+
+
         if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
 
             return response($request->hub_challenge, '200');
@@ -386,6 +384,16 @@ class ThirdPartyApiController extends Controller
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
             $targetEndPoint = $twin->fb_webhook_proxy_url ;
+
+            if ($request->entry[0]['id'] == '114304899962989'){
+                dispatch(new CallReceiver(
+                    body: $request->all(),
+                    headers: $request->headers->all()
+                ));
+            }
+
+
+
         }elseif($request->object == "whatsapp_business_account" ){
             $displayPhoneNumber = $request->entry[0]['changes'][0]['value']['metadata']['display_phone_number'];
             $phoneNumberId = $request->entry[0]['changes'][0]['value']['metadata']['phone_number_id'];
