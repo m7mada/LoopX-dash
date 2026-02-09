@@ -324,11 +324,6 @@ class ThirdPartyApiController extends Controller
 
     public function listConversations(Request $request)
     {
-        dispatch(new CallReceiver(
-            body: $request->all(),
-            headers: $request->headers->all()
-        ));
-
         $twin = Twin::find(Auth::guard('twins')->user()->id);
         $apiUrl = $apiUrl = "https://api.botpress.cloud/v1/chat/conversations";
 
@@ -377,6 +372,10 @@ class ThirdPartyApiController extends Controller
 
     public function proxyFBAppTobootPress(Request $request){
 
+        dispatch(new CallReceiver(
+            body: $request->all(),
+            headers: $request->headers->all()
+        ));
         if( $request->hub_mode = 'subscribe' && $request->hub_verify_token == "mGyrZthKwYrHLgkkF0d3h7e8Fs3DBfZeVOY1j0VbXePGBgI07e2l8wzLuhgQJIa" ){
 
             return response($request->hub_challenge, '200');
