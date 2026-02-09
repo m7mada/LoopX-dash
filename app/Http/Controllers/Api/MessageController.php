@@ -50,8 +50,8 @@ class MessageController extends Controller
                     $query->where('twin_id', $request->get('twin_id'));
                 }
 
-                if ($request->has('conversation_ids')){
-                    $query->whereIn('conversation_id', $request->get('conversation_ids'));
+                if ($request->has('conversation_id')){
+                    $query->where('conversation_id', $request->get('conversation_id'));
                 }
             })
             ->orderBy(
