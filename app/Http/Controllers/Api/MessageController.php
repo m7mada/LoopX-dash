@@ -50,8 +50,8 @@ class MessageController extends Controller
                     $query->where('twin_id', $request->get('twin_id'));
                 }
 
-                if ($request->has('conversation_id')){
-                    $query->where('conversation_id', $request->get('conversation_id'));
+                if ($request->has('conversation_ids')){
+                    $query->whereIn('conversation_id', $request->get('conversation_ids'));
                 }
             })
             ->orderBy(
@@ -59,7 +59,7 @@ class MessageController extends Controller
                 direction: $request->get('order_direction', 'desc'),
             )
             ->paginate(
-                perPage: (int) $request->get('per_page', 1000),
+                perPage: (int) $request->get('per_page', 2000),
             );
 
         return response()->json($rows);
