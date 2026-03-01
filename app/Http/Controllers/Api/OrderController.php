@@ -30,6 +30,9 @@ class OrderController extends Controller
 
         $userTwins = Twin::query()
             ->where('user_id', $userId)
+            ->when(request()->has('twin_id'), function ($query) {
+                $query->where('twin_external_id', request('twin_external_id'));
+            })
             ->pluck('twin_external_id')
             ->toArray();
 
