@@ -48,6 +48,7 @@ Route::prefix('twins')->group(function () {
 
 Route::get('latest-orders', [OrderController::class, 'latestOrders']);
 Route::get('user-credit/{id}', [OrderController::class, 'userCredit']);
+Route::get('twins-credit/{id}', [OrderController::class, 'userTwinCredits']);
 
 Route::get('messages', [MessageController::class, 'index']);
 Route::post('paused-conversations', [MessageController::class, 'pausedConversations']);

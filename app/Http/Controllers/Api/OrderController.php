@@ -50,6 +50,37 @@ class OrderController extends Controller
             ]
         ]);
     }
+
+    public function userTwinCredits(int $userId)
+    {
+        $userTwins = Twin::query()
+            ->where('user_id', $userId)
+            ->pluck('twin_external_id')
+            ->toArray();
+
+        // Return the total credit for each twin
+        $twinCredits = Messages::raw(function ($collection) use ($userTwins) {
+            return $collection->aggregate([
+                [
+                    '$match' => [
+                        'role' => 'assistant',
+                        'twin_id' => ['$in' => $userTwins],
+                    ]
+                ],
+                [
+                    '$group' => [
+                        '_id' => '$twin_id',
+                        'total_cost' => ['$sum' => '$total_cost'],
+                    ]
+                ]
+            ]);
+        });
+
+        return response()->json([
+            'message' => 'Twin Credit Details',
+            'data' => $twinCredits
+        ]);
+    }
     public function latestOrders()
     {
         $response = [];
