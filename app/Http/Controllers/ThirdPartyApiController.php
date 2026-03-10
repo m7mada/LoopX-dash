@@ -381,12 +381,21 @@ class ThirdPartyApiController extends Controller
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
             if (! $twin) {
-                // Proxy With Headers
+                // Proxy With Headers (excluding problematic headers)
                 $url = config('app.receiver_url') . '/meta/webhook';
-                $response = Http::withHeaders($request->headers->all())->post($url, $request->all());
+
+                // Filter out headers that should not be forwarded
+                $headersToExclude = ['host', 'content-length', 'connection'];
+                $filteredHeaders = array_filter(
+                    $request->headers->all(),
+                    fn($key) => !in_array(strtolower($key), $headersToExclude),
+                    ARRAY_FILTER_USE_KEY
+                );
+
+                $response = Http::withHeaders($filteredHeaders)->post($url, $request->all());
                 Log::info('Proxy Response:', [
                     'url' => $url,
-                    'headers' => $request->headers->all(),
+                    'headers' => $filteredHeaders,
                     'request_body' => $request->all(),
                     'status' => $response->status(),
                     'body' => $response->body(),
