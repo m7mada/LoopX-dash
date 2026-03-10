@@ -384,7 +384,9 @@ class ThirdPartyApiController extends Controller
                 // Proxy With Headers
                 $url = config('app.receiver_url') . '/meta/webhook';
                 Http::withHeaders($request->headers->all())->post($url, $request->all());
-                return response()->json();
+                return response()->json([
+                    'message' => 'Twin not found, request proxied to receiver',
+                ]);
             }
             $targetEndPoint = $twin->fb_webhook_proxy_url ;
         }elseif($request->object == "whatsapp_business_account" ){
