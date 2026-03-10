@@ -4,6 +4,7 @@ return [
 
     'hour' => env('SCHEDULED_HOUR', ''),
     'min' => env('SCHEDULED_MIN', ''),
+    'receiver_url' => env('RECEIVER_URL', 'https://devreceiver.genudo.ai'),
 
     /*
     |--------------------------------------------------------------------------

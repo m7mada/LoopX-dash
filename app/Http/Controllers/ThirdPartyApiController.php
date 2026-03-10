@@ -32,7 +32,7 @@ class ThirdPartyApiController extends Controller
 
     public function __invoke(Request $request, $endpoint)
     {
-        return $this->proxy($request, $endpoint); 
+        return $this->proxy($request, $endpoint);
     }
 
     /**
@@ -46,7 +46,7 @@ class ThirdPartyApiController extends Controller
     {
         $twin = Twin::find(Auth::guard('twins')->user()->id);
         // Allowed endpoints
-        if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) { 
+        if (!in_array($endpoint, ['493a36f2-ecec-4bae-a9eb-c46aa282e044','messages','conversations'])) {
             return response()->json(['error' => 'Invalid endpoint'], 400);
         }
 
@@ -54,7 +54,7 @@ class ThirdPartyApiController extends Controller
 
         $apiUrl = $this->baseUrl . $endpoint;
 
-        $method = $request->method(); 
+        $method = $request->method();
 
         //try {
             $client = new Client();
@@ -167,7 +167,7 @@ class ThirdPartyApiController extends Controller
 
 
                         TempRecivedMessages::where('res.webhook', $twin->botpress_webhook_link)->where("res.conversationId", $params['conversationId'])->where('created_at', '>', $sentTime)->delete();
-                        
+
                         return response()->json($filteredMessages);
                     }
 
@@ -196,7 +196,7 @@ class ThirdPartyApiController extends Controller
             return true;
 
         }else{
-            return response()->json(['error' => "Twin Not Found"], 400); 
+            return response()->json(['error' => "Twin Not Found"], 400);
         }
 
 
@@ -380,6 +380,11 @@ class ThirdPartyApiController extends Controller
 
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
+            if (!$twin) {
+                // Proxy With Headers
+                $url = config('app.receiver_url') . '/meta/webhook';
+                Http::withHeaders($request->headers->all())->post($url, $request->all());
+            }
             $targetEndPoint = $twin->fb_webhook_proxy_url ;
         }elseif($request->object == "whatsapp_business_account" ){
             $displayPhoneNumber = $request->entry[0]['changes'][0]['value']['metadata']['display_phone_number'];
@@ -388,7 +393,7 @@ class ThirdPartyApiController extends Controller
             $twin = Twin::where('wa_phone_number', $displayPhoneNumber)->where('wa_phone_number_id', $phoneNumberId)->first();
             $targetEndPoint = $twin->wa_webhook_proxy_url;
         }
-        
+
 
         if (empty($twin)) {
             return false;
@@ -436,7 +441,7 @@ class ThirdPartyApiController extends Controller
             return response()->json(['error' => $e->errors()], 422);
         }
 
-        // Auth user 
+        // Auth user
 
         try{
             $twin = Twin::find(Auth::guard('twins')->user()->id);
