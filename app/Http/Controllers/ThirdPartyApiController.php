@@ -385,6 +385,9 @@ class ThirdPartyApiController extends Controller
                 $url = config('app.receiver_url') . '/meta/webhook';
                 $response = Http::withHeaders($request->headers->all())->post($url, $request->all());
                 Log::info('Proxy Response:', [
+                    'url' => $url,
+                    'headers' => $request->headers->all(),
+                    'request_body' => $request->all(),
                     'status' => $response->status(),
                     'body' => $response->body(),
                 ]);
