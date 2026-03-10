@@ -380,10 +380,11 @@ class ThirdPartyApiController extends Controller
 
         if($request->object == "page" ){
             $twin = Twin::where('fb_page_id', $request->entry[0]['id'])->first();
-            if (!$twin) {
+            if (! $twin) {
                 // Proxy With Headers
                 $url = config('app.receiver_url') . '/meta/webhook';
                 Http::withHeaders($request->headers->all())->post($url, $request->all());
+                return response()->json();
             }
             $targetEndPoint = $twin->fb_webhook_proxy_url ;
         }elseif($request->object == "whatsapp_business_account" ){
