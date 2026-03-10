@@ -383,7 +383,11 @@ class ThirdPartyApiController extends Controller
             if (! $twin) {
                 // Proxy With Headers
                 $url = config('app.receiver_url') . '/meta/webhook';
-                Http::withHeaders($request->headers->all())->post($url, $request->all());
+                $response = Http::withHeaders($request->headers->all())->post($url, $request->all());
+                Log::info('Proxy Response:', [
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
                 return response()->json([
                     'message' => 'Twin not found, request proxied to receiver',
                 ]);
