@@ -41,7 +41,7 @@ class OrderController extends Controller
             ->whereIn("twin_id", $userTwins)
             ->sum("total_cost");
 
-        $remaining = ($totalCredit - $usedCredit) * 0.65;
+        $remaining = ($totalCredit - $usedCredit);
         return response()->json([
             'message' => 'Credit Details',
             'data' => [
